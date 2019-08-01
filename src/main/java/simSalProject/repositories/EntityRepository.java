@@ -1,5 +1,7 @@
 package simSalProject.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -33,6 +35,16 @@ public abstract class EntityRepository<T extends Entity_> {
 	public void removeEntity(T entity) {
 		T managedEntity = entityManager.find(getEntityClass(), entity.getId());
 		entityManager.remove(managedEntity);
+	}
+	
+	protected abstract String getAllIds();
+	public List<Long> allIds(){
+		return entityManager.createNamedQuery(getAllIds(), Long.class).getResultList();
+	}
+	
+	protected abstract String getAllValues();
+	public List<T> allValues(){
+		return entityManager.createNamedQuery(getAllValues(), getEntityClass()).getResultList();
 	}
 	
 	protected abstract Class<T> getEntityClass();
