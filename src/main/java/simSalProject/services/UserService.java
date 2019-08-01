@@ -36,7 +36,7 @@ public class UserService {
 	}
 
 	@Inject
-	@Named("UserRep")
+	@Named("UserBus")
 	UserBusiness USER_B;
 
 	@POST

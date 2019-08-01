@@ -37,16 +37,13 @@ public class User_ extends Entity_{
 	
 	public User_() {}
 
-	public User_(String email, String passwordToHash, UserRole role ) {
-		this.email = email;
-		this.password = hashPassword(passwordToHash) ;
-		this.userRole = role;	
-	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	public void setPassword(String password) {
+		this.password = hashPassword(password);
+	}
 
 	public String getEmail() {
 		return email;

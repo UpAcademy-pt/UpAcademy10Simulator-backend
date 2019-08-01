@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.core.Response;
@@ -11,11 +12,13 @@ import javax.ws.rs.core.Response;
 import simSalProject.models.User_;
 import simSalProject.repositories.UserRepository;
 
+@Named("UserBus")
+@RequestScoped
 public class UserBusiness  {
 	
 	
 	@Inject
-	@Named("UserBus")
+	@Named("UserRep")
 	UserRepository USER_DB;
 	
 	
