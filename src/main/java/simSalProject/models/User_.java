@@ -1,12 +1,15 @@
 package simSalProject.models;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+
+import simSalProject.Utils.HashEncrypt;
 
 
 
@@ -27,21 +30,17 @@ public class User_ extends Entity_{
 	}
 	
 	private String email;
-	private Integer password;
+	private String password;
 	private UserRole userRole;
-	private long date;
+	
 	
 	
 	public User_() {}
 
-	public User_(String email, String password, UserRole role ) {
+	public User_(String email, String passwordToHash, UserRole role ) {
 		this.email = email;
-		this.password = password.hashCode();
-		this.userRole = role;
-		this.date = new Date().getTime();
-		
-
-
+		this.password = hashPassword(passwordToHash) ;
+		this.userRole = role;	
 	}
 
 	public void setEmail(String email) {
@@ -53,7 +52,7 @@ public class User_ extends Entity_{
 		return email;
 	}
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	
@@ -61,11 +60,16 @@ public class User_ extends Entity_{
 		return userRole;
 	}
 	
-
-	public int myHashCode(int password) {
-		System.out.println(this.date);
-		System.out.println("Entrou: "+ Objects.hash(password, this.date));
-		return Objects.hash(password, this.date);
+	public String hashPassword (String passwordToHash) {
+		try {
+			return HashEncrypt.encryptHash(passwordToHash);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+		
 	}
+	
 	
 }

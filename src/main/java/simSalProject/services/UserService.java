@@ -19,8 +19,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import simSalProject.business.UserBusiness;
 import simSalProject.models.User_;
-import simSalProject.repositories.UserRepository;
 
 @Path("users")
 public class UserService {
@@ -37,21 +37,21 @@ public class UserService {
 
 	@Inject
 	@Named("UserRep")
-	UserRepository USER_DB;
+	UserBusiness USER_B;
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createUser(User_ myUser) {
-		USER_DB.createEntity(myUser);
-		return Response.ok("createUser return").build();
+		USER_B.createUser(myUser);
+		return Response.ok("User created").build();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultUser(@PathParam("id") long id) {
-		User_ myUser = USER_DB.consultEntity(id);
+		User_ myUser = USER_B.consultUser(id);
 		if (myUser == null) {
 			return Response.status(400).entity("User doesn't exist").build();
 		}
@@ -64,11 +64,12 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response editUser(@PathParam("id") long id, User_ myUserToEdit) {
-		User_ myUser = USER_DB.consultEntity(id);
+		User_ myUser = USER_B.consultUser(id);
 		if (myUser == null) {
 			return Response.status(400).entity("User doesn't exist").build();
 		} else {
-			USER_DB.editEntity(myUserToEdit);
+			myUserToEdit.setId(id);
+			USER_B.editUser(id, myUserToEdit);
 			return Response.ok("editUser return").build();
 		}
 
@@ -78,11 +79,12 @@ public class UserService {
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeUser(@PathParam("id") long idToRemove) {
-		User_ myUser = USER_DB.consultEntity(idToRemove);
+		User_ myUser = USER_B.consultUser(idToRemove);
 		if (myUser == null) {
 			return Response.status(400).entity("User doesn't exist").build();
 		} else {
-			USER_DB.removeEntity(myUser);
+			myUser.setId(idToRemove);
+			USER_B.removeUser(myUser);
 			return Response.ok("remove User return").build();
 		}
 	}
@@ -91,13 +93,13 @@ public class UserService {
 	@Path("allIds")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Long> getAllIds() {
-		return new ArrayList<Long>(USER_DB.allIds());
+		return new ArrayList<Long>(USER_B.getAllIds());
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<User_> getAllValues() {
-		return USER_DB.allValues();
+		return USER_B.getAllValues();
 	}
 	
 }
