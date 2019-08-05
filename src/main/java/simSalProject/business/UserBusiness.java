@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.Utils.SendMail;
 import simSalProject.models.User_;
 import simSalProject.models.User_.UserRole;
 import simSalProject.repositories.UserRepository;
@@ -24,6 +25,10 @@ public class UserBusiness  {
 	
 	
 	public String createUser(User_ myUser) {
+		if (USER_DB.allValues().contains(myUser)) {
+			return "This user already exists";
+		}
+		
 		String randomPassword = SendMail.createRandom();
 		myUser.setPassword(randomPassword);
 		try {
@@ -32,9 +37,7 @@ public class UserBusiness  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (USER_DB.allValues().contains(myUser)) {
-			return "This user already exists";
-		}
+		myUser.setUserRole(UserRole.USER);
 		USER_DB.createEntity(myUser);
 		return "Created";
 	}
