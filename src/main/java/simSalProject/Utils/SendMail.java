@@ -1,10 +1,6 @@
 package simSalProject.Utils;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Random;
 
 import com.sendgrid.Method;

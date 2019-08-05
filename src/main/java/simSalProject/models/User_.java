@@ -2,8 +2,6 @@ package simSalProject.models;
 
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;

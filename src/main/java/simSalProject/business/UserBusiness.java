@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.Utils.SendMail;
 import simSalProject.models.User_;
 import simSalProject.models.User_.UserRole;
 import simSalProject.repositories.UserRepository;
