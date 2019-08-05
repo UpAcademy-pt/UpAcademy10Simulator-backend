@@ -1,5 +1,6 @@
 package simSalProject.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.w3c.dom.Entity;
 import simSalProject.business.UserBusiness;
 import simSalProject.models.User_;
 import simSalProject.models.User_.UserRole;
+import simSalProject.Utils.SendMail;
 
 @Path("users")
 public class UserService {

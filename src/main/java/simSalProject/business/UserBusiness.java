@@ -1,5 +1,6 @@
 package simSalProject.business;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,15 +24,21 @@ public class UserBusiness  {
 	
 	
 	public String createUser(User_ myUser) {
-		if(myUser.getUserRole() == UserRole.USER) {
-			USER_DB.createEntity(myUser);	
-			
-		} else if (myUser.getUserRole() == UserRole.ADMIN) {
-			return "Only 1 admin can exist";
+		String randomPassword = SendMail.createRandom();
+		myUser.setPassword(randomPassword);
+		try {
+			SendMail.sendMail(myUser.getEmail(), randomPassword);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return "User created";
+		if (USER_DB.allValues().contains(myUser)) {
+			return "This user already exists";
+		}
+		USER_DB.createEntity(myUser);
+		return "Created";
 	}
-	
+
 	public String createAdmin(User_ adminUser) {
 		USER_DB.createEntity(adminUser);
 		return "ADMIN didn't exist, ADMIN created with default credentials";
