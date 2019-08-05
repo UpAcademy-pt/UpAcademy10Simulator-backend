@@ -19,8 +19,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.w3c.dom.Entity;
+
 import simSalProject.business.UserBusiness;
 import simSalProject.models.User_;
+import simSalProject.models.User_.UserRole;
 
 @Path("users")
 public class UserService {
@@ -35,16 +38,37 @@ public class UserService {
 		return "URI " + context.getRequestUri().toString() + " is OK!";
 	}
 
+	
+	
 	@Inject
 	@Named("UserBus")
 	UserBusiness USER_B;
 
+	
+	@GET
+	@Path("initDatabase")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response initDataBase() {
+		String message = USER_B.initDataBase();
+		if(message == "ADMIN didn't exist, ADMIN created with default credentials") {
+			
+		} else if (message == "ADMIN already exists") {
+			return Response.status(400).entity(message).build();
+			
+		}
+		return Response.ok().entity(message).build();
+	}
+	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createUser(User_ myUser) {
-		USER_B.createUser(myUser);
-		return Response.ok("User created").build();
+		if (USER_B.createUser(myUser) == "User created") {
+		} else if (USER_B.createUser(myUser) == "Only 1 admin can exist") {
+			return Response.status(304).entity(USER_B.createUser(myUser)).build();
+		}
+		return Response.ok(USER_B.createUser(myUser)).build();
 	}
 
 	@GET
@@ -70,7 +94,7 @@ public class UserService {
 		} else {
 			myUserToEdit.setId(id);
 			USER_B.editUser(id, myUserToEdit);
-			return Response.ok("editUser return").build();
+			return Response.ok("Edit successful").build();
 		}
 
 	}
@@ -85,7 +109,7 @@ public class UserService {
 		} else {
 			myUser.setId(idToRemove);
 			USER_B.removeUser(myUser);
-			return Response.ok("remove User return").build();
+			return Response.ok("Remove successful").build();
 		}
 	}
 

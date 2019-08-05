@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.User_;
+import simSalProject.models.User_.UserRole;
 
 
 @Named("UserRep")
@@ -35,8 +36,13 @@ public class UserRepository extends EntityRepository<User_>{
 		query.setParameter("id", id);
 		
 		return query.getResultList();
+	}
+
+	public long getRoleCount (UserRole role){
+		TypedQuery<Long> query = entityManager.createNamedQuery(User_.GET_ROLE_COUNT, Long.class);
+		query.setParameter("userRole", role);
 		
-		
+		return query.getSingleResult();
 	}
 
 }
