@@ -13,30 +13,30 @@ import simSalProject.Utils.HashEncrypt;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=User_.ALL_USER_IDS, query="SELECT u.id FROM User_ u"),
-	@NamedQuery(name=User_.ALL_USER_VALUES, query="SELECT u FROM User_ u"),
-	@NamedQuery(name=User_.GET_USER_BY_ID, query="SELECT u FROM User_ u WHERE u.id = :id"),
-	@NamedQuery(name=User_.GET_ROLE_COUNT, query="SELECT count(u) FROM User_ u WHERE u.userRole = :userRole")
+	@NamedQuery(name=Account.ALL_ACC_IDS, query="SELECT a.id FROM Account a"),
+	@NamedQuery(name=Account.ALL_ACC_VALUES, query="SELECT a FROM Account a"),
+	@NamedQuery(name=Account.GET_ACC_BY_ID, query="SELECT a FROM Account a WHERE a.id = :id"),
+	@NamedQuery(name=Account.GET_ROLE_COUNT, query="SELECT count(a) FROM Account a WHERE a.accountRole = :accountRole")
 //	@NamedQuery(name=User_.GET_ROLE_FROM_USER, query="SELECT u FROM User_ u WHERE u.userRole = :role"),
 })
-public class User_ extends Entity_{
+
+public class Account extends Entity_{
 	private static final long serialVersionUID = 1L;
-	public static final String ALL_USER_IDS = "getUserIds";
-	public static final String ALL_USER_VALUES = "getAllUsers";
-	public static final String GET_USER_BY_ID = "getUserById";
+	public static final String ALL_ACC_IDS = "getAccIds";
+	public static final String ALL_ACC_VALUES = "getAllAccs";
+	public static final String GET_ACC_BY_ID = "getAccById";
 	public static final String GET_ROLE_COUNT = "getRoleCount";
 	
 	
-	public enum UserRole {
+	public enum AccountRole {
 	    ADMIN, USER, 
 	}
 	
 	private String email;
 	private String password;
-	private UserRole userRole;
+	private AccountRole accountRole;
 	
-	
-	public User_() {}
+	public Account() {}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -55,14 +55,16 @@ public class User_ extends Entity_{
 	}
 	
 	
-	public void setUserRole(UserRole userRole) {
-		this.userRole = userRole;
+	public void setAccRole(AccountRole accountRole) {
+		this.accountRole = accountRole;
 	}
 
-	public UserRole getUserRole() {
-		return userRole;
+	
+	public AccountRole getAccRole() {
+		return accountRole;
 	}
 
+	
 	public String hashPassword (String passwordToHash) {
 		try {
 			return HashEncrypt.encryptHash(passwordToHash);
@@ -70,8 +72,6 @@ public class User_ extends Entity_{
 			e.printStackTrace();
 		}
 		return null;
-		
-		
 	}
 	
 	

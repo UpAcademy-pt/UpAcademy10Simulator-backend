@@ -19,11 +19,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import simSalProject.business.UserBusiness;
-import simSalProject.models.User_;
+import simSalProject.business.AccountBusiness;
+import simSalProject.models.Account;
 
-@Path("users")
-public class UserService {
+@Path("accounts")
+public class AccountService {
 
 	@Context
 	private UriInfo context;
@@ -38,15 +38,15 @@ public class UserService {
 	
 	
 	@Inject
-	@Named("UserBus")
-	UserBusiness USER_B;
+	@Named("AccBus")
+	AccountBusiness ACC_B;
 
 	
 	@GET
 	@Path("initDatabase")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response initDataBase() {
-		String message = USER_B.initDataBase();
+		String message = ACC_B.initDataBase();
 		if(message == "ADMIN didn't exist, ADMIN created with default credentials") {
 			
 		} else if (message == "ADMIN already exists") {
@@ -60,23 +60,23 @@ public class UserService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createUser(User_ myUser) {
-		if (USER_B.createUser(myUser) == "User created") {
-		} else if (USER_B.createUser(myUser) == "Only 1 admin can exist") {
-			return Response.status(304).entity(USER_B.createUser(myUser)).build();
+	public Response createAccount(Account myAccount) {
+		if (ACC_B.createAccount(myAccount) == "Account created") {
+		} else if (ACC_B.createAccount(myAccount) == "Only 1 admin can exist") {
+			return Response.status(304).entity(ACC_B.createAccount(myAccount)).build();
 		}
-		return Response.ok(USER_B.createUser(myUser)).build();
+		return Response.ok(ACC_B.createAccount(myAccount)).build();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultUser(@PathParam("id") long id) {
-		User_ myUser = USER_B.consultUser(id);
-		if (myUser == null) {
-			return Response.status(400).entity("User doesn't exist").build();
+	public Response consultAccount(@PathParam("id") long id) {
+		Account myAccount = ACC_B.consultAccount(id);
+		if (myAccount == null) {
+			return Response.status(400).entity("Account doesn't exist").build();
 		}
-		return Response.ok(myUser).build();
+		return Response.ok(myAccount).build();
 
 	}
 
@@ -84,13 +84,13 @@ public class UserService {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response editUser(@PathParam("id") long id, User_ myUserToEdit) {
-		User_ myUser = USER_B.consultUser(id);
-		if (myUser == null) {
-			return Response.status(400).entity("User doesn't exist").build();
+	public Response editAccount(@PathParam("id") long id, Account myAccountToEdit) {
+		Account myAccount = ACC_B.consultAccount(id);
+		if (myAccount == null) {
+			return Response.status(400).entity("Account doesn't exist").build();
 		} else {
-			myUserToEdit.setId(id);
-			USER_B.editUser(id, myUserToEdit);
+			myAccountToEdit.setId(id);
+			ACC_B.editAccount(id, myAccountToEdit);
 			return Response.ok("Edit successful").build();
 		}
 
@@ -99,13 +99,13 @@ public class UserService {
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response removeUser(@PathParam("id") long idToRemove) {
-		User_ myUser = USER_B.consultUser(idToRemove);
-		if (myUser == null) {
-			return Response.status(400).entity("User doesn't exist").build();
+	public Response removeAccount(@PathParam("id") long idToRemove) {
+		Account myAccount = ACC_B.consultAccount(idToRemove);
+		if (myAccount == null) {
+			return Response.status(400).entity("Account doesn't exist").build();
 		} else {
-			myUser.setId(idToRemove);
-			USER_B.removeUser(myUser);
+			myAccount.setId(idToRemove);
+			ACC_B.removeAccount(myAccount);
 			return Response.ok("Remove successful").build();
 		}
 	}
@@ -114,13 +114,13 @@ public class UserService {
 	@Path("allIds")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Long> getAllIds() {
-		return new ArrayList<Long>(USER_B.getAllIds());
+		return new ArrayList<Long>(ACC_B.getAllIds());
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<User_> getAllValues() {
-		return USER_B.getAllValues();
+	public Collection<Account> getAllValues() {
+		return ACC_B.getAllValues();
 	}
 	
 }
