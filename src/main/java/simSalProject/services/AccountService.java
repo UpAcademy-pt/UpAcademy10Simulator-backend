@@ -60,14 +60,22 @@ public class AccountService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createAccount(Account myAccount) {
-		if (ACC_B.createAccount(myAccount) == "Account created") {
-		} else if (ACC_B.createAccount(myAccount) == "Only 1 admin can exist") {
-			return Response.status(304).entity(ACC_B.createAccount(myAccount)).build();
+	public Response createAccount(Account myEmail) {
+		if(ACC_B.isEmailValid(myEmail.getEmail())) {
+			String msg = ACC_B.createAccount(myEmail.getEmail());
+			if( msg == "This Account already exists") {
+				
+				return Response.status(304).entity(msg).build();
+			} else {
+				return Response.ok(msg).build();
+			}
+			
+		} else {
+			return Response.status(305).entity("Not a valid Email").build();
 		}
-		return Response.ok(ACC_B.createAccount(myAccount)).build();
 	}
-
+	
+	
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,6 +87,21 @@ public class AccountService {
 		return Response.ok(myAccount).build();
 
 	}
+	
+	@POST
+	@Path("login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response verifyAccount(Account account) {
+		System.out.println("Service 1");
+		String myAccount = ACC_B.login(account);
+		if (myAccount == null) {
+			return Response.status(400).entity("Account doesn't exist").build();
+		}
+		return Response.ok(myAccount).build();
+
+	}
+	
 
 	@PUT
 	@Path("/{id}")

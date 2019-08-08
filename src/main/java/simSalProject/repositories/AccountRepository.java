@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Account;
@@ -36,6 +37,38 @@ public class AccountRepository extends EntityRepository<Account>{
 		query.setParameter("id", id);
 		
 		return query.getResultList();
+	}
+	
+//	public Account verifyEmailAndPass(String email, String password) {
+//		TypedQuery<Account> query = entityManager.createNamedQuery(Account.VERIFY_EMAIL_PASS, Account.class);
+//		query.setParameter("email", email);
+//		query.setParameter("password", password);
+//		return query.getSingleResult();
+//	}
+	
+	public boolean verifyEmail(String email) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Account.VERIFY_EMAIL, Long.class);
+		query.setParameter("email", email);
+		if (query.getSingleResult() == 0) {
+			return false;
+		} else {
+		return true;
+		}
+	}
+	
+	
+	
+	
+	public String verifyPassword(String password) {
+		System.out.println(password);
+		TypedQuery<Account> query = entityManager.createNamedQuery(Account.VERIFY_PASSWORD, Account.class);
+		System.out.println(query);
+		query.setParameter("password", password);
+		Account myAccount = query.getSingleResult();
+		System.out.println(myAccount);
+		String thisPassword = myAccount.getPassword();
+
+		return thisPassword;
 	}
 
 	public long getRoleCount (AccountRole role){

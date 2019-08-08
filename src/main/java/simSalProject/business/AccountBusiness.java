@@ -1,14 +1,17 @@
 package simSalProject.business;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.Utils.HashEncrypt;
 import simSalProject.Utils.SendMail;
 import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
@@ -24,22 +27,29 @@ public class AccountBusiness  {
 	AccountRepository ACC_DB;
 	
 	
-	public String createAccount(Account myAccount) {
-		if (ACC_DB.allValues().contains(myAccount)) {
+	public String createAccount(String email) {
+
+		
+		if (ACC_DB.verifyEmail(email)) {
 			return "This Account already exists";
-		}
+		} else {
+		
+		Account myAccount = new Account();
+		myAccount.setEmail(email);
 		
 		String randomPassword = SendMail.createRandom();
 		myAccount.setPassword(randomPassword);
 		try {
-			SendMail.sendMail(myAccount.getEmail(), randomPassword);
+			SendMail.sendMail(email, randomPassword);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		myAccount.setAccRole(AccountRole.USER);
 		ACC_DB.createEntity(myAccount);
-		return "Created";
+		return "Account Created";
+		}
+		
 	}
 
 	public String createAdmin(Account adminAccount) {
@@ -90,12 +100,49 @@ public class AccountBusiness  {
 		return message;
 	}
 	
-	public String login() {
+	public String login(Account account) {
+		System.out.println("Business 1");
+		System.out.println(account.getEmail());
+		if (!isEmailValid(account.getEmail())) {
+			System.out.println("Business 2");
+			return "Not a valid Email";
+		}
+			if (ACC_DB.verifyEmail(account.getEmail())) {
+				System.out.println("Business 3");
+				
+			
+				try {
+					if (HashEncrypt.encryptHash(account.getPassword()) == ACC_DB.verifyPassword(account.getPassword()));
+					System.out.println("Business 4");
+					return "Welcome";
+					
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		
 		
 		
-		return "";
+		return "Something went wrong";
 		
+	}
+	
+	
+	// Code to verify if the email is well written //
+	public boolean isEmailValid(String email) {
+		
+		String emailRegex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; 
+		Pattern pat = Pattern.compile(emailRegex);
+		
+		if (email.equals("")) {
+			return false;
+		}
+		boolean teste = pat.matcher(email).matches();
+	
+		return teste;
+		 
 	}
 	
 	
