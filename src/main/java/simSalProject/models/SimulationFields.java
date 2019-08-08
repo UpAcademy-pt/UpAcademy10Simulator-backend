@@ -18,84 +18,101 @@ public class SimulationFields extends Entity_{
 	public static final String ALL_SIM_FIELDS_VALUES = "getAllSimFieldsValues";
 	
 	private String name;
-	private float SA;
-	private float IRS;
-	private float SS;
-	private float TA;
-	private float BE;
-	private float varComponent;
+	private double SA;
+	private double IRS;
+	private double SS;
+	private double TA;
+	private double BE;
+	private double varComponent;
 	
 	
 	public SimulationFields() {
 		super();
 	}
 
-	public SimulationFields(String name, float sA, float iRS, float sS, float tA, float bE, float varComponent) {
+	
+
+	public SimulationFields(String name, double sA, double iRS, double sS, double tA, double bE, double varComponent) {
 		super();
 		this.name = name;
-		this.SA = sA;
-		this.IRS = iRS;
-		this.SS = sS;
-		this.TA = tA;
-		this.BE = bE;
+		SA = sA;
+		IRS = iRS;
+		SS = sS;
+		TA = tA;
+		BE = bE;
 		this.varComponent = varComponent;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public float getSA() {
+
+	public double getSA() {
 		return SA;
 	}
 
-	public void setSA(float sA) {
+
+	public void setSA(double sA) {
 		SA = sA;
 	}
 
-	public float getIRS() {
+
+	public double getIRS() {
 		return IRS;
 	}
 
-	public void setIRS(float iRS) {
+
+	public void setIRS(double iRS) {
 		IRS = iRS;
 	}
 
-	public float getSS() {
+
+	public double getSS() {
 		return SS;
 	}
 
-	public void setSS(float sS) {
+
+	public void setSS(double sS) {
 		SS = sS;
 	}
 
-	public float getTA() {
+
+	public double getTA() {
 		return TA;
 	}
 
-	public void setTA(float tA) {
+
+	public void setTA(double tA) {
 		TA = tA;
 	}
 
-	public float getBE() {
+
+	public double getBE() {
 		return BE;
 	}
 
-	public void setBE(float bE) {
+
+	public void setBE(double bE) {
 		BE = bE;
 	}
 
-	public float getVarComponent() {
+
+	public double getVarComponent() {
 		return varComponent;
 	}
 
-	public void setVarComponent(float varComponent) {
+
+	public void setVarComponent(double varComponent) {
 		this.varComponent = varComponent;
 	}
+
 	
 	
 	

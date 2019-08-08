@@ -25,10 +25,9 @@ public class AccountBusiness  {
 	
 	
 	public String createAccount(Account myAccount) {
-		if (ACC_DB.allValues().contains(myAccount)) {
+		if (ACC_DB.existsAccountbyEmail(myAccount.getEmail())) {
 			return "This Account already exists";
-		}
-		
+		} else if (!ACC_DB.existsAccountbyEmail(myAccount.getEmail())) {
 		String randomPassword = SendMail.createRandom();
 		myAccount.setPassword(randomPassword);
 		try {
@@ -40,6 +39,8 @@ public class AccountBusiness  {
 		myAccount.setAccRole(AccountRole.USER);
 		ACC_DB.createEntity(myAccount);
 		return "Created";
+		}
+		return null;
 	}
 
 	public String createAdmin(Account adminAccount) {
@@ -73,7 +74,10 @@ public class AccountBusiness  {
 		return ACC_DB.allValues();
 	}
 	
+	
+	
 	public String initDataBase() {
+		
 		String message = "";
 		//0 is ENUM(0), which is ADMIN
 		if (ACC_DB.getRoleCount(AccountRole.ADMIN) == 0){

@@ -12,7 +12,7 @@ public class SimFieldsDataBusiness {
 
 	@Inject
 	@Named("SimFieldsDataRep")
-	SimFieldsDataRepository SIMF_DB;
+	SimFieldsDataRepository SIMFD_DB;
 	
 	
 	

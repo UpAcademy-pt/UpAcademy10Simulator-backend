@@ -1,5 +1,7 @@
 package simSalProject.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -15,7 +17,7 @@ public class Simulation extends Entity_{
 	private static final long serialVersionUID = 1L;
 	public static final String ALL_SIM_IDS = "getAllSimIds";
 	public static final String ALL_SIM_VALUES = "getAllSims";
-	private long netSalary;
+//	private List<SimFieldsData> simFieldsData;
 	
 	
 	

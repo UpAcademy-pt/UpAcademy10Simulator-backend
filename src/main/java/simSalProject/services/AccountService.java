@@ -61,7 +61,7 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createAccount(Account myAccount) {
-		if (ACC_B.createAccount(myAccount) == "Account created") {
+		if (ACC_B.createAccount(myAccount) == "Created") {
 		} else if (ACC_B.createAccount(myAccount) == "Only 1 admin can exist") {
 			return Response.status(304).entity(ACC_B.createAccount(myAccount)).build();
 		}

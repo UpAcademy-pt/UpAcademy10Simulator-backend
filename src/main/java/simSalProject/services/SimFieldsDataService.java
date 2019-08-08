@@ -26,7 +26,7 @@ public class SimFieldsDataService {
 	
 	
 	@Inject
-	@Named("SimFieldsDataRep")
-	SimFieldsDataBusiness SIMF_B;
+	@Named("SimFieldsDataBus")
+	SimFieldsDataBusiness SIMFD_B;
 	
 }

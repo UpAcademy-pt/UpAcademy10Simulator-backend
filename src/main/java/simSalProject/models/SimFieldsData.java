@@ -10,6 +10,7 @@ public class SimFieldsData extends Entity_ {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private float value;
+	
 	private float result;
 	
 	
