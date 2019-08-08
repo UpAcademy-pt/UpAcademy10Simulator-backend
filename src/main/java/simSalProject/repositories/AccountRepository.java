@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Account;
@@ -60,12 +59,11 @@ public class AccountRepository extends EntityRepository<Account>{
 	
 	
 	public String verifyPassword(String password) {
-		System.out.println(password);
+		System.out.println("onInit verifyPas : "+ password);
 		TypedQuery<Account> query = entityManager.createNamedQuery(Account.VERIFY_PASSWORD, Account.class);
-		System.out.println(query);
+		System.out.println(query.toString());
 		query.setParameter("password", password);
 		Account myAccount = query.getSingleResult();
-		System.out.println(myAccount);
 		String thisPassword = myAccount.getPassword();
 
 		return thisPassword;

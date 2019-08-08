@@ -42,6 +42,7 @@ public class Account extends Entity_{
 	
 	private String email;
 	private String password;
+	private byte[] salt;
 	private AccountRole accountRole;
 	
 	public Account() {}
@@ -63,6 +64,14 @@ public class Account extends Entity_{
 	}
 	
 	
+	public byte[] getSalt() {
+		return salt;
+	}
+
+	public void setSalt(byte[] salt) {
+		this.salt = salt;
+	}
+
 	public void setAccRole(AccountRole accountRole) {
 		this.accountRole = accountRole;
 	}
@@ -72,15 +81,27 @@ public class Account extends Entity_{
 		return accountRole;
 	}
 
-	
 	public String hashPassword (String passwordToHash) {
 		try {
-			return HashEncrypt.encryptHash(passwordToHash);
+			byte[] salt = HashEncrypt.getSalt();
+			setSalt(salt);
+			String securePassword = HashEncrypt.getSecurePassword(passwordToHash, salt);
+			
+			return securePassword;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+//	public Optional<String> hashPassword (String passwordToHash) {
+//		try {
+//			return PasswordUtils.hashPassword(passwordToHash, PasswordUtils.generateSalt(8));
+//		} catch (NoSuchAlgorithmException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 	
 	
 }

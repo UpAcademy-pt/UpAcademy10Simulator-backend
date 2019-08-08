@@ -112,6 +112,7 @@ public class AccountBusiness  {
 				
 			
 				try {
+					System.out.println("AccountGetPassword: "+account.getPassword());
 					if (HashEncrypt.encryptHash(account.getPassword()) == ACC_DB.verifyPassword(account.getPassword()));
 					System.out.println("Business 4");
 					return "Welcome";

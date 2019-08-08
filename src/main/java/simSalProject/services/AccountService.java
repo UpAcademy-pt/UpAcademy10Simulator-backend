@@ -92,7 +92,7 @@ public class AccountService {
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response verifyAccount(Account account) {
+	public Response login(Account account) {
 		System.out.println("Service 1");
 		String myAccount = ACC_B.login(account);
 		if (myAccount == null) {
