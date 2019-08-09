@@ -51,4 +51,37 @@ public String createSimulationFields(SimulationFields mySimulationFields) {
 		return SIMF_DB.allValues();
 	}
 	
+	public String createSimulationField(SimulationFields mySimulationField) {
+		if(SIMF_DB.allValues().contains(mySimulationField)) {
+			return "This Simulation Field already exists";
+		}
+		return "Created";
+	}
+	
+	public SimulationFields consultSimulationField(long id) {
+		SimulationFields mySimulationField = SIMF_DB.getSimulationFieldsById(id);
+		return mySimulationField;
+	}
+	
+	public SimulationFields consultSimulationField(String name) {
+		SimulationFields mySimulationField = SIMF_DB.getSimulationFieldsByName(name);
+		return mySimulationField;
+	}
+	
+	public void editSimulationField(SimulationFields mySimulationFieldToEdit) {
+		SIMF_DB.editEntity(mySimulationFieldToEdit);
+	}
+
+	public void removeSimulationField(SimulationFields mySimulatonField) {
+		SIMF_DB.removeEntity(mySimulatonField);
+	}
+	
+	public List<Long> getAllIds(){
+		return new ArrayList<Long>(SIMF_DB.allIds());
+	}
+	
+	public Collection<SimulationFields> getAllValues(){
+		return SIMF_DB.allValues();
+	}
+	
 }

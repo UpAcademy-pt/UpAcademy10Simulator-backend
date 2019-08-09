@@ -37,7 +37,6 @@ public class SimulationFieldsService {
 	}
 
 	
-	
 	@Inject
 	@Named("SimFieldsBus")
 	SimulationsFieldsBusiness SIMF_B;
@@ -62,6 +61,17 @@ public class SimulationFieldsService {
 		}
 		return Response.ok(mySimulationFields).build();
 
+	}
+
+	@GET
+	@Path("/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultSimulationField(@PathParam("name")String name) {
+		SimulationFields mySimulationField = SIMF_B.consultSimulationField(name);
+		if (mySimulationField == null) {
+			return Response.status(400).entity("Simulation field doesn't exist").build();
+		}
+		return Response.ok(mySimulationField).build();
 	}
 
 	@PUT
