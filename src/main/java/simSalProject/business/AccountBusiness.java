@@ -14,6 +14,7 @@ import simSalProject.Utils.PasswordUtils;
 import simSalProject.Utils.SendMail;
 import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
+import simSalProject.models.AccountDTO;
 import simSalProject.repositories.AccountRepository;
 
 @Named("AccBus")
@@ -90,12 +91,10 @@ public class AccountBusiness  {
 	
 	public String initDataBase() {
 		String message = "";
-		//0 is ENUM(0), which is ADMIN
 		if (ACC_DB.getRoleCount(AccountRole.ADMIN) == 0){
 			Account initAccount = new Account();
 			initAccount.setEmail("admin@admin.com");
 			String salt = PasswordUtils.generateSalt(2).get();
-			
 			initAccount.setPassword(PasswordUtils.hashPassword("admin", salt ).get());
 			initAccount.setAccRole(AccountRole.ADMIN);
 			initAccount.setSalt(salt);
@@ -108,37 +107,35 @@ public class AccountBusiness  {
 		return message;
 	}
 	
-	public String login(Account account) {
-		
-		System.out.println("Business 1");
-		System.out.println(account.getEmail());
-		
-		if (!isEmailValid(account.getEmail())) {
-			System.out.println("Business 2");
-			return "The email you've written is not an email";
+	public AccountDTO login(Account myAccount) {
+		AccountDTO myAccountDTO = new AccountDTO();
+		if (!isEmailValid(myAccount.getEmail())) {
+
+			myAccountDTO.setMessage("The email you've written is not an email");
+
+			return myAccountDTO;
 		}
-			if (ACC_DB.verifyEmail(account.getEmail())) {
-				System.out.println("Business 3");
-	
-			System.out.println("AccountGetPassword: " + account.getPassword());
-			
-			String salt = ACC_DB.getSalt(account.getEmail());
-			String hashPassword = ACC_DB.getPassword(account.getEmail());
-			
-				if (PasswordUtils.verifyPassword(account.getPassword(), hashPassword, salt)) {
-					System.out.println("Business 4");
-					return "Welcome";
-				} else {
-					return "Not a valid Password";
-				}	
-			}		
-		return "That email is not registered";		
+		if (ACC_DB.verifyEmail(myAccount.getEmail())) {
+
+			String salt = ACC_DB.getSalt(myAccount.getEmail());
+			String hashPassword = ACC_DB.getPassword(myAccount.getEmail());
+
+			if (PasswordUtils.verifyPassword(myAccount.getPassword(), hashPassword, salt)) {
+				myAccountDTO.setMessage("Welcome");
+				return myAccountDTO;
+			} else {
+				myAccountDTO.setMessage("Not a valid Password");
+				return myAccountDTO;
+			}
+		} else {
+			myAccountDTO.setMessage("That email is not registered");
+			return myAccountDTO;
+		}
 	}
 	
 	
 	// Code to verify if the email is well written //
 	public boolean isEmailValid(String email) {
-		
 		String emailRegex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; 
 		Pattern pat = Pattern.compile(emailRegex);
 		

@@ -21,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.AccountBusiness;
 import simSalProject.models.Account;
+import simSalProject.models.AccountDTO;
 
 @Path("accounts")
 public class AccountService {
@@ -60,13 +61,15 @@ public class AccountService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createAccount(Account myEmail) {
-		String msg = ACC_B.createAccount(myEmail.getEmail());
-		if ( msg == "The email is not well written" ) {
+	public Response createAccount(Account myAccount) {
+		String msg = ACC_B.createAccount(myAccount.getEmail());
+		if (msg == "The email is not well written" ) {
 			return Response.status(400).entity(msg).build();
 		}
-		if ( msg == "This Account already exists" ) {
+		if (msg == "This Account already exists" ) {
 			return Response.status(400).entity(msg).build();
+		} else {
+			return Response.ok(msg).build();
 		}
 	} 
 
@@ -88,22 +91,20 @@ public class AccountService {
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response login(Account account) {
-		String msg = ACC_B.login(account);
-
-		if (myAccount == "The email you've written is not an email") {
-			Response.status(400).entity(myAccount).build();
+	public Response login(Account myAccount) {
+		AccountDTO myAccountDTO = ACC_B.login(myAccount);
+		String msg = myAccountDTO.getMessage();
+		if (msg == "The email you've written is not an email") {
+			Response.status(400).entity(msg).build();
 		}
-		if (myAccount == "That email is not registered") {
-			Response.status(400).entity(myAccount).build();
+		if (msg == "That email is not registered") {
+			Response.status(400).entity(msg).build();
 		}
-		if (myAccount == "Not a valid password") {
-			Response.status(400).entity(myAccount).build();
+		if (msg == "Not a valid password") {
+			Response.status(400).entity(msg).build();
 		}
-		if (myAccount == "Welcome") {
-			return Response.ok(myAccount).build();
-		}
-		return Response.status(400).entity("Something went wrong").build();
+		
+		return Response.ok(myAccountDTO).build();
 
 	}
 	
