@@ -1,7 +1,10 @@
 package simSalProject.repositories;
 
+import java.util.List;
+
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.TypedQuery;
 
 import simSalProject.models.SimulationFields;
 
@@ -24,6 +27,22 @@ public class SimulationsFieldsRepository extends EntityRepository<SimulationFiel
 		// TODO Auto-generated method stub
 		return SimulationFields.ALL_SIM_FIELDS_VALUES;
 	}
+	
+	public SimulationFields getSimulationFieldsById(long id) {
+		TypedQuery<SimulationFields> query = entityManager.createNamedQuery(SimulationFields.GET_SIM_FIELDS_BY_ID, SimulationFields.class);
+		query.setParameter("id", id);
+		
+		return query.getSingleResult();
+		
+	}
+	
+	public SimulationFields getSimulationFieldsByName(String name) {
+		TypedQuery<SimulationFields> query = entityManager.createNamedQuery(SimulationFields.GET_SIM_FIELDS_BY_NAME, SimulationFields.class);
+		query.setParameter("name", name);
+		
+		return query.getSingleResult();
+	}
+	
 	
 	
 }
