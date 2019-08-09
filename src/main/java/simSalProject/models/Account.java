@@ -19,7 +19,6 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name=Account.VERIFY_PASSWORD, query="SELECT a.password FROM Account a WHERE a.email = :email"),
 	@NamedQuery(name=Account.VERIFY_SALT, query="SELECT a.salt FROM Account a WHERE a.email = :email"),
 	@NamedQuery(name=Account.GET_ID_WITH_EMAIL, query="SELECT a.id FROM Account a WHERE a.email = :email")
-//	@NamedQuery(name=User_.GET_ROLE_FROM_USER, query="SELECT u FROM User_ u WHERE u.userRole = :role"),
 })
 
 public class Account extends Entity_{
