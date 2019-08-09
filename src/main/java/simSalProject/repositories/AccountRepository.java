@@ -55,18 +55,29 @@ public class AccountRepository extends EntityRepository<Account>{
 		}
 	}
 	
+	/**********************************************************************************************************
+	 * 
+	 * @param email
+	 * @return Password
+	 */
 	
-	
-	
-	public String verifyPassword(String password) {
-		System.out.println("onInit verifyPas : "+ password);
-		TypedQuery<Account> query = entityManager.createNamedQuery(Account.VERIFY_PASSWORD, Account.class);
-		System.out.println(query.toString());
-		query.setParameter("password", password);
-		Account myAccount = query.getSingleResult();
-		String thisPassword = myAccount.getPassword();
+	public String getPassword(String email) {
+		TypedQuery<String> query = entityManager.createNamedQuery(Account.VERIFY_PASSWORD, String.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
 
-		return thisPassword;
+	}
+	
+	/**********************************************************************************************************
+	 * 
+	 * @param email
+	 * @return salt
+	 */
+	
+	public String getSalt(String email) {
+		TypedQuery<String> query = entityManager.createNamedQuery(Account.VERIFY_SALT, String.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
 	}
 
 	public long getRoleCount (AccountRole role){

@@ -55,8 +55,13 @@ public class PasswordUtils {
   }
   
   public static boolean verifyPassword (String password, String key, String salt) {
+	  System.out.println(password);
+	  System.out.println(key);
+	  System.out.println(salt);
 	    Optional<String> optEncrypted = hashPassword(password, salt);
-	    if (!optEncrypted.isPresent()) return false;
+	    if (!optEncrypted.isPresent()) {
+	    	return false;
+	    }
 	    return optEncrypted.get().equals(key);
 	  }
 }

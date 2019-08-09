@@ -1,7 +1,6 @@
 package simSalProject.business;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +10,7 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import simSalProject.Utils.HashEncrypt;
+import simSalProject.Utils.PasswordUtils;
 import simSalProject.Utils.SendMail;
 import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
@@ -28,7 +27,9 @@ public class AccountBusiness  {
 	
 	
 	public String createAccount(String email) {
-
+		if (!isEmailValid(email)) {
+			return "The email is not well written";
+		}
 		
 		if (ACC_DB.verifyEmail(email)) {
 			return "This Account already exists";
@@ -38,7 +39,10 @@ public class AccountBusiness  {
 		myAccount.setEmail(email);
 		
 		String randomPassword = SendMail.createRandom();
-		myAccount.setPassword(randomPassword);
+		myAccount.setSalt(PasswordUtils.generateSalt(2).get());
+		String randomSalt = myAccount.getSalt();
+		myAccount.setPassword(PasswordUtils.hashPassword(randomPassword, randomSalt).get());
+		
 		try {
 			SendMail.sendMail(email, randomPassword);
 		} catch (IOException e) {
@@ -101,33 +105,30 @@ public class AccountBusiness  {
 	}
 	
 	public String login(Account account) {
+		
 		System.out.println("Business 1");
 		System.out.println(account.getEmail());
+		
 		if (!isEmailValid(account.getEmail())) {
 			System.out.println("Business 2");
-			return "Not a valid Email";
+			return "The email you've written is not an email";
 		}
 			if (ACC_DB.verifyEmail(account.getEmail())) {
 				System.out.println("Business 3");
-				
+	
+			System.out.println("AccountGetPassword: " + account.getPassword());
 			
-				try {
-					System.out.println("AccountGetPassword: "+account.getPassword());
-					if (HashEncrypt.encryptHash(account.getPassword()) == ACC_DB.verifyPassword(account.getPassword()));
+			String salt = ACC_DB.getSalt(account.getEmail());
+			String hashPassword = ACC_DB.getPassword(account.getEmail());
+			
+				if (PasswordUtils.verifyPassword(account.getPassword(), hashPassword, salt)) {
 					System.out.println("Business 4");
 					return "Welcome";
-					
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-		
-		
-		
-		return "Something went wrong";
-		
+				} else {
+					return "Not a valid Password";
+				}	
+			}		
+		return "That email is not registered";		
 	}
 	
 	

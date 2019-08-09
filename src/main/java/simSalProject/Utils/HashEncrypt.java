@@ -4,8 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-import simSalProject.models.Account;
-
 public class HashEncrypt {
 
 	public static String encryptHash(String passwordToHash) throws NoSuchAlgorithmException {
@@ -41,7 +39,7 @@ public class HashEncrypt {
 	// Add salt
 	public static byte[] getSalt() throws NoSuchAlgorithmException {
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-		byte[] salt = new byte[16];
+		byte[] salt = new byte[2];
 		sr.nextBytes(salt);
 		return salt;
 	}

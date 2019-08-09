@@ -1,13 +1,9 @@
 package simSalProject.models;
 
 
-import java.security.NoSuchAlgorithmException;
-
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-
-import simSalProject.Utils.HashEncrypt;
 
 
 
@@ -19,7 +15,8 @@ import simSalProject.Utils.HashEncrypt;
 	@NamedQuery(name=Account.GET_ROLE_COUNT, query="SELECT count(a) FROM Account a WHERE a.accountRole = :accountRole"),
 	@NamedQuery(name=Account.VERIFY_EMAIL_PASS, query="SELECT a FROM Account a WHERE a.email = :email AND a.password = :password"),
 	@NamedQuery(name=Account.VERIFY_EMAIL, query="SELECT count(a) FROM Account a WHERE a.email = :email"),	
-	@NamedQuery(name=Account.VERIFY_PASSWORD, query="SELECT a FROM Account a WHERE a.password = :password")
+	@NamedQuery(name=Account.VERIFY_PASSWORD, query="SELECT a.password FROM Account a WHERE a.email = :email"),
+	@NamedQuery(name=Account.VERIFY_SALT, query="SELECT a.salt FROM Account a WHERE a.email = :email")
 //	@NamedQuery(name=User_.GET_ROLE_FROM_USER, query="SELECT u FROM User_ u WHERE u.userRole = :role"),
 })
 
@@ -32,6 +29,7 @@ public class Account extends Entity_{
 	public static final String VERIFY_EMAIL_PASS = "verifyEmailAndPass";
 	public static final String VERIFY_EMAIL = "verifyEmail";
 	public static final String VERIFY_PASSWORD = "verifyPassword";
+	public static final String VERIFY_SALT = "verifySalt";
 
 	
 	
@@ -42,7 +40,7 @@ public class Account extends Entity_{
 	
 	private String email;
 	private String password;
-	private byte[] salt;
+	private String salt;
 	private AccountRole accountRole;
 	
 	public Account() {}
@@ -52,7 +50,7 @@ public class Account extends Entity_{
 	}
 
 	public void setPassword(String password) {
-		this.password = hashPassword(password);
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -64,11 +62,11 @@ public class Account extends Entity_{
 	}
 	
 	
-	public byte[] getSalt() {
+	public String getSalt() {
 		return salt;
 	}
 
-	public void setSalt(byte[] salt) {
+	public void setSalt(String salt) {
 		this.salt = salt;
 	}
 
@@ -81,27 +79,20 @@ public class Account extends Entity_{
 		return accountRole;
 	}
 
-	public String hashPassword (String passwordToHash) {
-		try {
-			byte[] salt = HashEncrypt.getSalt();
-			setSalt(salt);
-			String securePassword = HashEncrypt.getSecurePassword(passwordToHash, salt);
-			
-			return securePassword;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-//	public Optional<String> hashPassword (String passwordToHash) {
+//	public String hashPassword (String passwordToHash) {
 //		try {
-//			return PasswordUtils.hashPassword(passwordToHash, PasswordUtils.generateSalt(8));
+//			byte[] salt = HashEncrypt.getSalt();
+//			setSalt(salt);
+//			String securePassword = HashEncrypt.getSecurePassword(passwordToHash, salt);
+//			
+//			return securePassword;
 //		} catch (NoSuchAlgorithmException e) {
 //			e.printStackTrace();
 //		}
 //		return null;
 //	}
+	
+
 	
 	
 }
