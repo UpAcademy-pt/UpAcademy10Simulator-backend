@@ -90,7 +90,6 @@ public class AccountBusiness  {
 	
 	
 	public String initDataBase() {
-		
 		String message = "";
 		//0 is ENUM(0), which is ADMIN
 		if (ACC_DB.getRoleCount(AccountRole.ADMIN) == 0){

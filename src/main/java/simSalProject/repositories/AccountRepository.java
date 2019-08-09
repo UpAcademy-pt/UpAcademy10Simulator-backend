@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Account;
+import simSalProject.models.AccountDTO;
 import simSalProject.models.Account.AccountRole;
 
 
@@ -32,7 +33,7 @@ public class AccountRepository extends EntityRepository<Account>{
 	}
 	
 	
-	public List<Account> getUserById (long id){
+	public List<Account> getAccountById (long id){
 		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_ACC_BY_ID, Account.class);
 		query.setParameter("id", id);
 		
@@ -106,7 +107,22 @@ public class AccountRepository extends EntityRepository<Account>{
 		if(query.getResultList().size()>0) {
 			result = true;
 		}
-		return result;	}
+		return result;	
+		}
 	
-
+	public AccountDTO accountToAccountDTO(Account myAccount) {
+		AccountDTO myAccountDTO = new AccountDTO();
+		myAccountDTO.setId(myAccount.getId());
+		myAccountDTO.setEmail(myAccount.getEmail());
+		return myAccountDTO;
+	}
+	
+	public Account accountDTOToAccount (AccountDTO myAccountDTO) {
+		long id = myAccountDTO.getId();
+		Account myAccount = getAccountById(id);
+		
+		return myAccount;
+		
+	}
+		
 }
