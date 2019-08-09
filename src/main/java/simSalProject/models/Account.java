@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name=Account.ALL_ACC_VALUES, query="SELECT a FROM Account a"),
 	@NamedQuery(name=Account.GET_ACC_BY_ID, query="SELECT a FROM Account a WHERE a.id = :id"),
 	@NamedQuery(name=Account.GET_ROLE_COUNT, query="SELECT count(a) FROM Account a WHERE a.accountRole = :accountRole"),
+	@NamedQuery(name=Account.GET_ACC_BY_EMAIL, query="SELECT a FROM Account a WHERE a.email = :email"),
 	@NamedQuery(name=Account.VERIFY_EMAIL_PASS, query="SELECT a FROM Account a WHERE a.email = :email AND a.password = :password"),
 	@NamedQuery(name=Account.VERIFY_EMAIL, query="SELECT count(a) FROM Account a WHERE a.email = :email"),	
 	@NamedQuery(name=Account.VERIFY_PASSWORD, query="SELECT a.password FROM Account a WHERE a.email = :email"),
@@ -27,6 +28,7 @@ public class Account extends Entity_{
 	public static final String ALL_ACC_VALUES = "getAllAccs";
 	public static final String GET_ACC_BY_ID = "getAccById";
 	public static final String GET_ROLE_COUNT = "getRoleCount";
+	public static final String GET_ACC_BY_EMAIL = "existsAccountbyEmail";
 	public static final String VERIFY_EMAIL_PASS = "verifyEmailAndPass";
 	public static final String VERIFY_EMAIL = "verifyEmail";
 	public static final String VERIFY_PASSWORD = "verifyPassword";
@@ -95,6 +97,5 @@ public class Account extends Entity_{
 //	}
 	
 
-	
 	
 }
