@@ -82,19 +82,6 @@ public class Account extends Entity_{
 	public AccountRole getAccRole() {
 		return accountRole;
 	}
-
-//	public String hashPassword (String passwordToHash) {
-//		try {
-//			byte[] salt = HashEncrypt.getSalt();
-//			setSalt(salt);
-//			String securePassword = HashEncrypt.getSecurePassword(passwordToHash, salt);
-//			
-//			return securePassword;
-//		} catch (NoSuchAlgorithmException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
 	
 
 	

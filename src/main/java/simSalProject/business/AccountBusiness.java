@@ -25,7 +25,6 @@ public class AccountBusiness  {
 	@Named("AccRep")
 	AccountRepository ACC_DB;
 	
-	
 	public String createAccount(String email) {
 		if (!isEmailValid(email)) {
 			return "The email is not well written";
@@ -95,8 +94,11 @@ public class AccountBusiness  {
 		if (ACC_DB.getRoleCount(AccountRole.ADMIN) == 0){
 			Account initAccount = new Account();
 			initAccount.setEmail("admin@admin.com");
-			initAccount.setPassword("admin");
+			String salt = PasswordUtils.generateSalt(2).get();
+			
+			initAccount.setPassword(PasswordUtils.hashPassword("admin", salt ).get());
 			initAccount.setAccRole(AccountRole.ADMIN);
+			initAccount.setSalt(salt);
 			message = createAdmin(initAccount);
 			
 		} else {

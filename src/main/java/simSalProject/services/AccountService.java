@@ -60,16 +60,17 @@ public class AccountService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createAccount(Account myEmail) {
-		String msg = ACC_B.createAccount(myEmail.getEmail());
-		if ( msg == "The email is not well written" ) {
+	public Response createAccount(Account myAccount) {
+		String msg = ACC_B.createAccount(myAccount.getEmail());
+		System.out.println("msg"+ msg);
+		if (msg == "The email is not well written" ) {
 			return Response.status(304).entity(msg).build();
 		}
-		if ( msg == "This Account already exists" ) {
+		if (msg == "This Account already exists" ) {
 			return Response.status(304).entity(msg).build();
+		} else {
+			return Response.ok(msg).build();
 		}
-		
-		return Response.ok(msg).build();	
 	} 
 
 	
@@ -91,19 +92,19 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response login(Account account) {
-		String myAccount = ACC_B.login(account);
+		String msg = ACC_B.login(account);
 
-		if (myAccount == "The email you've written is not an email") {
-			Response.status(304).entity(myAccount).build();
+		if (msg == "The email you've written is not an email") {
+			Response.status(304).entity(msg).build();
 		}
-		if (myAccount == "That email is not registered") {
-			Response.status(304).entity(myAccount).build();
+		if (msg == "That email is not registered") {
+			Response.status(304).entity(msg).build();
 		}
-		if (myAccount == "Not a valid password") {
-			Response.status(304).entity(myAccount).build();
+		if (msg == "Not a valid password") {
+			Response.status(304).entity(msg).build();
 		}
 		
-		return Response.ok(myAccount).build();
+		return Response.ok(msg).build();
 
 	}
 	
