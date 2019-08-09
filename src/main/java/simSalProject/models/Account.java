@@ -16,7 +16,8 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name=Account.VERIFY_EMAIL_PASS, query="SELECT a FROM Account a WHERE a.email = :email AND a.password = :password"),
 	@NamedQuery(name=Account.VERIFY_EMAIL, query="SELECT count(a) FROM Account a WHERE a.email = :email"),	
 	@NamedQuery(name=Account.VERIFY_PASSWORD, query="SELECT a.password FROM Account a WHERE a.email = :email"),
-	@NamedQuery(name=Account.VERIFY_SALT, query="SELECT a.salt FROM Account a WHERE a.email = :email")
+	@NamedQuery(name=Account.VERIFY_SALT, query="SELECT a.salt FROM Account a WHERE a.email = :email"),
+	@NamedQuery(name=Account.GET_ID_WITH_EMAIL, query="SELECT a.id FROM Account a WHERE a.email = :email")
 //	@NamedQuery(name=User_.GET_ROLE_FROM_USER, query="SELECT u FROM User_ u WHERE u.userRole = :role"),
 })
 
@@ -30,6 +31,7 @@ public class Account extends Entity_{
 	public static final String VERIFY_EMAIL = "verifyEmail";
 	public static final String VERIFY_PASSWORD = "verifyPassword";
 	public static final String VERIFY_SALT = "verifySalt";
+	public static final String GET_ID_WITH_EMAIL = "getIdWithEmail";
 
 	
 	

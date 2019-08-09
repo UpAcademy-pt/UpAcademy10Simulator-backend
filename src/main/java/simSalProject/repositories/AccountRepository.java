@@ -79,6 +79,13 @@ public class AccountRepository extends EntityRepository<Account>{
 		query.setParameter("email", email);
 		return query.getSingleResult();
 	}
+	
+	
+	public long getIdWithEmail(String email) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ID_WITH_EMAIL, Long.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+	}
 
 	public long getRoleCount (AccountRole role){
 		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ROLE_COUNT, Long.class);
