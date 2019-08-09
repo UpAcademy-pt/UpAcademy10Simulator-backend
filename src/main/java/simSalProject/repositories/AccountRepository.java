@@ -1,14 +1,12 @@
 package simSalProject.repositories;
 
-import java.util.List;
-
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Account;
-import simSalProject.models.AccountDTO;
 import simSalProject.models.Account.AccountRole;
+import simSalProject.models.AccountDTO;
 
 
 @Named("AccRep")
@@ -33,11 +31,11 @@ public class AccountRepository extends EntityRepository<Account>{
 	}
 	
 	
-	public List<Account> getAccountById (long id){
+	public Account getAccountById (long id){
 		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_ACC_BY_ID, Account.class);
 		query.setParameter("id", id);
 		
-		return query.getResultList();
+		return query.getSingleResult();
 	}
 	
 //	public Account verifyEmailAndPass(String email, String password) {

@@ -68,8 +68,6 @@ public class AccountService {
 		if ( msg == "This Account already exists" ) {
 			return Response.status(400).entity(msg).build();
 		}
-		
-		return Response.ok(msg).build();	
 	} 
 
 	
@@ -91,7 +89,7 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response login(Account account) {
-		String myAccount = ACC_B.login(account);
+		String msg = ACC_B.login(account);
 
 		if (myAccount == "The email you've written is not an email") {
 			Response.status(400).entity(myAccount).build();
