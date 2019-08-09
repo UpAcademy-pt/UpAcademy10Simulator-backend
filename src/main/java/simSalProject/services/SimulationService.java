@@ -82,7 +82,7 @@ public class SimulationService {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
 			mySimulationToEdit.setId(id);
-			SIM_B.editSimulation(id, mySimulationToEdit);
+			SIM_B.editSimulation(mySimulationToEdit);
 			return Response.ok("Edit successful").build();
 		}
 

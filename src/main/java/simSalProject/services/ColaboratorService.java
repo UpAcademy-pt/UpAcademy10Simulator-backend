@@ -9,7 +9,6 @@ import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -59,17 +58,16 @@ public class ColaboratorService {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response editColaborator (long id, Colaborator myColaboratorToEdit) {
-	Colaborator myColaborator = COLAB_B.consultColaborator(id);
-	
-	if (myColaborator == null) {
-		return Response.status(404).entity("Colaborator doesn't exist").build();
-	} else {
-		myColaboratorToEdit.setId(id);
-		COLAB_B.editColaborator(id, myColaboratorToEdit);
-		return Response.ok("Edit successful").build();
-	}
-	return Response.ok("Colaborator successfully updated").build();
+	public Response editColaborator(long id, Colaborator myColaboratorToEdit) {
+		Colaborator myColaborator = COLAB_B.consultColaborator(id);
+
+		if (myColaborator == null) {
+			return Response.status(404).entity("Colaborator doesn't exist").build();
+		} else {
+			myColaboratorToEdit.setId(id);
+			COLAB_B.editColaborator(id, myColaboratorToEdit);
+			return Response.ok("Colaborator successfully updated").build();
+		}
 
 	}
 	

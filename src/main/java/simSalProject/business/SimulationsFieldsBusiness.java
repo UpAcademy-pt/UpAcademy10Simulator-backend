@@ -76,12 +76,4 @@ public String createSimulationFields(SimulationFields mySimulationFields) {
 		SIMF_DB.removeEntity(mySimulatonField);
 	}
 	
-	public List<Long> getAllIds(){
-		return new ArrayList<Long>(SIMF_DB.allIds());
-	}
-	
-	public Collection<SimulationFields> getAllValues(){
-		return SIMF_DB.allValues();
-	}
-	
 }
