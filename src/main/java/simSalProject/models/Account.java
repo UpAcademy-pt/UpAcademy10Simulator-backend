@@ -74,5 +74,4 @@ public class Account extends Entity_{
 		return null;
 	}
 	
-	
 }
