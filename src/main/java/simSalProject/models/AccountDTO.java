@@ -2,12 +2,10 @@ package simSalProject.models;
 
 public class AccountDTO {
 	
-	public enum AccountRole {
-	    ADMIN, USER, 
-	}
+
 	private long id;
 	private String email;
-	private AccountRole accountRole;
+	private String accountRole;
 	private String message;
 	
 	public long getId() {
@@ -26,11 +24,11 @@ public class AccountDTO {
 		this.email = email;
 	}
 
-	public AccountRole getAccountRole() {
+	public String getAccountRole() {
 		return accountRole;
 	}
 
-	public void setAccountRole(AccountRole accountRole) {
+	public void setAccountRole(String accountRole) {
 		this.accountRole = accountRole;
 	}
 

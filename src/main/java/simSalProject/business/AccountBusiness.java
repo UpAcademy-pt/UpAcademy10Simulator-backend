@@ -108,9 +108,10 @@ public class AccountBusiness  {
 	}
 	
 	public AccountDTO login(Account myAccount) {
+		Account accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
 		AccountDTO myAccountDTO = new AccountDTO();
 		if (!isEmailValid(myAccount.getEmail())) {
-
+			
 			myAccountDTO.setMessage("The email you've written is not an email");
 
 			return myAccountDTO;
@@ -121,6 +122,9 @@ public class AccountBusiness  {
 			String hashPassword = ACC_DB.getPassword(myAccount.getEmail());
 
 			if (PasswordUtils.verifyPassword(myAccount.getPassword(), hashPassword, salt)) {
+				myAccountDTO.setEmail(myAccount.getEmail());
+				myAccountDTO.setId(accountInDB.getId());
+				myAccountDTO.setAccountRole(Account.AccountRole.USER.toString());
 				myAccountDTO.setMessage("Welcome");
 				return myAccountDTO;
 			} else {

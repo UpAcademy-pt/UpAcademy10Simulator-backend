@@ -90,7 +90,7 @@ public class AccountService {
 	@POST
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Account myAccount) {
 		AccountDTO myAccountDTO = ACC_B.login(myAccount);
 		String msg = myAccountDTO.getMessage();

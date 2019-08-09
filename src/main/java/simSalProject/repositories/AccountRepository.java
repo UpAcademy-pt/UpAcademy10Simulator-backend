@@ -38,6 +38,12 @@ public class AccountRepository extends EntityRepository<Account>{
 		return query.getSingleResult();
 	}
 	
+	public Account getAccountByEmail (String email) {
+		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_ACC_BY_EMAIL, Account.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+	}
+	
 //	public Account verifyEmailAndPass(String email, String password) {
 //		TypedQuery<Account> query = entityManager.createNamedQuery(Account.VERIFY_EMAIL_PASS, Account.class);
 //		query.setParameter("email", email);

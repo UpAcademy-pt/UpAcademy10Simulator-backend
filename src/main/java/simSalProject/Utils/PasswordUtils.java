@@ -29,7 +29,7 @@ public class PasswordUtils {
 
   private static final int ITERATIONS = 65536;
   private static final int KEY_LENGTH = 8;
-  private static final String ALGORITHM = "PBKDF2WithHmacSHA512";
+  private static final String ALGORITHM = "PBKDF2WithHmacSHA1";
 
   public static Optional<String> hashPassword (String password, String salt) {
 
