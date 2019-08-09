@@ -7,13 +7,16 @@ import java.security.SecureRandom;
 public class HashEncrypt {
 
 	public static String encryptHash(String passwordToHash) throws NoSuchAlgorithmException {
+		System.out.println("encryptHash: "+passwordToHash);
 		byte[] salt = getSalt();
+		
 		String securePassword = getSecurePassword(passwordToHash, salt);
+		System.out.println("Secure Password: "+ securePassword);
 		return securePassword;
 		
 	}
 
-	private static String getSecurePassword(String passwordToHash, byte[] salt) {
+	public static String getSecurePassword(String passwordToHash, byte[] salt) {
 		String generatedPassword = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-1");
@@ -28,12 +31,15 @@ public class HashEncrypt {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Password with Hash: "+generatedPassword);
 		return generatedPassword;
+		
+		
 	}
 	// Add salt
-	private static byte[] getSalt() throws NoSuchAlgorithmException {
+	public static byte[] getSalt() throws NoSuchAlgorithmException {
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-		byte[] salt = new byte[16];
+		byte[] salt = new byte[2];
 		sr.nextBytes(salt);
 		return salt;
 	}

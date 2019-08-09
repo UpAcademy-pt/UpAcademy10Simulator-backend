@@ -38,6 +38,55 @@ public class AccountRepository extends EntityRepository<Account>{
 		
 		return query.getResultList();
 	}
+	
+//	public Account verifyEmailAndPass(String email, String password) {
+//		TypedQuery<Account> query = entityManager.createNamedQuery(Account.VERIFY_EMAIL_PASS, Account.class);
+//		query.setParameter("email", email);
+//		query.setParameter("password", password);
+//		return query.getSingleResult();
+//	}
+	
+	public boolean verifyEmail(String email) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Account.VERIFY_EMAIL, Long.class);
+		query.setParameter("email", email);
+		if (query.getSingleResult() == 0) {
+			return false;
+		} else {
+		return true;
+		}
+	}
+	
+	/**********************************************************************************************************
+	 * 
+	 * @param email
+	 * @return Password
+	 */
+	
+	public String getPassword(String email) {
+		TypedQuery<String> query = entityManager.createNamedQuery(Account.VERIFY_PASSWORD, String.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+
+	}
+	
+	/**********************************************************************************************************
+	 * 
+	 * @param email
+	 * @return salt
+	 */
+	
+	public String getSalt(String email) {
+		TypedQuery<String> query = entityManager.createNamedQuery(Account.VERIFY_SALT, String.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+	}
+	
+	
+	public long getIdWithEmail(String email) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ID_WITH_EMAIL, Long.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+	}
 
 	
 	public long getRoleCount (AccountRole role){

@@ -60,14 +60,20 @@ public class AccountService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createAccount(Account myAccount) {
-		if (ACC_B.createAccount(myAccount) == "Created") {
-		} else if (ACC_B.createAccount(myAccount) == "Only 1 admin can exist") {
-			return Response.status(304).entity(ACC_B.createAccount(myAccount)).build();
+	public Response createAccount(Account myEmail) {
+		String msg = ACC_B.createAccount(myEmail.getEmail());
+		if ( msg == "The email is not well written" ) {
+			return Response.status(304).entity(msg).build();
 		}
-		return Response.ok(ACC_B.createAccount(myAccount)).build();
-	}
+		if ( msg == "This Account already exists" ) {
+			return Response.status(304).entity(msg).build();
+		}
+		
+		return Response.ok(msg).build();	
+	} 
 
+	
+	
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,6 +85,28 @@ public class AccountService {
 		return Response.ok(myAccount).build();
 
 	}
+	
+	@POST
+	@Path("login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response login(Account account) {
+		String myAccount = ACC_B.login(account);
+
+		if (myAccount == "The email you've written is not an email") {
+			Response.status(304).entity(myAccount).build();
+		}
+		if (myAccount == "That email is not registered") {
+			Response.status(304).entity(myAccount).build();
+		}
+		if (myAccount == "Not a valid password") {
+			Response.status(304).entity(myAccount).build();
+		}
+		
+		return Response.ok(myAccount).build();
+
+	}
+	
 
 	@PUT
 	@Path("/{id}")

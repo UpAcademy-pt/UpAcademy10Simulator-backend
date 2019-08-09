@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.Utils.PasswordUtils;
 import simSalProject.Utils.SendMail;
 import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
@@ -24,23 +26,34 @@ public class AccountBusiness  {
 	AccountRepository ACC_DB;
 	
 	
-	public String createAccount(Account myAccount) {
-		if (ACC_DB.existsAccountbyEmail(myAccount.getEmail())) {
+	public String createAccount(String email) {
+		if (!isEmailValid(email)) {
+			return "The email is not well written";
+		}
+		
+		if (ACC_DB.verifyEmail(email)) {
 			return "This Account already exists";
-		} else if (!ACC_DB.existsAccountbyEmail(myAccount.getEmail())) {
+		} else {
+		
+		Account myAccount = new Account();
+		myAccount.setEmail(email);
+		
 		String randomPassword = SendMail.createRandom();
-		myAccount.setPassword(randomPassword);
+		myAccount.setSalt(PasswordUtils.generateSalt(2).get());
+		String randomSalt = myAccount.getSalt();
+		myAccount.setPassword(PasswordUtils.hashPassword(randomPassword, randomSalt).get());
+		
 		try {
-			SendMail.sendMail(myAccount.getEmail(), randomPassword);
+			SendMail.sendMail(email, randomPassword);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		myAccount.setAccRole(AccountRole.USER);
 		ACC_DB.createEntity(myAccount);
-		return "Created";
+		return "Account Created";
 		}
-		return null;
+		
 	}
 
 	public String createAdmin(Account adminAccount) {
@@ -94,12 +107,47 @@ public class AccountBusiness  {
 		return message;
 	}
 	
-	public String login() {
+	public String login(Account account) {
 		
+		System.out.println("Business 1");
+		System.out.println(account.getEmail());
 		
+		if (!isEmailValid(account.getEmail())) {
+			System.out.println("Business 2");
+			return "The email you've written is not an email";
+		}
+			if (ACC_DB.verifyEmail(account.getEmail())) {
+				System.out.println("Business 3");
+	
+			System.out.println("AccountGetPassword: " + account.getPassword());
+			
+			String salt = ACC_DB.getSalt(account.getEmail());
+			String hashPassword = ACC_DB.getPassword(account.getEmail());
+			
+				if (PasswordUtils.verifyPassword(account.getPassword(), hashPassword, salt)) {
+					System.out.println("Business 4");
+					return "Welcome";
+				} else {
+					return "Not a valid Password";
+				}	
+			}		
+		return "That email is not registered";		
+	}
+	
+	
+	// Code to verify if the email is well written //
+	public boolean isEmailValid(String email) {
 		
-		return "";
+		String emailRegex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; 
+		Pattern pat = Pattern.compile(emailRegex);
 		
+		if (email.equals("")) {
+			return false;
+		}
+		boolean teste = pat.matcher(email).matches();
+	
+		return teste;
+		 
 	}
 	
 	
