@@ -31,11 +31,11 @@ public class AccountRepository extends EntityRepository<Account>{
 		return Account.ALL_ACC_VALUES;
 	}
 	
-	public List<Account> getUserById (long id){
+	public Account getUserById (long id){
 		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_ACC_BY_ID, Account.class);
 		query.setParameter("id", id);
 		
-		return query.getResultList();
+		return query.getSingleResult();
 	}
 
 	public long getRoleCount (AccountRole role){
@@ -43,6 +43,5 @@ public class AccountRepository extends EntityRepository<Account>{
 		query.setParameter("accountRole", role);
 		
 		return query.getSingleResult();
-	}
-
+	}	
 }

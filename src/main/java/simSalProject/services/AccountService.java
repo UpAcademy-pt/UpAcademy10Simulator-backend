@@ -36,7 +36,6 @@ public class AccountService {
 	}
 
 	
-	
 	@Inject
 	@Named("AccBus")
 	AccountBusiness ACC_B;
@@ -91,7 +90,7 @@ public class AccountService {
 		} else {
 			myAccountToEdit.setId(id);
 			ACC_B.editAccount(id, myAccountToEdit);
-			return Response.ok("Edit successful").build();
+			return Response.ok("Account successfully updated").build();
 		}
 
 	}
@@ -106,7 +105,7 @@ public class AccountService {
 		} else {
 			myAccount.setId(idToRemove);
 			ACC_B.removeAccount(myAccount);
-			return Response.ok("Remove successful").build();
+			return Response.ok("Account successfully removed").build();
 		}
 	}
 

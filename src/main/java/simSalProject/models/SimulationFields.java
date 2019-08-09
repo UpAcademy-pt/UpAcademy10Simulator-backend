@@ -8,6 +8,9 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name=SimulationFields.ALL_SIM_FIELDS_IDS, query="SELECT sf.id FROM SimulationFields sf "),
 	@NamedQuery(name=SimulationFields.ALL_SIM_FIELDS_VALUES, query="SELECT sf FROM SimulationFields sf"),
+	@NamedQuery(name=SimulationFields.GET_SIM_FIELDS_BY_ID, query="SELECT sf FROM SimulationFields sf WHERE sf.id = :id"),
+	@NamedQuery(name=SimulationFields.GET_SIM_FIELDS_BY_NAME, query="SELECT sf FROM SimulationFields sf WHERE sf.name = :name")
+	
 })
 public class SimulationFields extends Entity_{
 	/**
@@ -16,6 +19,8 @@ public class SimulationFields extends Entity_{
 	private static final long serialVersionUID = 1L;
 	public static final String ALL_SIM_FIELDS_IDS = "getAllSimFieldsIds";
 	public static final String ALL_SIM_FIELDS_VALUES = "getAllSimFieldsValues";
+	public static final String GET_SIM_FIELDS_BY_ID = "getSimFieldsById";
+	public static final String GET_SIM_FIELDS_BY_NAME = "getSimFieldsByName";
 	
 	private String name;
 	private float SA;
