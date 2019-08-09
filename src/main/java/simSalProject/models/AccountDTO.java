@@ -8,7 +8,7 @@ public class AccountDTO {
 	private long id;
 	private String email;
 	private AccountRole accountRole;
-	
+	private String message;
 	
 	public long getId() {
 		return id;
@@ -32,6 +32,14 @@ public class AccountDTO {
 
 	public void setAccountRole(AccountRole accountRole) {
 		this.accountRole = accountRole;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	

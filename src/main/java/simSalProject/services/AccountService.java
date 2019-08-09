@@ -21,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.AccountBusiness;
 import simSalProject.models.Account;
+import simSalProject.models.AccountDTO;
 
 @Path("accounts")
 public class AccountService {
@@ -62,7 +63,6 @@ public class AccountService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createAccount(Account myAccount) {
 		String msg = ACC_B.createAccount(myAccount.getEmail());
-		System.out.println("msg"+ msg);
 		if (msg == "The email is not well written" ) {
 			return Response.status(400).entity(msg).build();
 		}
@@ -91,9 +91,9 @@ public class AccountService {
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response login(Account account) {
-		String msg = ACC_B.login(account);
-
+	public Response login(Account myAccount) {
+		AccountDTO myAccountDTO = ACC_B.login(myAccount);
+		String msg = myAccountDTO.getMessage();
 		if (msg == "The email you've written is not an email") {
 			Response.status(400).entity(msg).build();
 		}
@@ -104,7 +104,7 @@ public class AccountService {
 			Response.status(400).entity(msg).build();
 		}
 		
-		return Response.ok(msg).build();
+		return Response.ok(myAccountDTO).build();
 
 	}
 	
