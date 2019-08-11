@@ -20,6 +20,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.AccountBusiness;
+import simSalProject.business.AccountBusiness.CreateAccountException;
+import simSalProject.business.AccountBusiness.ExistingEmailException;
+import simSalProject.business.AccountBusiness.InvalidEmailException;
 import simSalProject.models.Account;
 import simSalProject.models.AccountDTO;
 
@@ -36,45 +39,42 @@ public class AccountService {
 		return "URI " + context.getRequestUri().toString() + " is OK!";
 	}
 
-	
-	
 	@Inject
 	@Named("AccBus")
 	AccountBusiness ACC_B;
 
-	
 	@GET
 	@Path("initDatabase")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response initDataBase() {
 		String message = ACC_B.initDataBase();
-		if(message == "ADMIN didn't exist, ADMIN created with default credentials") {
-			
+		if (message == "ADMIN didn't exist, ADMIN created with default credentials") {
+
 		} else if (message == "ADMIN already exists") {
 			return Response.status(400).entity(message).build();
-			
+
 		}
 		return Response.ok().entity(message).build();
 	}
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createAccount(Account myAccount) {
-		String msg = ACC_B.createAccount(myAccount.getEmail());
-		if (msg == "The email is not well written" ) {
-			return Response.status(400).entity(msg).build();
-		}
-		if (msg == "This Account already exists" ) {
-			return Response.status(400).entity(msg).build();
-		} else {
-			return Response.ok(msg).build();
-		}
-	} 
 
-	
-	
+		try {
+			ACC_B.createAccount(myAccount.getEmail());
+		} catch (InvalidEmailException invalidEmailException) {
+			return Response.status(400).entity("That email was not well written").build();
+		} catch (ExistingEmailException existingEmailException) {
+			return Response.status(400).entity("This Account already exists").build();
+		} catch (CreateAccountException e) {
+			return Response.status(400).entity("Something went wrong sending email").build();
+		}
+
+		return Response.ok("Account created").build();
+	}
+
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -86,7 +86,7 @@ public class AccountService {
 		return Response.ok(myAccount).build();
 
 	}
-	
+
 	@POST
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -103,26 +103,19 @@ public class AccountService {
 		if (msg == "Not a valid password") {
 			Response.status(400).entity(msg).build();
 		}
-		
+
 		return Response.ok(myAccountDTO).build();
 
 	}
-	
 
 	@PUT
-	@Path("/{id}")
+	@Path("editAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response editAccount(@PathParam("id") long id, Account myAccountToEdit) {
-		Account myAccount = ACC_B.consultAccount(id);
-		if (myAccount == null) {
-			return Response.status(400).entity("Account doesn't exist").build();
-		} else {
-			myAccountToEdit.setId(id);
-			ACC_B.editAccount(id, myAccountToEdit);
-			return Response.ok("Edit successful").build();
-		}
-
+	public Response editAccount(Account myAccountToEdit) {
+		ACC_B.changePassword(myAccountToEdit);
+		
+		return Response.ok().build();
 	}
 
 	@DELETE
@@ -151,5 +144,5 @@ public class AccountService {
 	public Collection<Account> getAllValues() {
 		return ACC_B.getAllValues();
 	}
-	
+
 }
