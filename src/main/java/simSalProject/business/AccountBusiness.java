@@ -54,17 +54,17 @@ public class AccountBusiness {
 		}
 		
 	}
-	
 	public String changePassword(Account myAccountToEdit) {
-		Account currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
-		System.out.println(currentAccount.getEmail());
 		String salt = PasswordUtils.generateSalt(2).get();
+		Account currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
+
 		currentAccount.setSalt(salt);
-		currentAccount.setPassword(PasswordUtils.hashPassword(currentAccount.getPassword(), salt).get());
+		currentAccount.setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
 		
 		ACC_DB.editEntity(currentAccount);
 		return "Welcome user with new Password";
 	}
+	
 
 	public String createAdmin(Account adminAccount) {
 		ACC_DB.createEntity(adminAccount);
@@ -143,6 +143,8 @@ public class AccountBusiness {
 			return myAccountDTO;
 		}
 	}
+	
+
 
 	// Code to verify if the email is well written //
 	public boolean isEmailValid(String email) {
