@@ -113,6 +113,7 @@ public class AccountBusiness {
 
 		return message;
 	}
+	
 
 	public AccountDTO login(Account myAccount) {
 		Account accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
@@ -125,13 +126,20 @@ public class AccountBusiness {
 		}
 		if (ACC_DB.verifyEmail(myAccount.getEmail())) {
 
-			String salt = ACC_DB.getSalt(myAccount.getEmail());
-			String hashPassword = ACC_DB.getPassword(myAccount.getEmail());
+			String salt = accountInDB.getSalt();
+			String hashPassword = accountInDB.getPassword();
 
 			if (PasswordUtils.verifyPassword(myAccount.getPassword(), hashPassword, salt)) {
 				myAccountDTO.setEmail(myAccount.getEmail());
 				myAccountDTO.setId(accountInDB.getId());
-				myAccountDTO.setAccountRole(Account.AccountRole.USER.toString());
+				System.out.println(accountInDB.getAccRole());
+				if (accountInDB.getAccRole() == Account.AccountRole.ADMIN) {
+					System.out.println("entrei");
+					myAccountDTO.setAccountRole(Account.AccountRole.ADMIN.toString());
+				} 
+				else {
+					myAccountDTO.setAccountRole(Account.AccountRole.USER.toString());
+				}
 				myAccountDTO.setMessage("Welcome");
 				return myAccountDTO;
 			} else {
