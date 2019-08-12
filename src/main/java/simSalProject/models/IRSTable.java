@@ -1,5 +1,7 @@
 package simSalProject.models;
 
+import java.util.Iterator;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -7,89 +9,93 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=IRSTable.ALL_IRS_VALUES, query="SELECT a FROM IRSTable a")
+	@NamedQuery(name=IRSTable.ALL_IRS_VALUES, query="SELECT a FROM IRSTable a"),
+	@NamedQuery(name=IRSTable.ALL_IRS_IDS, query="SELECT a.id FROM IRSTable a")
 })
 	
 public class IRSTable extends Entity_{
 	private static final long serialVersionUID = 1L;
 	
 	public static final String ALL_IRS_VALUES = "getAll";
+	public static final String ALL_IRS_IDS = "getAllIds";
 	
-	
-	private double monthlySalary;
-	private double zeroKids;
-	private double oneKid;
-	private double twoKids;
-	private double threeKids;
-	private double fourKids;
-	private double fiveKids;
-	private String civilState;
+	private int remuneracao_mensal;
+	private double zero;
+	private double um;
+	private double dois;
+	private double tres;
+	private double quatro;
+	private double cinco;
+	private String n_titulares_rendimento;
 	
 	public IRSTable() {}
 
-	public double getMonthlySalary() {
-		return monthlySalary;
+	public double getRemuneracao_mensal() {
+		return remuneracao_mensal;
 	}
 
-	public void setMonthlySalary(double monthlySalary) {
-		this.monthlySalary = monthlySalary;
+	public void setRemuneracao_mensal(int remuneracao_mensal) {
+		this.remuneracao_mensal = remuneracao_mensal;
 	}
 
-	public double getZeroKids() {
-		return zeroKids;
+	public double getZero() {
+		return zero;
 	}
 
-	public void setZeroKids(double zeroKids) {
-		this.zeroKids = zeroKids;
+	public void setZero(double zero) {
+		this.zero = zero;
 	}
 
-	public double getOneKid() {
-		return oneKid;
+	public double getUm() {
+		return um;
 	}
 
-	public void setOneKid(double oneKid) {
-		this.oneKid = oneKid;
+	public void setUm(double um) {
+		this.um = um;
 	}
 
-	public double getTwoKids() {
-		return twoKids;
+	public double getDois() {
+		return dois;
 	}
 
-	public void setTwoKids(double twoKids) {
-		this.twoKids = twoKids;
+	public void setDois(double dois) {
+		this.dois = dois;
 	}
 
-	public double getThreeKids() {
-		return threeKids;
+	public double getTres() {
+		return tres;
 	}
 
-	public void setThreeKids(double threeKids) {
-		this.threeKids = threeKids;
+	public void setTres(double tres) {
+		this.tres = tres;
 	}
 
-	public double getFourKids() {
-		return fourKids;
+	public double getQuatro() {
+		return quatro;
 	}
 
-	public void setFourKids(double fourKids) {
-		this.fourKids = fourKids;
+	public void setQuatro(double quatro) {
+		this.quatro = quatro;
 	}
 
-	public double getFiveKids() {
-		return fiveKids;
+	public double getCinco() {
+		return cinco;
 	}
 
-	public void setFiveKids(double fiveKids) {
-		this.fiveKids = fiveKids;
+	public void setCinco(double cinco) {
+		this.cinco = cinco;
 	}
 
-	public String getCivilState() {
-		return civilState;
+	public String getN_titulares_rendimento() {
+		return n_titulares_rendimento;
 	}
 
-	public void setCivilState(String civilState) {
-		this.civilState = civilState;
+	public void setN_titulares_rendimento(String n_titulares_rendimento) {
+		this.n_titulares_rendimento = n_titulares_rendimento;
 	}
+
+	
+
 	
 	
 	
