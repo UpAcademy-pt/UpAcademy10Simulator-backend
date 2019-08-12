@@ -23,7 +23,7 @@ public class Colaborator extends Entity_{
 	public static final String GET_COLABORATOR_BY_NAME = "getColabByName";
 	private String name;
 	private String status;
-	private int dependents;
+	private String dependents;
 	
 //	private List<Simulation> simulations = new ArrayList();
 	
@@ -47,11 +47,11 @@ public class Colaborator extends Entity_{
 		this.status = status;
 	}
 
-	public int getDependents() {
+	public String getDependents() {
 		return dependents;
 	}
 
-	public void setDependents(int dependents) {
+	public void setDependents(String dependents) {
 		this.dependents = dependents;
 	}
 

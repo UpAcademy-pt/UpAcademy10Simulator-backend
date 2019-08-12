@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.IRSTableBusiness;
+import simSalProject.models.Colaborator;
 import simSalProject.models.IRSTable;
 
 @Path("irstable")
@@ -47,6 +48,15 @@ public class IRSTableService {
 	public Response createIRSTable(Collection <IRSTable> table) {
 		IRS_B.createIRSTable(table);
 
-		return Response.ok().entity("entrou").build();
+		return Response.ok().entity("Table uploaded").build();
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response filterIRSTable(Colaborator colaborator) {
+		Collection<IRSTable> filteredTable= IRS_B.filterIRSTable(colaborator);
+		
+		return Response.ok().entity(filteredTable).build();
 	}
 }
