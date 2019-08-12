@@ -1,7 +1,5 @@
 package simSalProject.models;
 
-import java.util.Iterator;
-
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -10,7 +8,14 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=IRSTable.ALL_IRS_VALUES, query="SELECT a FROM IRSTable a"),
-	@NamedQuery(name=IRSTable.ALL_IRS_IDS, query="SELECT a.id FROM IRSTable a")
+	@NamedQuery(name=IRSTable.ALL_IRS_IDS, query="SELECT a.id FROM IRSTable a"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_ZERO, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_ONE, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_TWO, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_THREE, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_FOUR, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_FIVE, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento")
+	
 })
 	
 public class IRSTable extends Entity_{
@@ -18,6 +23,14 @@ public class IRSTable extends Entity_{
 	
 	public static final String ALL_IRS_VALUES = "getAll";
 	public static final String ALL_IRS_IDS = "getAllIds";
+	public static final String FILTER_IRS_BY_ZERO = "filterByZero";
+	public static final String FILTER_IRS_BY_ONE = "filterByOne";
+	public static final String FILTER_IRS_BY_TWO = "filterByTwo";
+	public static final String FILTER_IRS_BY_THREE = "filterByThree";
+	public static final String FILTER_IRS_BY_FOUR = "filterByFour";
+	public static final String FILTER_IRS_BY_FIVE = "filterByFive";
+	
+	
 	
 	private int remuneracao_mensal;
 	private double zero;
