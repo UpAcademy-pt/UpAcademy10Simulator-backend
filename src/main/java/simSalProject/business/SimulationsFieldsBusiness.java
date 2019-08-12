@@ -19,13 +19,21 @@ public class SimulationsFieldsBusiness {
 	@Named("SimFieldsRep")
 	SimulationsFieldsRepository SIMF_DB;
 	
-public String createSimulationFields(SimulationFields mySimulationFields) {
+	
+	public SimulationFields initDatabase() {
 		
-		SIMF_DB.createEntity(mySimulationFields);
-		return "Created";
+		
+		return null;
 		
 	}
 	
+	public String createSimulationFields(SimulationFields mySimulationFields) {
+
+		SIMF_DB.createEntity(mySimulationFields);
+		return "Created";
+
+	}
+
 	public SimulationFields consultSimulationFields(long id) {
 		SimulationFields mySimulationFields = SIMF_DB.consultEntity(id);
 		return mySimulationFields;
@@ -49,6 +57,31 @@ public String createSimulationFields(SimulationFields mySimulationFields) {
 	
 	public Collection<SimulationFields> getAllValues() {
 		return SIMF_DB.allValues();
+	}
+	
+	public String createSimulationField(SimulationFields mySimulationField) {
+		if(SIMF_DB.allValues().contains(mySimulationField)) {
+			return "This Simulation Field already exists";
+		}
+		return "Created";
+	}
+	
+	public SimulationFields consultSimulationField(long id) {
+		SimulationFields mySimulationField = SIMF_DB.getSimulationFieldsById(id);
+		return mySimulationField;
+	}
+	
+	public SimulationFields consultSimulationField(String name) {
+		SimulationFields mySimulationField = SIMF_DB.getSimulationFieldsByName(name);
+		return mySimulationField;
+	}
+	
+	public void editSimulationField(SimulationFields mySimulationFieldToEdit) {
+		SIMF_DB.editEntity(mySimulationFieldToEdit);
+	}
+
+	public void removeSimulationField(SimulationFields mySimulatonField) {
+		SIMF_DB.removeEntity(mySimulatonField);
 	}
 	
 }

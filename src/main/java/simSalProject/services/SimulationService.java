@@ -61,6 +61,17 @@ public class SimulationService {
 
 	}
 
+	@GET
+	@Path("/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultSimulation(@PathParam("name")String name) {
+		Simulation mySimulation = SIM_B.consultSimulation(name);
+		if (mySimulation == null) {
+			return Response.status(400).entity("Simulation doesn't exist").build();
+		}
+		return Response.ok(mySimulation).build();
+	}
+
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -71,7 +82,7 @@ public class SimulationService {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
 			mySimulationToEdit.setId(id);
-			SIM_B.editSimulation(id, mySimulationToEdit);
+			SIM_B.editSimulation(mySimulationToEdit);
 			return Response.ok("Edit successful").build();
 		}
 

@@ -39,6 +39,7 @@ public class AccountService {
 		return "URI " + context.getRequestUri().toString() + " is OK!";
 	}
 
+	
 	@Inject
 	@Named("AccBus")
 	AccountBusiness ACC_B;
@@ -61,17 +62,14 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createAccount(Account myAccount) {
-		System.out.println(myAccount.getEmail());
-		try {
-			ACC_B.createAccount(myAccount.getEmail());
-		
-		} catch (InvalidEmailException invalidEmailException) {
-			return Response.status(400).entity("That email was not well written").build();
-		} catch (ExistingEmailException existingEmailException) {
-			return Response.status(400).entity("This Account already exists").build();
-		} catch (CreateAccountException e) {
-			System.out.println(e);
-			return Response.status(400).entity("Something went wrong sending email").build();
+		String msg = ACC_B.createAccount(myAccount.getEmail());
+		if (msg == "The email is not well written" ) {
+			return Response.status(400).entity(msg).build();
+		}
+		if (msg == "This Account already exists" ) {
+			return Response.status(400).entity(msg).build();
+		} else {
+			return Response.ok(msg).build();
 		}
 
 		return Response.ok("Account created").build();
@@ -130,7 +128,7 @@ public class AccountService {
 		} else {
 			myAccount.setId(idToRemove);
 			ACC_B.removeAccount(myAccount);
-			return Response.ok("Remove successful").build();
+			return Response.ok("Account successfully removed").build();
 		}
 	}
 

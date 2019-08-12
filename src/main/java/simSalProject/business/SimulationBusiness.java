@@ -20,35 +20,37 @@ public class SimulationBusiness {
 	@Named("SimRep")
 	SimulationRepository SIM_DB;
 	
-public String createSimulation(Simulation mySimulation) {
-		
+	public String createSimulation(Simulation mySimulation) {
+		if(SIM_DB.allValues().contains(mySimulation)) {
+			return "This Simulation already exists";
+		}
 		SIM_DB.createEntity(mySimulation);
 		return "Created";
-		
 	}
 	
 	public Simulation consultSimulation(long id) {
-		Simulation mySimulation = SIM_DB.consultEntity(id);
+		Simulation mySimulation = SIM_DB.getSimulationById(id);
 		return mySimulation;
 	}
 	
-	public void editSimulation(long id, Simulation mySimulationToEdit) {
-		
-			SIM_DB.editEntity(mySimulationToEdit);
-		
+	public Simulation consultSimulation(String name) {
+		Simulation mySimulation = SIM_DB.getSimulationByName(name);
+		return mySimulation;
+	}
+	
+	public void editSimulation(Simulation mySimulationToEdit) {
+		SIM_DB.editEntity(mySimulationToEdit);
 	}
 	
 	public void removeSimulation(Simulation mySimulation) {
-		
-			SIM_DB.removeEntity(mySimulation);
-		
+		SIM_DB.removeEntity(mySimulation);
 	}
 	
 	public List<Long> getAllIds() {
 		return new ArrayList<Long>(SIM_DB.allIds());
 	}
 	
-	public Collection<Simulation> getAllValues() {
+	public Collection<Simulation> getAllValues(){
 		return SIM_DB.allValues();
 	}
 	
