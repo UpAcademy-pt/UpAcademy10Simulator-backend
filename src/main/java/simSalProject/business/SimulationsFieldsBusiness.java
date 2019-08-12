@@ -19,13 +19,21 @@ public class SimulationsFieldsBusiness {
 	@Named("SimFieldsRep")
 	SimulationsFieldsRepository SIMF_DB;
 	
-public String createSimulationFields(SimulationFields mySimulationFields) {
+	
+	public SimulationFields initDatabase() {
 		
-		SIMF_DB.createEntity(mySimulationFields);
-		return "Created";
+		
+		return null;
 		
 	}
 	
+	public String createSimulationFields(SimulationFields mySimulationFields) {
+
+		SIMF_DB.createEntity(mySimulationFields);
+		return "Created";
+
+	}
+
 	public SimulationFields consultSimulationFields(long id) {
 		SimulationFields mySimulationFields = SIMF_DB.consultEntity(id);
 		return mySimulationFields;
