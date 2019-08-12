@@ -61,14 +61,16 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createAccount(Account myAccount) {
-
+		System.out.println(myAccount.getEmail());
 		try {
 			ACC_B.createAccount(myAccount.getEmail());
+		
 		} catch (InvalidEmailException invalidEmailException) {
 			return Response.status(400).entity("That email was not well written").build();
 		} catch (ExistingEmailException existingEmailException) {
 			return Response.status(400).entity("This Account already exists").build();
 		} catch (CreateAccountException e) {
+			System.out.println(e);
 			return Response.status(400).entity("Something went wrong sending email").build();
 		}
 

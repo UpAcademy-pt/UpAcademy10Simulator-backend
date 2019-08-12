@@ -44,6 +44,7 @@ public class AccountBusiness {
 		try {
 			SendMail.sendMail(email, randomPassword);
 		} catch (IOException e) {
+			System.out.println(e);
 			throw new SendEmailException();
 		}
 		myAccount.setAccRole(AccountRole.USER);
