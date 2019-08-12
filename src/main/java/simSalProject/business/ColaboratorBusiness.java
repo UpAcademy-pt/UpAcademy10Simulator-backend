@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import simSalProject.models.Colaborator;
 import simSalProject.repositories.ColaboratorRepository;
 

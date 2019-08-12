@@ -1,7 +1,5 @@
 package simSalProject.models;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,37 +20,40 @@ public class Simulation extends Entity_{
 	public static final String GET_SIM_BY_ID = "getSimByID";
 	public static final String GET_SIM_BY_NAME = "getSimByName";
 	
-	private long netSalary;
+	
 	private String name;
-//	private List<SimFieldsData> simFieldsData;
+	private SimulationFields simFields;
+	private SimFieldsData simFieldsData;
 
 	public Simulation() {
 		super();
 	}
 	
 	
-	public Simulation(long netSalary, String name) {
+	public Simulation(String name) {
 		super();
-		this.netSalary = netSalary;
 		this.name = name;
 	}
-	
-	public long getSalary() {
-		return netSalary;
+
+
+	public SimulationFields getSimFields() {
+		return simFields;
 	}
 
-	public void setSalary(long netSalary) {
-		this.netSalary = netSalary;
-	}
-	
-	
-	public String getName() {
-		return name;
+
+
+
+	public SimFieldsData getSimFieldsData() {
+		return simFieldsData;
 	}
 
-	public void setNameField(String name) {
-		this.name = name;
-	}
+
+	
+	
+	
+	
+	
+	
 
 	
 	

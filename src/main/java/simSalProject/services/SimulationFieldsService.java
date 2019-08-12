@@ -41,14 +41,29 @@ public class SimulationFieldsService {
 	@Named("SimFieldsBus")
 	SimulationsFieldsBusiness SIMF_B;
 	
+	@GET
+	@Path("initDatabase")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response initDataBase() {
+		String message = SIMF_B.initDataBase();
+		if(message == "Inited Fields") {
+			
+		}
+		return Response.ok().entity(message).build();
+	}
+	
+	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createSimulationFields(SimulationFields mySimulationFields) {
-		if (SIMF_B.createSimulationFields(mySimulationFields) == "Created") {
-		
+	public Response manageSimulationFields(SimulationFields mySimulationFields) {
+		String msg = SIMF_B.manageSimulationFields(mySimulationFields);
+		if (msg == "Created" | msg == "Edited") {
+			return Response.ok(msg).build();
+		} else {
+			return Response.status(400).entity("Something went wrong").build();
 		}
-		return Response.ok(SIMF_B.createSimulationFields(mySimulationFields)).build();
 	}
 
 	@GET
