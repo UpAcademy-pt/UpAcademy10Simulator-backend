@@ -20,9 +20,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.AccountBusiness;
-import simSalProject.business.AccountBusiness.CreateAccountException;
-import simSalProject.business.AccountBusiness.ExistingEmailException;
-import simSalProject.business.AccountBusiness.InvalidEmailException;
 import simSalProject.models.Account;
 import simSalProject.models.AccountDTO;
 
@@ -60,19 +57,17 @@ public class AccountService {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response createAccount(Account myAccount) {
 		String msg = ACC_B.createAccount(myAccount.getEmail());
 		if (msg == "The email is not well written" ) {
 			return Response.status(400).entity(msg).build();
-		}
-		if (msg == "This Account already exists" ) {
+		} else if (msg == "This Account already exists" ) {
 			return Response.status(400).entity(msg).build();
 		} else {
 			return Response.ok(msg).build();
 		}
 
-		return Response.ok("Account created").build();
 	}
 
 	@GET
@@ -111,16 +106,19 @@ public class AccountService {
 	@PUT
 	@Path("editAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response editAccount(Account myAccountToEdit) {
-		ACC_B.changePassword(myAccountToEdit);
-		
-		return Response.ok().build();
+		String msg = ACC_B.changePassword(myAccountToEdit);
+		if (ACC_B.changePassword(myAccountToEdit) == "Welcome user with new Password") {
+			return Response.ok(msg).build();
+		} else {
+			return Response.ok(msg).build();
+		}
 	}
 
 	@DELETE
 	@Path("/{id}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response removeAccount(@PathParam("id") long idToRemove) {
 		Account myAccount = ACC_B.consultAccount(idToRemove);
 		if (myAccount == null) {

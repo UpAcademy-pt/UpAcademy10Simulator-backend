@@ -12,10 +12,6 @@ import javax.inject.Named;
 
 import simSalProject.Utils.PasswordUtils;
 import simSalProject.Utils.SendMail;
-import simSalProject.business.AccountBusiness.CreateAccountException;
-import simSalProject.business.AccountBusiness.ExistingEmailException;
-import simSalProject.business.AccountBusiness.InvalidEmailException;
-import simSalProject.business.AccountBusiness.SendEmailException;
 import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
 import simSalProject.models.AccountDTO;
@@ -29,50 +25,45 @@ public class AccountBusiness {
 	@Named("AccRep")
 	AccountRepository ACC_DB;
 
-	public void createAccount(String email) throws CreateAccountException {
-		if (!isEmailValid(email)) throw new InvalidEmailException();
-		if (ACC_DB.verifyEmail(email)) throw new ExistingEmailException();
-
+	public String createAccount(String email) {
+		if (!isEmailValid(email)) {
+			return "The email is not well written";
+		}
+		
+		if (ACC_DB.verifyEmail(email)) {
+			return "This Account already exists";
+		} else {
+		
 		Account myAccount = new Account();
 		myAccount.setEmail(email);
-
+		
 		String randomPassword = SendMail.createRandom();
 		myAccount.setSalt(PasswordUtils.generateSalt(2).get());
 		String randomSalt = myAccount.getSalt();
 		myAccount.setPassword(PasswordUtils.hashPassword(randomPassword, randomSalt).get());
-
+		
 		try {
 			SendMail.sendMail(email, randomPassword);
 		} catch (IOException e) {
-			System.out.println(e);
-			throw new SendEmailException();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		myAccount.setAccRole(AccountRole.USER);
 		ACC_DB.createEntity(myAccount);
-	}
-
-	public abstract class CreateAccountException extends Exception {
-		private static final long serialVersionUID = 1L;	
-	}
-	// TODO: nome mais generico para a excecao mae
-	public class InvalidEmailException extends CreateAccountException {
-	}
-	public class ExistingEmailException extends CreateAccountException {
-	}
-	public class SendEmailException extends CreateAccountException {
+		return "Account Created";
+		}
+		
 	}
 	
-	// TODO: Usar um DTO para a mudança de password
-	public void changePassword(Account myAccountToEdit) {
+	public String changePassword(Account myAccountToEdit) {
 		Account currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
-		hashPassword(currentAccount);
-		ACC_DB.editEntity(currentAccount);
-	}
-	
-	private void hashPassword(Account account) {
+		System.out.println(currentAccount.getEmail());
 		String salt = PasswordUtils.generateSalt(2).get();
-		account.setPassword(PasswordUtils.hashPassword(account.getPassword(), salt).get());
-		account.setSalt(salt);
+		currentAccount.setSalt(salt);
+		currentAccount.setPassword(PasswordUtils.hashPassword(currentAccount.getPassword(), salt).get());
+		
+		ACC_DB.editEntity(currentAccount);
+		return "Welcome user with new Password";
 	}
 
 	public String createAdmin(Account adminAccount) {
@@ -128,7 +119,7 @@ public class AccountBusiness {
 		AccountDTO myAccountDTO = new AccountDTO();
 		if (!isEmailValid(myAccount.getEmail())) {
 
-			myAccountDTO.setMessage("The email you've written is not an email");
+			myAccountDTO.setMessage("The text you've written is not an email");
 
 			return myAccountDTO;
 		}
