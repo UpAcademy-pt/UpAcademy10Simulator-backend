@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import simSalProject.models.IRSTable;
 
@@ -91,5 +93,26 @@ public class IRSTableRepository extends EntityRepository<IRSTable> {
 			return results;
 		}
 		return null;
+	}
+
+	public void deleteAll() {
+		System.out.println("entrou");
+		Query query = entityManager.createQuery("DELETE FROM IRSTable a");
+		int rowsDeleted = query.executeUpdate();
+		System.out.println("entities deleted: "+ rowsDeleted);
+//		Query query1 = entityManager.createQuery("ALTER TABLE IRSTable AUTO_INCREMENT = 1");
+//		query1.executeUpdate();
+		
 	}	
+	
+	public boolean existSomethingInIRSTable() {
+		System.out.println("Entrou aqui");
+		TypedQuery<Long> query = entityManager.createNamedQuery(IRSTable.VERIFY_IF_SOMETHING_EXISTS_IN_IRS_TABLE, Long.class);
+		System.out.println(query.getResultList().toString());
+		 if (query.getResultList().get(0) == 0) {
+			 return false;
+		 } else {
+			 return true;
+		 }
+	}
 }
