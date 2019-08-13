@@ -10,7 +10,7 @@ import simSalProject.models.Entity_;
 	@NamedQuery(name=Simulation.ALL_SIM_IDS, query="SELECT s.id FROM Simulation s"),
 	@NamedQuery(name=Simulation.ALL_SIM_VALUES, query="SELECT s FROM Simulation s"),
 	@NamedQuery(name=Simulation.GET_SIM_BY_ID, query="SELECT s FROM Simulation s WHERE s.id = :id"),
-	@NamedQuery(name=Simulation.GET_SIM_BY_NAME, query="SELECT s FROM Simulation s WHERE s.name = :name")
+//	@NamedQuery(name=Simulation.GET_SIM_BY_NAME, query="SELECT s FROM Simulation s WHERE s.name = :name")
 	
 })
 public class Simulation extends Entity_{
@@ -22,7 +22,7 @@ public class Simulation extends Entity_{
 	public static final String GET_SIM_BY_NAME = "getSimByName";
 	
 	
-	private String name;
+
 	private SimulationFields simFields;
 	private SimFieldsData simFieldsData;
 
@@ -30,11 +30,6 @@ public class Simulation extends Entity_{
 		super();
 	}
 	
-	
-	public Simulation(String name) {
-		super();
-		this.name = name;
-	}
 
 
 	public SimulationFields getSimFields() {

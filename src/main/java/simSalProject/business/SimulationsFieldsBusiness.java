@@ -91,11 +91,6 @@ public class SimulationsFieldsBusiness {
 			SIMF_DB.removeEntity(mySimulationFields);
 		
 	}
-		
-	public SimulationFields consultSimulationField(long id) {
-		SimulationFields mySimulationField = SIMF_DB.getSimulationFieldsById(id);
-		return mySimulationField;
-	}
 	
 	public List<SimulationFields> consultSimulationField(String name) {
 		List<SimulationFields> mySimulationField = SIMF_DB.getSimulationFieldsByName(name);
