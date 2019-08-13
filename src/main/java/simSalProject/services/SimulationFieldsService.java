@@ -57,18 +57,6 @@ public class SimulationFieldsService {
 		return Response.status(400).entity("Something went wrong").build();
 	}
 
-//	@GET
-//	@Path("/{id}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response consultSimulationFields(@PathParam("id") long id) {
-//		SimulationFields mySimulationField = SIMF_B.consultSimulationField(id);
-//		if (mySimulationField == null) {
-//			return Response.status(400).entity("SimulationFields doesn't exist").build();
-//		}
-//		return Response.ok(mySimulationField).build();
-//
-//	}
-
 	@GET
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -80,22 +68,6 @@ public class SimulationFieldsService {
 			return Response.ok(mySimulationField.get(0)).build();
 		}
 	}
-
-//	@PUT
-//	@Path("/{name}")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response editSimulationFields(@PathParam("name") String name, SimulationFields mySimulationFieldsToEdit) {
-//		List<SimulationFields> mySimulationField = SIMF_B.consultSimulationField(name);
-//		if (mySimulationField.size() == 0) {
-//			return Response.status(400).entity("SimulationFields doesn't exist").build();
-//		} else {
-//			mySimulationFieldsToEdit.setName(name);
-//			SIMF_B.editSimulationFields(mySimulationFieldsToEdit);
-//			return Response.ok("Edit successful").build();
-//		}
-//
-//	}
 
 	@DELETE
 	@Path("/{name}")
