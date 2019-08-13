@@ -41,81 +41,72 @@ public class SimulationFieldsService {
 	@Named("SimFieldsBus")
 	SimulationsFieldsBusiness SIMF_B;
 	
-	@GET
-	@Path("initDatabase")
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response initDataBase() {
-		String message = SIMF_B.initDataBase();
-		if(message == "Inited Fields") {
-			
-		}
-		return Response.ok().entity(message).build();
-	}
-	
-	
-	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response manageSimulationFields(SimulationFields mySimulationFields) {
-		String msg = SIMF_B.manageSimulationFields(mySimulationFields);
-		if (msg == "Created" | msg == "Edited") {
-			return Response.ok(msg).build();
-		} else {
-			return Response.status(400).entity("Something went wrong").build();
-		}
-	}
-
-	@GET
-	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultSimulationFields(@PathParam("id") long id) {
-		SimulationFields mySimulationFields = SIMF_B.consultSimulationFields(id);
-		if (mySimulationFields == null) {
-			return Response.status(400).entity("SimulationFields doesn't exist").build();
+	public Response manageSimulationFields(SimulationFields mySimulationField) {
+		if (SIMF_B.getSimFieldsCount(mySimulationField.getName()) == 0) {
+			if (SIMF_B.createSimulationFields(mySimulationField) == "Created") {
+				return Response.ok("Created").build();
+			}
+		} else {
+			if (SIMF_B.editSimulationFields(mySimulationField) == "Edited") {
+				return Response.ok("Edited").build();
+			}
 		}
-		return Response.ok(mySimulationFields).build();
-
+		return Response.status(400).entity("Something went wrong").build();
 	}
+
+//	@GET
+//	@Path("/{id}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response consultSimulationFields(@PathParam("id") long id) {
+//		SimulationFields mySimulationField = SIMF_B.consultSimulationField(id);
+//		if (mySimulationField == null) {
+//			return Response.status(400).entity("SimulationFields doesn't exist").build();
+//		}
+//		return Response.ok(mySimulationField).build();
+//
+//	}
 
 	@GET
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultSimulationField(@PathParam("name")String name) {
-		SimulationFields mySimulationField = SIMF_B.consultSimulationField(name);
-		if (mySimulationField == null) {
-			return Response.status(400).entity("Simulation field doesn't exist").build();
-		}
-		return Response.ok(mySimulationField).build();
-	}
-
-	@PUT
-	@Path("/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response editSimulationFields(@PathParam("id") long id, SimulationFields mySimulationFieldsToEdit) {
-		SimulationFields mySimulationFields = SIMF_B.consultSimulationFields(id);
-		if (mySimulationFields == null) {
-			return Response.status(400).entity("SimulationFields doesn't exist").build();
+	public Response consultSimulationField(@PathParam("name") String name) {
+		if (SIMF_B.getSimFieldsCount(name) == 0) {
+			return Response.status(400).entity("Simulation field with that name doesn't exist").build();
 		} else {
-			mySimulationFieldsToEdit.setId(id);
-			SIMF_B.editSimulationFields(id, mySimulationFieldsToEdit);
-			return Response.ok("Edit successful").build();
+			List<SimulationFields> mySimulationField = SIMF_B.getSimulationFieldsByName(name);
+			return Response.ok(mySimulationField.get(0)).build();
 		}
-
 	}
+
+//	@PUT
+//	@Path("/{name}")
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response editSimulationFields(@PathParam("name") String name, SimulationFields mySimulationFieldsToEdit) {
+//		List<SimulationFields> mySimulationField = SIMF_B.consultSimulationField(name);
+//		if (mySimulationField.size() == 0) {
+//			return Response.status(400).entity("SimulationFields doesn't exist").build();
+//		} else {
+//			mySimulationFieldsToEdit.setName(name);
+//			SIMF_B.editSimulationFields(mySimulationFieldsToEdit);
+//			return Response.ok("Edit successful").build();
+//		}
+//
+//	}
 
 	@DELETE
-	@Path("/{id}")
+	@Path("/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response removeSimulationFields(@PathParam("id") long idToRemove) {
-		SimulationFields mySimulationFields = SIMF_B.consultSimulationFields(idToRemove);
-		if (mySimulationFields == null) {
+	public Response removeSimulationFields(@PathParam("name") String nameToRemove) {
+		if (SIMF_B.getSimFieldsCount(nameToRemove) == 0) {
 			return Response.status(400).entity("SimulationFields doesn't exist").build();
 		} else {
-			mySimulationFields.setId(idToRemove);
-			SIMF_B.removeSimulationFields(mySimulationFields);
-			return Response.ok("Remove successful").build();
+			List<SimulationFields >mySimulationField = SIMF_B.getSimulationFieldsByName(nameToRemove);
+			SIMF_B.removeSimulationFields(mySimulationField.get(0));
+			return Response.ok("Removed successful").build();
 		}
 	}
 

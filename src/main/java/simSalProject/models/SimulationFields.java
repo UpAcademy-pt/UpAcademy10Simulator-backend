@@ -9,7 +9,8 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name=SimulationFields.ALL_SIM_FIELDS_IDS, query="SELECT sf.id FROM SimulationFields sf "),
 	@NamedQuery(name=SimulationFields.ALL_SIM_FIELDS_VALUES, query="SELECT sf FROM SimulationFields sf"),
 	@NamedQuery(name=SimulationFields.GET_SIM_FIELDS_BY_ID, query="SELECT sf FROM SimulationFields sf WHERE sf.id = :id"),
-	@NamedQuery(name=SimulationFields.GET_SIM_FIELDS_BY_NAME, query="SELECT sf FROM SimulationFields sf WHERE sf.name = :name")
+	@NamedQuery(name=SimulationFields.GET_SIM_FIELDS_BY_NAME, query="SELECT sf FROM SimulationFields sf WHERE sf.name = :name"),
+	@NamedQuery(name=SimulationFields.GET_SIM_FIELDS_COUNT_BY_NAME, query="SELECT count(sf) FROM SimulationFields sf WHERE sf.name = :name"),
 	
 })
 public class SimulationFields extends Entity_{
@@ -21,13 +22,14 @@ public class SimulationFields extends Entity_{
 	public static final String ALL_SIM_FIELDS_VALUES = "getAllSimFieldsValues";
 	public static final String GET_SIM_FIELDS_BY_ID = "getSimFieldsById";
 	public static final String GET_SIM_FIELDS_BY_NAME = "getSimFieldsByName";
+	public static final String GET_SIM_FIELDS_COUNT_BY_NAME = "getSimFieldsByNameCount";
 	
 	private String name;
-	private double SA;
-	private double IRS;
-	private double SS;
-	private double TA;
-	private double BE;
+	private double sA;
+	private double iRS;
+	private double sS;
+	private double tA;
+	private double bE;
 	private double varComponent;
 	
 	
@@ -35,18 +37,21 @@ public class SimulationFields extends Entity_{
 		super();
 	}
 
-	
 
+	
+	
 	public SimulationFields(String name, double sA, double iRS, double sS, double tA, double bE, double varComponent) {
 		super();
 		this.name = name;
-		SA = sA;
-		IRS = iRS;
-		SS = sS;
-		TA = tA;
-		BE = bE;
+		this.sA = sA;
+		this.iRS = iRS;
+		this.sS = sS;
+		this.tA = tA;
+		this.bE = bE;
 		this.varComponent = varComponent;
 	}
+
+
 
 
 	public String getName() {
@@ -59,53 +64,53 @@ public class SimulationFields extends Entity_{
 	}
 
 
-	public double getSA() {
-		return SA;
+	public double getsA() {
+		return sA;
 	}
 
 
-	public void setSA(double sA) {
-		SA = sA;
+	public void setsA(double sA) {
+		this.sA = sA;
 	}
 
 
-	public double getIRS() {
-		return IRS;
+	public double getiRS() {
+		return iRS;
 	}
 
 
-	public void setIRS(double iRS) {
-		IRS = iRS;
+	public void setiRS(double iRS) {
+		this.iRS = iRS;
 	}
 
 
-	public double getSS() {
-		return SS;
+	public double getsS() {
+		return sS;
 	}
 
 
-	public void setSS(double sS) {
-		SS = sS;
+	public void setsS(double sS) {
+		this.sS = sS;
 	}
 
 
-	public double getTA() {
-		return TA;
+	public double gettA() {
+		return tA;
 	}
 
 
-	public void setTA(double tA) {
-		TA = tA;
+	public void settA(double tA) {
+		this.tA = tA;
 	}
 
 
-	public double getBE() {
-		return BE;
+	public double getbE() {
+		return bE;
 	}
 
 
-	public void setBE(double bE) {
-		BE = bE;
+	public void setbE(double bE) {
+		this.bE = bE;
 	}
 
 
@@ -119,7 +124,6 @@ public class SimulationFields extends Entity_{
 	}
 
 	
-	
-	
-	
+
+		
 }

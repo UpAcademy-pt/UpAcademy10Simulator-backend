@@ -1,8 +1,3 @@
-INSERT INTO Colaborator (name, status, dependents) VALUES ('OLA', 'OLE', 1);
-INSERT INTO Colaborator (name, status, dependents) VALUES ('OLI', 'OLO', 45);
-
-
-
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("baseSalary",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("foodSubsidy",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("vehicle",0,0,0,0,0,0);
