@@ -1,6 +1,5 @@
 package simSalProject.business;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,8 +24,13 @@ public class IRSTableBusiness {
 	}
 
 	public void createIRSTable(Collection <IRSTable> table) {
-		
-		IRS_DB.setAllTable(table);
+		System.out.println(IRS_DB.existSomethingInIRSTable());
+		if (IRS_DB.existSomethingInIRSTable()) {	
+			IRS_DB.deleteAll();
+			IRS_DB.setAllTable(table);
+		} else {
+			IRS_DB.setAllTable(table);
+		}
 		
 	}
 
@@ -40,3 +44,4 @@ public class IRSTableBusiness {
 	
 
 }
+	
