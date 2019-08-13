@@ -11,6 +11,7 @@ import javax.inject.Named;
 import simSalProject.models.SimulationFields;
 import simSalProject.repositories.SimulationsFieldsRepository;
 
+
 @Named("SimFieldsBus")
 @RequestScoped
 public class SimulationsFieldsBusiness {

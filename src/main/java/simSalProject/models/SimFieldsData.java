@@ -1,6 +1,7 @@
 package simSalProject.models;
 
 import javax.persistence.Entity;
+import simSalProject.models.Entity_;
 
 @Entity
 public class SimFieldsData extends Entity_ {

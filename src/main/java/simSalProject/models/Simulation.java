@@ -3,6 +3,7 @@ package simSalProject.models;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import simSalProject.models.Entity_;
 
 @Entity
 @NamedQueries({

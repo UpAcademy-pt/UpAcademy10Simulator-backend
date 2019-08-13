@@ -1,11 +1,12 @@
 package simSalProject.repositories;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
-import javax.persistence.TypedQuery;
 
 import simSalProject.models.IRSTable;
 
@@ -40,40 +41,55 @@ public class IRSTableRepository extends EntityRepository<IRSTable> {
 		}
 	}
 	
-	public Collection<IRSTable> filteIRSTable(int depedents, String status) {
+	public List<Object[]> filteIRSTable(int depedents, String status) {
 		if (depedents == 0) {
-			TypedQuery<IRSTable> query = entityManager.createNamedQuery(IRSTable.FILTER_IRS_BY_ZERO, IRSTable.class);
-			query.setParameter("n_titulares_rendimento", status);
-			return query.getResultList();
+			List<Object[]> results = new ArrayList();
+			List<Object[]> result = entityManager.createQuery("SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento").setParameter("n_titulares_rendimento", status).getResultList();
+			for( Object[] a : result) {
+				results.add(a);
+			}
+			return results;
 		}
 		if (depedents == 1) {
-			TypedQuery<IRSTable> query = entityManager.createNamedQuery(IRSTable.FILTER_IRS_BY_ONE, IRSTable.class);
-			query.setParameter("n_titulares_rendimento", status);
-			return query.getResultList();
+			List<Object[]> results = new ArrayList();
+			List<Object[]> result = entityManager.createQuery("SELECT a.id, a.remuneracao_mensal, a.um FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento").setParameter("n_titulares_rendimento", status).getResultList();
+			for( Object[] a : result) {
+				results.add(a);
+			}
+			return results;
 		}
 		if (depedents == 2) {
-			TypedQuery<IRSTable> query = entityManager.createNamedQuery(IRSTable.FILTER_IRS_BY_TWO, IRSTable.class);
-			query.setParameter("n_titulares_rendimento", status);
-			return query.getResultList();
+			List<Object[]> results = new ArrayList();
+			List<Object[]> result = entityManager.createQuery("SELECT a.id, a.remuneracao_mensal, a.dois FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento").setParameter("n_titulares_rendimento", status).getResultList();
+			for( Object[] a : result) {
+				results.add(a);
+			}
+			return results;
 		}
 		if (depedents == 3) {
-			TypedQuery<IRSTable> query = entityManager.createNamedQuery(IRSTable.FILTER_IRS_BY_THREE, IRSTable.class);
-			query.setParameter("n_titulares_rendimento", status);
-			return query.getResultList();
+			List<Object[]> results = new ArrayList();
+			List<Object[]> result = entityManager.createQuery("SELECT a.id, a.remuneracao_mensal, a.tres FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento").setParameter("n_titulares_rendimento", status).getResultList();
+			for( Object[] a : result) {
+				results.add(a);
+			}
+			return results;
 		}
 		if (depedents == 4) {
-			TypedQuery<IRSTable> query = entityManager.createNamedQuery(IRSTable.FILTER_IRS_BY_FOUR, IRSTable.class);
-			query.setParameter("n_titulares_rendimento", status);
-			return query.getResultList();
+			List<Object[]> results = new ArrayList();
+			List<Object[]> result = entityManager.createQuery("SELECT a.id, a.remuneracao_mensal, a.quatro FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento").setParameter("n_titulares_rendimento", status).getResultList();
+			for( Object[] a : result) {
+				results.add(a);
+			}
+			return results;
 		}
 		if (depedents == 5) {
-			TypedQuery<IRSTable> query = entityManager.createNamedQuery(IRSTable.FILTER_IRS_BY_FIVE, IRSTable.class);
-			query.setParameter("n_titulares_rendimento", status);
-			return query.getResultList();
+			List<Object[]> results = new ArrayList();
+			List<Object[]> result = entityManager.createQuery("SELECT a.id, a.remuneracao_mensal, a.cinco FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento").setParameter("n_titulares_rendimento", status).getResultList();
+			for( Object[] a : result) {
+				results.add(a);
+			}
+			return results;
 		}
 		return null;
-	}
-	
-	
-	
+	}	
 }

@@ -1,6 +1,8 @@
 package simSalProject.business;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -18,7 +20,7 @@ public class IRSTableBusiness {
 	@Named("IRSTableRep")
 	IRSTableRepository IRS_DB;
 
-	public Collection<IRSTable> getAllIRSTable() {
+	public String getAllIRSTable() {
 		return IRS_DB.getAllValues();
 	}
 
@@ -28,7 +30,7 @@ public class IRSTableBusiness {
 		
 	}
 
-	public Collection<IRSTable> filterIRSTable(Colaborator colaborator) {
+	public List<Object[]> filterIRSTable(Colaborator colaborator) {
 		String depedents = colaborator.getDependents();
 		int depedentsInt = Integer.parseInt(depedents);
 		String status = colaborator.getStatus();
