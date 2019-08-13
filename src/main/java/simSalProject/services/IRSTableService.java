@@ -52,10 +52,11 @@ public class IRSTableService {
 	}
 	
 	@POST
+	@Path("filtertable")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response filterIRSTable(Colaborator colaborator) {
-		Collection<IRSTable> filteredTable= IRS_B.filterIRSTable(colaborator);
+		Collection<Object[]> filteredTable= IRS_B.filterIRSTable(colaborator);
 		
 		return Response.ok().entity(filteredTable).build();
 	}

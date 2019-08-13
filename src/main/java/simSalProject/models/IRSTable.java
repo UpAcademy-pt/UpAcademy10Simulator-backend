@@ -1,5 +1,6 @@
 package simSalProject.models;
 
+import simSalProject.models.Entity_;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -9,12 +10,12 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name=IRSTable.ALL_IRS_VALUES, query="SELECT a FROM IRSTable a"),
 	@NamedQuery(name=IRSTable.ALL_IRS_IDS, query="SELECT a.id FROM IRSTable a"),
-	@NamedQuery(name=IRSTable.FILTER_IRS_BY_ZERO, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
-	@NamedQuery(name=IRSTable.FILTER_IRS_BY_ONE, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
-	@NamedQuery(name=IRSTable.FILTER_IRS_BY_TWO, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
-	@NamedQuery(name=IRSTable.FILTER_IRS_BY_THREE, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
-	@NamedQuery(name=IRSTable.FILTER_IRS_BY_FOUR, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
-	@NamedQuery(name=IRSTable.FILTER_IRS_BY_FIVE, query="SELECT a.id, a.remuneracao_mensal, a.zero FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento")
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_ZERO, query="SELECT a FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_ONE, query="SELECT a.id, a.remuneracao_mensal, a.um FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_TWO, query="SELECT a.id, a.remuneracao_mensal, a.dois FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_THREE, query="SELECT a.id, a.remuneracao_mensal, a.tres FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_FOUR, query="SELECT a.id, a.remuneracao_mensal, a.quatro FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento"),
+	@NamedQuery(name=IRSTable.FILTER_IRS_BY_FIVE, query="SELECT a.id, a.remuneracao_mensal, a.cinco FROM IRSTable a WHERE a.n_titulares_rendimento = :n_titulares_rendimento")
 	
 })
 	

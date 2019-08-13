@@ -58,7 +58,7 @@ public class ColaboratorService {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response editColaborator(long id, Colaborator myColaboratorToEdit) {
+	public Response editColaborator(@PathParam("id")long id, Colaborator myColaboratorToEdit) {
 		Colaborator myColaborator = COLAB_B.consultColaborator(id);
 
 		if (myColaborator == null) {
