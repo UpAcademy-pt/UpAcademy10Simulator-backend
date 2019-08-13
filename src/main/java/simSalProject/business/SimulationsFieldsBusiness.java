@@ -78,8 +78,7 @@ public class SimulationsFieldsBusiness {
 	
 	public String createSimulationFields(SimulationFields mySimulationField) {
 			SIMF_DB.createEntity(mySimulationField);
-			return "Created";
-				
+			return "Created";		
 	}
 	
 	public String editSimulationFields(SimulationFields mySimulationFieldsToEdit) {
@@ -96,11 +95,6 @@ public class SimulationsFieldsBusiness {
 		List<SimulationFields> mySimulationField = SIMF_DB.getSimulationFieldsByName(name);
 		return mySimulationField;
 	}
-	
-	public void removeSimulationField(SimulationFields mySimulatonField) {
-		SIMF_DB.removeEntity(mySimulatonField);
-	}
-	
 	
 	public List<Long> getAllIds() {
 		return new ArrayList<Long>(SIMF_DB.allIds());

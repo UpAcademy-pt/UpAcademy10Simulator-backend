@@ -1,6 +1,7 @@
 package simSalProject.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -21,8 +22,8 @@ public class Colaborator extends Entity_{
 	private String name;
 	private String status;
 	private String dependents;
-	
-//	private List<Simulation> simulations = new ArrayList();
+	@ManyToOne
+	private Simulation simulation;
 	
 	public Colaborator() {
 		super();
