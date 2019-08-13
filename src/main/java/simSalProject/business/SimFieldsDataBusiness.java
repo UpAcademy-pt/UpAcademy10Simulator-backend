@@ -21,7 +21,7 @@ public class SimFieldsDataBusiness {
 	SimFieldsDataRepository SIMFD_DB;
 	
 	@Inject
-	@Named("SimFieldsDataRep") 
+	@Named("SimFieldsRep") 
 	SimulationsFieldsRepository SIMF_DB;
 
 	public String createSimFieldsData(SimFieldsData mySimFieldsData) {
