@@ -22,8 +22,8 @@ public class Colaborator extends Entity_{
 	private String name;
 	private String status;
 	private String dependents;
-//	@ManyToOne
-//	private Simulation simulation;
+	@ManyToOne
+	private Simulation simulation;
 	
 	public Colaborator() {
 		super();
@@ -52,6 +52,12 @@ public class Colaborator extends Entity_{
 	public void setDependents(String dependents) {
 		this.dependents = dependents;
 	}
+
+	public Simulation getSimulation() {
+		return simulation;
+	}
+
+	
 
 	
 	

@@ -46,8 +46,8 @@ public class Account extends Entity_{
 	private String password;
 	private String salt;
 	private AccountRole accountRole;
-//	@ManyToOne
-//	private Colaborator colaborators;
+	@ManyToOne
+	private Colaborator colaborators;
 	
 	public Account() {}
 
@@ -76,13 +76,21 @@ public class Account extends Entity_{
 		this.salt = salt;
 	}
 
-	public void setAccRole(AccountRole accountRole) {
+	public AccountRole getAccountRole() {
+		return accountRole;
+	}
+
+	public void setAccountRole(AccountRole accountRole) {
 		this.accountRole = accountRole;
 	}
 
-	
-	public AccountRole getAccRole() {
-		return accountRole;
+	public Colaborator getColaborators() {
+		return colaborators;
 	}
+
+	public void setColaborators(Colaborator colaborators) {
+		this.colaborators = colaborators;
+	}
+	
 	
 }

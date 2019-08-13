@@ -48,7 +48,7 @@ public class AccountBusiness {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		myAccount.setAccRole(AccountRole.USER);
+		myAccount.setAccountRole(AccountRole.USER);
 		ACC_DB.createEntity(myAccount);
 		return "Account Created";
 		}
@@ -77,13 +77,13 @@ public class AccountBusiness {
 	}
 
 	public void editAccount(Account myAccountToEdit) {
-		if (myAccountToEdit.getAccRole() == AccountRole.ADMIN) return;
+		if (myAccountToEdit.getAccountRole() == AccountRole.ADMIN) return;
 		
 		ACC_DB.editEntity(myAccountToEdit);
 	}
 
 	public void removeAccount(Account myAccount) {
-		if (myAccount.getAccRole() != AccountRole.ADMIN) {
+		if (myAccount.getAccountRole() != AccountRole.ADMIN) {
 			ACC_DB.removeEntity(myAccount);
 		}
 	}
@@ -103,7 +103,7 @@ public class AccountBusiness {
 			initAccount.setEmail("admin@admin.com");
 			String salt = PasswordUtils.generateSalt(2).get();
 			initAccount.setPassword(PasswordUtils.hashPassword("admin", salt).get());
-			initAccount.setAccRole(AccountRole.ADMIN);
+			initAccount.setAccountRole(AccountRole.ADMIN);
 			initAccount.setSalt(salt);
 			message = createAdmin(initAccount);
 
@@ -132,8 +132,8 @@ public class AccountBusiness {
 			if (PasswordUtils.verifyPassword(myAccount.getPassword(), hashPassword, salt)) {
 				myAccountDTO.setEmail(myAccount.getEmail());
 				myAccountDTO.setId(accountInDB.getId());
-				System.out.println(accountInDB.getAccRole());
-				if (accountInDB.getAccRole() == Account.AccountRole.ADMIN) {
+				System.out.println(accountInDB.getAccountRole());
+				if (accountInDB.getAccountRole() == Account.AccountRole.ADMIN) {
 					System.out.println("entrei");
 					myAccountDTO.setAccountRole(Account.AccountRole.ADMIN.toString());
 				} 

@@ -22,7 +22,7 @@ public class Simulation extends Entity_{
 	public static final String GET_SIM_BY_NAME = "getSimByName";
 	
 	
-
+	
 	private SimulationFields simFields;
 	private SimFieldsData simFieldsData;
 
