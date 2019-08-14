@@ -14,7 +14,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 public class SendMail {
 
 		public static void sendMail(String email, String randomPassword) throws IOException {
-		    Email from = new Email("simuladorsalaria@gmail.com");
+		    Email from = new Email("simuladorsalarial@gmail.com");
 		    String subject = "Sending with Twilio SendGrid is Fun";
 		    Email to = new Email(email);
 		    Content content = new Content("text/plain", "and easy to do anywhere, even with Java. A sua password é: " + randomPassword);
@@ -39,7 +39,7 @@ public class SendMail {
 			
 		    int leftLimit = 97; // letter 'a'
 		    int rightLimit = 122; // letter 'z'
-		    int targetStringLength = 8;
+		    int targetStringLength = 4;
 		    Random random = new Random();
 		    StringBuilder buffer = new StringBuilder(targetStringLength);
 		    for (int i = 0; i < targetStringLength; i++) {

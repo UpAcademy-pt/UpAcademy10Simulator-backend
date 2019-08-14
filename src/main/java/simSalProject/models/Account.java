@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name=Account.ALL_ACC_IDS, query="SELECT a.id FROM Account a"),
 	@NamedQuery(name=Account.ALL_ACC_VALUES, query="SELECT a FROM Account a"),
 	@NamedQuery(name=Account.GET_ACC_BY_ID, query="SELECT a FROM Account a WHERE a.id = :id"),
+	@NamedQuery(name=Account.GET_ACC_COUNT_BY_EMAIL, query="SELECT count(a) FROM Account a WHERE a.email = :email"),
 	@NamedQuery(name=Account.GET_ROLE_COUNT, query="SELECT count(a) FROM Account a WHERE a.accountRole = :accountRole"),
 	@NamedQuery(name=Account.GET_ACC_BY_EMAIL, query="SELECT a FROM Account a WHERE a.email = :email"),
 	@NamedQuery(name=Account.VERIFY_EMAIL_PASS, query="SELECT a FROM Account a WHERE a.email = :email AND a.password = :password"),
@@ -24,6 +25,7 @@ import javax.persistence.NamedQuery;
 
 public class Account extends Entity_{
 	private static final long serialVersionUID = 1L;
+	public static final String GET_ACC_COUNT_BY_EMAIL = "getAccCountByEmail";
 	public static final String ALL_ACC_IDS = "getAccIds";
 	public static final String ALL_ACC_VALUES = "getAllAccs";
 	public static final String GET_ACC_BY_ID = "getAccById";

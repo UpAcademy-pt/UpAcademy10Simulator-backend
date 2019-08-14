@@ -18,37 +18,52 @@ public class ColaboratorBusiness {
 	@Inject
 	@Named("ColabRep")
 	ColaboratorRepository COLAB_DB;
-	
-	public String createColaborator(Colaborator myColaborator) {
-		
+
+	public List<Colaborator> createColaborator(Colaborator myColaborator) {
 		COLAB_DB.createEntity(myColaborator);
-		return "Created";
-		
+		return COLAB_DB.getColabByName(myColaborator.getName());
+
 	}
-	
+
 	public Colaborator consultColaborator(long id) {
 		Colaborator myColaborator = COLAB_DB.consultEntity(id);
 		return myColaborator;
 	}
-	
-	public void editColaborator(long id, Colaborator myColaboratorToEdit) {
-		
-			COLAB_DB.editEntity(myColaboratorToEdit);
-		
+
+	public String editColaborator(Colaborator myColaboratorToEdit) {
+		COLAB_DB.editEntity(myColaboratorToEdit);
+		return "Edited";
+
 	}
-	
-	public void removeColaborator(Colaborator myColaborator) {
-		
-			COLAB_DB.removeEntity(myColaborator);
-		
+
+	public String removeColaborator(Colaborator myColaborator) {
+		COLAB_DB.removeEntity(myColaborator);
+		return "Colaborator Removed";
+
 	}
-	
+
 	public List<Long> getAllIds() {
 		return new ArrayList<Long>(COLAB_DB.allIds());
 	}
-	
+
 	public Collection<Colaborator> getAllValues() {
 		return COLAB_DB.allValues();
+	}
+	
+	public List<Colaborator> getColabById(long id) {
+		return COLAB_DB.getColabById(id);
+	}
+	
+	public long getColabCountByName(String name) {
+		return COLAB_DB.getColabCountByName(name);
+	}
+	
+	public List<Colaborator> getColabByName(String name) {
+		return COLAB_DB.getColabByName(name);
+	}
+	
+	public long getColabCountById(long id) {
+		return COLAB_DB.getColabCountById(id);
 	}
 	
 }

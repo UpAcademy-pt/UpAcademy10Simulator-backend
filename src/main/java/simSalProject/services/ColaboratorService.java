@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -43,46 +44,52 @@ public class ColaboratorService {
 	
 	
 	@GET
-	@Path("/{id}")
+	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultColaborator(@PathParam("id")long id)  {
-		Colaborator myColaborator = COLAB_B.consultColaborator(id);
-		if (myColaborator == null) {
+	public Response consultColaborator(@PathParam("name")String name)  {
+		if (COLAB_B.getColabCountByName(name) == 0) {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
 		}
-		return Response.ok(myColaborator).build();
+		List<Colaborator> myColaborator = COLAB_B.getColabByName(name);
+		return Response.ok(myColaborator.get(0)).build();
 
 	}
 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createColaborator(Colaborator myColaborator) {
+		if(COLAB_B.createColaborator(myColaborator).size() > 0) {
+			return Response.ok(myColaborator).build();
+		} else {
+			return Response.status(400).entity("Colaborator wasn't created").build();
+		}
+	}
+	
 	@PUT
 	@Path("/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response editColaborator(@PathParam("id")long id, Colaborator myColaboratorToEdit) {
-		Colaborator myColaborator = COLAB_B.consultColaborator(id);
-
-		if (myColaborator == null) {
-			return Response.status(404).entity("Colaborator doesn't exist").build();
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editColaborator(@PathParam("id") long id, Colaborator myColaboratorToEdit) {
+		if (COLAB_B.getColabCountByName(myColaboratorToEdit.getName()) == 0) {
+			return Response.status(404).entity("Colaborator with that name doesn't exist").build();
 		} else {
 			myColaboratorToEdit.setId(id);
-			COLAB_B.editColaborator(id, myColaboratorToEdit);
-			return Response.ok("Colaborator successfully updated").build();
+			return Response.ok(COLAB_B.editColaborator(myColaboratorToEdit)).build();
 		}
-
 	}
 	
 	
 	@DELETE
 	@Path("/{id}")
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeColaborator(@PathParam("id")long idToRemove) {
-		Colaborator myColaborator = COLAB_B.consultColaborator(idToRemove);
-		if (myColaborator == null) {
+		if (COLAB_B.getColabCountById(idToRemove) == 0) {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
 		} else {
+			List<Colaborator> colaborators = COLAB_B.getColabById(idToRemove);
+			Colaborator myColaborator = colaborators.get(0);
 			myColaborator.setId(idToRemove);
-			COLAB_B.removeColaborator(myColaborator);
-			return Response.ok("Colaborator successfully removed").build();
+			return Response.ok(COLAB_B.removeColaborator(myColaborator)).build();
 		}
 	}
 	

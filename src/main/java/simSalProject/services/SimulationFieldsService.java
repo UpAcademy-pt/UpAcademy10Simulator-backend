@@ -45,15 +45,14 @@ public class SimulationFieldsService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response manageSimulationFields(SimulationFields mySimulationField) {
 		if (SIMF_B.getSimFieldsCount(mySimulationField.getName()) == 0) {
-			if (SIMF_B.createSimulationFields(mySimulationField) == "Created") {
-				return Response.ok("Created").build();
-			}
+			return Response.ok(SIMF_B.createSimulationFields(mySimulationField)).build();
 		} else {
-			if (SIMF_B.editSimulationFields(mySimulationField) == "Edited") {
-				return Response.ok("Edited").build();
-			}
+			List<SimulationFields> simulationField = SIMF_B.getSimulationFieldsByName(mySimulationField.getName());
+			SimulationFields mySimulationFieldToEdit = simulationField.get(0);
+			mySimulationField.setId(mySimulationFieldToEdit.getId());
+
+			return Response.ok(SIMF_B.editSimulationFields(mySimulationField)).build();
 		}
-		return Response.status(400).entity("Something went wrong").build();
 	}
 
 	@GET
@@ -75,7 +74,7 @@ public class SimulationFieldsService {
 		if (SIMF_B.getSimFieldsCount(nameToRemove) == 0) {
 			return Response.status(400).entity("SimulationFields doesn't exist").build();
 		} else {
-			List<SimulationFields >mySimulationField = SIMF_B.getSimulationFieldsByName(nameToRemove);
+			List<SimulationFields> mySimulationField = SIMF_B.getSimulationFieldsByName(nameToRemove);
 			SIMF_B.removeSimulationFields(mySimulationField.get(0));
 			return Response.ok("Removed successful").build();
 		}

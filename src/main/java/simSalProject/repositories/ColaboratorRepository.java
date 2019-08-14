@@ -1,5 +1,7 @@
 package simSalProject.repositories;
 
+import java.util.List;
+
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
@@ -23,22 +25,27 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 		return Colaborator.ALL_COLABORATOR_VALUES;
 	}
 
-	public Colaborator getColabById (long id){
+	public List<Colaborator> getColabById (long id){
 		TypedQuery<Colaborator> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_BY_ID, Colaborator.class);
 		query.setParameter("id", id);
-		
+		return query.getResultList();
+	}
+	
+	public long getColabCountById(long id) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_COUNT_BY_ID, Long.class);
+		query.setParameter("id", id);
 		return query.getSingleResult();
 	}
 	
-	public Colaborator getColabByName (String name){
+	public List<Colaborator> getColabByName (String name){
 		TypedQuery<Colaborator> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_BY_NAME, Colaborator.class);
 		query.setParameter("name", name);
 		
-		return query.getSingleResult();
+		return query.getResultList();
 	}
 	
 	public long getColabCountByName(String name) {
-		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_COUNT_BY_NAME, long.class);
+		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_COUNT_BY_NAME, Long.class);
 		query.setParameter("name", name);
 		
 		return query.getSingleResult();

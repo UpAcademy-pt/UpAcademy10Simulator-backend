@@ -36,7 +36,6 @@ public class AccountService {
 		return "URI " + context.getRequestUri().toString() + " is OK!";
 	}
 
-	
 	@Inject
 	@Named("AccBus")
 	AccountBusiness ACC_B;
@@ -59,26 +58,29 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createAccount(Account myAccount) {
-		String msg = ACC_B.createAccount(myAccount.getEmail());
-		if (msg == "The email is not well written" ) {
-			return Response.status(400).entity(msg).build();
-		} else if (msg == "This Account already exists" ) {
-			return Response.status(400).entity(msg).build();
+		if (ACC_B.getAccCountByEmail(myAccount.getEmail()) == 0) {
+			String msg = ACC_B.createAccount(myAccount.getEmail());
+			if (msg == "The email is not well written") {
+				return Response.status(400).entity(msg).build();
+			} else if (msg == "This Account already exists") {
+				return Response.status(400).entity(msg).build();
+			} else {
+				return Response.ok(msg).build();
+			}
 		} else {
-			return Response.ok(msg).build();
+			return Response.status(400).entity("Account with this email already exists").build();
 		}
-
 	}
 
 	@GET
-	@Path("/{id}")
+	@Path("/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultAccount(@PathParam("id") long id) {
-		Account myAccount = ACC_B.consultAccount(id);
-		if (myAccount == null) {
+	public Response consultAccount(@PathParam("email") String email) {
+		if (ACC_B.getAccCountByEmail(email) == 0) {
 			return Response.status(400).entity("Account doesn't exist").build();
+		} else {
+			return Response.ok(ACC_B.getAccountByEmail(email).get(0)).build();
 		}
-		return Response.ok(myAccount).build();
 
 	}
 
@@ -108,25 +110,30 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editAccount(Account myAccountToEdit) {
-		String msg = ACC_B.changePassword(myAccountToEdit);
-		if (ACC_B.changePassword(myAccountToEdit) == "Welcome user with new Password") {
-			return Response.ok(msg).build();
+		if (ACC_B.getAccCountByEmail(myAccountToEdit.getEmail()) == 0) {
+			String msg = ACC_B.changePassword(myAccountToEdit);
+			if (msg == "Welcome user with new Password") {
+				return Response.ok(msg).build();
+			} else {
+				return Response.ok(msg).build();
+			}
 		} else {
-			return Response.ok(msg).build();
+			return Response.status(404).entity("Account with that email doesn't exist").build();
 		}
+
 	}
 
 	@DELETE
-	@Path("/{id}")
+	@Path("/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response removeAccount(@PathParam("id") long idToRemove) {
-		Account myAccount = ACC_B.consultAccount(idToRemove);
-		if (myAccount == null) {
+	public Response removeAccount(@PathParam("email") String emailToRemove) {
+		if (ACC_B.getAccCountByEmail(emailToRemove) == 0) {
 			return Response.status(400).entity("Account doesn't exist").build();
 		} else {
-			myAccount.setId(idToRemove);
-			ACC_B.removeAccount(myAccount);
-			return Response.ok("Account successfully removed").build();
+			List<Account> accounts = ACC_B.getAccountByEmail(emailToRemove);
+			Account myAccount = accounts.get(0);
+			myAccount.setId(myAccount.getId());
+			return Response.ok(ACC_B.removeAccount(myAccount)).build();
 		}
 	}
 

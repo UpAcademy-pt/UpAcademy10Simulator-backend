@@ -29,14 +29,12 @@ public class AccountBusiness {
 		if (!isEmailValid(email)) {
 			return "The email is not well written";
 		}
-		
 		if (ACC_DB.verifyEmail(email)) {
 			return "This Account already exists";
 		} else {
 		
 		Account myAccount = new Account();
 		myAccount.setEmail(email);
-		
 		String randomPassword = SendMail.createRandom();
 		myAccount.setSalt(PasswordUtils.generateSalt(2).get());
 		String randomSalt = myAccount.getSalt();
@@ -56,12 +54,12 @@ public class AccountBusiness {
 	}
 	public String changePassword(Account myAccountToEdit) {
 		String salt = PasswordUtils.generateSalt(2).get();
-		Account currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
+		List<Account> currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
 
-		currentAccount.setSalt(salt);
-		currentAccount.setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
+		currentAccount.get(0).setSalt(salt);
+		currentAccount.get(0).setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
 		
-		ACC_DB.editEntity(currentAccount);
+		ACC_DB.editEntity(currentAccount.get(0));
 		return "Welcome user with new Password";
 	}
 	
@@ -82,10 +80,12 @@ public class AccountBusiness {
 		ACC_DB.editEntity(myAccountToEdit);
 	}
 
-	public void removeAccount(Account myAccount) {
+	public String removeAccount(Account myAccount) {
 		if (myAccount.getAccountRole() != AccountRole.ADMIN) {
 			ACC_DB.removeEntity(myAccount);
+			return "Account Removed";
 		}
+		return null;
 	}
 
 	public List<Long> getAllIds() {
@@ -116,7 +116,7 @@ public class AccountBusiness {
 	
 
 	public AccountDTO login(Account myAccount) {
-		Account accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
+		List<Account> accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
 		AccountDTO myAccountDTO = new AccountDTO();
 		if (!isEmailValid(myAccount.getEmail())) {
 
@@ -126,14 +126,14 @@ public class AccountBusiness {
 		}
 		if (ACC_DB.verifyEmail(myAccount.getEmail())) {
 
-			String salt = accountInDB.getSalt();
-			String hashPassword = accountInDB.getPassword();
+			String salt = accountInDB.get(0).getSalt();
+			String hashPassword = accountInDB.get(0).getPassword();
 
 			if (PasswordUtils.verifyPassword(myAccount.getPassword(), hashPassword, salt)) {
 				myAccountDTO.setEmail(myAccount.getEmail());
-				myAccountDTO.setId(accountInDB.getId());
-				System.out.println(accountInDB.getAccountRole());
-				if (accountInDB.getAccountRole() == Account.AccountRole.ADMIN) {
+				myAccountDTO.setId(accountInDB.get(0).getId());
+				System.out.println(accountInDB.get(0).getAccountRole());
+				if (accountInDB.get(0).getAccountRole() == Account.AccountRole.ADMIN) {
 					System.out.println("entrei");
 					myAccountDTO.setAccountRole(Account.AccountRole.ADMIN.toString());
 				} 
@@ -165,6 +165,14 @@ public class AccountBusiness {
 		boolean teste = pat.matcher(email).matches();
 
 		return teste;
-
 	}
+	
+	public long getAccCountByEmail(String email) {
+		return ACC_DB.getAccCountByEmail(email);
+	}
+	
+	public List<Account> getAccountByEmail (String email){
+		return ACC_DB.getAccountByEmail(email);
+	}
+	
 }
