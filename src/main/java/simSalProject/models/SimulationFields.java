@@ -31,12 +31,12 @@ public class SimulationFields extends Entity_{
 	public static final String GET_SIM_FIELDS_COUNT_BY_NAME = "getSimFieldsByNameCount";
 	
 	private String name;
-	private double sA;
-	private double iRS;
-	private double sS;
-	private double tA;
-	private double bE;
-	private double varComponent;
+	private boolean sA;
+	private boolean iRS;
+	private boolean sS;
+	private boolean tA;
+	private boolean bE;
+	private boolean varComponent;
 	@ManyToMany(mappedBy = "simFields")
     private List<Simulation> simulations = new ArrayList<>();
 	
@@ -44,91 +44,74 @@ public class SimulationFields extends Entity_{
 		super();
 	}
 
-
-	
-	
-	public SimulationFields(String name, double sA, double iRS, double sS, double tA, double bE, double varComponent) {
-		super();
-		this.name = name;
-		this.sA = sA;
-		this.iRS = iRS;
-		this.sS = sS;
-		this.tA = tA;
-		this.bE = bE;
-		this.varComponent = varComponent;
-	}
-
-
-
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-	public double getsA() {
+	public boolean issA() {
 		return sA;
 	}
 
-
-	public void setsA(double sA) {
+	public void setsA(boolean sA) {
 		this.sA = sA;
 	}
 
-
-	public double getiRS() {
+	public boolean isiRS() {
 		return iRS;
 	}
 
-
-	public void setiRS(double iRS) {
+	public void setiRS(boolean iRS) {
 		this.iRS = iRS;
 	}
 
-
-	public double getsS() {
+	public boolean issS() {
 		return sS;
 	}
 
-
-	public void setsS(double sS) {
+	public void setsS(boolean sS) {
 		this.sS = sS;
 	}
 
-
-	public double gettA() {
+	public boolean istA() {
 		return tA;
 	}
 
-
-	public void settA(double tA) {
+	public void settA(boolean tA) {
 		this.tA = tA;
 	}
 
-
-	public double getbE() {
+	public boolean isbE() {
 		return bE;
 	}
 
-
-	public void setbE(double bE) {
+	public void setbE(boolean bE) {
 		this.bE = bE;
 	}
 
-
-	public double getVarComponent() {
+	public boolean isVarComponent() {
 		return varComponent;
 	}
 
-
-	public void setVarComponent(double varComponent) {
+	public void setVarComponent(boolean varComponent) {
 		this.varComponent = varComponent;
 	}
+
+	public List<Simulation> getSimulations() {
+		return simulations;
+	}
+
+	public void setSimulations(List<Simulation> simulations) {
+		this.simulations = simulations;
+	}
+
+
+	
+	
+	
 
 	
 

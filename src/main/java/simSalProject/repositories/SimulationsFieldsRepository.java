@@ -44,7 +44,7 @@ public class SimulationsFieldsRepository extends EntityRepository<SimulationFiel
 	}
 	
 	public long getSimFieldsCount (String name){
-		TypedQuery<Long> query = entityManager.createNamedQuery(SimulationFields.GET_SIM_FIELDS_COUNT_BY_NAME, long.class);
+		TypedQuery<Long> query = entityManager.createNamedQuery(SimulationFields.GET_SIM_FIELDS_COUNT_BY_NAME, Long.class);
 		query.setParameter("name", name);
 		
 		return query.getSingleResult();

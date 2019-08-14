@@ -17,7 +17,8 @@ import javax.persistence.Table;
 	@NamedQuery(name=Colaborator.ALL_COLABORATOR_IDS, query="SELECT c.id FROM Colaborator c"),
 	@NamedQuery(name=Colaborator.ALL_COLABORATOR_VALUES, query="SELECT c FROM Colaborator c"),
 	@NamedQuery(name=Colaborator.GET_COLABORATOR_BY_ID, query="SELECT c FROM Colaborator c WHERE c.id = :id"),
-	@NamedQuery(name=Colaborator.GET_COLABORATOR_BY_NAME , query="SELECT c FROM Colaborator C WHERE c.name = :name")
+	@NamedQuery(name=Colaborator.GET_COLABORATOR_BY_NAME , query="SELECT c FROM Colaborator C WHERE c.name = :name"),
+	@NamedQuery(name=Colaborator.GET_COLABORATOR_COUNT_BY_NAME, query="SELECT count(c) FROM Colaborator C WHERE c.name = :name")
 	
 })
 public class Colaborator extends Entity_{
@@ -26,6 +27,7 @@ public class Colaborator extends Entity_{
 	public static final String ALL_COLABORATOR_VALUES = "getAllColabs";
 	public static final String GET_COLABORATOR_BY_ID = "getColabById";
 	public static final String GET_COLABORATOR_BY_NAME = "getColabByName";
+	public static final String GET_COLABORATOR_COUNT_BY_NAME = "getColabCountByName";
 	private String name;
 	private String status;
 	private String dependents;

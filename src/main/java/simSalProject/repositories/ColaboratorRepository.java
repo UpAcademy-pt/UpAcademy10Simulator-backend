@@ -37,6 +37,13 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 		return query.getSingleResult();
 	}
 	
+	public long getColabCountByName(String name) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_COUNT_BY_NAME, long.class);
+		query.setParameter("name", name);
+		
+		return query.getSingleResult();
+	}
+	
 	
 	@Override
 	public Class<Colaborator> getEntityClass(){

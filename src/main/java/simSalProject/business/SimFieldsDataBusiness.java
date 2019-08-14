@@ -34,8 +34,9 @@ public class SimFieldsDataBusiness {
 		return "Edited";
 	}
 
-	public void removeSimFieldsData(SimFieldsData mySimFieldsData) {
+	public String removeSimFieldsData(SimFieldsData mySimFieldsData) {
 		SIMFD_DB.removeEntity(mySimFieldsData);
+		return "Removed";
 
 	}
 

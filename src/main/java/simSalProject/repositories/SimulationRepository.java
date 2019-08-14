@@ -40,7 +40,7 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 	
 	
 	public long getSimulationCountById(long id) {
-		TypedQuery<Long> query = entityManager.createNamedQuery(Simulation.GET_SIM_COUNT_BY_ID, long.class);
+		TypedQuery<Long> query = entityManager.createNamedQuery(Simulation.GET_SIM_COUNT_BY_ID, Long.class);
 		query.setParameter("id", id);
 		return query.getSingleResult();
 	}

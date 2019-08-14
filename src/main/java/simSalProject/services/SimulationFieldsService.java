@@ -21,7 +21,7 @@ import javax.ws.rs.core.UriInfo;
 import simSalProject.business.SimulationsFieldsBusiness;
 import simSalProject.models.SimulationFields;
 
-@Path("SimulationFields")
+@Path("simulationfields")
 public class SimulationFieldsService {
 
 	

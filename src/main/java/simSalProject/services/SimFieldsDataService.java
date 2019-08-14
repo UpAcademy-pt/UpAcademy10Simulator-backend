@@ -41,8 +41,14 @@ public class SimFieldsDataService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createSimFieldsData(SimFieldsData mySimFieldsData) {
+	public Response manageSimFieldsData(SimFieldsData mySimFieldsData) {
+		if (SIMFD_B.getSimFieldsCount(mySimFieldsData.getName()) == 0) {
 		return Response.ok(SIMFD_B.createSimFieldsData(mySimFieldsData)).build();
+		} else {
+			SimFieldsData mySimFieldsDataToEdit = SIMFD_B.getSimFieldsDataByName(mySimFieldsData.getName()).get(0);
+			mySimFieldsData.setId(mySimFieldsDataToEdit.getId());
+		return Response.ok(SIMFD_B.editSimFieldsData(mySimFieldsData)).build();
+		}
 	}
 
 	@GET
@@ -56,19 +62,6 @@ public class SimFieldsDataService {
 		}
 	}
 
-	@PUT
-	@Path("/{name}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response editSimFieldsData(@PathParam("name") String name, SimFieldsData mySimFieldsDataToEdit) {
-		if (SIMFD_B.getSimFieldsCount(name) == 0) {
-			return Response.status(400).entity("SimFieldsData doesn't exist").build();
-		} else {
-		SIMFD_B.editSimFieldsData(mySimFieldsDataToEdit);
-		return Response.ok().build();
-		}
-	}
-
 	@DELETE
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,10 +69,11 @@ public class SimFieldsDataService {
 		if (SIMFD_B.getSimFieldsCount(nameToRemove) == 0) {
 			return Response.status(400).entity("SimFieldsData doesn't exist").build();
 		} else {
-			List<SimFieldsData> mySimFieldsData = SIMFD_B.getSimFieldsDataByName(nameToRemove);
-			mySimFieldsData.get(0).setName(nameToRemove);
-			SIMFD_B.removeSimFieldsData(mySimFieldsData.get(0));
-			return Response.ok("SimFieldsData successfully removed").build();
+			List<SimFieldsData> simFieldsData = SIMFD_B.getSimFieldsDataByName(nameToRemove);
+			System.out.println(simFieldsData.get(0));
+			SimFieldsData mySimFieldsData = simFieldsData.get(0);
+			System.out.println(mySimFieldsData);
+			return Response.ok(SIMFD_B.removeSimFieldsData(mySimFieldsData)).build();
 		}
 	}
 	

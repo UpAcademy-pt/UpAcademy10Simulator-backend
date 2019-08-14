@@ -28,22 +28,17 @@ public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 	@Override
 	protected Class<SimFieldsData> getEntityClass() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<SimFieldsData> getSimFieldsDataByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return SimFieldsData.class;
 	}
 
 	public long getSimFieldsCount(String name) {
-		TypedQuery<Long> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_COUNT_BY_NAME, long.class);
+		TypedQuery<Long> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_COUNT_BY_NAME, Long.class);
 		query.setParameter("name", name);
 		
 		return query.getSingleResult();
 	}
 	
-	public List<SimFieldsData> getSimulationFieldsByName(String name) {
+	public List<SimFieldsData> getSimFieldsDataByName(String name) {
 		TypedQuery<SimFieldsData> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_BY_NAME, SimFieldsData.class);
 		query.setParameter("name", name);
 		
