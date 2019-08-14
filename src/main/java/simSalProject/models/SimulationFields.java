@@ -1,10 +1,16 @@
 package simSalProject.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "SimulationFields")
+@Table(name="simulationfields")
 @NamedQueries({
 	@NamedQuery(name=SimulationFields.ALL_SIM_FIELDS_IDS, query="SELECT sf.id FROM SimulationFields sf "),
 	@NamedQuery(name=SimulationFields.ALL_SIM_FIELDS_VALUES, query="SELECT sf FROM SimulationFields sf"),
@@ -31,7 +37,8 @@ public class SimulationFields extends Entity_{
 	private double tA;
 	private double bE;
 	private double varComponent;
-	
+	@ManyToMany(mappedBy = "simFields")
+    private List<Simulation> simulations = new ArrayList<>();
 	
 	public SimulationFields() {
 		super();

@@ -1,6 +1,8 @@
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("baseSalary",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("foodSubsidy",0,0,0,0,0,0);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("phone",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("vehicle",0,0,0,0,0,0);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("fuel",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("healthInsurance",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("workInsurance",0,0,0,0,0,0);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("mobileNet",0,0,0,0,0,0);

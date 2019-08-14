@@ -43,44 +43,48 @@ public class SimulationService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createSimulation(Simulation mySimulation) {
-		if (SIM_B.createSimulation(mySimulation) == "Created") {
-		
+		String msg = SIM_B.createSimulation(mySimulation);
+		if (msg == "Created") {
+			return Response.ok(msg).build();
 		}
-		return Response.ok(SIM_B.createSimulation(mySimulation)).build();
+		return null;
+		
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultSimulation(@PathParam("id") long id) {
-		Simulation mySimulation = SIM_B.consultSimulation(id);
-		if (mySimulation == null) {
+		if (SIM_B.getSimulationCountById(id) == 0) {
 			return Response.status(400).entity("Simulation doesn't exist").build();
+		} else {
+			Simulation mySimulation = SIM_B.consultSimulation(id);
+			return Response.ok(mySimulation).build();
 		}
-		return Response.ok(mySimulation).build();
+		
 
 	}
 
-	@GET
-	@Path("/{name}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultSimulation(@PathParam("name")String name) {
-		Simulation mySimulation = SIM_B.consultSimulation(name);
-		if (mySimulation == null) {
-			return Response.status(400).entity("Simulation doesn't exist").build();
-		}
-		return Response.ok(mySimulation).build();
-	}
+//	@GET
+//	@Path("/{name}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response consultSimulation(@PathParam("name")String name) {
+//		Simulation mySimulation = SIM_B.consultSimulation(name);
+//		if (mySimulation == null) {
+//			return Response.status(400).entity("Simulation doesn't exist").build();
+//		}
+//		return Response.ok(mySimulation).build();
+//	}
 
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response editSimulation(@PathParam("id") long id, Simulation mySimulationToEdit) {
-		Simulation mySimulation = SIM_B.consultSimulation(id);
-		if (mySimulation == null) {
+	public Response editSimulation(@PathParam("id") long id) {
+		if (SIM_B.getSimulationCountById(id) == 0) {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
+			Simulation mySimulationToEdit = SIM_B.consultSimulation(id);
 			mySimulationToEdit.setId(id);
 			SIM_B.editSimulation(mySimulationToEdit);
 			return Response.ok("Edit successful").build();
@@ -92,12 +96,12 @@ public class SimulationService {
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeSimulation(@PathParam("id") long idToRemove) {
-		Simulation mySimulation = SIM_B.consultSimulation(idToRemove);
-		if (mySimulation == null) {
+		if (SIM_B.getSimulationCountById(idToRemove) == 0) {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
-			mySimulation.setId(idToRemove);
-			SIM_B.removeSimulation(mySimulation);
+			Simulation mySimulationToRemove = SIM_B.consultSimulation(idToRemove);
+			mySimulationToRemove.setId(idToRemove);
+			SIM_B.removeSimulation(mySimulationToRemove);
 			return Response.ok("Remove successful").build();
 		}
 	}

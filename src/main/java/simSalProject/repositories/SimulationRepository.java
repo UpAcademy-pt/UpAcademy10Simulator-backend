@@ -1,5 +1,7 @@
 package simSalProject.repositories;
 
+import java.util.List;
+
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
@@ -22,11 +24,11 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 		return Simulation.ALL_SIM_VALUES;
 	}
 
-	public Simulation getSimulationById(long id){
+	public List<Simulation> getSimulationById(long id){
 		TypedQuery<Simulation> query = entityManager.createNamedQuery(Simulation.GET_SIM_BY_ID, Simulation.class);
 		query.setParameter("id", id);
 		
-		return query.getSingleResult();
+		return query.getResultList();
 	}
 	
 	public Simulation getSimulationByName(String name){
@@ -34,7 +36,13 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 		query.setParameter("name", name);
 		
 		return query.getSingleResult();
-		
+	}
+	
+	
+	public long getSimulationCountById(long id) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Simulation.GET_SIM_COUNT_BY_ID, long.class);
+		query.setParameter("id", id);
+		return query.getSingleResult();
 	}
 	
 	@Override

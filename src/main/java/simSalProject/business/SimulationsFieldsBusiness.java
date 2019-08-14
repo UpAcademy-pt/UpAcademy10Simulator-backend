@@ -7,7 +7,6 @@ import java.util.List;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.TypedQuery;
 
 import simSalProject.models.SimulationFields;
 import simSalProject.repositories.SimulationsFieldsRepository;

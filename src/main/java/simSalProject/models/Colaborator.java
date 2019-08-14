@@ -1,11 +1,18 @@
 package simSalProject.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Colaborator")
+@Table(name="colaborator")
 @NamedQueries({
 	@NamedQuery(name=Colaborator.ALL_COLABORATOR_IDS, query="SELECT c.id FROM Colaborator c"),
 	@NamedQuery(name=Colaborator.ALL_COLABORATOR_VALUES, query="SELECT c FROM Colaborator c"),
@@ -22,8 +29,9 @@ public class Colaborator extends Entity_{
 	private String name;
 	private String status;
 	private String dependents;
-	@ManyToOne
-	private Simulation simulation;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="colaborator_id")
+	private List<Simulation> simulations = new ArrayList();
 	
 	public Colaborator() {
 		super();
@@ -53,9 +61,7 @@ public class Colaborator extends Entity_{
 		this.dependents = dependents;
 	}
 
-	public Simulation getSimulation() {
-		return simulation;
-	}
+	
 
 	
 

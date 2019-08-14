@@ -1,10 +1,15 @@
 package simSalProject.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "SimulationFieldsData")
+@Table(name="simulationfieldsdata")
 @NamedQueries({
 	@NamedQuery(name=SimFieldsData.GET_SIM_FIELDS_DATA_BY_NAME, query="SELECT sfd FROM SimulationFields sfd WHERE sfd.name = :name"),
 	@NamedQuery(name=SimFieldsData.GET_SIM_FIELDS_DATA_COUNT_BY_NAME, query="SELECT count(sfd) FROM SimulationFields sfd WHERE sfd.name = :name"),
@@ -20,7 +25,8 @@ public class SimFieldsData extends Entity_ {
 	private String name;
 	private float value;
 	private float result;
-	
+	@ManyToMany(mappedBy = "simFieldsData")
+	private List<Simulation> simulations;
 	
 	
 	public SimFieldsData() {

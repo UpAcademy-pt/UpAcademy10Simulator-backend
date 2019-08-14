@@ -1,6 +1,5 @@
 package simSalProject.models;
 
-import simSalProject.models.Entity_;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
