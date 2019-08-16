@@ -128,6 +128,12 @@ public class AccountBusiness {
 		List<Account> accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
 		
 		AccountDTO myAccountDTO = new AccountDTO();
+		
+		if (myAccount.getPassword() == null) {
+			myAccountDTO.setMessage("You have to write the password!");
+			return myAccountDTO;
+		}
+
 		if (!isEmailValid(myAccount.getEmail())) {
 
 			myAccountDTO.setMessage("The text you've written is not an email");
