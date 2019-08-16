@@ -90,18 +90,25 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Account myAccount) {
 		AccountDTO myAccountDTO = ACC_B.login(myAccount);
+		System.out.println(myAccountDTO);
+		
 		String msg = myAccountDTO.getMessage();
+		System.out.println(msg);
 		if (msg == "The email you've written is not an email") {
-			Response.status(400).entity(msg).build();
+			return Response.status(400).entity(msg).build();
 		}
 		if (msg == "That email is not registered") {
-			Response.status(400).entity(msg).build();
+			return Response.status(400).entity(msg).build();
 		}
-		if (msg == "Not a valid password") {
-			Response.status(400).entity(msg).build();
+		if (msg == "Not a valid Password") {
+			return Response.status(400).entity(msg).build();
 		}
-
+		if (msg == "You have to write the password!") {
+			return Response.status(400).entity(msg).build();
+		}
 		return Response.ok(myAccountDTO).build();
+
+		
 
 	}
 

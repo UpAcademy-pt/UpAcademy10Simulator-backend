@@ -126,9 +126,7 @@ public class AccountBusiness {
 
 	public AccountDTO login(Account myAccount) {
 		List<Account> accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
-		
 		AccountDTO myAccountDTO = new AccountDTO();
-		
 		if (myAccount.getPassword() == null) {
 			myAccountDTO.setMessage("You have to write the password!");
 			return myAccountDTO;
