@@ -137,6 +137,7 @@ public class AccountService {
 		}
 	}
 
+	
 	@GET
 	@Path("allIds")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -146,7 +147,7 @@ public class AccountService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Account> getAllValues() {
+	public List<AccountDTO> getAllValues() {
 		return ACC_B.getAllValues();
 	}
 

@@ -3,7 +3,9 @@ package simSalProject.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,7 +52,8 @@ public class Account extends Entity_{
 	private String password;
 	private String salt;
 	private AccountRole accountRole;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST
+	}, fetch = FetchType.EAGER)
 	private List<Colaborator> colaborators;
 	
 	public Account() {}

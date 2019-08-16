@@ -93,8 +93,16 @@ public class AccountBusiness {
 		return new ArrayList<Long>(ACC_DB.allIds());
 	}
 
-	public List<Account> getAllValues() {
-		return ACC_DB.allValues();
+	public List<AccountDTO> getAllValues() {
+		List<Account> accounts = ACC_DB.allValues();
+		List<AccountDTO> accountsDTO = new ArrayList<>();
+		for (Account account : accounts) {
+			if(account.getAccountRole() == Account.AccountRole.USER) {
+				AccountDTO accountDTO = ACC_DB.accountToAccountDTO(account);
+				accountsDTO.add(accountDTO);
+			}
+		}
+		return accountsDTO;
 	}
 
 	public String initDataBase() {

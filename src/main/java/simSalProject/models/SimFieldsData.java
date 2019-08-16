@@ -28,7 +28,6 @@ public class SimFieldsData extends Entity_ {
 	public static final String GET_SIM_FIELDS_DATA_BY_NAME = "getSimFieldsDataByName";
 	private String name;
 	private double value;
-	private double result;
 	
 	@OneToMany
     private List<SimulationFields> simFields = new ArrayList<>();
@@ -57,16 +56,6 @@ public class SimFieldsData extends Entity_ {
 
 	public void setValue(double value) {
 		this.value = value;
-	}
-
-
-	public double getResult() {
-		return result;
-	}
-
-
-	public void setResult(double result) {
-		this.result = result;
 	}
 
 

@@ -31,13 +31,6 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 		return query.getResultList();
 	}
 	
-	public Simulation getSimulationByName(String name){
-		TypedQuery<Simulation> query = entityManager.createNamedQuery(Simulation.GET_SIM_BY_NAME, Simulation.class);
-		query.setParameter("name", name);
-		
-		return query.getSingleResult();
-	}
-	
 	
 	public long getSimulationCountById(long id) {
 		TypedQuery<Long> query = entityManager.createNamedQuery(Simulation.GET_SIM_COUNT_BY_ID, Long.class);

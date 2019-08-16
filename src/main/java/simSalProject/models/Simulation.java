@@ -3,11 +3,7 @@ package simSalProject.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,7 +25,6 @@ public class Simulation extends Entity_{
 	public static final String ALL_SIM_IDS = "getAllSimIds";
 	public static final String ALL_SIM_VALUES = "getAllSims";
 	public static final String GET_SIM_BY_ID = "getSimByID";
-	public static final String GET_SIM_BY_NAME = "getSimByName";
 	public static final String GET_SIM_COUNT_BY_ID = "getSimCountById";
 	@OneToMany
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
@@ -37,10 +32,10 @@ public class Simulation extends Entity_{
 	
 	
 	
-	
 	public Simulation() {
 		super();
 	}
+
 
 	public List<SimFieldsData> getSimFieldsData() {
 		return simFieldsData;
