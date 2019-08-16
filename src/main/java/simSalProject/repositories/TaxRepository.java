@@ -6,7 +6,6 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
-import simSalProject.models.Colaborator;
 import simSalProject.models.Tax;
 
 
