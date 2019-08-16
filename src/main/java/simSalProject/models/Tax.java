@@ -1,17 +1,26 @@
 package simSalProject.models;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name=Tax.GET_TAX_BY_NAME, query="SELECT t FROM Tax t WHERE t.name = :name"),
+	@NamedQuery(name=Tax.GET_TAX_COUNT_BY_NAME, query="SELECT count(t) FROM Tax t WHERE t.name = :name")
+})
 public class Tax extends Entity_ {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private double autoTaxation;
-	private double socialSecurityWorker;
-	private double socialSecurityCompany;
+	public static final String GET_TAX_BY_NAME = "getTaxByName";
+	public static final String GET_TAX_COUNT_BY_NAME = "getTaxCountByName";
+	
+	private String name;
+	private double value;
+
 	
 	
 	
@@ -21,33 +30,34 @@ public class Tax extends Entity_ {
 	}
 
 
-	public Tax(double autoTaxation, double socialSecurityWorker, double socialSecurityCompany) {
-		super();
-		this.autoTaxation = autoTaxation;
-		this.socialSecurityWorker = socialSecurityWorker;
-		this.socialSecurityCompany = socialSecurityCompany;
+
+
+	public String getName() {
+		return name;
 	}
-	
-	
-	public double getAutoTaxation() {
-		return autoTaxation;
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setAutoTaxation(double autoTaxation) {
-		this.autoTaxation = autoTaxation;
+
+
+
+
+	public double getValue() {
+		return value;
 	}
-	public double getSocialSecurityWorker() {
-		return socialSecurityWorker;
+
+
+
+
+	public void setValue(double value) {
+		this.value = value;
 	}
-	public void setSocialSecurityWorker(double socialSecurityWorker) {
-		this.socialSecurityWorker = socialSecurityWorker;
-	}
-	public double getSocialSecurityCompany() {
-		return socialSecurityCompany;
-	}
-	public void setSocialSecurityCompany(double socialSecurityCompany) {
-		this.socialSecurityCompany = socialSecurityCompany;
-	}
-	
+
+
 	
 	
 }

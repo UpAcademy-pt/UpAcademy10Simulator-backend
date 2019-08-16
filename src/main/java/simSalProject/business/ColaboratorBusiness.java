@@ -22,7 +22,6 @@ public class ColaboratorBusiness {
 	public List<Colaborator> createColaborator(Colaborator myColaborator) {
 		COLAB_DB.createEntity(myColaborator);
 		return COLAB_DB.getColabByName(myColaborator.getName());
-
 	}
 
 	public Colaborator consultColaborator(long id) {
@@ -33,13 +32,11 @@ public class ColaboratorBusiness {
 	public String editColaborator(Colaborator myColaboratorToEdit) {
 		COLAB_DB.editEntity(myColaboratorToEdit);
 		return "Edited";
-
 	}
 
 	public String removeColaborator(Colaborator myColaborator) {
 		COLAB_DB.removeEntity(myColaborator);
 		return "Colaborator Removed";
-
 	}
 
 	public List<Long> getAllIds() {

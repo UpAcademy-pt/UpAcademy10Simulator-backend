@@ -11,3 +11,8 @@ INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("ot
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("vehicleMaintenance",false,false,false,true,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("otherWithoutTA",false,false,false,false,false,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("otherAwards",false,true,false,false,false,false);
+
+INSERT INTO Tax(name, value) VALUES("autoTaxation", 10);
+INSERT INTO Tax(name, value) VALUES("socialSecurityWorker", 11);
+INSERT INTO Tax(name, value) VALUES("socialSecurityCompany", 23.75);
+

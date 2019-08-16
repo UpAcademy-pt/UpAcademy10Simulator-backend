@@ -26,8 +26,6 @@ public class AccountDTO {
 	}
 
 
-
-
 	public String getName() {
 		return name;
 	}
