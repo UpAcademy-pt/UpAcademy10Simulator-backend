@@ -4,10 +4,21 @@ public class AccountDTO {
 	
 
 	private long id;
+	private String name;
 	private String email;
 	private String accountRole;
 	private String message;
 	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public long getId() {
 		return id;
 	}

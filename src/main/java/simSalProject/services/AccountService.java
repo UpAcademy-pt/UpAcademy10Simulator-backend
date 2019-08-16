@@ -57,9 +57,9 @@ public class AccountService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createAccount(Account myAccount) {
-		if (ACC_B.getAccCountByEmail(myAccount.getEmail()) == 0) {
-			String msg = ACC_B.createAccount(myAccount.getEmail());
+	public Response createAccount(AccountDTO myAccountDTO) {
+		if (ACC_B.getAccCountByEmail(myAccountDTO.getEmail()) == 0) {
+			String msg = ACC_B.createAccount(myAccountDTO);
 			if (msg == "The email is not well written") {
 				return Response.status(400).entity(msg).build();
 			} else if (msg == "This Account already exists") {

@@ -25,23 +25,24 @@ public class AccountBusiness {
 	@Named("AccRep")
 	AccountRepository ACC_DB;
 
-	public String createAccount(String email) {
-		if (!isEmailValid(email)) {
+	public String createAccount(AccountDTO myAccountDTO) {
+		if (!isEmailValid(myAccountDTO.getEmail())) {
 			return "The email is not well written";
 		}
-		if (ACC_DB.verifyEmail(email)) {
+		if (ACC_DB.verifyEmail(myAccountDTO.getEmail())) {
 			return "This Account already exists";
 		} else {
 		
 		Account myAccount = new Account();
-		myAccount.setEmail(email);
+		myAccount.setName(myAccountDTO.getName());
+		myAccount.setEmail(myAccountDTO.getEmail());
 		String randomPassword = SendMail.createRandom();
 		myAccount.setSalt(PasswordUtils.generateSalt(2).get());
 		String randomSalt = myAccount.getSalt();
 		myAccount.setPassword(PasswordUtils.hashPassword(randomPassword, randomSalt).get());
 		
 		try {
-			SendMail.sendMail(email, randomPassword);
+			SendMail.sendMail(myAccountDTO.getEmail(), randomPassword);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

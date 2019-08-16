@@ -33,9 +33,8 @@ public class Colaborator extends Entity_{
 	private String name;
 	private String status;
 	private String dependents;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="colaborator_id")
-	private List<Simulation> simulations = new ArrayList();
+	@OneToMany
+	private List<Simulation> simulations = new ArrayList<>();
 	
 	public Colaborator() {
 		super();
@@ -63,6 +62,14 @@ public class Colaborator extends Entity_{
 
 	public void setDependents(String dependents) {
 		this.dependents = dependents;
+	}
+
+	public List<Simulation> getSimulations() {
+		return simulations;
+	}
+
+	public void setSimulations(List<Simulation> simulations) {
+		this.simulations = simulations;
 	}
 
 	

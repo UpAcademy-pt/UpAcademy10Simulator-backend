@@ -1,10 +1,12 @@
 package simSalProject.models;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 
@@ -43,15 +45,29 @@ public class Account extends Entity_{
 	    ADMIN, USER, 
 	}
 
-	
+	private String name;
 	private String email;
 	private String password;
 	private String salt;
 	private AccountRole accountRole;
-	@ManyToOne
-	private Colaborator colaborators;
+	@OneToMany
+	private List<Colaborator> colaborators;
 	
 	public Account() {}
+
+	
+	
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -86,11 +102,11 @@ public class Account extends Entity_{
 		this.accountRole = accountRole;
 	}
 
-	public Colaborator getColaborators() {
+	public List<Colaborator> getColaborators() {
 		return colaborators;
 	}
 
-	public void setColaborators(Colaborator colaborators) {
+	public void setColaborators(List<Colaborator> colaborators) {
 		this.colaborators = colaborators;
 	}
 	

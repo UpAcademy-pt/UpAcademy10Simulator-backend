@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -37,8 +37,7 @@ public class SimulationFields extends Entity_{
 	private boolean tA;
 	private boolean bE;
 	private boolean varComponent;
-	@ManyToMany(mappedBy = "simFields")
-    private List<Simulation> simulations = new ArrayList<>();
+	
 	
 	public SimulationFields() {
 		super();
@@ -100,13 +99,6 @@ public class SimulationFields extends Entity_{
 		this.varComponent = varComponent;
 	}
 
-	public List<Simulation> getSimulations() {
-		return simulations;
-	}
-
-	public void setSimulations(List<Simulation> simulations) {
-		this.simulations = simulations;
-	}
 
 
 	

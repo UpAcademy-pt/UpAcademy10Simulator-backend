@@ -1,11 +1,15 @@
 package simSalProject.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "SimulationFieldsData")
@@ -25,8 +29,10 @@ public class SimFieldsData extends Entity_ {
 	private String name;
 	private double value;
 	private double result;
-	@ManyToMany(mappedBy = "simFieldsData")
-	private List<Simulation> simulations;
+	
+	@OneToMany
+    private List<SimulationFields> simFields = new ArrayList<>();
+	
 	
 	
 	public SimFieldsData() {
@@ -64,14 +70,16 @@ public class SimFieldsData extends Entity_ {
 	}
 
 
-	public List<Simulation> getSimulations() {
-		return simulations;
+	public List<SimulationFields> getSimFields() {
+		return simFields;
 	}
 
 
-	public void setSimulations(List<Simulation> simulations) {
-		this.simulations = simulations;
+	public void setSimFields(List<SimulationFields> simFields) {
+		this.simFields = simFields;
 	}
+
+
 	
 	
 	
