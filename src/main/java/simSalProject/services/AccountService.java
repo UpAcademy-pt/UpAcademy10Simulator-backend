@@ -146,7 +146,7 @@ public class AccountService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Account> getAllValues() {
+	public List<Account> getAllValues() {
 		return ACC_B.getAllValues();
 	}
 

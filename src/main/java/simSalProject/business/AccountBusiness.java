@@ -93,7 +93,7 @@ public class AccountBusiness {
 		return new ArrayList<Long>(ACC_DB.allIds());
 	}
 
-	public Collection<Account> getAllValues() {
+	public List<Account> getAllValues() {
 		return ACC_DB.allValues();
 	}
 
@@ -118,6 +118,7 @@ public class AccountBusiness {
 
 	public AccountDTO login(Account myAccount) {
 		List<Account> accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
+		
 		AccountDTO myAccountDTO = new AccountDTO();
 		if (!isEmailValid(myAccount.getEmail())) {
 
@@ -131,6 +132,7 @@ public class AccountBusiness {
 			String hashPassword = accountInDB.get(0).getPassword();
 
 			if (PasswordUtils.verifyPassword(myAccount.getPassword(), hashPassword, salt)) {
+				
 				myAccountDTO.setEmail(myAccount.getEmail());
 				myAccountDTO.setId(accountInDB.get(0).getId());
 				System.out.println(accountInDB.get(0).getAccountRole());

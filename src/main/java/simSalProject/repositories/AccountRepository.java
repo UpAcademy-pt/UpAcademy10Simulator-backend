@@ -118,6 +118,7 @@ public class AccountRepository extends EntityRepository<Account> {
 	public AccountDTO accountToAccountDTO(Account myAccount) {
 		AccountDTO myAccountDTO = new AccountDTO();
 		myAccountDTO.setId(myAccount.getId());
+		myAccountDTO.setName(myAccount.getName());
 		myAccountDTO.setEmail(myAccount.getEmail());
 		return myAccountDTO;
 	}

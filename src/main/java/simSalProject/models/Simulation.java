@@ -35,6 +35,9 @@ public class Simulation extends Entity_{
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
 	
 	
+	
+	
+	
 	public Simulation() {
 		super();
 	}
