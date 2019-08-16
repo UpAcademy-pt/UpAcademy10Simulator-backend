@@ -11,6 +11,23 @@ public class AccountDTO {
 	
 	
 	
+	
+	public AccountDTO() {
+		super();
+	}
+	
+	
+	
+
+	public AccountDTO(String name, String email) {
+		super();
+		this.name = name;
+		this.email = email;
+	}
+
+
+
+
 	public String getName() {
 		return name;
 	}
