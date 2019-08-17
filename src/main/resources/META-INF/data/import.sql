@@ -1,16 +1,16 @@
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("baseSalary",false,true,true,false,false,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("foodSubsidy",true,false,false,false,false,false);
+--INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("baseSalary",false,true,true,false,false,false);
+--INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("foodSubsidy",true,false,false,false,false,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("phone",false,false,false,false,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("vehicle",false,false,false,true,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("fuel",false,false,false,true,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("healthInsurance",false,false,false,false,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("workInsurance",false,false,false,false,true,false);
+--INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("healthInsurance",false,false,false,false,true,false);
+--INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("workInsurance",false,false,false,false,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("mobileNet",false,false,false,false,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("zPass",false,false,false,true,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("vehicleMaintenance",false,false,false,true,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("bonus",false,true,false,false,false,false);
+--INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("bonus",false,true,false,false,false,false);
 
-INSERT INTO Tax(name, value) VALUES("autonomousTributation ", 10);
+INSERT INTO Tax(name, value) VALUES("autonomousTributation", 10);
 INSERT INTO Tax(name, value) VALUES("workerSocialSecurity", 11);
 INSERT INTO Tax(name, value) VALUES("companySocialSecurity", 23.75);
 

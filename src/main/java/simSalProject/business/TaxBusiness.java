@@ -46,5 +46,8 @@ public class TaxBusiness {
 		return TAX_DB.getTaxByName(name);
 	}
 	
+	public List<Tax> getAllTaxes() {
+		return TAX_DB.getAllTaxes();
+	}
 	
 }

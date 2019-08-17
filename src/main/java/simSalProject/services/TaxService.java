@@ -38,6 +38,14 @@ public class TaxService {
 	@Named("TaxBus")
 	TaxBusiness TAX_B;
 	
+	@GET
+	@Path("all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultTax()  {
+		return Response.ok(TAX_B.getAllTaxes()).build();
+
+	}
+	
 	
 	@GET
 	@Path("/{name}")

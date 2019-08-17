@@ -43,5 +43,10 @@ public class TaxRepository extends EntityRepository<Tax> {
 		query.setParameter("name", name);
 		return query.getSingleResult();
 	}
+	
+	public List<Tax> getAllTaxes() {
+		TypedQuery<Tax> query = entityManager.createNamedQuery(Tax.GET_ALL_TAXES, Tax.class);
+		return query.getResultList();
+	}
 
 }

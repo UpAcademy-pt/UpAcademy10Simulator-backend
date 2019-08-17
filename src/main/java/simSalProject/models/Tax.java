@@ -7,7 +7,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Tax.GET_TAX_BY_NAME, query="SELECT t FROM Tax t WHERE t.name = :name"),
-	@NamedQuery(name=Tax.GET_TAX_COUNT_BY_NAME, query="SELECT count(t) FROM Tax t WHERE t.name = :name")
+	@NamedQuery(name=Tax.GET_TAX_COUNT_BY_NAME, query="SELECT count(t) FROM Tax t WHERE t.name = :name"),
+	@NamedQuery(name=Tax.GET_ALL_TAXES, query="SELECT t FROM Tax t")
 })
 public class Tax extends Entity_ {
 
@@ -17,6 +18,7 @@ public class Tax extends Entity_ {
 	private static final long serialVersionUID = 1L;
 	public static final String GET_TAX_BY_NAME = "getTaxByName";
 	public static final String GET_TAX_COUNT_BY_NAME = "getTaxCountByName";
+	public static final String GET_ALL_TAXES = "getAllTaxes";
 	
 	private String name;
 	private double value;
