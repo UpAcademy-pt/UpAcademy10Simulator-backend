@@ -30,12 +30,11 @@ public class SimFieldsData extends Entity_ {
 	private String name;
 	private double value;
 	
-	
-//	@ManyToOne
-//	private Simulation simulations;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Simulation simulation;
 
-	@ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
-	private List<SimulationFields> simFields = new ArrayList<>();
+	
+	
 
 	public SimFieldsData() {
 		super();
@@ -57,12 +56,14 @@ public class SimFieldsData extends Entity_ {
 		this.value = value;
 	}
 
-	public List<SimulationFields> getSimFields() {
-		return simFields;
+	public Simulation getSimulation() {
+		return simulation;
 	}
 
-	public void setSimFields(List<SimulationFields> simFields) {
-		this.simFields = simFields;
+	public void setSimulation(Simulation simulation) {
+		this.simulation = simulation;
 	}
+	
+	
 
 }

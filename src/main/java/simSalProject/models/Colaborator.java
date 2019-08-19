@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,10 +33,11 @@ public class Colaborator extends Entity_ {
 	private String name;
 	private String status;
 	private String dependents;
-//	@ManyToOne
-//	private Account account;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Account account;
 
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "colaborator")
 	private List<Simulation> simulations = new ArrayList<>();
 
 	public Colaborator() {
@@ -75,5 +75,15 @@ public class Colaborator extends Entity_ {
 	public void setSimulations(List<Simulation> simulations) {
 		this.simulations = simulations;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
+	
 
 }

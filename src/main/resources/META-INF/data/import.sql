@@ -13,7 +13,7 @@ INSERT INTO Margin(margin_min, margin_max) VALUES (-100, 500);
 
 INSERT INTO WorkInsurance(workInsuranceVariable) VALUES (0.007);
 
---INSERT INTO FoodSubsidy(foodSubsidyMonth) VALUES(160.23);
+INSERT INTO FoodSubsidy(foodSubsidyMonth) VALUES(160.23);
 
 INSERT INTO SimulationFieldsData(name, value) VALUES("marginPercentage", 0);
 INSERT INTO SimulationFieldsData(name, value) VALUES("markUp", 0);
