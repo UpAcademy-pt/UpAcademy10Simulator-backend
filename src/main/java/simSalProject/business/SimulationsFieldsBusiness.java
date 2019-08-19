@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import simSalProject.models.SimulationFields;
+import simSalProject.repositories.SimFieldsDataRepository;
 import simSalProject.repositories.SimulationsFieldsRepository;
 
 
@@ -19,7 +20,6 @@ public class SimulationsFieldsBusiness {
 	@Inject
 	@Named("SimFieldsRep")
 	SimulationsFieldsRepository SIMF_DB;
-	
 	
 	
 //	public String initDataBase() {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.FoodSubsidy;

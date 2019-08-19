@@ -18,6 +18,7 @@ import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.SimFieldsDataBusiness;
 import simSalProject.models.SimFieldsData;
+import simSalProject.models.SimulationFields;
 
 @Path("simulationfieldsdataservice")
 public class SimFieldsDataService {
@@ -36,6 +37,8 @@ public class SimFieldsDataService {
 	@Inject
 	@Named("SimFieldsDataBus")
 	SimFieldsDataBusiness SIMFD_B;
+	
+	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

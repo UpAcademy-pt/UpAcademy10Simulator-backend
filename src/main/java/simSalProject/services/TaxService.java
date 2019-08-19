@@ -1,7 +1,5 @@
 package simSalProject.services;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
