@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name=SimFieldsData.GET_SIM_FIELDS_DATA_BY_NAME, query="SELECT sfd FROM SimulationFieldsData sfd WHERE sfd.name = :name"),
 	@NamedQuery(name=SimFieldsData.GET_SIM_FIELDS_DATA_COUNT_BY_NAME, query="SELECT count(sfd) FROM SimulationFieldsData sfd WHERE sfd.name = :name"),
-	
+//	@NamedQuery(name=SimFieldsData.PUT_SIM_FIELDS_DATA_FROM_FIELD_NAMES, query="INSERT INTO SimFieldsData (name, value) VALUES(SELECT ")
 })
 public class SimFieldsData extends Entity_ {
 	/**
@@ -26,6 +26,7 @@ public class SimFieldsData extends Entity_ {
 	private static final long serialVersionUID = 1L;
 	public static final String GET_SIM_FIELDS_DATA_COUNT_BY_NAME = "getSimFieldsDataCountByName";
 	public static final String GET_SIM_FIELDS_DATA_BY_NAME = "getSimFieldsDataByName";
+	public static final String PUT_SIM_FIELDS_DATA_FROM_FIELD_NAMES = "updateSimFieldsData";
 	private String name;
 	private double value;
 	
