@@ -1,9 +1,9 @@
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Telemóvel",false,false,false,false,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Veículo",false,false,false,true,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Combustível",false,false,false,true,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Internet Móvel",false,false,false,false,true,false);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Telemï¿½vel",false,false,false,false,true,false);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Veï¿½culo",false,false,false,true,true,false);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Combustï¿½vel",false,false,false,true,true,false);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Internet Mï¿½vel",false,false,false,false,true,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Via Verde",false,false,false,true,true,false);
-INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Manutenção de Veículo",false,false,false,true,true,false);
+INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Manutenï¿½ï¿½o de Veï¿½culo",false,false,false,true,true,false);
 
 INSERT INTO Tax(name, value) VALUES("autonomousTributation", 10);
 INSERT INTO Tax(name, value) VALUES("workerSocialSecurity", 11);
