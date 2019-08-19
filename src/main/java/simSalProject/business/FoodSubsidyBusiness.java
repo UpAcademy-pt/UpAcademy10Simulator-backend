@@ -25,4 +25,9 @@ public class FoodSubsidyBusiness {
 		FOODSUB_DB.editEntity(foodSubsidy);
 		
 	}
+
+
+	public void createFoodSubsidy(FoodSubsidy foodSubsidy) {
+		FOODSUB_DB.createEntity(foodSubsidy);
+	}
 }

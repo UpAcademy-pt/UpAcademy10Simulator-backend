@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -39,6 +40,13 @@ public class FoodSubsidyService {
 	public Response getFoodSubsidyVariable () {
 		FoodSubsidy newFoodSubsidyVariable = FOODSUB_B.getFoodSubsidyValue();
 		return Response.ok().entity(newFoodSubsidyVariable).build();
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createFoodSubsidy (FoodSubsidy foodSubsidy) {
+		FOODSUB_B.createFoodSubsidy(foodSubsidy);
+		return Response.ok("Created").build();
 	}
 	
 	
