@@ -36,9 +36,7 @@ public class FoodSubsidyRepository extends EntityRepository<FoodSubsidy>{
 		return query.getResultList();
 	}
 	
-	public void setFoodSubsidyValue(double newValue) {
-		Query query = entityManager.createQuery("DELETE FROM FoodSubsidy f");
-		query.executeUpdate();
-		entityManager.persist(newValue);
-	}
+//	public void setFoodSubsidyValue(double newValue) {
+//		TypedQuery<FoodSubsidy> query = entityManager.createQuery(FoodSubsidy.SET_NEW_VALUE_FOR_SUBSIDY, FoodSubsidy.class);
+//		
 }

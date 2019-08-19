@@ -19,8 +19,10 @@ public class FoodSubsidyBusiness {
 	}
 	
 
-	public void setFoodSubsidyValue(double newvalue) {
-		FOODSUB_DB.setFoodSubsidyValue(newvalue);
+	public void setFoodSubsidyValue(FoodSubsidy foodSubsidy) {
+		long id = 1;
+		foodSubsidy.setId(id);
+		FOODSUB_DB.editEntity(foodSubsidy);
 		
 	}
 }

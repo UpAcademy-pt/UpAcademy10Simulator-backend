@@ -13,6 +13,8 @@ public class FoodSubsidy extends Entity_{
 	
 	public static final String GET_ALL_FoodSubsidy_VALUE = "getFoodSubsidy";
 
+	public static final String SET_NEW_VALUE_FOR_SUBSIDY = null;
+
 	public FoodSubsidy() {}
 	
 	private double foodSubsidyMonth;

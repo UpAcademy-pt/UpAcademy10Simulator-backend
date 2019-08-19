@@ -47,7 +47,7 @@ public class FoodSubsidyService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response setFoodSubsidyVariable(FoodSubsidy foodSubsidy) {		
-		FOODSUB_B.setFoodSubsidyValue(foodSubsidy.getFoodSubsidyMonth());
+		FOODSUB_B.setFoodSubsidyValue(foodSubsidy);
 		return Response.ok().entity("Food Subsidy updated").build();
 
 	}
