@@ -1,9 +1,7 @@
 package simSalProject.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,6 +36,8 @@ public class SimulationFields extends Entity_{
 	private boolean bE;
 	private boolean varComponent;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Simulation simulation;
 	
 	public SimulationFields() {
 		super();
@@ -97,6 +97,14 @@ public class SimulationFields extends Entity_{
 
 	public void setVarComponent(boolean varComponent) {
 		this.varComponent = varComponent;
+	}
+
+	public Simulation getSimulation() {
+		return simulation;
+	}
+
+	public void setSimulation(Simulation simulation) {
+		this.simulation = simulation;
 	}
 
 

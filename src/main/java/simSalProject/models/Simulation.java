@@ -28,12 +28,14 @@ public class Simulation extends Entity_ {
 	public static final String ALL_SIM_VALUES = "getAllSims";
 	public static final String GET_SIM_BY_ID = "getSimByID";
 	public static final String GET_SIM_COUNT_BY_ID = "getSimCountById";
-//	@ManyToOne
-//	private Colaborator colaborator;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Colaborator colaborator;
 	
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation")
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
 
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation")
+	private List<SimulationFields> simFields = new ArrayList<>();
 	
 	public Simulation() {
 		super();
@@ -46,5 +48,23 @@ public class Simulation extends Entity_ {
 	public void setSimFieldsData(List<SimFieldsData> simFieldsData) {
 		this.simFieldsData = simFieldsData;
 	}
+
+	public Colaborator getColaborator() {
+		return colaborator;
+	}
+
+	public void setColaborator(Colaborator colaborator) {
+		this.colaborator = colaborator;
+	}
+
+	public List<SimulationFields> getSimFields() {
+		return simFields;
+	}
+
+	public void setSimFields(List<SimulationFields> simFields) {
+		this.simFields = simFields;
+	}
+	
+	
 	
 }

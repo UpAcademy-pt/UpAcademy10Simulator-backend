@@ -18,7 +18,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import simSalProject.business.SimFieldsDataBusiness;
 import simSalProject.business.SimulationsFieldsBusiness;
+import simSalProject.models.SimFieldsData;
 import simSalProject.models.SimulationFields;
 
 @Path("simulationfields")
@@ -40,12 +42,14 @@ public class SimulationFieldsService {
 	@Named("SimFieldsBus")
 	SimulationsFieldsBusiness SIMF_B;
 	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response manageSimulationFields(SimulationFields mySimulationField) {
 		if (SIMF_B.getSimFieldsCount(mySimulationField.getName()) == 0) {
-			return Response.ok(SIMF_B.createSimulationFields(mySimulationField)).build();
+			String msg = SIMF_B.createSimulationFields(mySimulationField);
+			return Response.ok(msg).build();
 		} else {
 			List<SimulationFields> simulationField = SIMF_B.getSimulationFieldsByName(mySimulationField.getName());
 			SimulationFields mySimulationFieldToEdit = simulationField.get(0);
