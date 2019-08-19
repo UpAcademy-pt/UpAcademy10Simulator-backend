@@ -94,13 +94,13 @@ public class AccountService {
 		
 		String msg = myAccountDTO.getMessage();
 		System.out.println(msg);
-		if (msg == "The email you've written is not an email") {
+		if (msg == "Email not valid") {
 			return Response.status(400).entity(msg).build();
 		}
-		if (msg == "That email is not registered") {
+		if (msg == "Email is not registered") {
 			return Response.status(400).entity(msg).build();
 		}
-		if (msg == "Not a valid Password") {
+		if (msg == "Invalid password") {
 			return Response.status(400).entity(msg).build();
 		}
 		if (msg == "You have to write the password!") {

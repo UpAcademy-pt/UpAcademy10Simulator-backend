@@ -14,8 +14,6 @@ INSERT INTO Tax(name, value) VALUES("autonomousTributation ", 10);
 INSERT INTO Tax(name, value) VALUES("workerSocialSecurity", 11);
 INSERT INTO Tax(name, value) VALUES("companySocialSecurity", 23.75);
 
-INSERTO INTO SimulationFieldsData(name,value) VALUES(Simulat)
-
 INSERT INTO SimulationFieldsData(name, value) VALUES("marginPercentage", 0);
 INSERT INTO SimulationFieldsData(name, value) VALUES("markUp", 0);
 INSERT INTO SimulationFieldsData(name, value) VALUES("usagePercentage" ,0);

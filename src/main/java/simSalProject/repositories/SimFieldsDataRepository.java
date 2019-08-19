@@ -44,5 +44,12 @@ public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 		
 		return query.getResultList();
 	}
-
+	
+	public void updateSimFieldsData (List<String> names) {
+		
+		TypedQuery<SimFieldsData> query = entityManager.createNamedQuery(SimFieldsData.PUT_SIM_FIELDS_DATA_FROM_FIELD_NAMES, SimFieldsData.class);
+		query.executeUpdate();
+	}
+	
+	
 }

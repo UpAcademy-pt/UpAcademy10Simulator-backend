@@ -134,7 +134,7 @@ public class AccountBusiness {
 
 		if (!isEmailValid(myAccount.getEmail())) {
 
-			myAccountDTO.setMessage("The text you've written is not an email");
+			myAccountDTO.setMessage("Email not valid");
 
 			return myAccountDTO;
 		}
@@ -158,11 +158,11 @@ public class AccountBusiness {
 				myAccountDTO.setMessage("Welcome");
 				return myAccountDTO;
 			} else {
-				myAccountDTO.setMessage("Not a valid Password");
+				myAccountDTO.setMessage("Invalid password");
 				return myAccountDTO;
 			}
 		} else {
-			myAccountDTO.setMessage("That email is not registered");
+			myAccountDTO.setMessage("Email is not registered");
 			return myAccountDTO;
 		}
 	}
