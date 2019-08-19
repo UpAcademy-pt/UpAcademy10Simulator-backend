@@ -17,7 +17,7 @@ public class WorkInsurance extends Entity_{
 	public WorkInsurance() {}
 
 	
-	private double workInsuranceVariable = 0.007;
+	private double workInsuranceVariable;
 
 	public double getWorkInsuranceVariable() {
 		return workInsuranceVariable;

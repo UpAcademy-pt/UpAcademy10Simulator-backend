@@ -127,7 +127,6 @@ public class AccountService {
 		} else {
 			return Response.status(404).entity("Account with that email doesn't exist").build();
 		}
-
 	}
 
 	@DELETE

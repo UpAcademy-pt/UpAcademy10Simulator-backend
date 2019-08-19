@@ -1,33 +1,29 @@
 package simSalProject.models;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
-
 @Entity
-@NamedQueries({
-	@NamedQuery(name=Account.ALL_ACC_IDS, query="SELECT a.id FROM Account a"),
-	@NamedQuery(name=Account.ALL_ACC_VALUES, query="SELECT a FROM Account a"),
-	@NamedQuery(name=Account.GET_ACC_BY_ID, query="SELECT a FROM Account a WHERE a.id = :id"),
-	@NamedQuery(name=Account.GET_ACC_COUNT_BY_EMAIL, query="SELECT count(a) FROM Account a WHERE a.email = :email"),
-	@NamedQuery(name=Account.GET_ROLE_COUNT, query="SELECT count(a) FROM Account a WHERE a.accountRole = :accountRole"),
-	@NamedQuery(name=Account.GET_ACC_BY_EMAIL, query="SELECT a FROM Account a WHERE a.email = :email"),
-	@NamedQuery(name=Account.VERIFY_EMAIL_PASS, query="SELECT a FROM Account a WHERE a.email = :email AND a.password = :password"),
-	@NamedQuery(name=Account.VERIFY_EMAIL, query="SELECT count(a) FROM Account a WHERE a.email = :email"),	
-	@NamedQuery(name=Account.VERIFY_PASSWORD, query="SELECT a.password FROM Account a WHERE a.email = :email"),
-	@NamedQuery(name=Account.VERIFY_SALT, query="SELECT a.salt FROM Account a WHERE a.email = :email"),
-	@NamedQuery(name=Account.GET_ID_WITH_EMAIL, query="SELECT a.id FROM Account a WHERE a.email = :email")
-})
+@NamedQueries({ @NamedQuery(name = Account.ALL_ACC_IDS, query = "SELECT a.id FROM Account a"),
+		@NamedQuery(name = Account.ALL_ACC_VALUES, query = "SELECT a FROM Account a"),
+		@NamedQuery(name = Account.GET_ACC_BY_ID, query = "SELECT a FROM Account a WHERE a.id = :id"),
+		@NamedQuery(name = Account.GET_ACC_COUNT_BY_EMAIL, query = "SELECT count(a) FROM Account a WHERE a.email = :email"),
+		@NamedQuery(name = Account.GET_ROLE_COUNT, query = "SELECT count(a) FROM Account a WHERE a.accountRole = :accountRole"),
+		@NamedQuery(name = Account.GET_ACC_BY_EMAIL, query = "SELECT a FROM Account a WHERE a.email = :email"),
+		@NamedQuery(name = Account.VERIFY_EMAIL_PASS, query = "SELECT a FROM Account a WHERE a.email = :email AND a.password = :password"),
+		@NamedQuery(name = Account.VERIFY_EMAIL, query = "SELECT count(a) FROM Account a WHERE a.email = :email"),
+		@NamedQuery(name = Account.VERIFY_PASSWORD, query = "SELECT a.password FROM Account a WHERE a.email = :email"),
+		@NamedQuery(name = Account.VERIFY_SALT, query = "SELECT a.salt FROM Account a WHERE a.email = :email"),
+		@NamedQuery(name = Account.GET_ID_WITH_EMAIL, query = "SELECT a.id FROM Account a WHERE a.email = :email") })
 
-public class Account extends Entity_{
+public class Account extends Entity_ {
 	private static final long serialVersionUID = 1L;
 	public static final String GET_ACC_COUNT_BY_EMAIL = "getAccCountByEmail";
 	public static final String ALL_ACC_IDS = "getAccIds";
@@ -41,10 +37,8 @@ public class Account extends Entity_{
 	public static final String VERIFY_SALT = "verifySalt";
 	public static final String GET_ID_WITH_EMAIL = "getIdWithEmail";
 
-	
-	
 	public enum AccountRole {
-	    ADMIN, USER, 
+		ADMIN, USER,
 	}
 
 	private String name;
@@ -52,25 +46,21 @@ public class Account extends Entity_{
 	private String password;
 	private String salt;
 	private AccountRole accountRole;
-	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST
-	}, fetch = FetchType.EAGER)
-	private List<Colaborator> colaborators;
-	
-	public Account() {}
 
-	
-	
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
+//	@JoinColumn(name="")
+	private List<Colaborator> colaborators;
+
+	public Account() {
+	}
+
 	public String getName() {
 		return name;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -87,8 +77,7 @@ public class Account extends Entity_{
 	public String getPassword() {
 		return password;
 	}
-	
-	
+
 	public String getSalt() {
 		return salt;
 	}
@@ -112,6 +101,5 @@ public class Account extends Entity_{
 	public void setColaborators(List<Colaborator> colaborators) {
 		this.colaborators = colaborators;
 	}
-	
-	
+
 }
