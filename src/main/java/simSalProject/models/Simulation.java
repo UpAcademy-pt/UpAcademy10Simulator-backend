@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = Simulation.ALL_SIM_IDS, query = "SELECT s.id FROM Simulation s"),
 		@NamedQuery(name = Simulation.ALL_SIM_VALUES, query = "SELECT s FROM Simulation s"),
 		@NamedQuery(name = Simulation.GET_SIM_BY_ID, query = "SELECT s FROM Simulation s WHERE s.id = :id"),
-//	@NamedQuery(name=Simulation.GET_SIM_BY_NAME, query="SELECT s FROM Simulation s WHERE s.name = :name")
 		@NamedQuery(name = Simulation.GET_SIM_COUNT_BY_ID, query = "SELECT count(s) FROM Simulation s WHERE s.id = :id")
 
 })
@@ -28,25 +27,16 @@ public class Simulation extends Entity_ {
 	public static final String ALL_SIM_VALUES = "getAllSims";
 	public static final String GET_SIM_BY_ID = "getSimByID";
 	public static final String GET_SIM_COUNT_BY_ID = "getSimCountById";
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Colaborator colaborator;
 	
 	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation")
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
-
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation")
-	private List<SimulationFields> simFields = new ArrayList<>();
 	
 	public Simulation() {
 		super();
-	}
-
-	public List<SimFieldsData> getSimFieldsData() {
-		return simFieldsData;
-	}
-
-	public void setSimFieldsData(List<SimFieldsData> simFieldsData) {
-		this.simFieldsData = simFieldsData;
 	}
 
 	public Colaborator getColaborator() {
@@ -57,13 +47,15 @@ public class Simulation extends Entity_ {
 		this.colaborator = colaborator;
 	}
 
-	public List<SimulationFields> getSimFields() {
-		return simFields;
+	public List<SimFieldsData> getSimFieldsData() {
+		return simFieldsData;
 	}
 
-	public void setSimFields(List<SimulationFields> simFields) {
-		this.simFields = simFields;
+	public void setSimFieldsData(List<SimFieldsData> simFieldsData) {
+		this.simFieldsData = simFieldsData;
 	}
+
+
 	
 	
 	

@@ -7,6 +7,9 @@ import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Colaborator;
+import simSalProject.models.ColaboratorDTO;
+import simSalProject.models.Colaborator;
+import simSalProject.models.ColaboratorDTO;
 
 @Named("ColabRep")
 @RequestScoped
@@ -55,5 +58,22 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 	@Override
 	public Class<Colaborator> getEntityClass(){
 		return Colaborator.class;
+	}
+	
+	public ColaboratorDTO ColaboratorToColaboratorDTO(Colaborator myColaborator) {
+		ColaboratorDTO myColaboratorDTO = new ColaboratorDTO();
+		myColaboratorDTO.setId(myColaborator.getId());
+		myColaboratorDTO.setName(myColaborator.getName());
+		myColaboratorDTO.setDependents(myColaborator.getDependents());
+		myColaboratorDTO.setStatus(myColaborator.getStatus());
+		return myColaboratorDTO;
+	}
+
+	public Colaborator ColaboratorDTOToColaborator(ColaboratorDTO myColaboratorDTO) {
+		long id = myColaboratorDTO.getId();
+		Colaborator myColaborator = getColabById(id).get(0);
+
+		return myColaborator;
+
 	}
 }

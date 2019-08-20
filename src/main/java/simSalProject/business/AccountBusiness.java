@@ -54,12 +54,12 @@ public class AccountBusiness {
 	}
 	public String changePassword(Account myAccountToEdit) {
 		String salt = PasswordUtils.generateSalt(2).get();
-		List<Account> currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
-
-		currentAccount.get(0).setSalt(salt);
-		currentAccount.get(0).setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
+		Account currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail()).get(0);
+		currentAccount.setEmail(myAccountToEdit.getEmail());
+		currentAccount.setSalt(salt);
+		currentAccount.setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
 		
-		ACC_DB.editEntity(currentAccount.get(0));
+		ACC_DB.editEntity(currentAccount);
 		return "Welcome user with new Password";
 	}
 	

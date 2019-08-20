@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import simSalProject.models.Colaborator;
+import simSalProject.models.ColaboratorDTO;
 import simSalProject.repositories.ColaboratorRepository;
 
 @Named("ColabBus")
@@ -19,17 +20,21 @@ public class ColaboratorBusiness {
 	@Named("ColabRep")
 	ColaboratorRepository COLAB_DB;
 
-	public List<Colaborator> createColaborator(Colaborator myColaborator) {
+	public List<ColaboratorDTO> createColaborator(Colaborator myColaborator) {
 		COLAB_DB.createEntity(myColaborator);
-		return COLAB_DB.getColabByName(myColaborator.getName());
+		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
+		colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(COLAB_DB.getColabById(myColaborator.getId()).get(0)));
+		return colaboratorsDTO;
 	}
 
-	public Colaborator consultColaborator(long id) {
+	public ColaboratorDTO consultColaborator(long id) {
 		Colaborator myColaborator = COLAB_DB.consultEntity(id);
-		return myColaborator;
+		
+		return COLAB_DB.ColaboratorToColaboratorDTO(myColaborator);
 	}
 
-	public String editColaborator(Colaborator myColaboratorToEdit) {
+	public String editColaborator(ColaboratorDTO myColaboratorDTOToEdit) {
+		Colaborator myColaboratorToEdit = COLAB_DB.ColaboratorDTOToColaborator(myColaboratorDTOToEdit);
 		COLAB_DB.editEntity(myColaboratorToEdit);
 		return "Edited";
 	}
@@ -43,8 +48,13 @@ public class ColaboratorBusiness {
 		return new ArrayList<Long>(COLAB_DB.allIds());
 	}
 
-	public Collection<Colaborator> getAllValues() {
-		return COLAB_DB.allValues();
+	public List<ColaboratorDTO> getAllValues() {
+		List<Colaborator> colaborators = COLAB_DB.allValues();
+		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
+		for (Colaborator colaborator : colaborators) {
+			colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(colaborator));
+		}
+		return colaboratorsDTO;
 	}
 	
 	public List<Colaborator> getColabById(long id) {
