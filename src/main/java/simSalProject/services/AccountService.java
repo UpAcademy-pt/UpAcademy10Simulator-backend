@@ -117,14 +117,14 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editAccount(Account myAccountToEdit) {
 		if (ACC_B.getAccCountByEmail(myAccountToEdit.getEmail()) == 0) {
-			String msg = ACC_B.changePassword(myAccountToEdit);
-			if (msg == "Welcome user with new Password") {
-				return Response.ok(msg).build();
-			} else {
-				return Response.ok(msg).build();
-			}
-		} else {
 			return Response.status(404).entity("Account with that email doesn't exist").build();
+		} else {
+				String msg = ACC_B.changePassword(myAccountToEdit);
+				if (msg == "Welcome user with new Password") {
+					return Response.ok(msg).build();
+				} else {
+					return Response.ok(msg).build();
+				}	
 		}
 	}
 

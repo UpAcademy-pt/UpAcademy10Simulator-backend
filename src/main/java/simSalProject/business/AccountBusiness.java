@@ -55,7 +55,6 @@ public class AccountBusiness {
 	public String changePassword(Account myAccountToEdit) {
 		String salt = PasswordUtils.generateSalt(2).get();
 		List<Account> currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail());
-
 		currentAccount.get(0).setSalt(salt);
 		currentAccount.get(0).setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
 		
