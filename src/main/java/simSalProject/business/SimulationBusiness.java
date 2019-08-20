@@ -8,7 +8,9 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.models.SimFieldsData;
 import simSalProject.models.Simulation;
+import simSalProject.repositories.SimFieldsDataRepository;
 import simSalProject.repositories.SimulationRepository;
 
 @Named("SimBus")
@@ -20,20 +22,26 @@ public class SimulationBusiness {
 	@Named("SimRep")
 	SimulationRepository SIM_DB;
 	
-	public String createSimulation(Simulation mySimulation) {
-		SIM_DB.createEntity(mySimulation);
-		return "Created";
+	@Inject
+	@Named("SimFieldsDataRep")
+	SimFieldsDataRepository SIMFD_DB;
+	
+	
+	public Simulation createSimulation(List<SimFieldsData> myFieldsData) {
+		Simulation mySimulation = new Simulation();
+		mySimulation.setSimFieldsData(myFieldsData);
+		Simulation simulation = SIM_DB.createEntity(mySimulation);
+		for (SimFieldsData fieldData : myFieldsData) {
+			fieldData.setSimulation(simulation);
+			SIMFD_DB.createEntity(fieldData);
+		}
+		return simulation;
 	}
 	
 	public Simulation consultSimulation(long id) {
 		List<Simulation> mySimulation = SIM_DB.getSimulationById(id);
 		return mySimulation.get(0);
 	}
-	
-//	public Simulation consultSimulation(String name) {
-//		Simulation mySimulation = SIM_DB.getSimulationByName(name);
-//		return mySimulation;
-//	}
 	
 	public void editSimulation(Simulation mySimulationToEdit) {
 		SIM_DB.editEntity(mySimulationToEdit);
