@@ -90,7 +90,7 @@ public class AccountService {
 	public Response login(Account myAccount) {
 		AccountDTO myAccountDTO = ACC_B.login(myAccount);
 		System.out.println(myAccountDTO);
-		
+
 		String msg = myAccountDTO.getMessage();
 		System.out.println(msg);
 		if (msg == "Email not valid") {
@@ -107,8 +107,6 @@ public class AccountService {
 		}
 		return Response.ok(myAccountDTO).build();
 
-		
-
 	}
 
 	@PUT
@@ -119,12 +117,12 @@ public class AccountService {
 		if (ACC_B.getAccCountByEmail(myAccountToEdit.getEmail()) == 0) {
 			return Response.status(404).entity("Account with that email doesn't exist").build();
 		} else {
-				String msg = ACC_B.changePassword(myAccountToEdit);
-				if (msg == "Welcome user with new Password") {
-					return Response.ok(msg).build();
-				} else {
-					return Response.ok(msg).build();
-				}	
+			String msg = ACC_B.changePassword(myAccountToEdit);
+			if (msg == "Welcome user with new Password") {
+				return Response.ok(msg).build();
+			} else {
+				return Response.ok(msg).build();
+			}
 		}
 	}
 
@@ -142,7 +140,6 @@ public class AccountService {
 		}
 	}
 
-	
 	@GET
 	@Path("allIds")
 	@Produces(MediaType.APPLICATION_JSON)

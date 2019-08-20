@@ -35,10 +35,6 @@ public class SimFieldsData extends Entity_ {
 	private String name;
 	private double value;
 	
-	
-
-	
-	
 
 	public SimFieldsData() {
 		super();

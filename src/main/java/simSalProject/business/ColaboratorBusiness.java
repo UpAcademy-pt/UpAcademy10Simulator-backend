@@ -20,14 +20,17 @@ public class ColaboratorBusiness {
 	@Named("ColabRep")
 	ColaboratorRepository COLAB_DB;
 
-	public List<Colaborator> createColaborator(Colaborator myColaborator) {
+	public List<ColaboratorDTO> createColaborator(Colaborator myColaborator) {
 		COLAB_DB.createEntity(myColaborator);
-		return COLAB_DB.getColabById(myColaborator.getId());
+		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
+		colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(COLAB_DB.getColabById(myColaborator.getId()).get(0)));
+		return colaboratorsDTO;
 	}
 
-	public Colaborator consultColaborator(long id) {
+	public ColaboratorDTO consultColaborator(long id) {
 		Colaborator myColaborator = COLAB_DB.consultEntity(id);
-		return myColaborator;
+		
+		return COLAB_DB.ColaboratorToColaboratorDTO(myColaborator);
 	}
 
 	public String editColaborator(ColaboratorDTO myColaboratorDTOToEdit) {
