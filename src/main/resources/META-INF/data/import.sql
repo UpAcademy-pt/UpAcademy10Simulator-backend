@@ -11,7 +11,7 @@ INSERT INTO Tax(name, value) VALUES("companySocialSecurity", 23.75);
 
 INSERT INTO Margin(margin_min, margin_max) VALUES (-100, 500);
 
-INSERT INTO WorkInsurance(workInsuranceVariable) VALUES (0.007);
+INSERT INTO WorkInsurance(workInsuranceVariable, varAccountedForWorkInsurance) VALUES (0.007, 14);
 
 INSERT INTO FoodSubsidy(foodSubsidyMonth) VALUES(160.23);
 

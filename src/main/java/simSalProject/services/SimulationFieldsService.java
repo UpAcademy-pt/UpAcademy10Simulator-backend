@@ -70,6 +70,13 @@ public class SimulationFieldsService {
 			return Response.ok(mySimulationField.get(0)).build();
 		}
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllSimFields() {
+		List<SimulationFields> thisSimFields = SIMF_B.getAllSimValues();
+		return Response.ok().entity(thisSimFields).build();
+	}
 
 	@DELETE
 	@Path("/{name}")
@@ -91,9 +98,9 @@ public class SimulationFieldsService {
 		return new ArrayList<Long>(SIMF_B.getAllIds());
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<SimulationFields> getAllValues() {
-		return SIMF_B.getAllValues();
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Collection<SimulationFields> getAllValues() {
+//		return SIMF_B.getAllValues();
+//	}
 }

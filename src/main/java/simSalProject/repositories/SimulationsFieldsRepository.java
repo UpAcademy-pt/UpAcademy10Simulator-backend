@@ -50,5 +50,11 @@ public class SimulationsFieldsRepository extends EntityRepository<SimulationFiel
 		return query.getSingleResult();
 	}
 	
+	public List<SimulationFields> getAllSimulationFields() {
+		TypedQuery<SimulationFields> query = entityManager.createNamedQuery(SimulationFields.ALL_SIM_FIELDS_VALUES, SimulationFields.class);
+		
+		return query.getResultList();
+	}
+	
 	
 }
