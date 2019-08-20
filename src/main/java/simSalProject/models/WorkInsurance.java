@@ -18,6 +18,7 @@ public class WorkInsurance extends Entity_{
 
 	
 	private double workInsuranceVariable;
+	private int varAccountedForWorkInsurance;
 
 	public double getWorkInsuranceVariable() {
 		return workInsuranceVariable;
@@ -26,6 +27,16 @@ public class WorkInsurance extends Entity_{
 
 	public void setWorkInsuranceVariable(double workInsuranceVariable) {
 		this.workInsuranceVariable = workInsuranceVariable;
+	}
+
+
+	public int getVarAccountedForWorkInsurance() {
+		return varAccountedForWorkInsurance;
+	}
+
+
+	public void setVarAccountedForWorkInsurance(int varAccountedForWorkInsurance) {
+		this.varAccountedForWorkInsurance = varAccountedForWorkInsurance;
 	}
 	
 	

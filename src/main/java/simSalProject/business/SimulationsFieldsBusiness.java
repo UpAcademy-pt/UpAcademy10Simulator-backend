@@ -113,5 +113,9 @@ public class SimulationsFieldsBusiness {
 		return SIMF_DB.getSimFieldsCount(name);
 	}
 	
+	public List<SimulationFields> getAllSimValues() {
+		return SIMF_DB.getAllSimulationFields();
+	}
+	
 	
 }
