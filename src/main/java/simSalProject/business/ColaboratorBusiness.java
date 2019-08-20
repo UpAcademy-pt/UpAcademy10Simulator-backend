@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import simSalProject.models.Colaborator;
+import simSalProject.models.ColaboratorDTO;
 import simSalProject.repositories.ColaboratorRepository;
 
 @Named("ColabBus")
@@ -21,7 +22,7 @@ public class ColaboratorBusiness {
 
 	public List<Colaborator> createColaborator(Colaborator myColaborator) {
 		COLAB_DB.createEntity(myColaborator);
-		return COLAB_DB.getColabByName(myColaborator.getName());
+		return COLAB_DB.getColabById(myColaborator.getId());
 	}
 
 	public Colaborator consultColaborator(long id) {
@@ -29,7 +30,8 @@ public class ColaboratorBusiness {
 		return myColaborator;
 	}
 
-	public String editColaborator(Colaborator myColaboratorToEdit) {
+	public String editColaborator(ColaboratorDTO myColaboratorDTOToEdit) {
+		Colaborator myColaboratorToEdit = COLAB_DB.ColaboratorDTOToColaborator(myColaboratorDTOToEdit);
 		COLAB_DB.editEntity(myColaboratorToEdit);
 		return "Edited";
 	}
@@ -43,8 +45,13 @@ public class ColaboratorBusiness {
 		return new ArrayList<Long>(COLAB_DB.allIds());
 	}
 
-	public Collection<Colaborator> getAllValues() {
-		return COLAB_DB.allValues();
+	public List<ColaboratorDTO> getAllValues() {
+		List<Colaborator> colaborators = COLAB_DB.allValues();
+		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
+		for (Colaborator colaborator : colaborators) {
+			colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(colaborator));
+		}
+		return colaboratorsDTO;
 	}
 	
 	public List<Colaborator> getColabById(long id) {

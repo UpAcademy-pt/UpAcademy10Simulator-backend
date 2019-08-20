@@ -18,8 +18,9 @@ public abstract class EntityRepository<T extends Entity_> {
 	
 
 	
-	public void createEntity(T entity) {
+	public T createEntity(T entity) {
 		entityManager.persist(entity);
+		return entity;
 	}
 	
 	

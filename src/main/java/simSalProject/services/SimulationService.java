@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.SimulationBusiness;
+import simSalProject.models.SimFieldsData;
 import simSalProject.models.Simulation;
 
 @Path("simulations")
@@ -42,13 +43,13 @@ public class SimulationService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response createSimulation(Simulation mySimulation) {
-		String msg = SIM_B.createSimulation(mySimulation);
-		if (msg == "Created") {
-			return Response.ok(msg).build();
+	public Response createSimulation(List<SimFieldsData> mySimulation ) {
+		Simulation simulation = SIM_B.createSimulation(mySimulation);
+		if (simulation != null) {
+			return Response.ok(simulation).build();
+		} else {
+			return Response.status(400).entity("Simulação não criada").build();
 		}
-		return null;
-		
 	}
 
 	@GET
@@ -65,26 +66,14 @@ public class SimulationService {
 
 	}
 
-//	@GET
-//	@Path("/{name}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response consultSimulation(@PathParam("name")String name) {
-//		Simulation mySimulation = SIM_B.consultSimulation(name);
-//		if (mySimulation == null) {
-//			return Response.status(400).entity("Simulation doesn't exist").build();
-//		}
-//		return Response.ok(mySimulation).build();
-//	}
-
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response editSimulation(@PathParam("id") long id) {
+	public Response editSimulation(@PathParam("id") long id, Simulation mySimulationToEdit) {
 		if (SIM_B.getSimulationCountById(id) == 0) {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
-			Simulation mySimulationToEdit = SIM_B.consultSimulation(id);
 			mySimulationToEdit.setId(id);
 			SIM_B.editSimulation(mySimulationToEdit);
 			return Response.ok("Edit successful").build();

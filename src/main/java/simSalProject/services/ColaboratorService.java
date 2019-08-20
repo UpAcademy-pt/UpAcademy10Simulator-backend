@@ -21,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.ColaboratorBusiness;
 import simSalProject.models.Colaborator;
+import simSalProject.models.ColaboratorDTO;
 
 @Path("colaborators")
 public class ColaboratorService {
@@ -44,13 +45,13 @@ public class ColaboratorService {
 	
 	
 	@GET
-	@Path("/{name}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultColaborator(@PathParam("name")String name)  {
-		if (COLAB_B.getColabCountByName(name) == 0) {
+	public Response consultColaborator(@PathParam("id")long  id)  {
+		if (COLAB_B.getColabCountById(id) == 0) {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
 		}
-		List<Colaborator> myColaborator = COLAB_B.getColabByName(name);
+		List<Colaborator> myColaborator = COLAB_B.getColabById(id);
 		return Response.ok(myColaborator.get(0)).build();
 
 	}
@@ -60,7 +61,10 @@ public class ColaboratorService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColaborator(Colaborator myColaborator) {
 		if(COLAB_B.createColaborator(myColaborator).size() > 0) {
-			return Response.ok(myColaborator).build();
+			ColaboratorDTO myColaboratorDTO = new ColaboratorDTO();
+			myColaboratorDTO.setId(myColaborator.getId());
+			myColaboratorDTO.setName(myColaborator.getName());
+			return Response.ok(myColaboratorDTO).build();
 		} else {
 			return Response.status(400).entity("Colaborator wasn't created").build();
 		}
@@ -69,12 +73,12 @@ public class ColaboratorService {
 	@PUT
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response editColaborator(@PathParam("id") long id, Colaborator myColaboratorToEdit) {
-		if (COLAB_B.getColabCountByName(myColaboratorToEdit.getName()) == 0) {
+	public Response editColaborator(@PathParam("id") long id, ColaboratorDTO myColaboratorDTOToEdit) {
+		if (COLAB_B.getColabCountByName(myColaboratorDTOToEdit.getName()) == 0) {
 			return Response.status(404).entity("Colaborator with that name doesn't exist").build();
 		} else {
-			myColaboratorToEdit.setId(id);
-			return Response.ok(COLAB_B.editColaborator(myColaboratorToEdit)).build();
+			myColaboratorDTOToEdit.setId(id);
+			return Response.ok(COLAB_B.editColaborator(myColaboratorDTOToEdit)).build();
 		}
 	}
 	
@@ -103,7 +107,7 @@ public class ColaboratorService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Colaborator> getAllValues() {
+	public List<ColaboratorDTO> getAllValues() {
 		return COLAB_B.getAllValues();
 	}
 	
