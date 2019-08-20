@@ -1,5 +1,8 @@
 package simSalProject.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AccountDTO {
 	
 
@@ -9,22 +12,20 @@ public class AccountDTO {
 	private String accountRole;
 	private String message;
 	
-	
+	private List<Colaborator> colaborators = new ArrayList<>();
 	
 	
 	public AccountDTO() {
 		super();
 	}
-	
-	
-	
 
-	public AccountDTO(String name, String email) {
-		super();
-		this.name = name;
-		this.email = email;
+	public List<Colaborator> getColaborators() {
+		return colaborators;
 	}
 
+	public void setColaborators(List<Colaborator> colaborators) {
+		this.colaborators = colaborators;
+	}
 
 	public String getName() {
 		return name;

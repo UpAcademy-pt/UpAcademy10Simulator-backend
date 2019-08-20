@@ -27,6 +27,8 @@ public class Simulation extends Entity_ {
 	public static final String ALL_SIM_VALUES = "getAllSims";
 	public static final String GET_SIM_BY_ID = "getSimByID";
 	public static final String GET_SIM_COUNT_BY_ID = "getSimCountById";
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Colaborator colaborator;
 	

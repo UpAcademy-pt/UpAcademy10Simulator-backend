@@ -31,12 +31,13 @@ public class Colaborator extends Entity_ {
 	public static final String GET_COLABORATOR_BY_NAME = "getColabByName";
 	public static final String GET_COLABORATOR_COUNT_BY_NAME = "getColabCountByName";
 	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Account account;
 	private String name;
 	private String status;
 	private String dependents;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Account account;
 
 	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "colaborator")
 	private List<Simulation> simulations = new ArrayList<>();

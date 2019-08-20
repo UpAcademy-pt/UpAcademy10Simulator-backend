@@ -23,15 +23,19 @@ public class SimFieldsData extends Entity_ {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	public static final String GET_SIM_FIELDS_DATA_COUNT_BY_NAME = "getSimFieldsDataCountByName";
 	public static final String GET_SIM_FIELDS_DATA_BY_NAME = "getSimFieldsDataByName";
 	public static final String PUT_SIM_FIELDS_DATA_FROM_FIELD_NAMES = "updateSimFieldsData";
-	private String name;
-	private double value;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Simulation simulation;
+	private String name;
+	private double value;
+	
+	
 
 	
 	

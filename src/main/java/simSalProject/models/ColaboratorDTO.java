@@ -1,5 +1,8 @@
 package simSalProject.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ColaboratorDTO {
 	
 	private long id;
@@ -7,6 +10,7 @@ public class ColaboratorDTO {
 	private String status;
 	private String dependents;
 	
+	private List<Simulation> simulations = new ArrayList<>();
 	
 	
 	public ColaboratorDTO() {
@@ -35,6 +39,12 @@ public class ColaboratorDTO {
 	}
 	public void setDependents(String dependents) {
 		this.dependents = dependents;
+	}
+	public List<Simulation> getSimulations() {
+		return simulations;
+	}
+	public void setSimulations(List<Simulation> simulations) {
+		this.simulations = simulations;
 	}
 	
 	
