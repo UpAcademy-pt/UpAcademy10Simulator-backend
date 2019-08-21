@@ -30,9 +30,9 @@ public class FoodSubsidyRepository extends EntityRepository<FoodSubsidy>{
 		return FoodSubsidy.class;
 	}
 	
-	public List<FoodSubsidy> getFoodSubsidyValue() {
+	public FoodSubsidy getFoodSubsidyValue() {
 		TypedQuery<FoodSubsidy> query = entityManager.createNamedQuery(FoodSubsidy.GET_ALL_FoodSubsidy_VALUE, FoodSubsidy.class);
-		return query.getResultList();
+		return query.getSingleResult();
 	}
 	
 //	public void setFoodSubsidyValue(double newValue) {

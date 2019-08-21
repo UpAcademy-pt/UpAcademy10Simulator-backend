@@ -18,6 +18,8 @@ public class FoodSubsidy extends Entity_{
 	public FoodSubsidy() {}
 	
 	private double foodSubsidyMonth;
+	private int averageDaysOfTheMonth;
+	private double limitValueForFoodSubsidy;
 
 	public double getFoodSubsidyMonth() {
 		return foodSubsidyMonth;
@@ -26,6 +28,23 @@ public class FoodSubsidy extends Entity_{
 	public void setFoodSubsidyMonth(double foodSubsidyMonth) {
 		this.foodSubsidyMonth = foodSubsidyMonth;
 	}
+
+	public int getAverageDaysOfTheMonth() {
+		return averageDaysOfTheMonth;
+	}
+
+	public void setAverageDaysOfTheMonth(int averageDaysOfTheMonth) {
+		this.averageDaysOfTheMonth = averageDaysOfTheMonth;
+	}
+
+	public double getLimitValueForFoodSubsidy() {
+		return limitValueForFoodSubsidy;
+	}
+
+	public void setLimitValueForFoodSubsidy(double limitValueForFoodSubsidy) {
+		this.limitValueForFoodSubsidy = limitValueForFoodSubsidy;
+	}
+	
 	
 	
 }

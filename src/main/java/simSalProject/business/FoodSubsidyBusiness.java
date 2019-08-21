@@ -15,7 +15,7 @@ public class FoodSubsidyBusiness {
 	FoodSubsidyRepository FOODSUB_DB;
 	
 	public FoodSubsidy getFoodSubsidyValue () {
-		return FOODSUB_DB.getFoodSubsidyValue().get(0);
+		return FOODSUB_DB.getFoodSubsidyValue();
 	}
 	
 

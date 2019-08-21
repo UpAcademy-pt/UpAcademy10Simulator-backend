@@ -13,4 +13,4 @@ INSERT INTO Margin(margin_min, margin_max) VALUES (-100, 500);
 
 INSERT INTO WorkInsurance(workInsuranceVariable, varAccountedForWorkInsurance) VALUES (0.007, 14);
 
-INSERT INTO FoodSubsidy(foodSubsidyMonth) VALUES(160.23);
+INSERT INTO FoodSubsidy(foodSubsidyMonth, averageDaysOfTheMonth, limitValueForFoodSubsidy) VALUES(160.23, 21, 7.63);
