@@ -1,6 +1,5 @@
 package simSalProject.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
@@ -59,15 +58,10 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 	}
 	
 	
-	public List<SimulationDTO> getSimulationsByColabId(Colaborator colaborator){
+	public List<Simulation> getSimulationsByColabId(Colaborator colaborator){
 		TypedQuery<Simulation> query = entityManager.createNamedQuery(Simulation.GET_SIM_BY_COLAB_ID, Simulation.class);
 		query.setParameter("colaborator", colaborator);
-		List<Simulation> simulations = query.getResultList();
-		List<SimulationDTO> simulationsDTO = new ArrayList<SimulationDTO>();
-		for (Simulation simulation : simulations) {
-			simulationsDTO.add(SimulationToSimulationDTO(simulation));
-		}
-		return simulationsDTO; 
+		return query.getResultList();
 	}
 		
 		

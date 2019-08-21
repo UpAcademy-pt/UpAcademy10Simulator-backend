@@ -7,6 +7,7 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.models.Colaborator;
 import simSalProject.models.SimFieldsData;
 import simSalProject.models.Simulation;
 import simSalProject.models.SimulationDTO;
@@ -70,6 +71,15 @@ public class SimulationBusiness {
 	
 	public List<Simulation> getSimulationById(long id){
 		return SIM_DB.getSimulationById(id);
+	}
+	
+	public List<SimulationDTO> getSimulationByColabId(Colaborator colaborator) {
+		List<Simulation> simulations = SIM_DB.getSimulationsByColabId(colaborator);
+		List<SimulationDTO> simulationsDTO = new ArrayList<SimulationDTO>();
+		for (Simulation simulation : simulations) {
+			simulationsDTO.add(SIM_DB.SimulationToSimulationDTO(simulation));
+		}
+		return simulationsDTO; 
 	}
 	
 }

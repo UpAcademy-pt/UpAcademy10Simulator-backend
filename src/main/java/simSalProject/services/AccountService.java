@@ -23,7 +23,6 @@ import simSalProject.business.AccountBusiness;
 import simSalProject.business.ColaboratorBusiness;
 import simSalProject.models.Account;
 import simSalProject.models.AccountDTO;
-import simSalProject.models.ColaboratorDTO;
 
 @Path("accounts")
 public class AccountService {

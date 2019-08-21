@@ -13,12 +13,15 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import simSalProject.business.ColaboratorBusiness;
 import simSalProject.business.SimulationBusiness;
+import simSalProject.models.Colaborator;
 import simSalProject.models.SimFieldsData;
 import simSalProject.models.Simulation;
 import simSalProject.models.SimulationDTO;
@@ -39,6 +42,10 @@ public class SimulationService {
 	@Inject
 	@Named("SimBus")
 	SimulationBusiness SIM_B;
+	
+	@Inject
+	@Named("ColabBus")
+	ColaboratorBusiness COLAB_B;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -106,6 +113,14 @@ public class SimulationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SimulationDTO> getAllValues() {
 		return SIM_B.getAllValues();
+	}
+	
+	@GET
+	@Path("allSimsFromColab")
+	@Produces(MediaType.APPLICATION_JSON)
+	public  List<SimulationDTO> getSimulationByColabId(@QueryParam("id")long id) {
+		Colaborator colaborator = COLAB_B.getColabById(id).get(0);
+		return SIM_B.getSimulationByColabId(colaborator);
 	}
 	
 }
