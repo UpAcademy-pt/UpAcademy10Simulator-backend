@@ -6,7 +6,7 @@ import java.util.List;
 public class SimulationDTO {
 
 	private long id;
-	private List<SimFieldsData> simFieldsData = new ArrayList<>();
+	private List<SimFieldsDataDTO> simFieldsDataDTO = new ArrayList<>();
 	
 	public SimulationDTO() {
 		super();
@@ -20,12 +20,13 @@ public class SimulationDTO {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public List<SimFieldsData> getSimFieldsData() {
-		return simFieldsData;
+	
+	public List<SimFieldsDataDTO> getSimFieldsData() {
+		return simFieldsDataDTO;
 	}
 
-	public void setSimFieldsData(List<SimFieldsData> simFieldsData) {
-		this.simFieldsData = simFieldsData;
+	public void setSimFieldsData(List<SimFieldsDataDTO> simFieldsDataDTO) {
+		this.simFieldsDataDTO = simFieldsDataDTO;
 	}
 	
 	

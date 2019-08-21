@@ -1,5 +1,6 @@
 package simSalProject.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
@@ -63,10 +64,20 @@ public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 		mySimFieldsDataDTO.setValue(mySimFieldsData.getValue());
 		return mySimFieldsDataDTO;
 	}
+	
+	public List<SimFieldsDataDTO> SimFieldsDataToSimFieldsDataDTO(List<SimFieldsData> fieldsData){
+		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
+		for (SimFieldsData fieldData : fieldsData) {
+			fieldsDataDTO.add(SimFieldsDataToSimFieldsDataDTO(fieldData));
+		}
+		return fieldsDataDTO;
+	}
 
 	public SimFieldsData SimFieldsDataDTOToSimFieldsData(SimFieldsDataDTO mySimFieldsDataDTO) {
 		SimFieldsData mySimFieldsData = getSimFieldsDataById(mySimFieldsDataDTO.getId()).get(0);
 		return mySimFieldsData;
 	}
+	
+	
 	
 }

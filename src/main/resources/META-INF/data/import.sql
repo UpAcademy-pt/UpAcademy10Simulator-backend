@@ -7,6 +7,8 @@ INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Ma
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Outros C/ Tributacao Autonoma",false,false,false,true,false,false);
 INSERT INTO SimulationFields(name, SA, IRS, SS, TA, BE, varComponent) VALUES("Outros S/ Tributacao Autonoma",false,false,false,false,false,false);
 
+
+
 INSERT INTO Tax(name, value) VALUES("autonomousTributation", 10);
 INSERT INTO Tax(name, value) VALUES("workerSocialSecurity", 11);
 INSERT INTO Tax(name, value) VALUES("companySocialSecurity", 23.75);

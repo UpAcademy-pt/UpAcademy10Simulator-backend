@@ -47,13 +47,16 @@ public class SimulationService {
 	@Named("ColabBus")
 	ColaboratorBusiness COLAB_B;
 	
+	
 	@POST
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response createSimulation(List<SimFieldsData> mySimulation ) {
-		Simulation simulation = SIM_B.createSimulation(mySimulation);
-		if (simulation != null) {
-			return Response.ok(simulation).build();
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createSimulation(@PathParam("id") long colabId, List<SimFieldsData> mySimulation ) {
+		Colaborator colaborator = COLAB_B.getColabById(colabId).get(0);
+		SimulationDTO simulationDTO = SIM_B.createSimulation(colaborator, mySimulation);
+		if (simulationDTO != null) {
+			return Response.ok(simulationDTO).build();
 		} else {
 			return Response.status(400).entity("Simulação não criada").build();
 		}

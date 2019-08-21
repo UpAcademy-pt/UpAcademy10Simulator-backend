@@ -21,63 +21,66 @@ public class SimulationBusiness {
 	
 	@Inject
 	@Named("SimRep")
-	SimulationRepository SIM_DB;
+	SimulationRepository simulationRepository;
 	
 	@Inject
 	@Named("SimFieldsDataRep")
-	SimFieldsDataRepository SIMFD_DB;
+	SimFieldsDataRepository simFieldsDataRepository;
 	
 	
-	public Simulation createSimulation(List<SimFieldsData> myFieldsData) {
+	public SimulationDTO createSimulation(Colaborator colaborator, List<SimFieldsData> myFieldsData) {
 		Simulation mySimulation = new Simulation();
+		mySimulation.setColaborator(colaborator);
 		mySimulation.setSimFieldsData(myFieldsData);
-		Simulation simulation = SIM_DB.createEntity(mySimulation);
+		Simulation simulation = simulationRepository.createEntity(mySimulation);
 		for (SimFieldsData fieldData : myFieldsData) {
 			fieldData.setSimulation(simulation);
-			SIMFD_DB.createEntity(fieldData);
+			simFieldsDataRepository.editEntity(fieldData);
 		}
-		return simulation;
+		SimulationDTO simulationDTO = simulationRepository.SimulationToSimulationDTO(simulationRepository.getSimulationById(simulation.getId()).get(0));
+		simulationDTO.setSimFieldsData(simFieldsDataRepository.SimFieldsDataToSimFieldsDataDTO(myFieldsData));
+		return simulationDTO;
 	}
 	
 	public Simulation consultSimulation(long id) {
-		List<Simulation> mySimulation = SIM_DB.getSimulationById(id);
+		List<Simulation> mySimulation = simulationRepository.getSimulationById(id);
 		return mySimulation.get(0);
 	}
 	
 	public void editSimulation(Simulation mySimulationToEdit) {
-		SIM_DB.editEntity(mySimulationToEdit);
+		simulationRepository.editEntity(mySimulationToEdit);
 	}
 	
 	public void removeSimulation(Simulation mySimulation) {
-		SIM_DB.removeEntity(mySimulation);
+		simulationRepository.removeEntity(mySimulation);
 	}
 	
 	public List<Long> getAllIds() {
-		return new ArrayList<Long>(SIM_DB.allIds());
+		return new ArrayList<Long>(simulationRepository.allIds());
 	}
 	
 	public List<SimulationDTO> getAllValues(){
 		List<SimulationDTO> simulationsDTO = new ArrayList<>();
-		List<Simulation> simulations = SIM_DB.allValues();
+		List<Simulation> simulations = simulationRepository.allValues();
 		for (Simulation simulation : simulations) {
-			simulationsDTO.add(SIM_DB.SimulationToSimulationDTO(simulation));
+			simulationsDTO.add(simulationRepository.SimulationToSimulationDTO(simulation));
 		}
 		return simulationsDTO ;
 	}
 	
 	public long getSimulationCountById(long id) {
-		return SIM_DB.getSimulationCountById(id);
+		return simulationRepository.getSimulationCountById(id);
 	}
 	
 	public List<Simulation> getSimulationById(long id){
-		return SIM_DB.getSimulationById(id);
+		return simulationRepository.getSimulationById(id);
 	}
 	
 	public List<SimulationDTO> getSimulationByColabId(Colaborator colaborator) {
-		List<Simulation> simulations = SIM_DB.getSimulationsByColabId(colaborator);
+		List<Simulation> simulations = simulationRepository.getSimulationsByColabId(colaborator);
 		List<SimulationDTO> simulationsDTO = new ArrayList<SimulationDTO>();
 		for (Simulation simulation : simulations) {
-			simulationsDTO.add(SIM_DB.SimulationToSimulationDTO(simulation));
+			simulationsDTO.add(simulationRepository.SimulationToSimulationDTO(simulation));
 		}
 		return simulationsDTO; 
 	}

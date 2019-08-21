@@ -66,5 +66,13 @@ public class SimFieldsDataBusiness {
 	public long getSimFieldsDataCountById(long id) {
 		return SIMFD_DB.getSimFieldsDataCountById(id);
 	}
+	
+	public List<SimFieldsDataDTO> SimFieldsDataToSimFieldsDataDTO(List<SimFieldsData> fieldsData){
+		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
+		for (SimFieldsData fieldData : fieldsData) {
+			fieldsDataDTO.add(SIMFD_DB.SimFieldsDataToSimFieldsDataDTO(fieldData));
+		}
+		return fieldsDataDTO;
+	}
 
 }

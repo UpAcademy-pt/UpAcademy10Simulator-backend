@@ -24,8 +24,8 @@ public abstract class EntityRepository<T extends Entity_> {
 	}
 	
 	
-	public void editEntity(T entity) {
-		entityManager.merge(entity);
+	public T editEntity(T entity) {
+		return entityManager.merge(entity);
 	}
 	
 	public T consultEntity(long id) {

@@ -48,7 +48,6 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 	public SimulationDTO SimulationToSimulationDTO(Simulation mySimulation) {
 		SimulationDTO mySimulationDTO = new SimulationDTO();
 		mySimulationDTO.setId(mySimulation.getId());
-		mySimulationDTO.setSimFieldsData(mySimulation.getSimFieldsData());
 		return mySimulationDTO;
 	}
 
