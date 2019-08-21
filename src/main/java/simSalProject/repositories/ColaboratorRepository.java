@@ -1,6 +1,5 @@
 package simSalProject.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
@@ -44,12 +43,6 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 		TypedQuery<Colaborator> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_BY_NAME, Colaborator.class);
 		query.setParameter("name", name);
 		return query.getResultList();
-	}
-	
-	public long getColabCountByName(String name) {
-		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_COUNT_BY_NAME, Long.class);
-		query.setParameter("name", name);
-		return query.getSingleResult();
 	}
 	
 	

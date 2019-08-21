@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -160,12 +161,20 @@ public class AccountService {
 	}
 	
 	
-	@POST
+	@GET
 	@Path("allSimsFromAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ColaboratorDTO> getAllSimsFromAccount (Account account){
-		return COLAB_B.getColabsByAccount(account);
+	public Response getAllSimsFromAccount(@QueryParam("email") String email){
+		System.out.println(email);
+		System.out.println(ACC_B.getAccCountByEmail(email));
+		if(ACC_B.getAccCountByEmail(email) == 0) {
+			return Response.status(400).entity("Account with this email doesn't exist").build();
+		} else {
+			Account account = ACC_B.getAccountByEmail(email).get(0);
+			return Response.ok(COLAB_B.getColabsByAccount(account)).build();
+		}
+		
 		
 	}
 

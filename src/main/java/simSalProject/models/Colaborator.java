@@ -41,7 +41,7 @@ public class Colaborator extends Entity_ {
 	private String dependents;
 	
 
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "colaborator")
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "colaborator", fetch = FetchType.EAGER)
 	private List<Simulation> simulations = new ArrayList<>();
 
 	public Colaborator() {

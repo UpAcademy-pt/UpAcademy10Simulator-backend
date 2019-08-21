@@ -32,10 +32,10 @@ public class Simulation extends Entity_ {
 	public static final String GET_SIM_BY_COLAB_ID = "getSimulationsByColabId";
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Colaborator colaborator;
 	
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation")
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation", fetch = FetchType.EAGER )
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
 	
 	

@@ -61,10 +61,6 @@ public class ColaboratorBusiness {
 		return COLAB_DB.getColabById(id);
 	}
 	
-	public long getColabCountByName(String name) {
-		return COLAB_DB.getColabCountByName(name);
-	}
-	
 	public long getColabCountById(long id) {
 		return COLAB_DB.getColabCountById(id);
 	}

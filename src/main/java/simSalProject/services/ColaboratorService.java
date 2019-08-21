@@ -73,7 +73,7 @@ public class ColaboratorService {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editColaborator(@PathParam("id") long id, ColaboratorDTO myColaboratorDTOToEdit) {
-		if (COLAB_B.getColabCountByName(myColaboratorDTOToEdit.getName()) == 0) {
+		if (COLAB_B.getColabCountById(myColaboratorDTOToEdit.getId()) == 0) {
 			return Response.status(404).entity("Colaborator with that name doesn't exist").build();
 		} else {
 			myColaboratorDTOToEdit.setId(id);

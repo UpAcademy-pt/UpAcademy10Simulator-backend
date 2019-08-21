@@ -31,7 +31,7 @@ public class SimFieldsData extends Entity_ {
 	public static final String ALL_SIMFIELDSDATA_VALUES = "getAllSimFieldsData";
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Simulation simulation;
 	private String name;
 	private double value;
