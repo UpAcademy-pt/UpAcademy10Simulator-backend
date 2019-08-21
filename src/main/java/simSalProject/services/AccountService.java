@@ -160,8 +160,9 @@ public class AccountService {
 	}
 	
 	
-	@GET
+	@POST
 	@Path("allSimsFromAccount")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ColaboratorDTO> getAllSimsFromAccount (Account account){
 		return COLAB_B.getColabsByAccount(account);
