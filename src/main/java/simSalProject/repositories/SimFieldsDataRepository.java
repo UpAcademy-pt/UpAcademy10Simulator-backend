@@ -7,6 +7,8 @@ import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.SimFieldsData;
+import simSalProject.models.SimFieldsDataDTO;
+import simSalProject.models.Simulation;
 
 
 @Named("SimFieldsDataRep")
@@ -22,7 +24,7 @@ public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 	@Override
 	protected String getAllValues() {
 		// TODO Auto-generated method stub
-		return null;
+		return SimFieldsData.ALL_SIMFIELDSDATA_VALUES;
 	}
 
 	@Override
@@ -30,26 +32,41 @@ public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 		// TODO Auto-generated method stub
 		return SimFieldsData.class;
 	}
-
-	public long getSimFieldsCount(String name) {
-		TypedQuery<Long> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_COUNT_BY_NAME, Long.class);
-		query.setParameter("name", name);
-		
+	
+	public long getSimFieldsDataCountById(long id) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(SimFieldsData.GET_SIMFIELDSDATA_COUNT_BY_ID, Long.class);
+		query.setParameter("id", id);
 		return query.getSingleResult();
 	}
 	
-	public List<SimFieldsData> getSimFieldsDataByName(String name) {
-		TypedQuery<SimFieldsData> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_BY_NAME, SimFieldsData.class);
-		query.setParameter("name", name);
+	public List<SimFieldsData> getSimFieldsDataById(long id) {
+		TypedQuery<SimFieldsData> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_BY_ID, SimFieldsData.class);
+		query.setParameter("id", id);
 		
 		return query.getResultList();
 	}
 	
-	public void updateSimFieldsData (List<String> names) {
+	public List<SimFieldsData> getFieldsDataBySimId(Simulation simulation){
+		TypedQuery<SimFieldsData> query = entityManager.createNamedQuery(SimFieldsData.GET_SIM_FIELDS_DATA_BY_SIM_ID, SimFieldsData.class);
+		query.setParameter("simulation", simulation);
 		
-		TypedQuery<SimFieldsData> query = entityManager.createNamedQuery(SimFieldsData.PUT_SIM_FIELDS_DATA_FROM_FIELD_NAMES, SimFieldsData.class);
-		query.executeUpdate();
+		return query.getResultList();
 	}
 	
+	
+	
+	
+	public SimFieldsDataDTO SimFieldsDataToSimFieldsDataDTO(SimFieldsData mySimFieldsData) {
+		SimFieldsDataDTO mySimFieldsDataDTO = new SimFieldsDataDTO();
+		mySimFieldsDataDTO.setId(mySimFieldsData.getId());
+		mySimFieldsDataDTO.setName(mySimFieldsData.getName());
+		mySimFieldsDataDTO.setValue(mySimFieldsData.getValue());
+		return mySimFieldsDataDTO;
+	}
+
+	public SimFieldsData SimFieldsDataDTOToSimFieldsData(SimFieldsDataDTO mySimFieldsDataDTO) {
+		SimFieldsData mySimFieldsData = getSimFieldsDataById(mySimFieldsDataDTO.getId()).get(0);
+		return mySimFieldsData;
+	}
 	
 }

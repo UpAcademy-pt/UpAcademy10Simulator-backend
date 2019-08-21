@@ -1,7 +1,6 @@
 package simSalProject.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 import simSalProject.business.SimulationBusiness;
 import simSalProject.models.SimFieldsData;
 import simSalProject.models.Simulation;
+import simSalProject.models.SimulationDTO;
 
 @Path("simulations")
 public class SimulationService {
@@ -104,7 +104,7 @@ public class SimulationService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Simulation> getAllValues() {
+	public List<SimulationDTO> getAllValues() {
 		return SIM_B.getAllValues();
 	}
 	

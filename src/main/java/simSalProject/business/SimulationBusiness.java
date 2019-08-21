@@ -1,7 +1,6 @@
 package simSalProject.business;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
@@ -10,6 +9,7 @@ import javax.inject.Named;
 
 import simSalProject.models.SimFieldsData;
 import simSalProject.models.Simulation;
+import simSalProject.models.SimulationDTO;
 import simSalProject.repositories.SimFieldsDataRepository;
 import simSalProject.repositories.SimulationRepository;
 
@@ -55,8 +55,13 @@ public class SimulationBusiness {
 		return new ArrayList<Long>(SIM_DB.allIds());
 	}
 	
-	public Collection<Simulation> getAllValues(){
-		return SIM_DB.allValues();
+	public List<SimulationDTO> getAllValues(){
+		List<SimulationDTO> simulationsDTO = new ArrayList<>();
+		List<Simulation> simulations = SIM_DB.allValues();
+		for (Simulation simulation : simulations) {
+			simulationsDTO.add(SIM_DB.SimulationToSimulationDTO(simulation));
+		}
+		return simulationsDTO ;
 	}
 	
 	public long getSimulationCountById(long id) {

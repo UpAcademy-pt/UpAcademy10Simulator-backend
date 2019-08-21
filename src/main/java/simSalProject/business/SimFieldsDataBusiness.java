@@ -1,7 +1,6 @@
 package simSalProject.business;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
@@ -9,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import simSalProject.models.SimFieldsData;
+import simSalProject.models.SimFieldsDataDTO;
 import simSalProject.repositories.SimFieldsDataRepository;
 import simSalProject.repositories.SimulationsFieldsRepository;
 
@@ -37,11 +37,10 @@ public class SimFieldsDataBusiness {
 	public String removeSimFieldsData(SimFieldsData mySimFieldsData) {
 		SIMFD_DB.removeEntity(mySimFieldsData);
 		return "Removed";
-
 	}
 
-	public List<SimFieldsData> consultSimFieldsData(String name) {
-		List<SimFieldsData> mySimulationField = SIMFD_DB.getSimFieldsDataByName(name);
+	public List<SimFieldsData> consultSimFieldsData(long id) {
+		List<SimFieldsData> mySimulationField = SIMFD_DB.getSimFieldsDataById(id);
 		return mySimulationField;
 	}
 
@@ -49,18 +48,23 @@ public class SimFieldsDataBusiness {
 		return new ArrayList<Long>(SIMFD_DB.allIds());
 	}
 
-	public Collection<SimFieldsData> getAllValues() {
-		return SIMFD_DB.allValues();
+	public List<SimFieldsDataDTO> getAllValues() {
+		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
+		List<SimFieldsData> fieldsData = SIMFD_DB.allValues();
+		for (SimFieldsData fieldData : fieldsData) {
+			fieldsDataDTO.add(SIMFD_DB.SimFieldsDataToSimFieldsDataDTO(fieldData));
+		}
+		return fieldsDataDTO;
+
 	}
 
-	public List<SimFieldsData> getSimFieldsDataByName(String name) {
+	public List<SimFieldsData> getSimFieldsDataById(long id) {
 		// TODO Auto-generated method stub
-		return SIMFD_DB.getSimFieldsDataByName(name);
+		return SIMFD_DB.getSimFieldsDataById(id);
 	}
 
-	public long getSimFieldsCount(String name) {
-
-		return SIMFD_DB.getSimFieldsCount(name);
+	public long getSimFieldsDataCountById(long id) {
+		return SIMFD_DB.getSimFieldsDataCountById(id);
 	}
 
 }

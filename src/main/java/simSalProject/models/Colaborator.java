@@ -18,8 +18,9 @@ import javax.persistence.Table;
 		@NamedQuery(name = Colaborator.ALL_COLABORATOR_VALUES, query = "SELECT c FROM Colaborator c"),
 		@NamedQuery(name = Colaborator.GET_COLABORATOR_BY_ID, query = "SELECT c FROM Colaborator c WHERE c.id = :id"),
 		@NamedQuery(name = Colaborator.GET_COLABORATOR_BY_NAME, query = "SELECT c FROM Colaborator C WHERE c.name = :name"),
-		@NamedQuery(name = Colaborator.GET_COLABORATOR_COUNT_BY_NAME, query = "SELECT count(c) FROM Colaborator C WHERE c.name = :name"),
-		@NamedQuery(name = Colaborator.GET_COLABORATOR_COUNT_BY_ID, query = "SELECT count(c) FROM Colaborator C WHERE c.id = :id")
+		@NamedQuery(name = Colaborator.GET_COLABORATOR_COUNT_BY_NAME, query = "SELECT count(c) FROM Colaborator c WHERE c.name = :name"),
+		@NamedQuery(name = Colaborator.GET_COLABORATOR_COUNT_BY_ID, query = "SELECT count(c) FROM Colaborator c WHERE c.id = :id"),
+		@NamedQuery(name = Colaborator.GET_COLABORATORS_BY_ACCOUNT_ID, query = "SELECT c FROM Colaborator c WHERE c.account = :account")
 
 })
 public class Colaborator extends Entity_ {
@@ -30,6 +31,7 @@ public class Colaborator extends Entity_ {
 	public static final String GET_COLABORATOR_COUNT_BY_ID = "getColabCountById";
 	public static final String GET_COLABORATOR_BY_NAME = "getColabByName";
 	public static final String GET_COLABORATOR_COUNT_BY_NAME = "getColabCountByName";
+	public static final String GET_COLABORATORS_BY_ACCOUNT_ID = "getColabsByAccountId";
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)

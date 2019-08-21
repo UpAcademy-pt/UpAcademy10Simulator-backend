@@ -1,13 +1,13 @@
 package simSalProject.business;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import simSalProject.models.Account;
 import simSalProject.models.Colaborator;
 import simSalProject.models.ColaboratorDTO;
 import simSalProject.repositories.ColaboratorRepository;
@@ -73,4 +73,12 @@ public class ColaboratorBusiness {
 		return COLAB_DB.getColabCountById(id);
 	}
 	
+	public List<ColaboratorDTO> getColabsByAccount (Account account) {
+		List<Colaborator> colaborators = COLAB_DB.getColabsByAccount(account);
+		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
+		for (Colaborator colaborator : colaborators) {
+			colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(colaborator));
+		}
+		return colaboratorsDTO;
+	}
 }

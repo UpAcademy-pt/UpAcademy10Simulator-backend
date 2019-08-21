@@ -18,7 +18,7 @@ import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.SimFieldsDataBusiness;
 import simSalProject.models.SimFieldsData;
-import simSalProject.models.SimulationFields;
+import simSalProject.models.SimFieldsDataDTO;
 
 @Path("simulationfieldsdataservice")
 public class SimFieldsDataService {
@@ -44,39 +44,44 @@ public class SimFieldsDataService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response manageSimFieldsData(SimFieldsData mySimFieldsData) {
-		if (SIMFD_B.getSimFieldsCount(mySimFieldsData.getName()) == 0) {
+		if (SIMFD_B.getSimFieldsDataCountById(mySimFieldsData.getId()) == 0) {
 		return Response.ok(SIMFD_B.createSimFieldsData(mySimFieldsData)).build();
 		} else {
-			SimFieldsData mySimFieldsDataToEdit = SIMFD_B.getSimFieldsDataByName(mySimFieldsData.getName()).get(0);
-			mySimFieldsData.setId(mySimFieldsDataToEdit.getId());
+			mySimFieldsData.setId(mySimFieldsData.getId());
 		return Response.ok(SIMFD_B.editSimFieldsData(mySimFieldsData)).build();
 		}
 	}
 
 	@GET
-	@Path("/{name}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultSimFieldsData(@PathParam("name") String name) {
-		if (SIMFD_B.getSimFieldsCount(name) == 0) {
+	public Response consultSimFieldsData(@PathParam("id") long id) {
+		if (SIMFD_B.getSimFieldsDataCountById(id) == 0) {
 			return Response.status(400).entity("SimFieldsData doesn't exist").build();
 		} else {
-			return Response.ok(SIMFD_B.getSimFieldsDataByName(name).get(0)).build();
+			return Response.ok(SIMFD_B.getSimFieldsDataById(id).get(0)).build();
 		}
 	}
 
 	@DELETE
-	@Path("/{name}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response removeSimFieldsData(@PathParam("name") String nameToRemove) {
-		if (SIMFD_B.getSimFieldsCount(nameToRemove) == 0) {
+	public Response removeSimFieldsData(@PathParam("id") long idToRemove) {
+		if (SIMFD_B.getSimFieldsDataCountById(idToRemove) == 0) {
 			return Response.status(400).entity("SimFieldsData doesn't exist").build();
 		} else {
-			List<SimFieldsData> simFieldsData = SIMFD_B.getSimFieldsDataByName(nameToRemove);
-			System.out.println(simFieldsData.get(0));
+			List<SimFieldsData> simFieldsData = SIMFD_B.getSimFieldsDataById(idToRemove);
 			SimFieldsData mySimFieldsData = simFieldsData.get(0);
-			System.out.println(mySimFieldsData);
 			return Response.ok(SIMFD_B.removeSimFieldsData(mySimFieldsData)).build();
 		}
+	}
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<SimFieldsDataDTO> getAllValues() {
+		return SIMFD_B.getAllValues();
 	}
 	
 	

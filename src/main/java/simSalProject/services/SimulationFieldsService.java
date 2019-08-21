@@ -1,7 +1,6 @@
 package simSalProject.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,9 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import simSalProject.business.SimFieldsDataBusiness;
 import simSalProject.business.SimulationsFieldsBusiness;
-import simSalProject.models.SimFieldsData;
 import simSalProject.models.SimulationFields;
 
 @Path("simulationfields")

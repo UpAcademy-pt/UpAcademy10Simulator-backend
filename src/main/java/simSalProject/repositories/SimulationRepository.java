@@ -1,12 +1,15 @@
 package simSalProject.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
+import simSalProject.models.Colaborator;
 import simSalProject.models.Simulation;
+import simSalProject.models.SimulationDTO;
 
 @Named("SimRep")
 @RequestScoped
@@ -42,6 +45,34 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 	public Class<Simulation> getEntityClass(){
 		return Simulation.class;
 	}
+	
+	public SimulationDTO SimulationToSimulationDTO(Simulation mySimulation) {
+		SimulationDTO mySimulationDTO = new SimulationDTO();
+		mySimulationDTO.setId(mySimulation.getId());
+		mySimulationDTO.setSimFieldsData(mySimulation.getSimFieldsData());
+		return mySimulationDTO;
+	}
+
+	public Simulation SimulationDTOToSimulation(SimulationDTO mySimulationDTO) {
+		Simulation mySimulation = getSimulationById(mySimulationDTO.getId()).get(0);
+		return mySimulation;
+	}
+	
+	
+	public List<SimulationDTO> getSimulationsByColabId(Colaborator colaborator){
+		TypedQuery<Simulation> query = entityManager.createNamedQuery(Simulation.GET_SIM_BY_COLAB_ID, Simulation.class);
+		query.setParameter("colaborator", colaborator);
+		List<Simulation> simulations = query.getResultList();
+		List<SimulationDTO> simulationsDTO = new ArrayList<SimulationDTO>();
+		for (Simulation simulation : simulations) {
+			simulationsDTO.add(SimulationToSimulationDTO(simulation));
+		}
+		return simulationsDTO; 
+	}
+		
+		
+		
+	
 
 	
 	

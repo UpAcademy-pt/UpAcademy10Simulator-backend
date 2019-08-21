@@ -30,11 +30,11 @@ public class AccountRepository extends EntityRepository<Account> {
 		return Account.ALL_ACC_VALUES;
 	}
 
-	public Account getAccountById(long id) {
+	public List<Account> getAccountById(long id) {
 		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_ACC_BY_ID, Account.class);
 		query.setParameter("id", id);
 
-		return query.getSingleResult();
+		return query.getResultList();
 	}
 
 	public long getAccCountByEmail(String email) {
@@ -124,9 +124,7 @@ public class AccountRepository extends EntityRepository<Account> {
 	}
 
 	public Account accountDTOToAccount(AccountDTO myAccountDTO) {
-		long id = myAccountDTO.getId();
-		Account myAccount = getAccountById(id);
-
+		Account myAccount = getAccountById(myAccountDTO.getId()).get(0);
 		return myAccount;
 
 	}

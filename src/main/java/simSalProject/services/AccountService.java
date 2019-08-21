@@ -19,8 +19,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.AccountBusiness;
+import simSalProject.business.ColaboratorBusiness;
 import simSalProject.models.Account;
 import simSalProject.models.AccountDTO;
+import simSalProject.models.ColaboratorDTO;
 
 @Path("accounts")
 public class AccountService {
@@ -39,6 +41,10 @@ public class AccountService {
 	@Named("AccBus")
 	AccountBusiness ACC_B;
 
+	@Inject
+	@Named("ColabBus")
+	ColaboratorBusiness COLAB_B;
+	
 	@GET
 	@Path("initDatabase")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -151,6 +157,15 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AccountDTO> getAllValues() {
 		return ACC_B.getAllValues();
+	}
+	
+	
+	@GET
+	@Path("allSimsFromAccount")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ColaboratorDTO> getAllSimsFromAccount (Account account){
+		return COLAB_B.getColabsByAccount(account);
+		
 	}
 
 }

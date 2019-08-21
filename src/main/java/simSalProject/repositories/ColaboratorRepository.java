@@ -1,13 +1,13 @@
 package simSalProject.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
-import simSalProject.models.Colaborator;
-import simSalProject.models.ColaboratorDTO;
+import simSalProject.models.Account;
 import simSalProject.models.Colaborator;
 import simSalProject.models.ColaboratorDTO;
 
@@ -43,14 +43,12 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 	public List<Colaborator> getColabByName (String name){
 		TypedQuery<Colaborator> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_BY_NAME, Colaborator.class);
 		query.setParameter("name", name);
-		
 		return query.getResultList();
 	}
 	
 	public long getColabCountByName(String name) {
 		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATOR_COUNT_BY_NAME, Long.class);
 		query.setParameter("name", name);
-		
 		return query.getSingleResult();
 	}
 	
@@ -66,14 +64,20 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 		myColaboratorDTO.setName(myColaborator.getName());
 		myColaboratorDTO.setDependents(myColaborator.getDependents());
 		myColaboratorDTO.setStatus(myColaborator.getStatus());
+		myColaboratorDTO.setSimulations(myColaborator.getSimulations());
 		return myColaboratorDTO;
 	}
 
 	public Colaborator ColaboratorDTOToColaborator(ColaboratorDTO myColaboratorDTO) {
-		long id = myColaboratorDTO.getId();
-		Colaborator myColaborator = getColabById(id).get(0);
-
+		Colaborator myColaborator = getColabById(myColaboratorDTO.getId()).get(0);
 		return myColaborator;
-
 	}
+	
+	
+	public List<Colaborator> getColabsByAccount(Account account) {
+		TypedQuery<Colaborator> query = entityManager.createNamedQuery(Colaborator.GET_COLABORATORS_BY_ACCOUNT_ID, Colaborator.class);
+		query.setParameter("account", account);
+		return query.getResultList();
+	}
+	
 }
