@@ -97,7 +97,7 @@ public class AccountBusiness {
 
 	public List<AccountDTO> getAllValues() {
 		List<Account> accounts = ACC_DB.allValues();
-		List<AccountDTO> accountsDTO = accountToAccountDTO(accounts);
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
 		for (Account account : accounts) {
 			if(account.getAccountRole() == Account.AccountRole.USER) {
 				accountsDTO.add(ACC_DB.accountToAccountDTO(account));
