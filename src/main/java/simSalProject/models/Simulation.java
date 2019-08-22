@@ -35,7 +35,7 @@ public class Simulation extends Entity_ {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Colaborator colaborator;
 	
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "simulation", fetch = FetchType.EAGER )
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST , CascadeType.}, mappedBy = "simulation", fetch = FetchType.EAGER )
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
 	
 	

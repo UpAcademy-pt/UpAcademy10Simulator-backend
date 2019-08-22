@@ -13,7 +13,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -53,13 +52,18 @@ public class SimulationService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createSimulation(@PathParam("id") long colabId, List<SimFieldsData> mySimulation ) {
-		Colaborator colaborator = COLAB_B.getColabById(colabId).get(0);
-		SimulationDTO simulationDTO = SIM_B.createSimulation(colaborator, mySimulation);
-		if (simulationDTO != null) {
-			return Response.ok(simulationDTO).build();
+		if(COLAB_B.getColabCountById(colabId) != 0) {
+			Colaborator colaborator = COLAB_B.getColabById(colabId).get(0);
+			SimulationDTO simulationDTO = SIM_B.createSimulation(colaborator, mySimulation);
+			if (simulationDTO != null) {
+				return Response.ok(simulationDTO).build();
+			} else {
+				return Response.status(400).entity("Simulação não criada").build();
+			}
 		} else {
-			return Response.status(400).entity("Simulação não criada").build();
+			return Response.status(404).entity("Colaborator with that id doesn't exist").build();
 		}
+		
 	}
 
 	@GET
@@ -99,7 +103,6 @@ public class SimulationService {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
 			Simulation mySimulationToRemove = SIM_B.consultSimulation(idToRemove);
-			mySimulationToRemove.setId(idToRemove);
 			SIM_B.removeSimulation(mySimulationToRemove);
 			return Response.ok("Remove successful").build();
 		}
@@ -119,11 +122,11 @@ public class SimulationService {
 	}
 	
 	@GET
-	@Path("allSimsFromColab")
+	@Path("allSimsFromColab/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  List<SimulationDTO> getSimulationByColabId(@QueryParam("id")long id) {
+	public  List<SimulationDTO> getSimulationByColabId(@PathParam("id")long id) {
 		Colaborator colaborator = COLAB_B.getColabById(id).get(0);
-		return SIM_B.getSimulationByColabId(colaborator);
+		return SIM_B.getSimulationByColab(colaborator);
 	}
 	
 }

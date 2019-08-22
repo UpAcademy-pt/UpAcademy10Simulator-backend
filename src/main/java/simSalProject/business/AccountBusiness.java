@@ -23,6 +23,10 @@ public class AccountBusiness {
 	@Inject
 	@Named("AccRep")
 	AccountRepository ACC_DB;
+	
+	@Inject
+	@Named("ColabBus") 
+	ColaboratorBusiness COLAB_B;
 
 	public String createAccount(AccountDTO myAccountDTO) {
 		if (!isEmailValid(myAccountDTO.getEmail())) {
@@ -76,7 +80,6 @@ public class AccountBusiness {
 
 	public void editAccount(Account myAccountToEdit) {
 		if (myAccountToEdit.getAccountRole() == AccountRole.ADMIN) return;
-		
 		ACC_DB.editEntity(myAccountToEdit);
 	}
 
@@ -94,7 +97,7 @@ public class AccountBusiness {
 
 	public List<AccountDTO> getAllValues() {
 		List<Account> accounts = ACC_DB.allValues();
-		List<AccountDTO> accountsDTO = new ArrayList<>();
+		List<AccountDTO> accountsDTO = accountToAccountDTO(accounts);
 		for (Account account : accounts) {
 			if(account.getAccountRole() == Account.AccountRole.USER) {
 				AccountDTO accountDTO = ACC_DB.accountToAccountDTO(account);
@@ -125,7 +128,7 @@ public class AccountBusiness {
 
 	public AccountDTO login(Account myAccount) {
 		List<Account> accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
-		AccountDTO myAccountDTO = new AccountDTO();
+		AccountDTO myAccountDTO = ACC_DB.accountToAccountDTO(myAccount);
 		if (myAccount.getPassword() == null) {
 			myAccountDTO.setMessage("You have to write the password!");
 			return myAccountDTO;
@@ -146,9 +149,7 @@ public class AccountBusiness {
 				
 				myAccountDTO.setEmail(myAccount.getEmail());
 				myAccountDTO.setId(accountInDB.get(0).getId());
-				System.out.println(accountInDB.get(0).getAccountRole());
 				if (accountInDB.get(0).getAccountRole() == Account.AccountRole.ADMIN) {
-					System.out.println("entrei");
 					myAccountDTO.setAccountRole(Account.AccountRole.ADMIN.toString());
 				} 
 				else {
@@ -187,6 +188,26 @@ public class AccountBusiness {
 	
 	public List<Account> getAccountByEmail (String email){
 		return ACC_DB.getAccountByEmail(email);
+	}
+	
+	public List<AccountDTO> accountToAccountDTO(List<Account> accounts){
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
+		for (Account account : accounts) {
+			accountsDTO.add(accountToAccountDTO(account));
+		}
+		return accountsDTO;
+	}
+	
+	public AccountDTO accountToAccountDTO(Account myAccount) {
+		AccountDTO myAccountDTO = ACC_DB.accountToAccountDTO(myAccount);
+		myAccountDTO.setColaboratorsDTO(COLAB_B.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
+		return myAccountDTO;
+	}
+
+	public Account accountDTOToAccount(AccountDTO myAccountDTO) {
+		Account myAccount = ACC_DB.getAccountById(myAccountDTO.getId()).get(0);
+		return myAccount;
+
 	}
 	
 }

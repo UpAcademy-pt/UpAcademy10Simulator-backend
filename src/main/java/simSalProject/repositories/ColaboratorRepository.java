@@ -54,10 +54,6 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 	public ColaboratorDTO ColaboratorToColaboratorDTO(Colaborator myColaborator) {
 		ColaboratorDTO myColaboratorDTO = new ColaboratorDTO();
 		myColaboratorDTO.setId(myColaborator.getId());
-		myColaboratorDTO.setName(myColaborator.getName());
-		myColaboratorDTO.setDependents(myColaborator.getDependents());
-		myColaboratorDTO.setStatus(myColaborator.getStatus());
-		myColaboratorDTO.setSimulations(myColaborator.getSimulations());
 		return myColaboratorDTO;
 	}
 

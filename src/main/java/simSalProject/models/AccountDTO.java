@@ -12,19 +12,19 @@ public class AccountDTO {
 	private String accountRole;
 	private String message;
 	
-	private List<Colaborator> colaborators = new ArrayList<>();
+	private List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
 	
 	
 	public AccountDTO() {
 		super();
 	}
 
-	public List<Colaborator> getColaborators() {
-		return colaborators;
+	public List<ColaboratorDTO> getColaboratorsDTO() {
+		return colaboratorsDTO;
 	}
 
-	public void setColaborators(List<Colaborator> colaborators) {
-		this.colaborators = colaborators;
+	public void setColaboratorsDTO(List<ColaboratorDTO> colaboratorsDTO) {
+		this.colaboratorsDTO = colaboratorsDTO;
 	}
 
 	public String getName() {
