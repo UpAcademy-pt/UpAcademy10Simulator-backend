@@ -100,8 +100,7 @@ public class AccountBusiness {
 		List<AccountDTO> accountsDTO = accountToAccountDTO(accounts);
 		for (Account account : accounts) {
 			if(account.getAccountRole() == Account.AccountRole.USER) {
-				AccountDTO accountDTO = ACC_DB.accountToAccountDTO(account);
-				accountsDTO.add(accountDTO);
+				accountsDTO.add(ACC_DB.accountToAccountDTO(account));
 			}
 		}
 		return accountsDTO;
