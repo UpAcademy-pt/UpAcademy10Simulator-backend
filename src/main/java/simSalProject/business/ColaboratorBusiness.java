@@ -43,6 +43,8 @@ public class ColaboratorBusiness {
 	}
 
 	public String removeColaborator(Colaborator myColaborator) {
+		myColaborator.setAccount(null);
+		COLAB_DB.editEntity(myColaborator);
 		COLAB_DB.removeEntity(myColaborator);
 		return "Colaborator Removed";
 	}

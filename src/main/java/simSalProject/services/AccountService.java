@@ -142,7 +142,13 @@ public class AccountService {
 			List<Account> accounts = ACC_B.getAccountByEmail(emailToRemove);
 			Account myAccount = accounts.get(0);
 			myAccount.setId(myAccount.getId());
-			return Response.ok(ACC_B.removeAccount(myAccount)).build();
+			String msg = ACC_B.removeAccount(myAccount);
+			if(msg == "Account Removed" ) {
+				return Response.ok(msg).build();
+			} else {
+				return Response.status(400).entity(msg).build();
+			}
+			
 		}
 	}
 

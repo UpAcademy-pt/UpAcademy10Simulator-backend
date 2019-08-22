@@ -1,6 +1,5 @@
 package simSalProject.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;

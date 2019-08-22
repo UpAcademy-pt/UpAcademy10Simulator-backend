@@ -50,6 +50,8 @@ public class SimulationBusiness {
 	}
 	
 	public void removeSimulation(Simulation mySimulation) {
+		mySimulation.setColaborator(null);
+		simulationRepository.editEntity(mySimulation);
 		simulationRepository.removeEntity(mySimulation);
 	}
 	

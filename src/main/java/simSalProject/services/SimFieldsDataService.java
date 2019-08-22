@@ -77,7 +77,6 @@ public class SimFieldsDataService {
 	}
 	
 	
-	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SimFieldsDataDTO> getAllValues() {

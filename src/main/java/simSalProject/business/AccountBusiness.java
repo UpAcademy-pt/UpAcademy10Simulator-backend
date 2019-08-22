@@ -14,6 +14,7 @@ import simSalProject.Utils.SendMail;
 import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
 import simSalProject.models.AccountDTO;
+import simSalProject.models.Colaborator;
 import simSalProject.repositories.AccountRepository;
 
 @Named("AccBus")
@@ -85,10 +86,20 @@ public class AccountBusiness {
 
 	public String removeAccount(Account myAccount) {
 		if (myAccount.getAccountRole() != AccountRole.ADMIN) {
+			List<Colaborator> colaborators = myAccount.getColaborators();
+			for (Colaborator colaborator : colaborators) {
+				colaborator.setAccount(null);
+				COLAB_B.editColaborator(COLAB_B.ColaboratorToColaboratorDTO(colaborator));
+				COLAB_B.removeColaborator(colaborator);
+			}
+			myAccount.setColaborators(null);
+			ACC_DB.editEntity(myAccount);
 			ACC_DB.removeEntity(myAccount);
 			return "Account Removed";
+		} else {
+			return "ADMIN não pode ser removido";
 		}
-		return null;
+		
 	}
 
 	public List<Long> getAllIds() {

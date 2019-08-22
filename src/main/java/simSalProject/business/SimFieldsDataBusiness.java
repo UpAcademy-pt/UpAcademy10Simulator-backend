@@ -35,6 +35,8 @@ public class SimFieldsDataBusiness {
 	}
 
 	public String removeSimFieldsData(SimFieldsData mySimFieldsData) {
+		mySimFieldsData.setSimulation(null);
+		editSimFieldsData(mySimFieldsData);
 		SIMFD_DB.removeEntity(mySimFieldsData);
 		return "Removed";
 	}
@@ -42,10 +44,6 @@ public class SimFieldsDataBusiness {
 	public List<SimFieldsData> consultSimFieldsData(long id) {
 		List<SimFieldsData> mySimulationField = SIMFD_DB.getSimFieldsDataById(id);
 		return mySimulationField;
-	}
-
-	public List<Long> getAllIds() {
-		return new ArrayList<Long>(SIMFD_DB.allIds());
 	}
 
 	public List<SimFieldsDataDTO> getAllValues() {
