@@ -32,8 +32,7 @@ public class ColaboratorBusiness {
 	}
 
 	public ColaboratorDTO consultColaborator(long id) {
-		Colaborator myColaborator = COLAB_DB.consultEntity(id);
-		return COLAB_DB.ColaboratorToColaboratorDTO(myColaborator);
+		return COLAB_DB.ColaboratorToColaboratorDTO(COLAB_DB.consultEntity(id));
 	}
 
 	public String editColaborator(ColaboratorDTO myColaboratorDTOToEdit) {

@@ -41,9 +41,8 @@ public class SimFieldsDataBusiness {
 		return "Removed";
 	}
 
-	public List<SimFieldsData> consultSimFieldsData(long id) {
-		List<SimFieldsData> mySimulationField = SIMFD_DB.getSimFieldsDataById(id);
-		return mySimulationField;
+	public List<SimFieldsDataDTO> consultSimFieldsData(long id) { 
+		return SimFieldsDataToSimFieldsDataDTO(SIMFD_DB.getSimFieldsDataById(id));
 	}
 
 	public List<SimFieldsDataDTO> getAllValues() {
