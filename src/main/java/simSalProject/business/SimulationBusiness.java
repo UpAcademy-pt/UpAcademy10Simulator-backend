@@ -9,9 +9,9 @@ import javax.inject.Named;
 
 import simSalProject.models.Colaborator;
 import simSalProject.models.SimFieldsData;
+import simSalProject.models.SimFieldsDataDTO;
 import simSalProject.models.Simulation;
 import simSalProject.models.SimulationDTO;
-import simSalProject.repositories.SimFieldsDataRepository;
 import simSalProject.repositories.SimulationRepository;
 
 @Named("SimBus")
@@ -24,8 +24,8 @@ public class SimulationBusiness {
 	SimulationRepository simulationRepository;
 	
 	@Inject
-	@Named("SimFieldsDataRep")
-	SimFieldsDataRepository simFieldsDataRepository;
+	@Named("SimFieldsDataBus")
+	SimFieldsDataBusiness simFieldsDataBusiness;
 	
 	
 	public SimulationDTO createSimulation(Colaborator colaborator, List<SimFieldsData> myFieldsData) {
@@ -35,11 +35,9 @@ public class SimulationBusiness {
 		Simulation simulation = simulationRepository.createEntity(mySimulation);
 		for (SimFieldsData fieldData : myFieldsData) {
 			fieldData.setSimulation(simulation);
-			simFieldsDataRepository.editEntity(fieldData);
+			simFieldsDataBusiness.editSimFieldsData(fieldData);
 		}
-		SimulationDTO simulationDTO = simulationRepository.SimulationToSimulationDTO(simulationRepository.getSimulationById(simulation.getId()).get(0));
-		simulationDTO.setSimFieldsData(simFieldsDataRepository.SimFieldsDataToSimFieldsDataDTO(myFieldsData));
-		return simulationDTO;
+		return SimulationToSimulationDTO(simulation);
 	}
 	
 	public Simulation consultSimulation(long id) {
@@ -60,12 +58,8 @@ public class SimulationBusiness {
 	}
 	
 	public List<SimulationDTO> getAllValues(){
-		List<SimulationDTO> simulationsDTO = new ArrayList<>();
 		List<Simulation> simulations = simulationRepository.allValues();
-		for (Simulation simulation : simulations) {
-			simulationsDTO.add(simulationRepository.SimulationToSimulationDTO(simulation));
-		}
-		return simulationsDTO ;
+		return SimulationToSimulationDTO(simulations); 
 	}
 	
 	public long getSimulationCountById(long id) {
@@ -76,13 +70,38 @@ public class SimulationBusiness {
 		return simulationRepository.getSimulationById(id);
 	}
 	
-	public List<SimulationDTO> getSimulationByColabId(Colaborator colaborator) {
-		List<Simulation> simulations = simulationRepository.getSimulationsByColabId(colaborator);
+	public List<SimulationDTO> getSimulationByColab(Colaborator colaborator) {
+		List<Simulation> simulations = simulationRepository.getSimulationsByColab(colaborator);
+		return SimulationToSimulationDTO(simulations); 
+	}
+	
+	
+	public List<SimulationDTO> SimulationToSimulationDTO(List<Simulation> simulations){
 		List<SimulationDTO> simulationsDTO = new ArrayList<SimulationDTO>();
 		for (Simulation simulation : simulations) {
-			simulationsDTO.add(simulationRepository.SimulationToSimulationDTO(simulation));
+			simulationsDTO.add(SimulationToSimulationDTO(simulation));
 		}
-		return simulationsDTO; 
+		return simulationsDTO;
 	}
+	
+	//Simulation to DTO - Transforms simulation into DTO and calls method to transform Array of fieldsData to fieldsDataDTO
+	public SimulationDTO SimulationToSimulationDTO(Simulation mySimulation) {
+		SimulationDTO mySimulationDTO = simulationRepository.SimulationToSimulationDTO(mySimulation);
+		mySimulationDTO.setId(mySimulation.getId());
+		List<SimFieldsData> fieldsData = mySimulation.getSimFieldsData();
+		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
+		for (SimFieldsData fieldData : fieldsData) {
+			fieldsDataDTO.add(simFieldsDataBusiness.SimFieldsDataToSimFieldsDataDTO(fieldData));
+		}
+		mySimulationDTO.setSimFieldsData(fieldsDataDTO);
+		return mySimulationDTO;
+	}
+	
+
+	public Simulation SimulationDTOToSimulation(SimulationDTO mySimulationDTO) {
+		Simulation mySimulation = getSimulationById(mySimulationDTO.getId()).get(0);
+		return mySimulation;
+	}
+	
 	
 }

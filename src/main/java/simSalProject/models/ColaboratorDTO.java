@@ -10,7 +10,7 @@ public class ColaboratorDTO {
 	private String status;
 	private String dependents;
 	
-	private List<Simulation> simulations = new ArrayList<>();
+	private List<SimulationDTO> simulations = new ArrayList<SimulationDTO>();
 	
 	
 	public ColaboratorDTO() {
@@ -40,10 +40,10 @@ public class ColaboratorDTO {
 	public void setDependents(String dependents) {
 		this.dependents = dependents;
 	}
-	public List<Simulation> getSimulations() {
+	public List<SimulationDTO> getSimulations() {
 		return simulations;
 	}
-	public void setSimulations(List<Simulation> simulations) {
+	public void setSimulations(List<SimulationDTO> simulations) {
 		this.simulations = simulations;
 	}
 	

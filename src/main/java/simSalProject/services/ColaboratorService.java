@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import simSalProject.business.ColaboratorBusiness;
+import simSalProject.business.SimulationBusiness;
 import simSalProject.models.Colaborator;
 import simSalProject.models.ColaboratorDTO;
 
@@ -41,6 +42,10 @@ public class ColaboratorService {
 	@Inject
 	@Named("ColabBus")
 	ColaboratorBusiness COLAB_B;
+	
+	@Inject
+	@Named("SimBus")
+	SimulationBusiness SIM_B;
 	
 	
 	@GET

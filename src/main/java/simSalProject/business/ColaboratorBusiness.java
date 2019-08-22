@@ -19,6 +19,10 @@ public class ColaboratorBusiness {
 	@Inject
 	@Named("ColabRep")
 	ColaboratorRepository COLAB_DB;
+	
+	@Inject
+	@Named("SimBus") 
+	SimulationBusiness SIM_B;
 
 	public List<ColaboratorDTO> createColaborator(Colaborator myColaborator) {
 		COLAB_DB.createEntity(myColaborator);
@@ -29,7 +33,6 @@ public class ColaboratorBusiness {
 
 	public ColaboratorDTO consultColaborator(long id) {
 		Colaborator myColaborator = COLAB_DB.consultEntity(id);
-		
 		return COLAB_DB.ColaboratorToColaboratorDTO(myColaborator);
 	}
 
@@ -49,12 +52,7 @@ public class ColaboratorBusiness {
 	}
 
 	public List<ColaboratorDTO> getAllValues() {
-		List<Colaborator> colaborators = COLAB_DB.allValues();
-		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
-		for (Colaborator colaborator : colaborators) {
-			colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(colaborator));
-		}
-		return colaboratorsDTO;
+		return ColaboratorToColaboratorDTO(COLAB_DB.allValues());
 	}
 	
 	public List<Colaborator> getColabById(long id) {
@@ -66,11 +64,29 @@ public class ColaboratorBusiness {
 	}
 	
 	public List<ColaboratorDTO> getColabsByAccount (Account account) {
-		List<Colaborator> colaborators = COLAB_DB.getColabsByAccount(account);
+		return ColaboratorToColaboratorDTO(COLAB_DB.getColabsByAccount(account));
+	}
+	
+	
+	public List<ColaboratorDTO> ColaboratorToColaboratorDTO(List<Colaborator> colaborators){
 		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
 		for (Colaborator colaborator : colaborators) {
-			colaboratorsDTO.add(COLAB_DB.ColaboratorToColaboratorDTO(colaborator));
+			colaboratorsDTO.add(ColaboratorToColaboratorDTO(colaborator));
 		}
 		return colaboratorsDTO;
+	}
+	
+	public ColaboratorDTO ColaboratorToColaboratorDTO(Colaborator myColaborator) {
+		ColaboratorDTO myColaboratorDTO = COLAB_DB.ColaboratorToColaboratorDTO(myColaborator);
+		myColaboratorDTO.setName(myColaborator.getName());
+		myColaboratorDTO.setDependents(myColaborator.getDependents());
+		myColaboratorDTO.setStatus(myColaborator.getStatus());
+		myColaboratorDTO.setSimulations(SIM_B.SimulationToSimulationDTO(myColaborator.getSimulations()));
+		return myColaboratorDTO;
+	}
+
+	public Colaborator ColaboratorDTOToColaborator(ColaboratorDTO myColaboratorDTO) {
+		Colaborator myColaborator = getColabById(myColaboratorDTO.getId()).get(0);
+		return myColaborator;
 	}
 }

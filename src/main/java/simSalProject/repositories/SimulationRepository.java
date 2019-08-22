@@ -45,6 +45,8 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 		return Simulation.class;
 	}
 	
+	
+	
 	public SimulationDTO SimulationToSimulationDTO(Simulation mySimulation) {
 		SimulationDTO mySimulationDTO = new SimulationDTO();
 		mySimulationDTO.setId(mySimulation.getId());
@@ -57,7 +59,7 @@ public class SimulationRepository extends EntityRepository<Simulation> {
 	}
 	
 	
-	public List<Simulation> getSimulationsByColabId(Colaborator colaborator){
+	public List<Simulation> getSimulationsByColab(Colaborator colaborator){
 		TypedQuery<Simulation> query = entityManager.createNamedQuery(Simulation.GET_SIM_BY_COLAB_ID, Simulation.class);
 		query.setParameter("colaborator", colaborator);
 		return query.getResultList();

@@ -60,18 +60,10 @@ public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 	public SimFieldsDataDTO SimFieldsDataToSimFieldsDataDTO(SimFieldsData mySimFieldsData) {
 		SimFieldsDataDTO mySimFieldsDataDTO = new SimFieldsDataDTO();
 		mySimFieldsDataDTO.setId(mySimFieldsData.getId());
-		mySimFieldsDataDTO.setName(mySimFieldsData.getName());
-		mySimFieldsDataDTO.setValue(mySimFieldsData.getValue());
 		return mySimFieldsDataDTO;
 	}
 	
-	public List<SimFieldsDataDTO> SimFieldsDataToSimFieldsDataDTO(List<SimFieldsData> fieldsData){
-		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
-		for (SimFieldsData fieldData : fieldsData) {
-			fieldsDataDTO.add(SimFieldsDataToSimFieldsDataDTO(fieldData));
-		}
-		return fieldsDataDTO;
-	}
+	
 
 	public SimFieldsData SimFieldsDataDTOToSimFieldsData(SimFieldsDataDTO mySimFieldsDataDTO) {
 		SimFieldsData mySimFieldsData = getSimFieldsDataById(mySimFieldsDataDTO.getId()).get(0);

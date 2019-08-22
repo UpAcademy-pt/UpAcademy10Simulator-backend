@@ -51,9 +51,7 @@ public class SimFieldsDataBusiness {
 	public List<SimFieldsDataDTO> getAllValues() {
 		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
 		List<SimFieldsData> fieldsData = SIMFD_DB.allValues();
-		for (SimFieldsData fieldData : fieldsData) {
-			fieldsDataDTO.add(SIMFD_DB.SimFieldsDataToSimFieldsDataDTO(fieldData));
-		}
+		SimFieldsDataToSimFieldsDataDTO(fieldsData);
 		return fieldsDataDTO;
 
 	}
@@ -70,9 +68,22 @@ public class SimFieldsDataBusiness {
 	public List<SimFieldsDataDTO> SimFieldsDataToSimFieldsDataDTO(List<SimFieldsData> fieldsData){
 		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
 		for (SimFieldsData fieldData : fieldsData) {
-			fieldsDataDTO.add(SIMFD_DB.SimFieldsDataToSimFieldsDataDTO(fieldData));
+			fieldsDataDTO.add(SimFieldsDataToSimFieldsDataDTO(fieldData));
 		}
 		return fieldsDataDTO;
+	}
+	
+	public SimFieldsDataDTO SimFieldsDataToSimFieldsDataDTO(SimFieldsData mySimFieldsData) {
+		SimFieldsDataDTO mySimFieldsDataDTO = SIMFD_DB.SimFieldsDataToSimFieldsDataDTO(mySimFieldsData);
+		mySimFieldsDataDTO.setName(mySimFieldsData.getName());
+		mySimFieldsDataDTO.setValue(mySimFieldsData.getValue());
+		return mySimFieldsDataDTO;
+	}
+	
+	
+	public SimFieldsData SimFieldsDataDTOToSimFieldsData(SimFieldsDataDTO mySimFieldsDataDTO) {
+		SimFieldsData mySimFieldsData = getSimFieldsDataById(mySimFieldsDataDTO.getId()).get(0);
+		return mySimFieldsData;
 	}
 
 }
