@@ -38,7 +38,7 @@ public class WorkInsuranceRepository extends EntityRepository<WorkInsurance> {
 	public void setWorkInsuranceVariable(WorkInsurance newValue) {
 		Query query = entityManager.createQuery("DELETE FROM WorkInsurance w");
 		query.executeUpdate();
-		entityManager.persist(newValue);
+		entityManager.merge(newValue);
 	}
 
 }
