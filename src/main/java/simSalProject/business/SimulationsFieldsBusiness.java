@@ -98,7 +98,7 @@ public class SimulationsFieldsBusiness {
 		return new ArrayList<Long>(SIMF_DB.allIds());
 	}
 	
-	public Collection<SimulationFields> getAllValues() {
+	public List<SimulationFields> getAllValues() {
 		return SIMF_DB.allValues();
 	}
 

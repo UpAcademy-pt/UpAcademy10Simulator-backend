@@ -34,14 +34,14 @@ public class Colaborator extends Entity_ {
 	public static final String GET_COLABORATORS_BY_ACCOUNT_ID = "getColabsByAccountId";
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private Account account;
 	private String name;
 	private String status;
 	private String dependents;
 	
 
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "colaborator", fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "colaborator", fetch = FetchType.EAGER)
 	private List<Simulation> simulations = new ArrayList<>();
 
 	public Colaborator() {

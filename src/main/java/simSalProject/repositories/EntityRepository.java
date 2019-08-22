@@ -34,6 +34,7 @@ public abstract class EntityRepository<T extends Entity_> {
 	}
 	
 	public void removeEntity(T entity) {
+		System.out.println("Entrou no remove");
 		T managedEntity = entityManager.find(getEntityClass(), entity.getId());
 		entityManager.remove(managedEntity);
 	}
