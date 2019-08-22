@@ -1,5 +1,6 @@
 package simSalProject.models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +39,7 @@ public class Simulation extends Entity_ {
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "simulation", fetch = FetchType.EAGER)
 	private List<SimFieldsData> simFieldsData = new ArrayList<>();
 	
-	
-	private Date date;
-	
+	private LocalDateTime localDateTime;
 	public Simulation() {
 		super();
 	}
@@ -61,13 +60,15 @@ public class Simulation extends Entity_ {
 		this.simFieldsData = simFieldsData;
 	}
 
-	public Date getDate() {
-		return date;
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = LocalDateTime.now();
 	}
+
+	
 
 
 	

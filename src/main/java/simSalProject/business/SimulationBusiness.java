@@ -1,5 +1,7 @@
 package simSalProject.business;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class SimulationBusiness {
 	public SimulationDTO createSimulation(Colaborator colaborator, List<SimFieldsData> myFieldsData) {
 		Simulation mySimulation = new Simulation();
 		mySimulation.setColaborator(colaborator);
+		mySimulation.setLocalDateTime(LocalDateTime.now());
 		mySimulation.setSimFieldsData(myFieldsData);
 		Simulation simulation = simulationRepository.createEntity(mySimulation);
 		for (SimFieldsData fieldData : myFieldsData) {
@@ -90,12 +93,13 @@ public class SimulationBusiness {
 	public SimulationDTO SimulationToSimulationDTO(Simulation mySimulation) {
 		SimulationDTO mySimulationDTO = simulationRepository.SimulationToSimulationDTO(mySimulation);
 		mySimulationDTO.setId(mySimulation.getId());
+		mySimulationDTO.setDate(mySimulation.getLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		List<SimFieldsData> fieldsData = mySimulation.getSimFieldsData();
 		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
 		for (SimFieldsData fieldData : fieldsData) {
 			fieldsDataDTO.add(simFieldsDataBusiness.SimFieldsDataToSimFieldsDataDTO(fieldData));
 		}
-		mySimulationDTO.setSimFieldsData(fieldsDataDTO);
+		mySimulationDTO.setSimFieldsDataDTO(fieldsDataDTO);
 		return mySimulationDTO;
 	}
 	

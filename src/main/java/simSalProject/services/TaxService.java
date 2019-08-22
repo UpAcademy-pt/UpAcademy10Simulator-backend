@@ -1,5 +1,7 @@
 package simSalProject.services;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
@@ -59,19 +61,21 @@ public class TaxService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createTax(Tax myTax) {
-		if(TAX_B.createTax(myTax).size() > 0) {
-			return Response.ok(myTax).build();
-		} else {
-			return Response.status(400).entity("Tax wasn't created").build();
+	public Response createTax(List<Tax> taxes) {
+		for (Tax tax : taxes) {
+			if(TAX_B.createTax(tax).size() > 0) {
+				return Response.ok(tax).build();
+			} else {
+				return Response.status(400).entity("Tax wasn't created").build();
+			}	
 		}
+		return null;
 	}
 	
 	@PUT
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editTax(@PathParam("name") String name) {
-		
 		if (TAX_B.getTaxCountByName(name) == 0) {
 			return Response.status(404).entity("Tax with that name doesn't exist").build();
 		} else {
