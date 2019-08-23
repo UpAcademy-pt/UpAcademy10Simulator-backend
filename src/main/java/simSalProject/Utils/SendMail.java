@@ -15,9 +15,9 @@ public class SendMail {
 
 		public static void sendMail(String email, String randomPassword) throws IOException {
 		    Email from = new Email("simuladorsalarial@gmail.com");
-		    String subject = "Sending with Twilio SendGrid is Fun";
+		    String subject = "Bem vindo ao Simulador Salarial da Aubay";
 		    Email to = new Email(email);
-		    Content content = new Content("text/plain", "and easy to do anywhere, even with Java. A sua password é: " + randomPassword);
+		    Content content = new Content("text/plain", "Neste momento poderá aceder à plataforma de cálculo salarial da Aubay \n. A sua password é: " + randomPassword + "\n\n\n Aubaygrado!");
 		    Mail mail = new Mail(from, subject, to, content);
 
 		    SendGrid sg = new SendGrid(System.getProperty("SGKey"));
