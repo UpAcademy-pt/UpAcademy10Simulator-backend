@@ -25,8 +25,11 @@ public class AccountBusiness {
 	@Inject
 	ColaboratorBusiness colabRepository;
 	
+	
+	
 	@Transactional
 	public String createAccount(AccountDTO myAccountDTO) {
+		System.out.println("Entrou");
 		if (!isEmailValid(myAccountDTO.getEmail())) {
 			return "The email is not well written";
 		}
