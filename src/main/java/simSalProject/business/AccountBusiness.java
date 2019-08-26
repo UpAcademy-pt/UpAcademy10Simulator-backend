@@ -108,7 +108,7 @@ public class AccountBusiness {
 		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
 		for (Account account : accounts) {
 			if(account.getAccountRole() == Account.AccountRole.USER) {
-				accountsDTO.add(accRepository.accountToAccountDTO(account));
+				accountsDTO.add(accountToAccountDTO(account));
 			}
 		}
 		return accountsDTO;
