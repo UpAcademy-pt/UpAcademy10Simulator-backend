@@ -21,7 +21,8 @@ import javax.persistence.OneToMany;
 		@NamedQuery(name = Account.VERIFY_PASSWORD, query = "SELECT a.password FROM Account a WHERE a.email = :email"),
 		@NamedQuery(name = Account.VERIFY_SALT, query = "SELECT a.salt FROM Account a WHERE a.email = :email"),
 		@NamedQuery(name = Account.GET_ID_WITH_EMAIL, query = "SELECT a.id FROM Account a WHERE a.email = :email") ,
-		@NamedQuery(name = Account.GET_ACC_COUNT, query = "SELECT count(a) FROM Account a")
+		@NamedQuery(name = Account.GET_ACC_COUNT, query = "SELECT count(a) FROM Account a"),
+		@NamedQuery(name = Account.GET_ACC_COUNT_BY_ID, query = "SELECT count(a) FROM Account a WHERE a.id = :id")
 })
 public class Account extends Entity_ {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +38,8 @@ public class Account extends Entity_ {
 	public static final String VERIFY_SALT = "verifySalt";
 	public static final String GET_ID_WITH_EMAIL = "getIdWithEmail";
 	public static final String GET_ACC_COUNT = "getAccCount";
-
+	public static final String GET_ACC_COUNT_BY_ID = "getAccCountById";
+	
 	public enum AccountRole {
 		ADMIN, USER,
 	}

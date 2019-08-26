@@ -129,5 +129,13 @@ public class AccountRepository extends EntityRepository<Account> {
 		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ACC_COUNT, Long.class);
 		return query.getSingleResult();
 	}
+	
+	public long getAccCountById(long id) {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ACC_COUNT_BY_ID, Long.class);
+		query.setParameter("id", id);
+		return query.getSingleResult();
+		
+		
+	}
 
 }

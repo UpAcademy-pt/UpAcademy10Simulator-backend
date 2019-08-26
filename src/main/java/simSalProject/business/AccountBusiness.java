@@ -208,5 +208,9 @@ public class AccountBusiness {
 		return accRepository.getAccCount();
 	}
 	
+	public long getAccCountById(long id) {
+		return accRepository.getAccCountById(id);
+	}
+	
 	
 }

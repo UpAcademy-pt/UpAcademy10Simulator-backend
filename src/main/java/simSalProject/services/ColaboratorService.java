@@ -64,7 +64,7 @@ public class ColaboratorService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColaborator(Colaborator myColaborator) {
-		if(accBusiness.getAccCountByEmail(myColaborator.getAccount().getEmail()) == 0) {
+		if(accBusiness.getAccCountById(myColaborator.getAccount().getId()) == 0) {
 			return Response.status(404).entity("Account with this email doesn't exist").build();
 		} else {
 			Colaborator colaborator = colabBusiness.createColaborator(myColaborator);
@@ -77,7 +77,7 @@ public class ColaboratorService {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editColaborator(@PathParam("id") long id, ColaboratorDTO myColaboratorDTOToEdit) {
-		if (colabBusiness.getColabCountById(myColaboratorDTOToEdit.getId()) == 0) {
+		if (colabBusiness.getColabCountById(id) == 0) {
 			return Response.status(404).entity("Colaborator with that name doesn't exist").build();
 		} else {
 			myColaboratorDTOToEdit.setId(id);
