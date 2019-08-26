@@ -37,11 +37,9 @@ public class AccountService {
 	}
 
 	@Inject
-	@Named("AccBus")
 	AccountBusiness accBusiness;
 
 	@Inject
-	@Named("ColabBus")
 	ColaboratorBusiness colabBusiness;
 
 	@GET

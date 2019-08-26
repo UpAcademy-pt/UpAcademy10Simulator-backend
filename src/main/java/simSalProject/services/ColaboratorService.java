@@ -40,11 +40,9 @@ public class ColaboratorService {
 
 	
 	@Inject
-	@Named("ColabBus")
 	ColaboratorBusiness colabBusiness;
 	
 	@Inject
-	@Named("SimBus")
 	SimulationBusiness simBusiness;
 	
 	

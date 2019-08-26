@@ -11,8 +11,7 @@ import simSalProject.models.SimFieldsDataDTO;
 import simSalProject.models.Simulation;
 
 
-@Named("SimFieldsDataRep")
-@RequestScoped
+
 public class SimFieldsDataRepository extends EntityRepository<SimFieldsData> {
 
 	@Override

@@ -36,7 +36,6 @@ public class SimulationFieldsService {
 
 	
 	@Inject
-	@Named("SimFieldsBus")
 	SimulationsFieldsBusiness simFieldsBusiness;
 	
 	

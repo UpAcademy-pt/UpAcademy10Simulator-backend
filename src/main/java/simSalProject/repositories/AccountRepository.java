@@ -10,8 +10,7 @@ import simSalProject.models.Account;
 import simSalProject.models.Account.AccountRole;
 import simSalProject.models.AccountDTO;
 
-@Named("AccRep")
-@RequestScoped
+
 public class AccountRepository extends EntityRepository<Account> {
 
 	public Class<Account> getEntityClass() {

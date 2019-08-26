@@ -12,16 +12,13 @@ import simSalProject.models.Colaborator;
 import simSalProject.models.ColaboratorDTO;
 import simSalProject.repositories.ColaboratorRepository;
 
-@Named("ColabBus")
-@RequestScoped
+
 public class ColaboratorBusiness {
 
 	@Inject
-	@Named("ColabRep")
 	ColaboratorRepository colabRepository;
 	
 	@Inject
-	@Named("SimBus") 
 	SimulationBusiness simRepository;
 
 	public List<ColaboratorDTO> createColaborator(Colaborator myColaborator) {

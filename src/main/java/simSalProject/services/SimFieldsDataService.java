@@ -35,7 +35,6 @@ public class SimFieldsDataService {
 	
 	
 	@Inject
-	@Named("SimFieldsDataBus")
 	SimFieldsDataBusiness simFieldsDataBusiness;
 	
 	

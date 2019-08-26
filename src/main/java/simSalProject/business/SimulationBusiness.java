@@ -23,11 +23,9 @@ public class SimulationBusiness {
 
 	
 	@Inject
-	@Named("SimRep")
 	SimulationRepository simulationRepository;
 	
 	@Inject
-	@Named("SimFieldsDataBus")
 	SimFieldsDataBusiness simFieldsDataBusiness;
 	
 	

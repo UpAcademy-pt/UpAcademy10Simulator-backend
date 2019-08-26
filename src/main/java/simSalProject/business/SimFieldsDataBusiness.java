@@ -12,16 +12,13 @@ import simSalProject.models.SimFieldsDataDTO;
 import simSalProject.repositories.SimFieldsDataRepository;
 import simSalProject.repositories.SimulationsFieldsRepository;
 
-@Named("SimFieldsDataBus")
-@RequestScoped
+
 public class SimFieldsDataBusiness {
 
 	@Inject
-	@Named("SimFieldsDataRep")
 	SimFieldsDataRepository simFieldsDataRepository;
 	
 	@Inject
-	@Named("SimFieldsRep") 
 	SimulationsFieldsRepository simFieldsRepository;
 
 	public String createSimFieldsData(SimFieldsData mySimFieldsData) {

@@ -38,11 +38,9 @@ public class SimulationService {
 	}
 
 	@Inject
-	@Named("SimBus")
 	SimulationBusiness simBusiness;
 
 	@Inject
-	@Named("ColabBus")
 	ColaboratorBusiness colabBusiness;
 
 	@POST
@@ -71,7 +69,7 @@ public class SimulationService {
 			return Response.status(400).entity("Simulation doesn't exist").build();
 		} else {
 			Simulation mySimulation = simBusiness.consultSimulation(id);
-			return Response.ok(mySimulation).build();
+			return Response.ok(simBusiness.SimulationToSimulationDTO(mySimulation)).build();
 		}
 	}
 

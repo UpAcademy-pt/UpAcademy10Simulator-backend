@@ -17,16 +17,13 @@ import simSalProject.models.AccountDTO;
 import simSalProject.models.Colaborator;
 import simSalProject.repositories.AccountRepository;
 
-@Named("AccBus")
-@RequestScoped
+
 public class AccountBusiness {
 
 	@Inject
-	@Named("AccRep")
 	AccountRepository accRepository;
 	
 	@Inject
-	@Named("ColabBus") 
 	ColaboratorBusiness colabRepository;
 
 	public String createAccount(AccountDTO myAccountDTO) {

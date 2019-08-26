@@ -8,8 +8,7 @@ import javax.persistence.TypedQuery;
 
 import simSalProject.models.SimulationFields;
 
-@Named("SimFieldsRep")
-@RequestScoped
+
 public class SimulationsFieldsRepository extends EntityRepository<SimulationFields> {
 
 	public Class<SimulationFields> getEntityClass(){

@@ -11,8 +11,7 @@ import simSalProject.models.Colaborator;
 import simSalProject.models.Simulation;
 import simSalProject.models.SimulationDTO;
 
-@Named("SimRep")
-@RequestScoped
+
 public class SimulationRepository extends EntityRepository<Simulation> {
 
 	@Override

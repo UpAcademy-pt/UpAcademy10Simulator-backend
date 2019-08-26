@@ -11,12 +11,10 @@ import simSalProject.models.SimulationFields;
 import simSalProject.repositories.SimulationsFieldsRepository;
 
 
-@Named("SimFieldsBus")
-@RequestScoped
+
 public class SimulationsFieldsBusiness {
 
 	@Inject
-	@Named("SimFieldsRep")
 	SimulationsFieldsRepository simFieldsRepository;
 	
 	

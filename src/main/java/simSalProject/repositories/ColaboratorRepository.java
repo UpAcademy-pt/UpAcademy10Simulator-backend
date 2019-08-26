@@ -10,8 +10,7 @@ import simSalProject.models.Account;
 import simSalProject.models.Colaborator;
 import simSalProject.models.ColaboratorDTO;
 
-@Named("ColabRep")
-@RequestScoped
+
 public class ColaboratorRepository extends EntityRepository<Colaborator> {
 	
 
