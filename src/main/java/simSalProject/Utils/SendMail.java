@@ -17,7 +17,7 @@ public class SendMail {
 		    Email from = new Email("simuladorsalarial@gmail.com");
 		    String subject = "Bem vindo ao Simulador Salarial da Aubay";
 		    Email to = new Email(email);
-		    Content content = new Content("text/plain", "Neste momento poderá aceder à plataforma de cálculo salarial da Aubay \n. A sua password é: " + randomPassword + "\n\n\n Aubaygrado!");
+		    Content content = new Content("text/plain", "Neste momento poderá aceder à plataforma de cálculo salarial da Aubay \n. O seu email é:" + email + "\n\nA sua password é: " + randomPassword + "\n\n\n Aubaygrado!");
 		    Mail mail = new Mail(from, subject, to, content);
 
 		    SendGrid sg = new SendGrid(System.getProperty("SGKey"));
