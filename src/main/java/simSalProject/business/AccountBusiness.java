@@ -195,7 +195,7 @@ public class AccountBusiness {
 	
 	public AccountDTO accountToAccountDTO(Account myAccount) {
 		AccountDTO myAccountDTO = accRepository.accountToAccountDTO(myAccount);
-		myAccountDTO.setColaboratorsDTO(colabRepository.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
+		myAccountDTO.setColaborators(colabRepository.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
 		return myAccountDTO;
 	}
 
