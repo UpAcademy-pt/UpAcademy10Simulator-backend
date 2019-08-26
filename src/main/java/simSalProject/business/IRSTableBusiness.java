@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.models.Colaborator;
 import simSalProject.models.IRSTable;
@@ -18,7 +19,8 @@ public class IRSTableBusiness {
 	public String getAllIRSTable() {
 		return irsRepository.getAllValues();
 	}
-
+	
+	@Transactional
 	public void createIRSTable(Collection <IRSTable> table) {
 		System.out.println(irsRepository.existSomethingInIRSTable());
 		if (irsRepository.existSomethingInIRSTable()) {	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.models.Account;
 import simSalProject.models.Colaborator;
@@ -19,6 +20,7 @@ public class ColaboratorBusiness {
 	@Inject
 	SimulationBusiness simRepository;
 
+	@Transactional
 	public Colaborator createColaborator(Colaborator myColaborator) {
 		return colabRepository.createEntity(myColaborator);
 	}
@@ -27,12 +29,14 @@ public class ColaboratorBusiness {
 		return colabRepository.ColaboratorToColaboratorDTO(colabRepository.consultEntity(id));
 	}
 
+	@Transactional
 	public String editColaborator(ColaboratorDTO myColaboratorDTOToEdit) {
 		Colaborator myColaboratorToEdit = colabRepository.ColaboratorDTOToColaborator(myColaboratorDTOToEdit);
 		colabRepository.editEntity(myColaboratorToEdit);
 		return "Edited";
 	}
 
+	@Transactional
 	public String removeColaborator(Colaborator myColaborator) {
 		myColaborator.setAccount(null);
 		colabRepository.editEntity(myColaborator);

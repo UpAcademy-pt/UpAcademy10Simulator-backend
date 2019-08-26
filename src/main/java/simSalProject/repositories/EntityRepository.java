@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import simSalProject.models.Entity_;
 
 
-@Transactional
+
 public abstract class EntityRepository<T extends Entity_> {
 	private static final long serialVersionUID = 1L;
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.models.SimFieldsData;
 import simSalProject.models.SimFieldsDataDTO;
@@ -19,16 +20,19 @@ public class SimFieldsDataBusiness {
 	@Inject
 	SimulationsFieldsRepository simFieldsRepository;
 
+	@Transactional
 	public String createSimFieldsData(SimFieldsData mySimFieldsData) {
 		simFieldsDataRepository.createEntity(mySimFieldsData);
 		return "Created";
 	}
 
+	@Transactional
 	public String editSimFieldsData(SimFieldsData mySimFieldsDataToEdit) {
 		simFieldsDataRepository.editEntity(mySimFieldsDataToEdit);
 		return "Edited";
 	}
 
+	@Transactional
 	public String removeSimFieldsData(SimFieldsData mySimFieldsData) {
 		mySimFieldsData.setSimulation(null);
 		editSimFieldsData(mySimFieldsData);

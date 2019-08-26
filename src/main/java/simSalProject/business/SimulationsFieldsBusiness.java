@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.models.SimulationFields;
 import simSalProject.repositories.SimulationsFieldsRepository;
@@ -69,16 +70,19 @@ public class SimulationsFieldsBusiness {
 //		
 //	}
 	
+	@Transactional
 	public String createSimulationFields(SimulationFields mySimulationField) {
 			simFieldsRepository.createEntity(mySimulationField);
 			return "Created";		
 	}
 	
+	@Transactional
 	public String editSimulationFields(SimulationFields mySimulationFieldsToEdit) {
 			simFieldsRepository.editEntity(mySimulationFieldsToEdit);
 			return "Edited";
 	}
 	
+	@Transactional
 	public void removeSimulationFields(SimulationFields mySimulationFields) {
 			simFieldsRepository.removeEntity(mySimulationFields);
 		

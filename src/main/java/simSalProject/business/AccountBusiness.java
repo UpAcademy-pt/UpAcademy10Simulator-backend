@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.Utils.PasswordUtils;
 import simSalProject.Utils.SendMail;
@@ -23,7 +24,8 @@ public class AccountBusiness {
 	
 	@Inject
 	ColaboratorBusiness colabRepository;
-
+	
+	@Transactional
 	public String createAccount(AccountDTO myAccountDTO) {
 		if (!isEmailValid(myAccountDTO.getEmail())) {
 			return "The email is not well written";
@@ -51,6 +53,8 @@ public class AccountBusiness {
 		}
 		
 	}
+	
+	@Transactional
 	public String changePassword(Account myAccountToEdit) {
 		String salt = PasswordUtils.generateSalt(2).get();
 		Account currentAccount = accRepository.getAccountByEmail(myAccountToEdit.getEmail()).get(0);
@@ -62,12 +66,12 @@ public class AccountBusiness {
 		return "New Password has been set";
 	}
 	
-
+	@Transactional
 	public String createAdmin(Account adminAccount) {
 		accRepository.createEntity(adminAccount);
 		return "ADMIN didn't exist, ADMIN created with default credentials";
 	}
-
+	@Transactional
 	public void editAccount(Account myAccountToEdit) {
 		if (myAccountToEdit.getAccountRole() == AccountRole.ADMIN) return;
 		accRepository.editEntity(myAccountToEdit);
@@ -77,6 +81,7 @@ public class AccountBusiness {
 		return accRepository.getAccountByEmail(email);
 	}
 
+	@Transactional
 	public String removeAccount(Account myAccount) {
 		if (myAccount.getAccountRole() != AccountRole.ADMIN) {
 			List<Colaborator> colaborators = myAccount.getColaborators();
@@ -106,6 +111,7 @@ public class AccountBusiness {
 		return accountsDTO;
 	}
 
+	@Transactional
 	public String initDataBase() {
 		String message = "";
 		if (accRepository.getRoleCount(AccountRole.ADMIN) == 0) {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.models.Colaborator;
 import simSalProject.models.SimFieldsData;
@@ -25,7 +26,7 @@ public class SimulationBusiness {
 	@Inject
 	SimFieldsDataBusiness simFieldsDataBusiness;
 	
-	
+	@Transactional
 	public SimulationDTO createSimulation(Colaborator colaborator, List<SimFieldsData> myFieldsData) {
 		Simulation mySimulation = new Simulation();
 		mySimulation.setColaborator(colaborator);
@@ -44,10 +45,12 @@ public class SimulationBusiness {
 		return mySimulation.get(0);
 	}
 	
+	@Transactional
 	public void editSimulation(Simulation mySimulationToEdit) {
 		simulationRepository.editEntity(mySimulationToEdit);
 	}
 	
+	@Transactional
 	public void removeSimulation(Simulation mySimulation) {
 		mySimulation.setColaborator(null);
 		simulationRepository.editEntity(mySimulation);

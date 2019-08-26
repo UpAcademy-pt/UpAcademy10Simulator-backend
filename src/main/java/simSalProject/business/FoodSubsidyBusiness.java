@@ -1,6 +1,7 @@
 package simSalProject.business;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import simSalProject.models.FoodSubsidy;
 import simSalProject.repositories.FoodSubsidyRepository;
@@ -22,7 +23,7 @@ public class FoodSubsidyBusiness {
 		
 	}
 
-
+	@Transactional
 	public void createFoodSubsidy(FoodSubsidy foodSubsidy) {
 		foodSubRepository.createEntity(foodSubsidy);
 	}
