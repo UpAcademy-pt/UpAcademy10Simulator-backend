@@ -3,7 +3,6 @@ package simSalProject.services;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,7 +22,6 @@ public class MarginService {
 	private UriInfo context;
 	
 	@Inject
-	@Named("MarginBus")
 	MarginBusiness marginBusiness;
 
 	@GET

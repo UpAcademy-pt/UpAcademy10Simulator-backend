@@ -2,15 +2,12 @@ package simSalProject.repositories;
 
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Tax;
 
 
-@Named("TaxRep")
-@RequestScoped
+
 public class TaxRepository extends EntityRepository<Tax> {
 
 	@Override

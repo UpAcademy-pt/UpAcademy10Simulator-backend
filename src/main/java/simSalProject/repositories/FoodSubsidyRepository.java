@@ -1,13 +1,10 @@
 package simSalProject.repositories;
 
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.FoodSubsidy;
 
-@Named("FoodSubRep")
-@RequestScoped
+
 public class FoodSubsidyRepository extends EntityRepository<FoodSubsidy>{
 
 	@Override

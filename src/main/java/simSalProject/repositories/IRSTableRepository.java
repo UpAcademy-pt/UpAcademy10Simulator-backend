@@ -5,15 +5,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.IRSTable;
 
-@Named("IRSTableRep")
-@RequestScoped
+
 public class IRSTableRepository extends EntityRepository<IRSTable> {
 	
 	public Class<IRSTable> getEntityClass(){

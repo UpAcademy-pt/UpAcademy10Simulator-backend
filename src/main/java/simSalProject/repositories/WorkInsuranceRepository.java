@@ -1,14 +1,11 @@
 package simSalProject.repositories;
 
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.WorkInsurance;
 
-@Named("WorkInsuranceRep")
-@RequestScoped
+
 public class WorkInsuranceRepository extends EntityRepository<WorkInsurance> {
 
 	@Override

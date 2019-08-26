@@ -2,19 +2,15 @@ package simSalProject.business;
 
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import simSalProject.models.Tax;
 import simSalProject.repositories.TaxRepository;
 
-@Named("TaxBus")
-@RequestScoped
+
 public class TaxBusiness {
 
 	@Inject
-	@Named("TaxRep")
 	TaxRepository taxRepository;
 	
 	public List<Tax> createTax(Tax myTax) {

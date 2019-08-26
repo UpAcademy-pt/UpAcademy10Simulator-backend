@@ -6,9 +6,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import simSalProject.models.Colaborator;
 import simSalProject.models.SimFieldsData;
@@ -17,8 +15,7 @@ import simSalProject.models.Simulation;
 import simSalProject.models.SimulationDTO;
 import simSalProject.repositories.SimulationRepository;
 
-@Named("SimBus")
-@RequestScoped
+
 public class SimulationBusiness {
 
 	

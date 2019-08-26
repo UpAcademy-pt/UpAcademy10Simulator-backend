@@ -1,7 +1,6 @@
 package simSalProject.services;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,7 +22,6 @@ public class FoodSubsidyService {
 	private UriInfo context;
 	
 	@Inject
-	@Named("FoodSubBus")
 	FoodSubsidyBusiness foodSubBusiness;
 
 	@GET
