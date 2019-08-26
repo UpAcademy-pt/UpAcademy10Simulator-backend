@@ -10,7 +10,6 @@ import simSalProject.models.Entity_;
 
 
 public abstract class EntityRepository<T extends Entity_> {
-	private static final long serialVersionUID = 1L;
 	
 	@PersistenceContext
 	protected EntityManager entityManager;
