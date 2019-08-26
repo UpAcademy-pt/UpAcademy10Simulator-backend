@@ -52,7 +52,7 @@ public class ColaboratorService {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
 		}
 		List<Colaborator> myColaborator = colabBusiness.getColabById(id);
-		return Response.ok(myColaborator.get(0)).build();
+		return Response.ok(colabBusiness.ColaboratorToColaboratorDTO(myColaborator.get(0))).build();
 
 	}
 
@@ -60,13 +60,13 @@ public class ColaboratorService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColaborator(Colaborator myColaborator) {
-		if(colabBusiness.createColaborator(myColaborator).size() > 0) {
+		if(colabBusiness.createColaborator(myColaborator) == null) {
+			return Response.status(400).entity("Colaborator wasn't created").build();
+		} else {
 			ColaboratorDTO myColaboratorDTO = new ColaboratorDTO();
 			myColaboratorDTO.setId(myColaborator.getId());
 			myColaboratorDTO.setName(myColaborator.getName());
 			return Response.ok(myColaboratorDTO).build();
-		} else {
-			return Response.status(400).entity("Colaborator wasn't created").build();
 		}
 	}
 	

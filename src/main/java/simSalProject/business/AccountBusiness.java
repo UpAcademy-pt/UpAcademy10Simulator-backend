@@ -43,7 +43,6 @@ public class AccountBusiness {
 		try {
 			SendMail.sendMail(myAccountDTO.getEmail(), randomPassword);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		myAccount.setAccountRole(AccountRole.USER);
@@ -60,7 +59,7 @@ public class AccountBusiness {
 		currentAccount.setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
 		
 		accRepository.editEntity(currentAccount);
-		return "Welcome user with new Password";
+		return "New Password has been set";
 	}
 	
 
@@ -69,14 +68,13 @@ public class AccountBusiness {
 		return "ADMIN didn't exist, ADMIN created with default credentials";
 	}
 
-	public Account consultAccount(long id) {
-		Account myAccount = accRepository.consultEntity(id);
-		return myAccount;
-	}
-
 	public void editAccount(Account myAccountToEdit) {
 		if (myAccountToEdit.getAccountRole() == AccountRole.ADMIN) return;
 		accRepository.editEntity(myAccountToEdit);
+	}
+	
+	public List<Account> getAccountByEmail (String email){
+		return accRepository.getAccountByEmail(email);
 	}
 
 	public String removeAccount(Account myAccount) {
@@ -95,10 +93,6 @@ public class AccountBusiness {
 			return "ADMIN não pode ser removido";
 		}
 		
-	}
-
-	public List<Long> getAllIds() {
-		return new ArrayList<Long>(accRepository.allIds());
 	}
 
 	public List<AccountDTO> getAllValues() {
@@ -189,10 +183,6 @@ public class AccountBusiness {
 	
 	public long getAccCountByEmail(String email) {
 		return accRepository.getAccCountByEmail(email);
-	}
-	
-	public List<Account> getAccountByEmail (String email){
-		return accRepository.getAccountByEmail(email);
 	}
 	
 	public List<AccountDTO> accountToAccountDTO(List<Account> accounts){

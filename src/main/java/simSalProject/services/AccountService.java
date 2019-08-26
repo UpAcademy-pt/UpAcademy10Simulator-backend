@@ -113,7 +113,7 @@ public class AccountService {
 			return Response.status(404).entity("Account with that email doesn't exist").build();
 		} else {
 			String msg = accBusiness.changePassword(myAccountToEdit);
-			if (msg == "Welcome user with new Password") {
+			if (msg == "New Password has been set") {
 				return Response.ok(msg).build();
 			} else {
 				return Response.ok(msg).build();

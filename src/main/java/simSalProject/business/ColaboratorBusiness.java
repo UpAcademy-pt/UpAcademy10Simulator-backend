@@ -19,11 +19,10 @@ public class ColaboratorBusiness {
 	@Inject
 	SimulationBusiness simRepository;
 
-	public List<ColaboratorDTO> createColaborator(Colaborator myColaborator) {
+	public ColaboratorDTO createColaborator(Colaborator myColaborator) {
 		colabRepository.createEntity(myColaborator);
-		List<ColaboratorDTO> colaboratorsDTO = new ArrayList<ColaboratorDTO>();
-		colaboratorsDTO.add(colabRepository.ColaboratorToColaboratorDTO(colabRepository.getColabById(myColaborator.getId()).get(0)));
-		return colaboratorsDTO;
+		ColaboratorDTO colaboratorDTO = ColaboratorToColaboratorDTO(myColaborator);
+		return colaboratorDTO;
 	}
 
 	public ColaboratorDTO consultColaborator(long id) {
