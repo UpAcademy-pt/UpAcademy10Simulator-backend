@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import simSalProject.Utils.PasswordUtils;
 import simSalProject.Utils.SendMail;

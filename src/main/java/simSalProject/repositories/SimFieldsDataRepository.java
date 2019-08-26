@@ -2,8 +2,6 @@ package simSalProject.repositories;
 
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.SimFieldsData;

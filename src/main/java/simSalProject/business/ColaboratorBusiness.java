@@ -3,9 +3,7 @@ package simSalProject.business;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import simSalProject.models.Account;
 import simSalProject.models.Colaborator;
