@@ -38,17 +38,17 @@ public class AccountService {
 
 	@Inject
 	@Named("AccBus")
-	AccountBusiness ACC_B;
+	AccountBusiness accBusiness;
 
 	@Inject
 	@Named("ColabBus")
-	ColaboratorBusiness COLAB_B;
+	ColaboratorBusiness colabBusiness;
 
 	@GET
 	@Path("initDatabase")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response initDataBase() {
-		String message = ACC_B.initDataBase();
+		String message = accBusiness.initDataBase();
 		if (message == "ADMIN didn't exist, ADMIN created with default credentials") {
 		} else if (message == "ADMIN already exists") {
 			return Response.status(400).entity(message).build();
@@ -60,8 +60,8 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createAccount(AccountDTO myAccountDTO) {
-		if (ACC_B.getAccCountByEmail(myAccountDTO.getEmail()) == 0) {
-			String msg = ACC_B.createAccount(myAccountDTO);
+		if (accBusiness.getAccCountByEmail(myAccountDTO.getEmail()) == 0) {
+			String msg = accBusiness.createAccount(myAccountDTO);
 			if (msg == "The email is not well written") {
 				return Response.status(400).entity(msg).build();
 			} else if (msg == "This Account already exists") {
@@ -78,10 +78,10 @@ public class AccountService {
 	@Path("/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultAccount(@PathParam("email") String email) {
-		if (ACC_B.getAccCountByEmail(email) == 0) {
+		if (accBusiness.getAccCountByEmail(email) == 0) {
 			return Response.status(400).entity("Account doesn't exist").build();
 		} else {
-			return Response.ok(ACC_B.getAccountByEmail(email).get(0)).build();
+			return Response.ok(accBusiness.getAccountByEmail(email).get(0)).build();
 		}
 	}
 
@@ -90,7 +90,7 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Account myAccount) {
-		AccountDTO myAccountDTO = ACC_B.login(myAccount);
+		AccountDTO myAccountDTO = accBusiness.login(myAccount);
 		String msg = myAccountDTO.getMessage();
 		if (msg == "Email not valid") {
 			return Response.status(400).entity(msg).build();
@@ -112,10 +112,10 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editAccount(Account myAccountToEdit) {
-		if (ACC_B.getAccCountByEmail(myAccountToEdit.getEmail()) == 0) {
+		if (accBusiness.getAccCountByEmail(myAccountToEdit.getEmail()) == 0) {
 			return Response.status(404).entity("Account with that email doesn't exist").build();
 		} else {
-			String msg = ACC_B.changePassword(myAccountToEdit);
+			String msg = accBusiness.changePassword(myAccountToEdit);
 			if (msg == "Welcome user with new Password") {
 				return Response.ok(msg).build();
 			} else {
@@ -128,13 +128,13 @@ public class AccountService {
 	@Path("/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response removeAccount(@PathParam("email") String emailToRemove) {
-		if (ACC_B.getAccCountByEmail(emailToRemove) == 0) {
+		if (accBusiness.getAccCountByEmail(emailToRemove) == 0) {
 			return Response.status(400).entity("Account doesn't exist").build();
 		} else {
-			List<Account> accounts = ACC_B.getAccountByEmail(emailToRemove);
+			List<Account> accounts = accBusiness.getAccountByEmail(emailToRemove);
 			Account myAccount = accounts.get(0);
 			myAccount.setId(myAccount.getId());
-			String msg = ACC_B.removeAccount(myAccount);
+			String msg = accBusiness.removeAccount(myAccount);
 			if (msg == "Account Removed") {
 				return Response.ok(msg).build();
 			} else {
@@ -146,10 +146,10 @@ public class AccountService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllValues() {
-		if (ACC_B.getAccCount() == 0) {
+		if (accBusiness.getAccCount() == 0) {
 			return Response.status(404).entity("There are no accounts").build();
 		} else {
-			return Response.ok().entity(ACC_B.getAllValues()).build();
+			return Response.ok().entity(accBusiness.getAllValues()).build();
 		}
 	}
 
@@ -158,10 +158,10 @@ public class AccountService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllSimsFromAccount(@QueryParam("email") String email) {
-		if (ACC_B.getAccCountByEmail(email) == 0) {
+		if (accBusiness.getAccCountByEmail(email) == 0) {
 			return Response.status(400).entity("Account with this email doesn't exist").build();
 		} else {
-			return Response.ok(COLAB_B.getColabsByAccount(ACC_B.getAccountByEmail(email).get(0))).build();
+			return Response.ok(colabBusiness.getColabsByAccount(accBusiness.getAccountByEmail(email).get(0))).build();
 		}
 	}
 

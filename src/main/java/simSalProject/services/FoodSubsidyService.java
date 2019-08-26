@@ -24,7 +24,7 @@ public class FoodSubsidyService {
 	
 	@Inject
 	@Named("FoodSubBus")
-	FoodSubsidyBusiness FOODSUB_B;
+	FoodSubsidyBusiness foodSubBusiness;
 
 	@GET
 	@Path("healthCheck")
@@ -38,14 +38,14 @@ public class FoodSubsidyService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFoodSubsidyVariable () {
-		FoodSubsidy newFoodSubsidyVariable = FOODSUB_B.getFoodSubsidyValue();
+		FoodSubsidy newFoodSubsidyVariable = foodSubBusiness.getFoodSubsidyValue();
 		return Response.ok().entity(newFoodSubsidyVariable).build();
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createFoodSubsidy (FoodSubsidy foodSubsidy) {
-		FOODSUB_B.createFoodSubsidy(foodSubsidy);
+		foodSubBusiness.createFoodSubsidy(foodSubsidy);
 		return Response.ok("Created").build();
 	}
 	
@@ -55,7 +55,7 @@ public class FoodSubsidyService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response setFoodSubsidyVariable(FoodSubsidy foodSubsidy) {		
-		FOODSUB_B.setFoodSubsidyValue(foodSubsidy);
+		foodSubBusiness.setFoodSubsidyValue(foodSubsidy);
 		return Response.ok().entity("Food Subsidy updated").build();
 
 	}

@@ -18,16 +18,16 @@ public class MarginBusiness {
 	
 	@Inject
 	@Named("MarginRep")
-	MarginRepository MARGIN_DB;
+	MarginRepository marginRepository;
 	
 	public List<Margin> getMarginValues () {
-		return MARGIN_DB.getMarginValues();
+		return marginRepository.getMarginValues();
 	}
 	
 
 	public void setMarginValue(Margin newValue) {
 		
-		MARGIN_DB.setNewMarginValues(newValue);
+		marginRepository.setNewMarginValues(newValue);
 		
 	}
 

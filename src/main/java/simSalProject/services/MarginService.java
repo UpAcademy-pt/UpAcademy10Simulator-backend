@@ -24,7 +24,7 @@ public class MarginService {
 	
 	@Inject
 	@Named("MarginBus")
-	MarginBusiness MARGIN_B;
+	MarginBusiness marginBusiness;
 
 	@GET
 	@Path("healthCheck")
@@ -38,7 +38,7 @@ public class MarginService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getMarginValues () {
-		List<Margin> newValues = MARGIN_B.getMarginValues();
+		List<Margin> newValues = marginBusiness.getMarginValues();
 		
 		return Response.ok().entity(newValues).build();
 	}
@@ -49,7 +49,7 @@ public class MarginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response setMarginValues(Margin newValue) {		
-		MARGIN_B.setMarginValue(newValue);	
+		marginBusiness.setMarginValue(newValue);	
 		return Response.ok().entity("Margin value updated").build();
 
 	}

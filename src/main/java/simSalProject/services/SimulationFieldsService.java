@@ -37,22 +37,22 @@ public class SimulationFieldsService {
 	
 	@Inject
 	@Named("SimFieldsBus")
-	SimulationsFieldsBusiness SIMF_B;
+	SimulationsFieldsBusiness simFieldsBusiness;
 	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response manageSimulationFields(SimulationFields mySimulationField) {
-		if (SIMF_B.getSimFieldsCount(mySimulationField.getName()) == 0) {
-			String msg = SIMF_B.createSimulationFields(mySimulationField);
+		if (simFieldsBusiness.getSimFieldsCount(mySimulationField.getName()) == 0) {
+			String msg = simFieldsBusiness.createSimulationFields(mySimulationField);
 			return Response.ok(msg).build();
 		} else {
-			List<SimulationFields> simulationField = SIMF_B.getSimulationFieldsByName(mySimulationField.getName());
+			List<SimulationFields> simulationField = simFieldsBusiness.getSimulationFieldsByName(mySimulationField.getName());
 			SimulationFields mySimulationFieldToEdit = simulationField.get(0);
 			mySimulationField.setId(mySimulationFieldToEdit.getId());
 
-			return Response.ok(SIMF_B.editSimulationFields(mySimulationField)).build();
+			return Response.ok(simFieldsBusiness.editSimulationFields(mySimulationField)).build();
 		}
 	}
 
@@ -60,10 +60,10 @@ public class SimulationFieldsService {
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultSimulationField(@PathParam("name") String name) {
-		if (SIMF_B.getSimFieldsCount(name) == 0) {
+		if (simFieldsBusiness.getSimFieldsCount(name) == 0) {
 			return Response.status(400).entity("Simulation field with that name doesn't exist").build();
 		} else {
-			List<SimulationFields> mySimulationField = SIMF_B.getSimulationFieldsByName(name);
+			List<SimulationFields> mySimulationField = simFieldsBusiness.getSimulationFieldsByName(name);
 			return Response.ok(mySimulationField.get(0)).build();
 		}
 	}
@@ -71,7 +71,7 @@ public class SimulationFieldsService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllSimFields() {
-		List<SimulationFields> thisSimFields = SIMF_B.getAllSimValues();
+		List<SimulationFields> thisSimFields = simFieldsBusiness.getAllSimValues();
 		return Response.ok().entity(thisSimFields).build();
 	}
 
@@ -79,25 +79,18 @@ public class SimulationFieldsService {
 	@Path("/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeSimulationFields(@PathParam("name") String nameToRemove) {
-		if (SIMF_B.getSimFieldsCount(nameToRemove) == 0) {
+		if (simFieldsBusiness.getSimFieldsCount(nameToRemove) == 0) {
 			return Response.status(400).entity("SimulationFields doesn't exist").build();
 		} else {
-			List<SimulationFields> mySimulationField = SIMF_B.getSimulationFieldsByName(nameToRemove);
-			SIMF_B.removeSimulationFields(mySimulationField.get(0));
+			List<SimulationFields> mySimulationField = simFieldsBusiness.getSimulationFieldsByName(nameToRemove);
+			simFieldsBusiness.removeSimulationFields(mySimulationField.get(0));
 			return Response.ok("Removed successful").build();
 		}
 	}
 
 	@GET
-	@Path("allIds")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Long> getAllIds() {
-		return new ArrayList<Long>(SIMF_B.getAllIds());
-	}
-
-	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SimulationFields> getAllValues() {
-		return SIMF_B.getAllValues();
+		return simFieldsBusiness.getAllValues();
 	}
 }

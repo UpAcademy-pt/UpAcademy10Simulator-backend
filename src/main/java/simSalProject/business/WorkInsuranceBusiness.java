@@ -13,15 +13,15 @@ public class WorkInsuranceBusiness {
 
 	@Inject
 	@Named("WorkInsuranceRep")
-	WorkInsuranceRepository WORKINS_DB;
+	WorkInsuranceRepository workInsuranceRepository;
 	
 	public WorkInsurance getWorkInsuranceVariable() {
-		return WORKINS_DB.getWorkInsuranceVariable();
+		return workInsuranceRepository.getWorkInsuranceVariable();
 	}
 	
 	public void setWorkInsuranceVariable(WorkInsurance newValue) {
 		
-		WORKINS_DB.setWorkInsuranceVariable(newValue);
+		workInsuranceRepository.setWorkInsuranceVariable(newValue);
 		
 	}
 }

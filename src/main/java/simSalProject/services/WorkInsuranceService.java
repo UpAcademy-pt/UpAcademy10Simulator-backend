@@ -23,7 +23,7 @@ public class WorkInsuranceService {
 	
 	@Inject
 	@Named("WorkInsuranceBus")
-	WorkInsuranceBusiness WORKINS_B;
+	WorkInsuranceBusiness workInsuranceBusiness;
 	
 	@GET
 	@Path("healthCheck")
@@ -35,7 +35,7 @@ public class WorkInsuranceService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getWorkInsuranceVariable () {
-		WorkInsurance newWorkInsuranceVariable = WORKINS_B.getWorkInsuranceVariable();
+		WorkInsurance newWorkInsuranceVariable = workInsuranceBusiness.getWorkInsuranceVariable();
 		
 		return Response.ok().entity(newWorkInsuranceVariable).build();
 	}
@@ -46,7 +46,7 @@ public class WorkInsuranceService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response setWorkInsuranceVariable(WorkInsurance newValue) {		
-		WORKINS_B.setWorkInsuranceVariable(newValue);
+		workInsuranceBusiness.setWorkInsuranceVariable(newValue);
 		return Response.ok().entity("Work Insurance variable updated").build();
 
 	}

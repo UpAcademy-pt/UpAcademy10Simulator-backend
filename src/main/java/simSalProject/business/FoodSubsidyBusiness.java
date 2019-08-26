@@ -12,22 +12,22 @@ import simSalProject.repositories.FoodSubsidyRepository;
 public class FoodSubsidyBusiness {
 	@Inject
 	@Named("FoodSubRep")
-	FoodSubsidyRepository FOODSUB_DB;
+	FoodSubsidyRepository foodSubRepository;
 	
 	public FoodSubsidy getFoodSubsidyValue () {
-		return FOODSUB_DB.getFoodSubsidyValue();
+		return foodSubRepository.getFoodSubsidyValue();
 	}
 	
 
 	public void setFoodSubsidyValue(FoodSubsidy foodSubsidy) {
 		long id = 1;
 		foodSubsidy.setId(id);
-		FOODSUB_DB.editEntity(foodSubsidy);
+		foodSubRepository.editEntity(foodSubsidy);
 		
 	}
 
 
 	public void createFoodSubsidy(FoodSubsidy foodSubsidy) {
-		FOODSUB_DB.createEntity(foodSubsidy);
+		foodSubRepository.createEntity(foodSubsidy);
 	}
 }

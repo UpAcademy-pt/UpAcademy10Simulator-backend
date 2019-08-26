@@ -23,17 +23,17 @@ public class AccountBusiness {
 
 	@Inject
 	@Named("AccRep")
-	AccountRepository ACC_DB;
+	AccountRepository accRepository;
 	
 	@Inject
 	@Named("ColabBus") 
-	ColaboratorBusiness COLAB_B;
+	ColaboratorBusiness colabRepository;
 
 	public String createAccount(AccountDTO myAccountDTO) {
 		if (!isEmailValid(myAccountDTO.getEmail())) {
 			return "The email is not well written";
 		}
-		if (ACC_DB.verifyEmail(myAccountDTO.getEmail())) {
+		if (accRepository.verifyEmail(myAccountDTO.getEmail())) {
 			return "This Account already exists";
 		} else {
 		
@@ -52,36 +52,36 @@ public class AccountBusiness {
 			e.printStackTrace();
 		}
 		myAccount.setAccountRole(AccountRole.USER);
-		ACC_DB.createEntity(myAccount);
+		accRepository.createEntity(myAccount);
 		return "Account Created";
 		}
 		
 	}
 	public String changePassword(Account myAccountToEdit) {
 		String salt = PasswordUtils.generateSalt(2).get();
-		Account currentAccount = ACC_DB.getAccountByEmail(myAccountToEdit.getEmail()).get(0);
+		Account currentAccount = accRepository.getAccountByEmail(myAccountToEdit.getEmail()).get(0);
 		currentAccount.setEmail(myAccountToEdit.getEmail());
 		currentAccount.setSalt(salt);
 		currentAccount.setPassword(PasswordUtils.hashPassword(myAccountToEdit.getPassword(), salt).get());
 		
-		ACC_DB.editEntity(currentAccount);
+		accRepository.editEntity(currentAccount);
 		return "Welcome user with new Password";
 	}
 	
 
 	public String createAdmin(Account adminAccount) {
-		ACC_DB.createEntity(adminAccount);
+		accRepository.createEntity(adminAccount);
 		return "ADMIN didn't exist, ADMIN created with default credentials";
 	}
 
 	public Account consultAccount(long id) {
-		Account myAccount = ACC_DB.consultEntity(id);
+		Account myAccount = accRepository.consultEntity(id);
 		return myAccount;
 	}
 
 	public void editAccount(Account myAccountToEdit) {
 		if (myAccountToEdit.getAccountRole() == AccountRole.ADMIN) return;
-		ACC_DB.editEntity(myAccountToEdit);
+		accRepository.editEntity(myAccountToEdit);
 	}
 
 	public String removeAccount(Account myAccount) {
@@ -89,12 +89,12 @@ public class AccountBusiness {
 			List<Colaborator> colaborators = myAccount.getColaborators();
 			for (Colaborator colaborator : colaborators) {
 				colaborator.setAccount(null);
-				COLAB_B.editColaborator(COLAB_B.ColaboratorToColaboratorDTO(colaborator));
-				COLAB_B.removeColaborator(colaborator);
+				colabRepository.editColaborator(colabRepository.ColaboratorToColaboratorDTO(colaborator));
+				colabRepository.removeColaborator(colaborator);
 			}
 			myAccount.setColaborators(null);
-			ACC_DB.editEntity(myAccount);
-			ACC_DB.removeEntity(myAccount);
+			accRepository.editEntity(myAccount);
+			accRepository.removeEntity(myAccount);
 			return "Account Removed";
 		} else {
 			return "ADMIN não pode ser removido";
@@ -103,15 +103,15 @@ public class AccountBusiness {
 	}
 
 	public List<Long> getAllIds() {
-		return new ArrayList<Long>(ACC_DB.allIds());
+		return new ArrayList<Long>(accRepository.allIds());
 	}
 
 	public List<AccountDTO> getAllValues() {
-		List<Account> accounts = ACC_DB.allValues();
+		List<Account> accounts = accRepository.allValues();
 		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
 		for (Account account : accounts) {
 			if(account.getAccountRole() == Account.AccountRole.USER) {
-				accountsDTO.add(ACC_DB.accountToAccountDTO(account));
+				accountsDTO.add(accRepository.accountToAccountDTO(account));
 			}
 		}
 		return accountsDTO;
@@ -119,7 +119,7 @@ public class AccountBusiness {
 
 	public String initDataBase() {
 		String message = "";
-		if (ACC_DB.getRoleCount(AccountRole.ADMIN) == 0) {
+		if (accRepository.getRoleCount(AccountRole.ADMIN) == 0) {
 			Account initAccount = new Account();
 			initAccount.setEmail("admin@admin.com");
 			String salt = PasswordUtils.generateSalt(2).get();
@@ -137,8 +137,8 @@ public class AccountBusiness {
 	
 
 	public AccountDTO login(Account myAccount) {
-		List<Account> accountInDB = ACC_DB.getAccountByEmail(myAccount.getEmail());
-		AccountDTO myAccountDTO = ACC_DB.accountToAccountDTO(myAccount);
+		List<Account> accountInDB = accRepository.getAccountByEmail(myAccount.getEmail());
+		AccountDTO myAccountDTO = accRepository.accountToAccountDTO(myAccount);
 		if (myAccount.getPassword() == null) {
 			myAccountDTO.setMessage("You have to write the password!");
 			return myAccountDTO;
@@ -150,7 +150,7 @@ public class AccountBusiness {
 
 			return myAccountDTO;
 		}
-		if (ACC_DB.verifyEmail(myAccount.getEmail())) {
+		if (accRepository.verifyEmail(myAccount.getEmail())) {
 
 			String salt = accountInDB.get(0).getSalt();
 			String hashPassword = accountInDB.get(0).getPassword();
@@ -193,11 +193,11 @@ public class AccountBusiness {
 	}
 	
 	public long getAccCountByEmail(String email) {
-		return ACC_DB.getAccCountByEmail(email);
+		return accRepository.getAccCountByEmail(email);
 	}
 	
 	public List<Account> getAccountByEmail (String email){
-		return ACC_DB.getAccountByEmail(email);
+		return accRepository.getAccountByEmail(email);
 	}
 	
 	public List<AccountDTO> accountToAccountDTO(List<Account> accounts){
@@ -209,18 +209,18 @@ public class AccountBusiness {
 	}
 	
 	public AccountDTO accountToAccountDTO(Account myAccount) {
-		AccountDTO myAccountDTO = ACC_DB.accountToAccountDTO(myAccount);
-		myAccountDTO.setColaboratorsDTO(COLAB_B.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
+		AccountDTO myAccountDTO = accRepository.accountToAccountDTO(myAccount);
+		myAccountDTO.setColaboratorsDTO(colabRepository.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
 		return myAccountDTO;
 	}
 
 	public Account accountDTOToAccount(AccountDTO myAccountDTO) {
-		Account myAccount = ACC_DB.getAccountById(myAccountDTO.getId()).get(0);
+		Account myAccount = accRepository.getAccountById(myAccountDTO.getId()).get(0);
 		return myAccount;
 	}
 	
 	public long getAccCount() {
-		return ACC_DB.getAccCount();
+		return accRepository.getAccCount();
 	}
 	
 	

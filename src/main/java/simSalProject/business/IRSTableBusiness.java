@@ -17,19 +17,19 @@ public class IRSTableBusiness {
 	
 	@Inject
 	@Named("IRSTableRep")
-	IRSTableRepository IRS_DB;
+	IRSTableRepository irsRepository;
 
 	public String getAllIRSTable() {
-		return IRS_DB.getAllValues();
+		return irsRepository.getAllValues();
 	}
 
 	public void createIRSTable(Collection <IRSTable> table) {
-		System.out.println(IRS_DB.existSomethingInIRSTable());
-		if (IRS_DB.existSomethingInIRSTable()) {	
-			IRS_DB.deleteAll();
-			IRS_DB.setAllTable(table);
+		System.out.println(irsRepository.existSomethingInIRSTable());
+		if (irsRepository.existSomethingInIRSTable()) {	
+			irsRepository.deleteAll();
+			irsRepository.setAllTable(table);
 		} else {
-			IRS_DB.setAllTable(table);
+			irsRepository.setAllTable(table);
 		}
 		
 	}
@@ -38,7 +38,7 @@ public class IRSTableBusiness {
 		String depedents = colaborator.getDependents();
 		int depedentsInt = Integer.parseInt(depedents);
 		String status = colaborator.getStatus();
-		return IRS_DB.filteIRSTable(depedentsInt, status);
+		return irsRepository.filteIRSTable(depedentsInt, status);
 		
 	}
 	

@@ -17,7 +17,7 @@ public class SimulationsFieldsBusiness {
 
 	@Inject
 	@Named("SimFieldsRep")
-	SimulationsFieldsRepository SIMF_DB;
+	SimulationsFieldsRepository simFieldsRepository;
 	
 	
 //	public String initDataBase() {
@@ -36,18 +36,18 @@ public class SimulationsFieldsBusiness {
 //		SimulationFields otherAwards = new SimulationFields("otherAwards",0,0,0,0,0,0);
 //		
 //		
-//		SIMF_DB.createEntity(baseSalary);
-//		SIMF_DB.createEntity(foodSubsidy);
-//		SIMF_DB.createEntity(phone);
-//		SIMF_DB.createEntity(vehicle);
-//		SIMF_DB.createEntity(healthInsurance);
-//		SIMF_DB.createEntity(workInsurance);
-//		SIMF_DB.createEntity(mobileNet);
-//		SIMF_DB.createEntity(zPass);
-//		SIMF_DB.createEntity(otherWithTA);
-//		SIMF_DB.createEntity(vehicleMaintenance);
-//		SIMF_DB.createEntity(otherWithoutTA);
-//		SIMF_DB.createEntity(otherAwards);
+//		simFieldsRepository.createEntity(baseSalary);
+//		simFieldsRepository.createEntity(foodSubsidy);
+//		simFieldsRepository.createEntity(phone);
+//		simFieldsRepository.createEntity(vehicle);
+//		simFieldsRepository.createEntity(healthInsurance);
+//		simFieldsRepository.createEntity(workInsurance);
+//		simFieldsRepository.createEntity(mobileNet);
+//		simFieldsRepository.createEntity(zPass);
+//		simFieldsRepository.createEntity(otherWithTA);
+//		simFieldsRepository.createEntity(vehicleMaintenance);
+//		simFieldsRepository.createEntity(otherWithoutTA);
+//		simFieldsRepository.createEntity(otherAwards);
 //		return "Inited Fields";
 				
 //R01 - Salário base	15							Não	Sim	Sim	Não	Não	Não
@@ -74,45 +74,45 @@ public class SimulationsFieldsBusiness {
 //	}
 	
 	public String createSimulationFields(SimulationFields mySimulationField) {
-			SIMF_DB.createEntity(mySimulationField);
+			simFieldsRepository.createEntity(mySimulationField);
 			return "Created";		
 	}
 	
 	public String editSimulationFields(SimulationFields mySimulationFieldsToEdit) {
-			SIMF_DB.editEntity(mySimulationFieldsToEdit);
+			simFieldsRepository.editEntity(mySimulationFieldsToEdit);
 			return "Edited";
 	}
 	
 	public void removeSimulationFields(SimulationFields mySimulationFields) {
-			SIMF_DB.removeEntity(mySimulationFields);
+			simFieldsRepository.removeEntity(mySimulationFields);
 		
 	}
 	
 	public List<SimulationFields> consultSimulationField(String name) {
-		List<SimulationFields> mySimulationField = SIMF_DB.getSimulationFieldsByName(name);
+		List<SimulationFields> mySimulationField = simFieldsRepository.getSimulationFieldsByName(name);
 		return mySimulationField;
 	}
 	
 	public List<Long> getAllIds() {
-		return new ArrayList<Long>(SIMF_DB.allIds());
+		return new ArrayList<Long>(simFieldsRepository.allIds());
 	}
 	
 	public List<SimulationFields> getAllValues() {
-		return SIMF_DB.allValues();
+		return simFieldsRepository.allValues();
 	}
 
 	public List<SimulationFields> getSimulationFieldsByName(String name) {
 		// TODO Auto-generated method stub
-		return SIMF_DB.getSimulationFieldsByName(name);
+		return simFieldsRepository.getSimulationFieldsByName(name);
 	}
 	
 	public long getSimFieldsCount(String name) {
 		
-		return SIMF_DB.getSimFieldsCount(name);
+		return simFieldsRepository.getSimFieldsCount(name);
 	}
 	
 	public List<SimulationFields> getAllSimValues() {
-		return SIMF_DB.getAllSimulationFields();
+		return simFieldsRepository.getAllSimulationFields();
 	}
 	
 	

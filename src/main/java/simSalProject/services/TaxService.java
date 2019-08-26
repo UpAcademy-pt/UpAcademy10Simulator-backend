@@ -36,13 +36,13 @@ public class TaxService {
 
 	@Inject
 	@Named("TaxBus")
-	TaxBusiness TAX_B;
+	TaxBusiness taxBusiness;
 	
 	@GET
 	@Path("all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultTax()  {
-		return Response.ok(TAX_B.getAllTaxes()).build();
+		return Response.ok(taxBusiness.getAllTaxes()).build();
 
 	}
 	
@@ -51,10 +51,10 @@ public class TaxService {
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultTax(@PathParam("name")String name)  {
-		if (TAX_B.getTaxCountByName(name) == 0) {
+		if (taxBusiness.getTaxCountByName(name) == 0) {
 			return Response.status(400).entity("Tax doesn't exist").build();
 		}
-		return Response.ok(TAX_B.getTaxByName(name).get(0)).build();
+		return Response.ok(taxBusiness.getTaxByName(name).get(0)).build();
 
 	}
 
@@ -63,7 +63,7 @@ public class TaxService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createTax(List<Tax> taxes) {
 		for (Tax tax : taxes) {
-			if(TAX_B.createTax(tax).size() > 0) {
+			if(taxBusiness.createTax(tax).size() > 0) {
 				return Response.ok(tax).build();
 			} else {
 				return Response.status(400).entity("Tax wasn't created").build();
@@ -76,12 +76,12 @@ public class TaxService {
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editTax(@PathParam("name") String name) {
-		if (TAX_B.getTaxCountByName(name) == 0) {
+		if (taxBusiness.getTaxCountByName(name) == 0) {
 			return Response.status(404).entity("Tax with that name doesn't exist").build();
 		} else {
-			Tax myTaxToEdit = TAX_B.getTaxByName(name).get(0);
+			Tax myTaxToEdit = taxBusiness.getTaxByName(name).get(0);
 			myTaxToEdit.setId(myTaxToEdit.getId());
-			return Response.ok(TAX_B.editTax(myTaxToEdit)).build();
+			return Response.ok(taxBusiness.editTax(myTaxToEdit)).build();
 		}
 	}
 	
@@ -90,12 +90,12 @@ public class TaxService {
 	@Path("/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeTax(@PathParam("name")String nameToRemove) {
-		if (TAX_B.getTaxCountByName(nameToRemove) == 0) {
+		if (taxBusiness.getTaxCountByName(nameToRemove) == 0) {
 			return Response.status(400).entity("Tax doesn't exist").build();
 		} else {
-			Tax myTax = TAX_B.getTaxByName(nameToRemove).get(0);
+			Tax myTax = taxBusiness.getTaxByName(nameToRemove).get(0);
 			myTax.setId(myTax.getId());
-			return Response.ok(TAX_B.removeTax(myTax)).build();
+			return Response.ok(taxBusiness.removeTax(myTax)).build();
 		}
 	}
 }

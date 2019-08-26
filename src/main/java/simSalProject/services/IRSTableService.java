@@ -32,21 +32,21 @@ public class IRSTableService {
 
 	@Inject
 	@Named("IRSTableBus")
-	IRSTableBusiness IRS_B;
+	IRSTableBusiness irsBusiness;
 
 	@GET
 	@Path("alltable")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllIRSTable() {
 
-		return Response.ok().entity(IRS_B.getAllIRSTable()).build();
+		return Response.ok().entity(irsBusiness.getAllIRSTable()).build();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createIRSTable(Collection <IRSTable> table) {
-		IRS_B.createIRSTable(table);
+		irsBusiness.createIRSTable(table);
 
 		return Response.ok().entity("Table uploaded").build();
 	}
@@ -56,7 +56,7 @@ public class IRSTableService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response filterIRSTable(Colaborator colaborator) {
-		Collection<Object[]> filteredTable= IRS_B.filterIRSTable(colaborator);
+		Collection<Object[]> filteredTable= irsBusiness.filterIRSTable(colaborator);
 		
 		return Response.ok().entity(filteredTable).build();
 	}

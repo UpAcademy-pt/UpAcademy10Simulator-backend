@@ -18,36 +18,36 @@ public class SimFieldsDataBusiness {
 
 	@Inject
 	@Named("SimFieldsDataRep")
-	SimFieldsDataRepository SIMFD_DB;
+	SimFieldsDataRepository simFieldsDataRepository;
 	
 	@Inject
 	@Named("SimFieldsRep") 
-	SimulationsFieldsRepository SIMF_DB;
+	SimulationsFieldsRepository simFieldsRepository;
 
 	public String createSimFieldsData(SimFieldsData mySimFieldsData) {
-		SIMFD_DB.createEntity(mySimFieldsData);
+		simFieldsDataRepository.createEntity(mySimFieldsData);
 		return "Created";
 	}
 
 	public String editSimFieldsData(SimFieldsData mySimFieldsDataToEdit) {
-		SIMFD_DB.editEntity(mySimFieldsDataToEdit);
+		simFieldsDataRepository.editEntity(mySimFieldsDataToEdit);
 		return "Edited";
 	}
 
 	public String removeSimFieldsData(SimFieldsData mySimFieldsData) {
 		mySimFieldsData.setSimulation(null);
 		editSimFieldsData(mySimFieldsData);
-		SIMFD_DB.removeEntity(mySimFieldsData);
+		simFieldsDataRepository.removeEntity(mySimFieldsData);
 		return "Removed";
 	}
 
 	public List<SimFieldsDataDTO> consultSimFieldsData(long id) { 
-		return SimFieldsDataToSimFieldsDataDTO(SIMFD_DB.getSimFieldsDataById(id));
+		return SimFieldsDataToSimFieldsDataDTO(simFieldsDataRepository.getSimFieldsDataById(id));
 	}
 
 	public List<SimFieldsDataDTO> getAllValues() {
 		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
-		List<SimFieldsData> fieldsData = SIMFD_DB.allValues();
+		List<SimFieldsData> fieldsData = simFieldsDataRepository.allValues();
 		SimFieldsDataToSimFieldsDataDTO(fieldsData);
 		return fieldsDataDTO;
 
@@ -55,11 +55,11 @@ public class SimFieldsDataBusiness {
 
 	public List<SimFieldsData> getSimFieldsDataById(long id) {
 		// TODO Auto-generated method stub
-		return SIMFD_DB.getSimFieldsDataById(id);
+		return simFieldsDataRepository.getSimFieldsDataById(id);
 	}
 
 	public long getSimFieldsDataCountById(long id) {
-		return SIMFD_DB.getSimFieldsDataCountById(id);
+		return simFieldsDataRepository.getSimFieldsDataCountById(id);
 	}
 	
 	public List<SimFieldsDataDTO> SimFieldsDataToSimFieldsDataDTO(List<SimFieldsData> fieldsData){
@@ -71,7 +71,7 @@ public class SimFieldsDataBusiness {
 	}
 	
 	public SimFieldsDataDTO SimFieldsDataToSimFieldsDataDTO(SimFieldsData mySimFieldsData) {
-		SimFieldsDataDTO mySimFieldsDataDTO = SIMFD_DB.SimFieldsDataToSimFieldsDataDTO(mySimFieldsData);
+		SimFieldsDataDTO mySimFieldsDataDTO = simFieldsDataRepository.SimFieldsDataToSimFieldsDataDTO(mySimFieldsData);
 		mySimFieldsDataDTO.setName(mySimFieldsData.getName());
 		mySimFieldsDataDTO.setValue(mySimFieldsData.getValue());
 		return mySimFieldsDataDTO;

@@ -15,39 +15,39 @@ public class TaxBusiness {
 
 	@Inject
 	@Named("TaxRep")
-	TaxRepository TAX_DB;
+	TaxRepository taxRepository;
 	
 	public List<Tax> createTax(Tax myTax) {
-		TAX_DB.createEntity(myTax);
-		return TAX_DB.getTaxByName(myTax.getName());
+		taxRepository.createEntity(myTax);
+		return taxRepository.getTaxByName(myTax.getName());
 	}
 
 	public Tax consultTax(long id) {
-		Tax myTax = TAX_DB.consultEntity(id);
+		Tax myTax = taxRepository.consultEntity(id);
 		return myTax;
 	}
 
 	public String editTax(Tax myTaxToEdit) {
-		TAX_DB.editEntity(myTaxToEdit);
+		taxRepository.editEntity(myTaxToEdit);
 		return "Edited";
 	}
 
 	public String removeTax(Tax myTax) {
-		TAX_DB.removeEntity(myTax);
+		taxRepository.removeEntity(myTax);
 		return "Tax Removed";
 	}
 
 	public long getTaxCountByName(String name) {
 		// TODO Auto-generated method stub
-		return TAX_DB.getTaxCountByName(name);
+		return taxRepository.getTaxCountByName(name);
 	}
 	
 	public List<Tax> getTaxByName(String name) {
-		return TAX_DB.getTaxByName(name);
+		return taxRepository.getTaxByName(name);
 	}
 	
 	public List<Tax> getAllTaxes() {
-		return TAX_DB.getAllTaxes();
+		return taxRepository.getAllTaxes();
 	}
 	
 }

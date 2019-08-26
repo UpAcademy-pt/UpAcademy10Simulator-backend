@@ -41,21 +41,21 @@ public class ColaboratorService {
 	
 	@Inject
 	@Named("ColabBus")
-	ColaboratorBusiness COLAB_B;
+	ColaboratorBusiness colabBusiness;
 	
 	@Inject
 	@Named("SimBus")
-	SimulationBusiness SIM_B;
+	SimulationBusiness simBusiness;
 	
 	
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultColaborator(@PathParam("id")long  id)  {
-		if (COLAB_B.getColabCountById(id) == 0) {
+		if (colabBusiness.getColabCountById(id) == 0) {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
 		}
-		List<Colaborator> myColaborator = COLAB_B.getColabById(id);
+		List<Colaborator> myColaborator = colabBusiness.getColabById(id);
 		return Response.ok(myColaborator.get(0)).build();
 
 	}
@@ -64,7 +64,7 @@ public class ColaboratorService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColaborator(Colaborator myColaborator) {
-		if(COLAB_B.createColaborator(myColaborator).size() > 0) {
+		if(colabBusiness.createColaborator(myColaborator).size() > 0) {
 			ColaboratorDTO myColaboratorDTO = new ColaboratorDTO();
 			myColaboratorDTO.setId(myColaborator.getId());
 			myColaboratorDTO.setName(myColaborator.getName());
@@ -78,11 +78,11 @@ public class ColaboratorService {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editColaborator(@PathParam("id") long id, ColaboratorDTO myColaboratorDTOToEdit) {
-		if (COLAB_B.getColabCountById(myColaboratorDTOToEdit.getId()) == 0) {
+		if (colabBusiness.getColabCountById(myColaboratorDTOToEdit.getId()) == 0) {
 			return Response.status(404).entity("Colaborator with that name doesn't exist").build();
 		} else {
 			myColaboratorDTOToEdit.setId(id);
-			return Response.ok(COLAB_B.editColaborator(myColaboratorDTOToEdit)).build();
+			return Response.ok(colabBusiness.editColaborator(myColaboratorDTOToEdit)).build();
 		}
 	}
 	
@@ -91,13 +91,13 @@ public class ColaboratorService {
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeColaborator(@PathParam("id")long idToRemove) {
-		if (COLAB_B.getColabCountById(idToRemove) == 0) {
+		if (colabBusiness.getColabCountById(idToRemove) == 0) {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
 		} else {
-			List<Colaborator> colaborators = COLAB_B.getColabById(idToRemove);
+			List<Colaborator> colaborators = colabBusiness.getColabById(idToRemove);
 			Colaborator myColaborator = colaborators.get(0);
 			myColaborator.setId(idToRemove);
-			return Response.ok(COLAB_B.removeColaborator(myColaborator)).build();
+			return Response.ok(colabBusiness.removeColaborator(myColaborator)).build();
 		}
 	}
 	
@@ -105,10 +105,10 @@ public class ColaboratorService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllValues() {
-		if(COLAB_B.getColabCount() == 0){
+		if(colabBusiness.getColabCount() == 0){
 			return Response.status(404).entity("There are no colaborators").build();
 		} else {
-			return Response.ok().entity(COLAB_B.getAllValues()).build();
+			return Response.ok().entity(colabBusiness.getAllValues()).build();
 		}
 	}
 	
