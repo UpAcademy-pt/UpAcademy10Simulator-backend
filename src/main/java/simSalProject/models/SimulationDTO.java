@@ -7,7 +7,7 @@ public class SimulationDTO {
 
 	private long id;
 	private long date;
-	private List<SimFieldsDataDTO> simFieldsDataDTO = new ArrayList<>();
+	private List<SimFieldsDataDTO> simFieldsData = new ArrayList<>();
 	
 	public SimulationDTO() {
 		super();
@@ -23,13 +23,13 @@ public class SimulationDTO {
 	}
 
 
-	public List<SimFieldsDataDTO> getSimFieldsDataDTO() {
-		return simFieldsDataDTO;
+	public List<SimFieldsDataDTO> getSimFieldsData() {
+		return simFieldsData;
 	}
 
 
-	public void setSimFieldsDataDTO(List<SimFieldsDataDTO> simFieldsDataDTO) {
-		this.simFieldsDataDTO = simFieldsDataDTO;
+	public void setSimFieldsData(List<SimFieldsDataDTO> simFieldsData) {
+		this.simFieldsData = simFieldsData;
 	}
 
 

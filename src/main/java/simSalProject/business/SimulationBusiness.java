@@ -95,7 +95,7 @@ public class SimulationBusiness {
 		for (SimFieldsData fieldData : fieldsData) {
 			fieldsDataDTO.add(simFieldsDataBusiness.SimFieldsDataToSimFieldsDataDTO(fieldData));
 		}
-		mySimulationDTO.setSimFieldsDataDTO(fieldsDataDTO);
+		mySimulationDTO.setSimFieldsData(fieldsDataDTO);
 		return mySimulationDTO;
 	}
 	
