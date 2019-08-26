@@ -6,7 +6,7 @@ import java.util.List;
 public class SimulationDTO {
 
 	private long id;
-	private String date;
+	private long date;
 	private List<SimFieldsDataDTO> simFieldsDataDTO = new ArrayList<>();
 	
 	public SimulationDTO() {
@@ -33,14 +33,17 @@ public class SimulationDTO {
 	}
 
 
-	public String getDate() {
+	public long getDate() {
 		return date;
 	}
 
 
-	public void setDate(String date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
+
+
+	
 
 
 	

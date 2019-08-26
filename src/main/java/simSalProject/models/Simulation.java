@@ -19,8 +19,12 @@ import javax.persistence.Table;
 		@NamedQuery(name = Simulation.ALL_SIM_VALUES, query = "SELECT s FROM Simulation s"),
 		@NamedQuery(name = Simulation.GET_SIM_BY_ID, query = "SELECT s FROM Simulation s WHERE s.id = :id"),
 		@NamedQuery(name = Simulation.GET_SIM_COUNT_BY_ID, query = "SELECT count(s) FROM Simulation s WHERE s.id = :id"),
-		@NamedQuery(name = Simulation.GET_SIM_BY_COLAB_ID, query = "SELECT s FROM Simulation s WHERE s.colaborator = :colaborator")
-
+		@NamedQuery(name = Simulation.GET_SIM_BY_COLAB_ID, query = "SELECT s FROM Simulation s WHERE s.colaborator = :colaborator"),
+		@NamedQuery(name = Simulation.GET_SIMS_BY_DATE, query = "SELECT s FROM Simulation s WHERE s.localDateTime BETWEEN :startDate AND :endDate"),
+		@NamedQuery(name = Simulation.GET_SIM_FROM_DATE, query = "SELECT s FROM Simulation s WHERE s.localDateTime = :localDateTime"),
+		@NamedQuery(name = Simulation.GET_SIM_COUNT, query = "SELECT count(s) FROM Simulation s "),
+		@NamedQuery(name = Simulation.GET_COUNT_SIMS_BY_DATE, query = "SELECT count(s) FROM Simulation s WHERE s.localDateTime BETWEEN :startDate AND :endDate"),
+		@NamedQuery(name = Simulation.GET_SIM_COUNT_BY_COLAB_ID, query = "SELECT count(s) FROM Simulation s WHERE s.colaborator = :colaborator")
 })
 public class Simulation extends Entity_ {
 
@@ -30,7 +34,11 @@ public class Simulation extends Entity_ {
 	public static final String GET_SIM_BY_ID = "getSimByID";
 	public static final String GET_SIM_COUNT_BY_ID = "getSimCountById";
 	public static final String GET_SIM_BY_COLAB_ID = "getSimulationsByColabId";
-	
+	public static final String GET_SIMS_BY_DATE = "getSimsByDate";
+	public static final String GET_SIM_FROM_DATE = "getSimFromDate";
+	public static final String GET_SIM_COUNT = "getSimCount";
+	public static final String GET_COUNT_SIMS_BY_DATE = "getCountSimByDate";
+	public static final String GET_SIM_COUNT_BY_COLAB_ID = "getSimCountByColabId";
 	
 	@ManyToOne
 	private Colaborator colaborator;

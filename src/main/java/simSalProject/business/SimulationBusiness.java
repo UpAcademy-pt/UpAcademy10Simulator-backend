@@ -1,7 +1,8 @@
 package simSalProject.business;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +94,7 @@ public class SimulationBusiness {
 	public SimulationDTO SimulationToSimulationDTO(Simulation mySimulation) {
 		SimulationDTO mySimulationDTO = simulationRepository.SimulationToSimulationDTO(mySimulation);
 		mySimulationDTO.setId(mySimulation.getId());
-		mySimulationDTO.setDate(mySimulation.getLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		mySimulationDTO.setDate(mySimulation.getLocalDateTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
 		List<SimFieldsData> fieldsData = mySimulation.getSimFieldsData();
 		List<SimFieldsDataDTO> fieldsDataDTO = new ArrayList<SimFieldsDataDTO>();
 		for (SimFieldsData fieldData : fieldsData) {
@@ -107,6 +108,33 @@ public class SimulationBusiness {
 	public Simulation SimulationDTOToSimulation(SimulationDTO mySimulationDTO) {
 		Simulation mySimulation = getSimulationById(mySimulationDTO.getId()).get(0);
 		return mySimulation;
+	}
+	
+	public List<SimulationDTO> getSimsByDate (long firstDate, long lastDate) {
+		LocalDateTime startDate = Instant.ofEpochMilli(firstDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime endDate = Instant.ofEpochMilli(lastDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		List<SimulationDTO> simsDTO = SimulationToSimulationDTO(simulationRepository.getSimsByDate(startDate, endDate));
+		return simsDTO;
+	}
+	
+	public List<SimulationDTO> getSimFromDate (long milliDate) {
+		LocalDateTime localDateTime = Instant.ofEpochMilli(milliDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		List<SimulationDTO> simsDTO = SimulationToSimulationDTO(simulationRepository.getSimFromDate(localDateTime));
+		return simsDTO;
+	}
+	
+	public long getSimCount () {
+		return simulationRepository.getSimCount();
+	}
+	
+	public long getCountSimByDate(long firstDate, long lastDate) {
+		LocalDateTime startDate = Instant.ofEpochMilli(firstDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime endDate = Instant.ofEpochMilli(lastDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		return simulationRepository.getCountSimByDate(startDate, endDate);
+	}
+	
+	public long getSimCountByColabId(Colaborator colaborator) {
+		return simulationRepository.getSimCountByColabId(colaborator);
 	}
 	
 	

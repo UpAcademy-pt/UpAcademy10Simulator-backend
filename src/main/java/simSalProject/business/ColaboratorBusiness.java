@@ -90,4 +90,8 @@ public class ColaboratorBusiness {
 		Colaborator myColaborator = getColabById(myColaboratorDTO.getId()).get(0);
 		return myColaborator;
 	}
+	
+	public long getColabCount() {
+		return COLAB_DB.getColabCount();
+	}
 }

@@ -108,7 +108,6 @@ public class AccountRepository extends EntityRepository<Account> {
 		boolean result = false;
 		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_ACC_BY_EMAIL, Account.class);
 		query.setParameter("email", email);
-
 		if (query.getResultList().size() > 0) {
 			result = true;
 		}
@@ -127,6 +126,11 @@ public class AccountRepository extends EntityRepository<Account> {
 		Account myAccount = getAccountById(myAccountDTO.getId()).get(0);
 		return myAccount;
 
+	}
+	
+	public long getAccCount() {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ACC_COUNT, Long.class);
+		return query.getSingleResult();
 	}
 
 }

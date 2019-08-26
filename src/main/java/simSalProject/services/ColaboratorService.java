@@ -101,18 +101,15 @@ public class ColaboratorService {
 		}
 	}
 	
-	
-	@GET
-	@Path("allIds")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Long> getAllIds() {
-		return new ArrayList<Long>(COLAB_B.getAllIds());
-	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ColaboratorDTO> getAllValues() {
-		return COLAB_B.getAllValues();
+	public Response getAllValues() {
+		if(COLAB_B.getColabCount() == 0){
+			return Response.status(404).entity("There are no colaborators").build();
+		} else {
+			return Response.ok().entity(COLAB_B.getAllValues()).build();
+		}
 	}
 	
 	

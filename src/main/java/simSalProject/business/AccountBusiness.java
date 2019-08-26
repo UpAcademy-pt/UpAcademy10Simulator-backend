@@ -217,7 +217,11 @@ public class AccountBusiness {
 	public Account accountDTOToAccount(AccountDTO myAccountDTO) {
 		Account myAccount = ACC_DB.getAccountById(myAccountDTO.getId()).get(0);
 		return myAccount;
-
 	}
+	
+	public long getAccCount() {
+		return ACC_DB.getAccCount();
+	}
+	
 	
 }

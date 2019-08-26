@@ -1,6 +1,5 @@
 package simSalProject.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,17 +43,15 @@ public class AccountService {
 	@Inject
 	@Named("ColabBus")
 	ColaboratorBusiness COLAB_B;
-	
+
 	@GET
 	@Path("initDatabase")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response initDataBase() {
 		String message = ACC_B.initDataBase();
 		if (message == "ADMIN didn't exist, ADMIN created with default credentials") {
-
 		} else if (message == "ADMIN already exists") {
 			return Response.status(400).entity(message).build();
-
 		}
 		return Response.ok().entity(message).build();
 	}
@@ -86,7 +83,6 @@ public class AccountService {
 		} else {
 			return Response.ok(ACC_B.getAccountByEmail(email).get(0)).build();
 		}
-
 	}
 
 	@POST
@@ -95,10 +91,7 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Account myAccount) {
 		AccountDTO myAccountDTO = ACC_B.login(myAccount);
-		System.out.println(myAccountDTO);
-
 		String msg = myAccountDTO.getMessage();
-		System.out.println(msg);
 		if (msg == "Email not valid") {
 			return Response.status(400).entity(msg).build();
 		}
@@ -112,7 +105,6 @@ public class AccountService {
 			return Response.status(400).entity(msg).build();
 		}
 		return Response.ok(myAccountDTO).build();
-
 	}
 
 	@PUT
@@ -143,44 +135,34 @@ public class AccountService {
 			Account myAccount = accounts.get(0);
 			myAccount.setId(myAccount.getId());
 			String msg = ACC_B.removeAccount(myAccount);
-			if(msg == "Account Removed" ) {
+			if (msg == "Account Removed") {
 				return Response.ok(msg).build();
 			} else {
 				return Response.status(400).entity(msg).build();
 			}
-			
 		}
 	}
 
 	@GET
-	@Path("allIds")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Long> getAllIds() {
-		return new ArrayList<Long>(ACC_B.getAllIds());
+	public Response getAllValues() {
+		if (ACC_B.getAccCount() == 0) {
+			return Response.status(404).entity("There are no accounts").build();
+		} else {
+			return Response.ok().entity(ACC_B.getAllValues()).build();
+		}
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<AccountDTO> getAllValues() {
-		return ACC_B.getAllValues();
-	}
-	
-	
 	@GET
 	@Path("allSimsFromAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllSimsFromAccount(@QueryParam("email") String email){
-		System.out.println(email);
-		System.out.println(ACC_B.getAccCountByEmail(email));
-		if(ACC_B.getAccCountByEmail(email) == 0) {
+	public Response getAllSimsFromAccount(@QueryParam("email") String email) {
+		if (ACC_B.getAccCountByEmail(email) == 0) {
 			return Response.status(400).entity("Account with this email doesn't exist").build();
 		} else {
-			Account account = ACC_B.getAccountByEmail(email).get(0);
-			return Response.ok(COLAB_B.getColabsByAccount(account)).build();
+			return Response.ok(COLAB_B.getColabsByAccount(ACC_B.getAccountByEmail(email).get(0))).build();
 		}
-		
-		
 	}
 
 }

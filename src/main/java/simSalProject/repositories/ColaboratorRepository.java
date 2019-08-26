@@ -69,4 +69,9 @@ public class ColaboratorRepository extends EntityRepository<Colaborator> {
 		return query.getResultList();
 	}
 	
+	public long getColabCount() {
+		TypedQuery<Long> query = entityManager.createNamedQuery(Colaborator.GET_COLAB_COUNT, Long.class);
+		return query.getSingleResult();
+	}
+	
 }

@@ -1,6 +1,5 @@
 package simSalProject.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,7 +26,7 @@ import simSalProject.models.SimulationDTO;
 
 @Path("simulations")
 public class SimulationService {
-	
+
 	@Context
 	private UriInfo context;
 
@@ -41,29 +40,27 @@ public class SimulationService {
 	@Inject
 	@Named("SimBus")
 	SimulationBusiness SIM_B;
-	
+
 	@Inject
 	@Named("ColabBus")
 	ColaboratorBusiness COLAB_B;
-	
-	
+
 	@POST
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createSimulation(@PathParam("id") long colabId, List<SimFieldsData> mySimulation ) {
-		if(COLAB_B.getColabCountById(colabId) != 0) {
+	public Response createSimulation(@PathParam("id") long colabId, List<SimFieldsData> mySimulation) {
+		if (COLAB_B.getColabCountById(colabId) != 0) {
 			Colaborator colaborator = COLAB_B.getColabById(colabId).get(0);
 			SimulationDTO simulationDTO = SIM_B.createSimulation(colaborator, mySimulation);
 			if (simulationDTO != null) {
 				return Response.ok(simulationDTO).build();
 			} else {
-				return Response.status(400).entity("Simulação não criada").build();
+				return Response.status(400).entity("Simulation was not created").build();
 			}
 		} else {
 			return Response.status(404).entity("Colaborator with that id doesn't exist").build();
 		}
-		
 	}
 
 	@GET
@@ -76,8 +73,6 @@ public class SimulationService {
 			Simulation mySimulation = SIM_B.consultSimulation(id);
 			return Response.ok(mySimulation).build();
 		}
-		
-
 	}
 
 	@PUT
@@ -92,7 +87,6 @@ public class SimulationService {
 			SIM_B.editSimulation(mySimulationToEdit);
 			return Response.ok("Edit successful").build();
 		}
-
 	}
 
 	@DELETE
@@ -109,24 +103,40 @@ public class SimulationService {
 	}
 
 	@GET
-	@Path("allIds")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Long> getAllIds() {
-		return new ArrayList<Long>(SIM_B.getAllIds());
+	public Response getAllValues() {
+		if (SIM_B.getSimCount() == 0) {
+			return Response.status(400).entity("There are no simulations to search for").build();
+		} else {
+			return Response.ok().entity(SIM_B.getAllValues()).build();
+		}
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<SimulationDTO> getAllValues() {
-		return SIM_B.getAllValues();
-	}
-	
-	@GET
 	@Path("allSimsFromColab/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  List<SimulationDTO> getSimulationByColabId(@PathParam("id")long id) {
-		Colaborator colaborator = COLAB_B.getColabById(id).get(0);
-		return SIM_B.getSimulationByColab(colaborator);
+	public Response getSimulationByColabId(@PathParam("id") long id) {
+		if (COLAB_B.getColabCount() == 0) {
+			return Response.status(404).entity("Colaborator doesn't exist").build();
+		} else {
+			Colaborator colaborator = COLAB_B.getColabById(id).get(0);
+			if (SIM_B.getSimCountByColabId(colaborator) == 0) {
+				return Response.status(404).entity("There are no simulation for this colaborator").build();
+			} else {
+				return Response.ok().entity(SIM_B.getSimulationByColab(colaborator)).build();
+			}
+		}
 	}
-	
+
+	@GET
+	@Path("allSimsByDate")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getSimsByDate(long startDate, long endDate) {
+		if (SIM_B.getCountSimByDate(startDate, endDate) == 0) {
+			return Response.status(400).entity("There are no simulation between these dates").build();
+		} else {
+			return Response.ok().entity(SIM_B.getSimsByDate(startDate, endDate)).build();
+		}
+	}
+
 }
