@@ -19,10 +19,8 @@ public class ColaboratorBusiness {
 	@Inject
 	SimulationBusiness simRepository;
 
-	public ColaboratorDTO createColaborator(Colaborator myColaborator) {
-		colabRepository.createEntity(myColaborator);
-		ColaboratorDTO colaboratorDTO = ColaboratorToColaboratorDTO(myColaborator);
-		return colaboratorDTO;
+	public Colaborator createColaborator(Colaborator myColaborator) {
+		return colabRepository.createEntity(myColaborator);
 	}
 
 	public ColaboratorDTO consultColaborator(long id) {

@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import simSalProject.business.AccountBusiness;
 import simSalProject.business.ColaboratorBusiness;
 import simSalProject.business.SimulationBusiness;
 import simSalProject.models.Colaborator;
@@ -43,6 +44,9 @@ public class ColaboratorService {
 	@Inject
 	SimulationBusiness simBusiness;
 	
+	@Inject
+	AccountBusiness accBusiness;
+	
 	
 	@GET
 	@Path("/{id}")
@@ -50,23 +54,22 @@ public class ColaboratorService {
 	public Response consultColaborator(@PathParam("id")long  id)  {
 		if (colabBusiness.getColabCountById(id) == 0) {
 			return Response.status(400).entity("Colaborator doesn't exist").build();
+		} else {
+			List<Colaborator> myColaborator = colabBusiness.getColabById(id);
+			return Response.ok(colabBusiness.ColaboratorToColaboratorDTO(myColaborator.get(0))).build();
 		}
-		List<Colaborator> myColaborator = colabBusiness.getColabById(id);
-		return Response.ok(colabBusiness.ColaboratorToColaboratorDTO(myColaborator.get(0))).build();
-
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createColaborator(Colaborator myColaborator) {
-		if(colabBusiness.createColaborator(myColaborator) == null) {
-			return Response.status(400).entity("Colaborator wasn't created").build();
+		if(accBusiness.getAccCountByEmail(myColaborator.getAccount().getEmail()) == 0) {
+			return Response.status(404).entity("Account with this email doesn't exist").build();
 		} else {
-			ColaboratorDTO myColaboratorDTO = new ColaboratorDTO();
-			myColaboratorDTO.setId(myColaborator.getId());
-			myColaboratorDTO.setName(myColaborator.getName());
-			return Response.ok(myColaboratorDTO).build();
+			Colaborator colaborator = colabBusiness.createColaborator(myColaborator);
+			ColaboratorDTO colaboratorDTO = colabBusiness.ColaboratorToColaboratorDTO(colaborator);
+			return Response.ok(colaboratorDTO).build();
 		}
 	}
 	
