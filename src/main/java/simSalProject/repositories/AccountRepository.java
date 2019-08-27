@@ -144,5 +144,12 @@ public class AccountRepository extends EntityRepository<Account> {
 		query.setParameter("endDate", endDate);
 		return query.getResultList();
 	}
+	
+	public List<Account> getAccsWithFilterSimsBetweenDates(LocalDateTime startDate, LocalDateTime endDate){
+		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_SIMS_BETWEEN_DATES_FOR_ALL_ACCOUNTS, Account.class);
+		query.setParameter("startDate", startDate);
+		query.setParameter("endDate", endDate);
+		return query.getResultList();
+	}
 
 }

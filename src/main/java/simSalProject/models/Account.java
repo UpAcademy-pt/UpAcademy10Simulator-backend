@@ -26,7 +26,13 @@ import javax.persistence.OneToMany;
 		@NamedQuery(name = Account.GET_SIMS_BETWEEN_DATES_FOR_ACCOUNT, query = "SELECT a FROM Account a WHERE "
 				+ "a.email = :email AND EXISTS"
 				+ "(SELECT c FROM Colaborator c WHERE EXISTS"
-				+ "(SELECT s FROM Simulation s WHERE s.localDateTime BETWEEN :startDate AND :endDate))")
+				+ "(SELECT s FROM Simulation s WHERE s.localDateTime BETWEEN :startDate AND :endDate))"),
+		
+		@NamedQuery(name = Account.GET_SIMS_BETWEEN_DATES_FOR_ALL_ACCOUNTS, query = "SELECT a FROM Account a WHERE "
+				+ "EXISTS"
+				+ "(SELECT c FROM Colaborator c WHERE EXISTS"
+				+ "(SELECT s FROM Simulation s WHERE s.localDateTime BETWEEN :startDate AND :endDate))"),
+
 })
 public class Account extends Entity_ {
 	private static final long serialVersionUID = 1L;
@@ -44,6 +50,7 @@ public class Account extends Entity_ {
 	public static final String GET_ACC_COUNT = "getAccCount";
 	public static final String GET_ACC_COUNT_BY_ID = "getAccCountById";
 	public static final String GET_SIMS_BETWEEN_DATES_FOR_ACCOUNT = "getSimsBetweenDatesForAccount";
+	public static final String GET_SIMS_BETWEEN_DATES_FOR_ALL_ACCOUNTS = "getSimsBetweenDatesForAllAccounts";
 	
 	public enum AccountRole {
 		ADMIN, USER,

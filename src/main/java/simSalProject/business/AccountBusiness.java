@@ -239,4 +239,19 @@ public class AccountBusiness {
 	}
 	
 	
+	public List<AccountDTO> getAccsWithFilterSimsBetweenDates( long firstDate, long lastDate) {
+		LocalDateTime startDate = Instant.ofEpochMilli(firstDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime endDate = Instant.ofEpochMilli(lastDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		List<Account> accounts = accRepository.getAccsWithFilterSimsBetweenDates(startDate, endDate);
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
+		for (Account account : accounts) {
+			if (account.getAccountRole() == Account.AccountRole.USER) {
+				accountsDTO.add(accountToAccountDTO(account));
+			}
+		}
+		return accountsDTO;
+	}
+	
+	
+	
 }
