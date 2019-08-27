@@ -1,5 +1,6 @@
 package simSalProject.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -134,8 +135,14 @@ public class AccountRepository extends EntityRepository<Account> {
 		TypedQuery<Long> query = entityManager.createNamedQuery(Account.GET_ACC_COUNT_BY_ID, Long.class);
 		query.setParameter("id", id);
 		return query.getSingleResult();
-		
-		
+	}
+	
+	public List<Account> getAccWithFilterSimsBetweenDates(String email, LocalDateTime startDate, LocalDateTime endDate){
+		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_SIMS_BETWEEN_DATES_FOR_ACCOUNT, Account.class);
+		query.setParameter("email", email);
+		query.setParameter("startDate", startDate);
+		query.setParameter("endDate", endDate);
+		return query.getResultList();
 	}
 
 }

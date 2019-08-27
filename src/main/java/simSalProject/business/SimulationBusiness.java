@@ -102,18 +102,27 @@ public class SimulationBusiness {
 		return mySimulationDTO;
 	}
 	
+	
 
 	public Simulation SimulationDTOToSimulation(SimulationDTO mySimulationDTO) {
 		Simulation mySimulation = getSimulationById(mySimulationDTO.getId()).get(0);
 		return mySimulation;
 	}
 	
-	public List<SimulationDTO> getSimsByDate (long firstDate, long lastDate) {
+	public List<SimulationDTO> getAllSimsDTOBetweenDates (long firstDate, long lastDate) {
 		LocalDateTime startDate = Instant.ofEpochMilli(firstDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
 		LocalDateTime endDate = Instant.ofEpochMilli(lastDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
 		List<SimulationDTO> simsDTO = SimulationToSimulationDTO(simulationRepository.getSimsByDate(startDate, endDate));
 		return simsDTO;
 	}
+	
+	public List<Simulation> getSimsBetweenDates (long firstDate, long lastDate) {
+		LocalDateTime startDate = Instant.ofEpochMilli(firstDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime endDate = Instant.ofEpochMilli(lastDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		List<Simulation> sims = simulationRepository.getSimsByDate(startDate, endDate);
+		return sims;
+	}
+	
 	
 	public List<SimulationDTO> getSimFromDate (long milliDate) {
 		LocalDateTime localDateTime = Instant.ofEpochMilli(milliDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -134,6 +143,8 @@ public class SimulationBusiness {
 	public long getSimCountByColabId(Colaborator colaborator) {
 		return simulationRepository.getSimCountByColabId(colaborator);
 	}
+	
+	
 	
 	
 }

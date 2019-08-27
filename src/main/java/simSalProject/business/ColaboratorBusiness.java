@@ -18,7 +18,7 @@ public class ColaboratorBusiness {
 	ColaboratorRepository colabRepository;
 	
 	@Inject
-	SimulationBusiness simRepository;
+	SimulationBusiness simBusiness;
 
 	@Transactional
 	public Colaborator createColaborator(Colaborator myColaborator) {
@@ -78,7 +78,7 @@ public class ColaboratorBusiness {
 		myColaboratorDTO.setName(myColaborator.getName());
 		myColaboratorDTO.setDependents(myColaborator.getDependents());
 		myColaboratorDTO.setStatus(myColaborator.getStatus());
-		myColaboratorDTO.setSimulations(simRepository.SimulationToSimulationDTO(myColaborator.getSimulations()));
+		myColaboratorDTO.setSimulations(simBusiness.SimulationToSimulationDTO(myColaborator.getSimulations()));
 		return myColaboratorDTO;
 	}
 

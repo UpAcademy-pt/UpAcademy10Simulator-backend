@@ -126,13 +126,13 @@ public class SimulationService {
 	}
 
 	@GET
-	@Path("allSimsByDate/{startDate}/{endDate}")
+	@Path("allSimsBetweenDates/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSimsByDate(@PathParam("startDate") long startDate, @PathParam("endDate") long endDate) {
+	public Response getSimsBetweenDates(@PathParam("startDate") long startDate, @PathParam("endDate") long endDate) {
 		if (simBusiness.getCountSimByDate(startDate, endDate) == 0) {
 			return Response.status(400).entity("There are no simulation between these dates").build();
 		} else {
-			return Response.ok().entity(simBusiness.getSimsByDate(startDate, endDate)).build();
+			return Response.ok().entity(simBusiness.getAllSimsDTOBetweenDates(startDate, endDate)).build();
 		}
 	}
 

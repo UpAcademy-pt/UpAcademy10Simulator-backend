@@ -161,5 +161,26 @@ public class AccountService {
 			return Response.ok(colabBusiness.getColabsByAccount(accBusiness.getAccountByEmail(email).get(0))).build();
 		}
 	}
+	
+	@GET
+	@Path("allSimsFromAccountWithDate")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllSimsFromAccountWithDate(@QueryParam("email") String email) {
+		if (accBusiness.getAccCountByEmail(email) == 0) {
+			return Response.status(400).entity("Account with this email doesn't exist").build();
+		} else {
+			return Response.ok(colabBusiness.getColabsByAccount(accBusiness.getAccountByEmail(email).get(0))).build();
+		}
+	}
+	
+	@GET
+	@Path("accWithFilterSimsBetweenDates")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAccWithFilterSimsBetweenDates(@QueryParam("email")String email, @QueryParam("startDate") long startDate, @QueryParam("endDate") long endDate) {
+		return Response.ok().entity(accBusiness.getAccWithFilterSimsBetweenDates(email, startDate, endDate)).build();
+				
+	}
+	
+
 
 }

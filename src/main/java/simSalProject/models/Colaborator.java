@@ -21,7 +21,7 @@ import javax.persistence.Table;
 		@NamedQuery(name = Colaborator.GET_COLABORATOR_COUNT_BY_NAME, query = "SELECT count(c) FROM Colaborator c WHERE c.name = :name"),
 		@NamedQuery(name = Colaborator.GET_COLABORATOR_COUNT_BY_ID, query = "SELECT count(c) FROM Colaborator c WHERE c.id = :id"),
 		@NamedQuery(name = Colaborator.GET_COLABORATORS_BY_ACCOUNT_ID, query = "SELECT c FROM Colaborator c WHERE c.account = :account"),
-		@NamedQuery(name = Colaborator.GET_COLAB_COUNT, query = "SELECT count(c) FROM Colaborator c")
+		@NamedQuery(name = Colaborator.GET_COLAB_COUNT, query = "SELECT count(c) FROM Colaborator c"),
 })
 public class Colaborator extends Entity_ {
 	private static final long serialVersionUID = 1L;

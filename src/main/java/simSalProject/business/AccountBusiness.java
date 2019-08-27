@@ -1,6 +1,9 @@
 package simSalProject.business;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -23,7 +26,7 @@ public class AccountBusiness {
 	AccountRepository accRepository;
 	
 	@Inject
-	ColaboratorBusiness colabRepository;
+	ColaboratorBusiness colabBusiness;
 	
 	
 	
@@ -90,8 +93,8 @@ public class AccountBusiness {
 			List<Colaborator> colaborators = myAccount.getColaborators();
 			for (Colaborator colaborator : colaborators) {
 				colaborator.setAccount(null);
-				colabRepository.editColaborator(colabRepository.ColaboratorToColaboratorDTO(colaborator));
-				colabRepository.removeColaborator(colaborator);
+				colabBusiness.editColaborator(colabBusiness.ColaboratorToColaboratorDTO(colaborator));
+				colabBusiness.removeColaborator(colaborator);
 			}
 			myAccount.setColaborators(null);
 			accRepository.editEntity(myAccount);
@@ -102,17 +105,7 @@ public class AccountBusiness {
 		}
 		
 	}
-
-	public List<AccountDTO> getAllValues() {
-		List<Account> accounts = accRepository.allValues();
-		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
-		for (Account account : accounts) {
-			if(account.getAccountRole() == Account.AccountRole.USER) {
-				accountsDTO.add(accountToAccountDTO(account));
-			}
-		}
-		return accountsDTO;
-	}
+	
 
 	@Transactional
 	public String initDataBase() {
@@ -204,7 +197,7 @@ public class AccountBusiness {
 	
 	public AccountDTO accountToAccountDTO(Account myAccount) {
 		AccountDTO myAccountDTO = accRepository.accountToAccountDTO(myAccount);
-		myAccountDTO.setColaborators(colabRepository.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
+		myAccountDTO.setColaborators(colabBusiness.ColaboratorToColaboratorDTO(myAccount.getColaborators()));
 		return myAccountDTO;
 	}
 
@@ -213,12 +206,36 @@ public class AccountBusiness {
 		return myAccount;
 	}
 	
+	public List<AccountDTO> getAllValues() {
+		List<Account> accounts = accRepository.allValues();
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
+		for (Account account : accounts) {
+			if(account.getAccountRole() == Account.AccountRole.USER) {
+				accountsDTO.add(accountToAccountDTO(account));
+			}
+		}
+		return accountsDTO;
+	}
+	
 	public long getAccCount() {
 		return accRepository.getAccCount();
 	}
 	
 	public long getAccCountById(long id) {
 		return accRepository.getAccCountById(id);
+	}
+	
+	public List<AccountDTO> getAccWithFilterSimsBetweenDates(String email, long firstDate, long lastDate) {
+		LocalDateTime startDate = Instant.ofEpochMilli(firstDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime endDate = Instant.ofEpochMilli(lastDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		List<Account> accounts = accRepository.getAccWithFilterSimsBetweenDates(email, startDate, endDate);
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
+		for (Account account : accounts) {
+			if (account.getAccountRole() == Account.AccountRole.USER) {
+				accountsDTO.add(accountToAccountDTO(account));
+			}
+		}
+		return accountsDTO;
 	}
 	
 	

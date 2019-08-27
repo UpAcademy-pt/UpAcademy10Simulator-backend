@@ -22,7 +22,11 @@ import javax.persistence.OneToMany;
 		@NamedQuery(name = Account.VERIFY_SALT, query = "SELECT a.salt FROM Account a WHERE a.email = :email"),
 		@NamedQuery(name = Account.GET_ID_WITH_EMAIL, query = "SELECT a.id FROM Account a WHERE a.email = :email") ,
 		@NamedQuery(name = Account.GET_ACC_COUNT, query = "SELECT count(a) FROM Account a"),
-		@NamedQuery(name = Account.GET_ACC_COUNT_BY_ID, query = "SELECT count(a) FROM Account a WHERE a.id = :id")
+		@NamedQuery(name = Account.GET_ACC_COUNT_BY_ID, query = "SELECT count(a) FROM Account a WHERE a.id = :id"),
+		@NamedQuery(name = Account.GET_SIMS_BETWEEN_DATES_FOR_ACCOUNT, query = "SELECT a FROM Account a WHERE "
+				+ "a.email = :email AND EXISTS"
+				+ "(SELECT c FROM Colaborator c WHERE EXISTS"
+				+ "(SELECT s FROM Simulation s WHERE s.localDateTime BETWEEN :startDate AND :endDate))")
 })
 public class Account extends Entity_ {
 	private static final long serialVersionUID = 1L;
@@ -39,6 +43,7 @@ public class Account extends Entity_ {
 	public static final String GET_ID_WITH_EMAIL = "getIdWithEmail";
 	public static final String GET_ACC_COUNT = "getAccCount";
 	public static final String GET_ACC_COUNT_BY_ID = "getAccCountById";
+	public static final String GET_SIMS_BETWEEN_DATES_FOR_ACCOUNT = "getSimsBetweenDatesForAccount";
 	
 	public enum AccountRole {
 		ADMIN, USER,
