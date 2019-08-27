@@ -252,6 +252,17 @@ public class AccountBusiness {
 		return accountsDTO;
 	}
 	
+	public List<AccountDTO> getSimsForAllAccs(){
+		List<Account> accounts = accRepository.getSimsForAllAccs();
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
+		for (Account account : accounts) {
+			if (account.getAccountRole() == Account.AccountRole.USER) {
+				accountsDTO.add(accountToAccountDTO(account));
+			}
+		}
+		return accountsDTO;
+	}
+	
 	
 	
 }

@@ -3,6 +3,7 @@ package simSalProject.services;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -185,8 +186,14 @@ public class AccountService {
 	@Path("accsWithFilterSimsBetweenDates")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAccsWithFilterSimsBetweenDates(@QueryParam("startDate") long startDate, @QueryParam("endDate") long endDate) {
-		return Response.ok().entity(accBusiness.getAccsWithFilterSimsBetweenDates(startDate, endDate)).build();
-				
+		return Response.ok().entity(accBusiness.getAccsWithFilterSimsBetweenDates(startDate, endDate)).build();	
+	}
+	
+	@GET
+	@Path("allSimsForAccounts")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getSimsForAllAccs() {
+		return Response.ok().entity(accBusiness.getSimsForAllAccs()).build();
 	}
 
 

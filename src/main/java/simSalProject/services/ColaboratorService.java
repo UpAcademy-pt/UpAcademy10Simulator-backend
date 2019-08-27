@@ -53,7 +53,7 @@ public class ColaboratorService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultColaborator(@PathParam("id")long  id)  {
 		if (colabBusiness.getColabCountById(id) == 0) {
-			return Response.status(400).entity("Colaborator doesn't exist").build();
+			return Response.status(404).entity("Colaborator doesn't exist").build();
 		} else {
 			List<Colaborator> myColaborator = colabBusiness.getColabById(id);
 			return Response.ok(colabBusiness.ColaboratorToColaboratorDTO(myColaborator.get(0))).build();
@@ -91,7 +91,7 @@ public class ColaboratorService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeColaborator(@PathParam("id")long idToRemove) {
 		if (colabBusiness.getColabCountById(idToRemove) == 0) {
-			return Response.status(400).entity("Colaborator doesn't exist").build();
+			return Response.status(404).entity("Colaborator doesn't exist").build();
 		} else {
 			List<Colaborator> colaborators = colabBusiness.getColabById(idToRemove);
 			Colaborator myColaborator = colaborators.get(0);

@@ -151,5 +151,10 @@ public class AccountRepository extends EntityRepository<Account> {
 		query.setParameter("endDate", endDate);
 		return query.getResultList();
 	}
+	
+	public List<Account> getSimsForAllAccs(){
+		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_SIMS_BETWEEN_DATES_FOR_ALL_ACCOUNTS, Account.class);
+		return query.getResultList();
+	}
 
 }
