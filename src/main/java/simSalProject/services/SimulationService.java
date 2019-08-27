@@ -65,7 +65,7 @@ public class SimulationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultSimulation(@PathParam("id") long id) {
 		if (simBusiness.getSimulationCountById(id) == 0) {
-			return Response.status(400).entity("Simulation doesn't exist").build();
+			return Response.status(404).entity("Simulation doesn't exist").build();
 		} else {
 			Simulation mySimulation = simBusiness.consultSimulation(id);
 			return Response.ok(simBusiness.SimulationToSimulationDTO(mySimulation)).build();
@@ -78,7 +78,7 @@ public class SimulationService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response editSimulation(@PathParam("id") long id, Simulation mySimulationToEdit) {
 		if (simBusiness.getSimulationCountById(id) == 0) {
-			return Response.status(400).entity("Simulation doesn't exist").build();
+			return Response.status(404).entity("Simulation doesn't exist").build();
 		} else {
 			mySimulationToEdit.setId(id);
 			simBusiness.editSimulation(mySimulationToEdit);
@@ -91,7 +91,7 @@ public class SimulationService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removeSimulation(@PathParam("id") long idToRemove) {
 		if (simBusiness.getSimulationCountById(idToRemove) == 0) {
-			return Response.status(400).entity("Simulation doesn't exist").build();
+			return Response.status(404).entity("Simulation doesn't exist").build();
 		} else {
 			Simulation mySimulationToRemove = simBusiness.consultSimulation(idToRemove);
 			simBusiness.removeSimulation(mySimulationToRemove);
@@ -130,7 +130,7 @@ public class SimulationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSimsBetweenDates(@PathParam("startDate") long startDate, @PathParam("endDate") long endDate) {
 		if (simBusiness.getCountSimByDate(startDate, endDate) == 0) {
-			return Response.status(400).entity("There are no simulation between these dates").build();
+			return Response.status(404).entity("There are no simulation between these dates").build();
 		} else {
 			return Response.ok().entity(simBusiness.getAllSimsDTOBetweenDates(startDate, endDate)).build();
 		}
