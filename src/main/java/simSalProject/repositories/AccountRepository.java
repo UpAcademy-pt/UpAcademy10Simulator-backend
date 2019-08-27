@@ -153,7 +153,7 @@ public class AccountRepository extends EntityRepository<Account> {
 	}
 	
 	public List<Account> getSimsForAllAccs(){
-		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_SIMS_BETWEEN_DATES_FOR_ALL_ACCOUNTS, Account.class);
+		TypedQuery<Account> query = entityManager.createNamedQuery(Account.GET_SIMS_FOR_ALL_ACCOUNTS, Account.class);
 		return query.getResultList();
 	}
 
