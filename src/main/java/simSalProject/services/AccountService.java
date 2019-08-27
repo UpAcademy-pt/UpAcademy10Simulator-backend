@@ -76,7 +76,7 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultAccount(@PathParam("email") String email) {
 		if (accBusiness.getAccCountByEmail(email) == 0) {
-			return Response.status(400).entity("Account doesn't exist").build();
+			return Response.status(404).entity("Account doesn't exist").build();
 		} else {
 			return Response.ok(accBusiness.getAccountByEmail(email).get(0)).build();
 		}
@@ -126,7 +126,7 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response removeAccount(@PathParam("email") String emailToRemove) {
 		if (accBusiness.getAccCountByEmail(emailToRemove) == 0) {
-			return Response.status(400).entity("Account doesn't exist").build();
+			return Response.status(404).entity("Account doesn't exist").build();
 		} else {
 			List<Account> accounts = accBusiness.getAccountByEmail(emailToRemove);
 			Account myAccount = accounts.get(0);
@@ -144,7 +144,7 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllValues() {
 		if (accBusiness.getAccCount() == 0) {
-			return Response.status(404).entity("There are no accounts").build();
+			return Response.status(400).entity("There are no accounts").build();
 		} else {
 			return Response.ok().entity(accBusiness.getAllValues()).build();
 		}
@@ -156,7 +156,7 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllSimsFromAccount(@QueryParam("email") String email) {
 		if (accBusiness.getAccCountByEmail(email) == 0) {
-			return Response.status(400).entity("Account with this email doesn't exist").build();
+			return Response.status(404).entity("Account with this email doesn't exist").build();
 		} else {
 			return Response.ok(colabBusiness.getColabsByAccount(accBusiness.getAccountByEmail(email).get(0))).build();
 		}
@@ -167,7 +167,7 @@ public class AccountService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllSimsFromAccountWithDate(@QueryParam("email") String email) {
 		if (accBusiness.getAccCountByEmail(email) == 0) {
-			return Response.status(400).entity("Account with this email doesn't exist").build();
+			return Response.status(404).entity("Account with this email doesn't exist").build();
 		} else {
 			return Response.ok(colabBusiness.getColabsByAccount(accBusiness.getAccountByEmail(email).get(0))).build();
 		}
