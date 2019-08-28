@@ -15,7 +15,7 @@ public class FoodSubsidyBusiness {
 		return foodSubRepository.getFoodSubsidyValue();
 	}
 	
-
+	@Transactional
 	public void setFoodSubsidyValue(FoodSubsidy foodSubsidy) {
 		long id = 1;
 		foodSubsidy.setId(id);
