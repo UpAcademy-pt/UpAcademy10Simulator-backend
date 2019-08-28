@@ -39,7 +39,7 @@ public class TaxService {
 	@GET
 	@Path("all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultTax()  {
+	public Response getAll()  {
 		return Response.ok(taxBusiness.getAllTaxes()).build();
 
 	}
@@ -74,11 +74,11 @@ public class TaxService {
 				return Response.status(404).entity("Tax with that name doesn't exist").build();
 			} else {
 				Tax myTaxToEdit = taxBusiness.getTaxByName(tax.getName()).get(0);
-				myTaxToEdit.setId(myTaxToEdit.getId());
-				return Response.ok(taxBusiness.editTax(myTaxToEdit)).build();
+				tax.setId(myTaxToEdit.getId());
+				taxBusiness.editTax(tax);
 			}
 		}
-		return null;
+		return Response.ok("Edited").build();
 	}
 	
 	
