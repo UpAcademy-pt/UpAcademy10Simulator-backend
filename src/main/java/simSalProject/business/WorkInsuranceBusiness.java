@@ -19,7 +19,6 @@ public class WorkInsuranceBusiness {
 	
 	@Transactional
 	public void setWorkInsuranceVariable(WorkInsurance newValue) {
-		
 		workInsuranceRepository.setWorkInsuranceVariable(newValue);
 		
 	}

@@ -60,15 +60,10 @@ public class TaxService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createTax(List<Tax> taxes) {
-		for (Tax tax : taxes) {
-			if(taxBusiness.createTax(tax).size() > 0) {
-				return Response.ok(tax).build();
-			} else {
-				return Response.status(400).entity("Tax wasn't created").build();
-			}	
-		}
-		return null;
-	}
+			return Response.ok(taxBusiness.createTax(taxes)).build();
+			
+		}		
+	
 	
 	@PUT
 	@Path("/{name}")

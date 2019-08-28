@@ -1,5 +1,6 @@
 package simSalProject.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,9 +16,13 @@ public class TaxBusiness {
 	TaxRepository taxRepository;
 	
 	@Transactional
-	public List<Tax> createTax(Tax myTax) {
-		taxRepository.createEntity(myTax);
-		return taxRepository.getTaxByName(myTax.getName());
+	public List<Tax> createTax(List<Tax> myTaxes) {
+		List<Tax> taxes = new ArrayList<Tax>();
+		for (Tax myTax : myTaxes) {
+			taxes.add(taxRepository.createEntity(myTax));
+		}
+		
+		return taxes;
 	}
 
 	public Tax consultTax(long id) {
