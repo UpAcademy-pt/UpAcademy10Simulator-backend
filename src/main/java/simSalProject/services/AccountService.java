@@ -184,7 +184,7 @@ public class AccountService {
 	@GET
 	@Path("accsWithFilterSimsBetweenDates")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAccsWithFilterSimsBetweenDates(@QueryParam("startDate") long startDate, @QueryParam("endDate") long endDate) {
+	public Response getAccsWithFilterSimsBetweenDates(@QueryParam("startDate")long startDate, @QueryParam("endDate") long endDate) {
 		return Response.ok().entity(accBusiness.getAccsWithFilterSimsBetweenDates(startDate, endDate)).build();	
 	}
 	
