@@ -149,6 +149,7 @@ public class AccountBusiness {
 				
 				myAccountDTO.setEmail(myAccount.getEmail());
 				myAccountDTO.setId(accountInDB.get(0).getId());
+				myAccountDTO.setName(accountInDB.get(0).getName());
 				if (accountInDB.get(0).getAccountRole() == Account.AccountRole.ADMIN) {
 					myAccountDTO.setAccountRole(Account.AccountRole.ADMIN.toString());
 				} 
