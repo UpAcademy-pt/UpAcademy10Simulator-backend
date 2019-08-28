@@ -66,16 +66,19 @@ public class TaxService {
 	
 	
 	@PUT
-	@Path("/{name}")
+	@Path("edit")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response editTax(@PathParam("name") String name) {
-		if (taxBusiness.getTaxCountByName(name) == 0) {
-			return Response.status(404).entity("Tax with that name doesn't exist").build();
-		} else {
-			Tax myTaxToEdit = taxBusiness.getTaxByName(name).get(0);
-			myTaxToEdit.setId(myTaxToEdit.getId());
-			return Response.ok(taxBusiness.editTax(myTaxToEdit)).build();
+	public Response editTax(List<Tax> taxes) {
+		for (Tax tax : taxes) {
+			if (taxBusiness.getTaxCountByName(tax.getName()) == 0) {
+				return Response.status(404).entity("Tax with that name doesn't exist").build();
+			} else {
+				Tax myTaxToEdit = taxBusiness.getTaxByName(tax.getName()).get(0);
+				myTaxToEdit.setId(myTaxToEdit.getId());
+				return Response.ok(taxBusiness.editTax(myTaxToEdit)).build();
+			}
 		}
+		return null;
 	}
 	
 	

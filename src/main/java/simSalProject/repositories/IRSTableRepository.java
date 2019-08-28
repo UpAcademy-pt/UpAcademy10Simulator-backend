@@ -31,12 +31,9 @@ public class IRSTableRepository extends EntityRepository<IRSTable> {
 	
 
 	public void setAllTable(Collection <IRSTable> table) {
-		// EntityTransaction tx = entityManager.getTransaction();
 		Iterator<IRSTable> iterator = table.iterator();
 		while (iterator.hasNext()) {
-		   // tx.begin();
 		    entityManager.persist(iterator.next());
-		   // tx.commit();
 		}
 	}
 	
@@ -93,19 +90,13 @@ public class IRSTableRepository extends EntityRepository<IRSTable> {
 	}
 
 	public void deleteAll() {
-		System.out.println("entrou");
 		Query query = entityManager.createQuery("DELETE FROM IRSTable a");
 		int rowsDeleted = query.executeUpdate();
-		System.out.println("entities deleted: "+ rowsDeleted);
-//		Query query1 = entityManager.createQuery("ALTER TABLE IRSTable AUTO_INCREMENT = 1");
-//		query1.executeUpdate();
 		
 	}	
 	
 	public boolean existSomethingInIRSTable() {
-		System.out.println("Entrou aqui");
 		TypedQuery<Long> query = entityManager.createNamedQuery(IRSTable.VERIFY_IF_SOMETHING_EXISTS_IN_IRS_TABLE, Long.class);
-		System.out.println(query.getResultList().toString());
 		 if (query.getResultList().get(0) == 0) {
 			 return false;
 		 } else {

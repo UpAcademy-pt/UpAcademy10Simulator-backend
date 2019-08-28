@@ -2,7 +2,6 @@ package simSalProject.repositories;
 
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.Margin;
@@ -34,10 +33,10 @@ public class MarginRepository extends EntityRepository<Margin>{
 		return query.getResultList();
 	}
 	
-	public void setNewMarginValues(Margin newValue) {
-		Query query = entityManager.createQuery("DELETE FROM Margin m");
-		query.executeUpdate();
-		entityManager.persist(newValue);
+	public List<Margin> getMarginById(long id) {
+		TypedQuery<Margin> query = entityManager.createNamedQuery(Margin.GET_MARGIN_BY_ID, Margin.class);
+		query.setParameter("id", id);
+		return query.getResultList();
 	}
 
 

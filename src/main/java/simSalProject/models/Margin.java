@@ -6,13 +6,16 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Margin.GET_ALL_MARGIN_VALUES, query="SELECT m FROM Margin m")
+	@NamedQuery(name=Margin.GET_ALL_MARGIN_VALUES, query="SELECT m FROM Margin m"),
+	@NamedQuery(name=Margin.GET_MARGIN_BY_ID, query = "SELECT m FROM Margin m WHERE m.id = :id")
 })
 
 public class Margin extends Entity_{
 		private static final long serialVersionUID = 1L;
 		
 		public static final String GET_ALL_MARGIN_VALUES = "getAllMarginValues";
+
+		public static final String GET_MARGIN_BY_ID = "getMarginById";
 		
 		
 		public Margin() {}

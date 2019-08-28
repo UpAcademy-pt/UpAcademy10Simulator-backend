@@ -20,10 +20,22 @@ public class MarginBusiness {
 	}
 	
 	@Transactional
-	public void setMarginValue(Margin newValue) {
-		
-		marginRepository.setNewMarginValues(newValue);
-		
+	public String editMarginValue(long id, Margin newValue) {
+		if(marginRepository.getMarginById(id).size() > 0) {
+			newValue.setId(id);
+			marginRepository.editEntity(newValue);
+			return "Edited";
+		} else {
+			return "Not Edited";
+		}
 	}
+
+	@Transactional
+	public Margin createMarginValue(Margin newValue) {
+		return marginRepository.createEntity(newValue);
+	}
+	
+	
+	
 
 }

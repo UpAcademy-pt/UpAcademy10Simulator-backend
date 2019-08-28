@@ -14,12 +14,22 @@ public class WorkInsuranceBusiness {
 	
 	
 	public WorkInsurance getWorkInsuranceVariable() {
-		return workInsuranceRepository.getWorkInsuranceVariable();
+		return workInsuranceRepository.getWorkInsuranceVariable().get(0);
 	}
 	
 	@Transactional
-	public void setWorkInsuranceVariable(WorkInsurance newValue) {
-		workInsuranceRepository.setWorkInsuranceVariable(newValue);
-		
+	public WorkInsurance createWorkInsuranceVariable(WorkInsurance newValue) {
+		return workInsuranceRepository.createEntity(newValue);
+	}
+	
+	@Transactional
+	public String editWorkInsuranceVariable(long id, WorkInsurance newValue) {
+		if(workInsuranceRepository.getWorkInsuranceById(id).size() > 0) {
+			newValue.setId(id);
+			workInsuranceRepository.editEntity(newValue);
+			return "Edited";
+		} else {
+			return "Not Edited";
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package simSalProject.repositories;
 
-import javax.persistence.Query;
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import simSalProject.models.WorkInsurance;
@@ -27,15 +28,15 @@ public class WorkInsuranceRepository extends EntityRepository<WorkInsurance> {
 	}
 	
 	
-	public WorkInsurance getWorkInsuranceVariable() {
+	public List<WorkInsurance> getWorkInsuranceVariable() {
 		TypedQuery<WorkInsurance> query = entityManager.createNamedQuery(WorkInsurance.GET_ALL_WORKINSURANCE_VALUES, WorkInsurance.class);
-		return query.getSingleResult();
+		return query.getResultList();
 	}
 	
-	public void setWorkInsuranceVariable(WorkInsurance newValue) {
-		Query query = entityManager.createQuery("DELETE FROM WorkInsurance w");
-		query.executeUpdate();
-		entityManager.merge(newValue);
+	public List<WorkInsurance> getWorkInsuranceById(long id) {
+		TypedQuery<WorkInsurance> query = entityManager.createNamedQuery(WorkInsurance.GET_WORK_INSURANCE_BY_ID, WorkInsurance.class);
+		query.setParameter("id", id);
+		return query.getResultList();
 	}
 
 }
