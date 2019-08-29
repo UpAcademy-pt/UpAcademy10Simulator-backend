@@ -36,8 +36,11 @@ public class SimFieldsDataService {
 	@Inject
 	SimFieldsDataBusiness simFieldsDataBusiness;
 	
-	
-	
+	/**
+	 * Creates or (if exists) edits SimFieldsData
+	 * @param SimFieldsData mySimFieldsData
+	 * @return Response message
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -50,6 +53,12 @@ public class SimFieldsDataService {
 		}
 	}
 
+	
+	/**
+	 * Gets SimFieldsData from database
+	 * @param long id
+	 * @return Response error message or SimFieldsData
+	 */
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -61,6 +70,11 @@ public class SimFieldsDataService {
 		}
 	}
 
+	/**
+	 * Deletes SimFieldsData from database
+	 * @param String idToRemove
+	 * @return Response message
+	 */
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +88,10 @@ public class SimFieldsDataService {
 		}
 	}
 	
-	
+	/**
+	 * Gets all SimFieldsData
+	 * @return Response List<SimFieldsDataDTO>
+	 */ 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SimFieldsDataDTO> getAllValues() {

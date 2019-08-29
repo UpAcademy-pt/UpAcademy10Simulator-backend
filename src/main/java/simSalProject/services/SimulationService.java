@@ -42,6 +42,13 @@ public class SimulationService {
 	@Inject
 	ColaboratorBusiness colabBusiness;
 
+	
+	/**
+	 * Creates Simulation for specific Colaborator
+	 * @param long colabId
+	 * @param List<SimFieldsData> mySimulation
+	 * @return Response error message or SimulationDTO
+	 */
 	@POST
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -60,6 +67,11 @@ public class SimulationService {
 		}
 	}
 
+	/**
+	 * Gets Simulation from database
+	 * @param long id
+	 * @return Response error message or SimulationDTO
+	 */
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -72,6 +84,12 @@ public class SimulationService {
 		}
 	}
 
+	/**
+	 * Edits Simulation
+	 * @param long id
+	 * @param Simulation mySimulationToEdit
+	 * @return Response message
+	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -86,6 +104,12 @@ public class SimulationService {
 		}
 	}
 
+	
+	/**
+	 * Deletes a Simulation
+	 * @param long idToRemove
+	 * @return Response message
+	 */
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -99,6 +123,10 @@ public class SimulationService {
 		}
 	}
 
+	/**
+	 * Gets all simulations from database
+	 * @return Response error message or List<SimulationDTO>
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllValues() {
@@ -109,6 +137,11 @@ public class SimulationService {
 		}
 	}
 
+	/**
+	 * Gets all simulations for a specific Colaborator
+	 * @param long id
+	 * @return Response error message or List<SimulationDTO>
+	 */
 	@GET
 	@Path("allSimsFromColab/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -125,6 +158,13 @@ public class SimulationService {
 		}
 	}
 
+	
+	/**
+	 * Gets all simulations between specific dates
+	 * @param long startDate
+	 * @param long endDate
+	 * @return Response error message or List<SimulationDTO>
+	 */
 	@GET
 	@Path("allSimsBetweenDates/{startDate}/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)

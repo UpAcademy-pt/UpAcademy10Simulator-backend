@@ -41,6 +41,11 @@ public class AccountService {
 	@Inject
 	ColaboratorBusiness colabBusiness;
 
+	/**
+	 * This method is used to initialize the database, persisting the admin with
+	 * default credentials.
+	 * @return Response message.
+	 */
 	@GET
 	@Path("initDatabase")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -53,6 +58,11 @@ public class AccountService {
 		return Response.ok().entity(message).build();
 	}
 
+	/**
+	 * Creates an account.
+	 * @param AccountDTO myAccountDTO
+	 * @return Response message.
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -71,6 +81,11 @@ public class AccountService {
 		}
 	}
 
+	/**
+	 * Gets an Account from database.
+	 * @param String email
+	 * @return Response error message or Account.
+	 */
 	@GET
 	@Path("/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -80,8 +95,14 @@ public class AccountService {
 		} else {
 			return Response.ok(accBusiness.getAccountByEmail(email).get(0)).build();
 		}
+
 	}
 
+	/**
+	 * Verifies login credentials.
+	 * @param Account myAccount
+	 * @return Response error message or AccountDTO.
+	 */
 	@POST
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -104,6 +125,11 @@ public class AccountService {
 		return Response.ok(myAccountDTO).build();
 	}
 
+	/**
+	 * Edits Account password
+	 * @param Account myAccountToEdit
+	 * @return Response message.
+	 */
 	@PUT
 	@Path("editAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -121,6 +147,12 @@ public class AccountService {
 		}
 	}
 
+	
+	/**
+	 * Deletes an account from database
+	 * @param String emailToRemove
+	 * @return Response message.
+	 */
 	@DELETE
 	@Path("/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -140,6 +172,10 @@ public class AccountService {
 		}
 	}
 
+	/**
+	 * Get all accounts from database
+	 * @return Response error message or List<AccountDTO>
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllValues() {
@@ -150,6 +186,11 @@ public class AccountService {
 		}
 	}
 
+	/**
+	 * Gets all Accounts with Simulations
+	 * @param String email
+	 * @return Response error message or List<AccountDTO>
+	 */
 	@GET
 	@Path("allSimsFromAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -162,6 +203,11 @@ public class AccountService {
 		}
 	}
 	
+	/**
+	 * Gets all Simulations from an Account
+	 * @param String email
+	 * @return Response error message or AccountDTO
+	 */
 	@GET
 	@Path("allSimsFromAccountWithDate")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -173,6 +219,13 @@ public class AccountService {
 		}
 	}
 	
+	/**
+	 * Gets all Simulations between dates for an Account
+	 * @param String email
+	 * @param long startDate
+	 * @param long endDate
+	 * @return Response AccountDTO 
+	 */
 	@GET
 	@Path("accWithFilterSimsBetweenDates")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -181,6 +234,12 @@ public class AccountService {
 				
 	}
 	
+	/**
+	 * Gets all Simulations between dates for all Accounts
+	 * @param long startDate
+	 * @param long endDate
+	 * @return Response List<AccountDTO>
+	 */
 	@GET
 	@Path("accsWithFilterSimsBetweenDates")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -188,6 +247,10 @@ public class AccountService {
 		return Response.ok().entity(accBusiness.getAccsWithFilterSimsBetweenDates(startDate, endDate)).build();	
 	}
 	
+	/**
+	 * Gets all Simulations for all Accounts
+	 * @return Response List<AccountDTO>
+	 */
 	@GET
 	@Path("allSimsForAccounts")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -114,6 +114,7 @@ public class AccountBusiness {
 			initAccount.setEmail("admin@admin.com");
 			String salt = PasswordUtils.generateSalt(2).get();
 			initAccount.setPassword(PasswordUtils.hashPassword("admin", salt).get());
+			initAccount.setName("Admin");
 			initAccount.setAccountRole(AccountRole.ADMIN);
 			initAccount.setSalt(salt);
 			message = createAdmin(initAccount);

@@ -37,6 +37,11 @@ public class SimulationFieldsService {
 	SimulationsFieldsBusiness simFieldsBusiness;
 	
 	
+	/**
+	 * Creates or (if exists) edits SimulationFields
+	 * @param SimulationFields mySimulationField
+	 * @return Response message
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,11 +53,15 @@ public class SimulationFieldsService {
 			List<SimulationFields> simulationField = simFieldsBusiness.getSimulationFieldsByName(mySimulationField.getName());
 			SimulationFields mySimulationFieldToEdit = simulationField.get(0);
 			mySimulationField.setId(mySimulationFieldToEdit.getId());
-
 			return Response.ok(simFieldsBusiness.editSimulationFields(mySimulationField)).build();
 		}
 	}
 
+	/**
+	 * Gets SimulationFields from database
+	 * @param String name
+	 * @return Response error message or SimulationFields
+	 */
 	@GET
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -64,14 +73,12 @@ public class SimulationFieldsService {
 			return Response.ok(mySimulationField.get(0)).build();
 		}
 	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllSimFields() {
-		List<SimulationFields> thisSimFields = simFieldsBusiness.getAllSimValues();
-		return Response.ok().entity(thisSimFields).build();
-	}
 
+	/**
+	 * Removes SimulationFields
+	 * @param String nameToRemove
+	 * @return Response message
+	 */
 	@DELETE
 	@Path("/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -84,7 +91,11 @@ public class SimulationFieldsService {
 			return Response.ok("Removed successful").build();
 		}
 	}
-
+	
+	/**
+	 * Gets all SimulationFields
+	 * @return List<SimulationFields>
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SimulationFields> getAllValues() {

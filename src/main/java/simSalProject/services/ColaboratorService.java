@@ -48,6 +48,11 @@ public class ColaboratorService {
 	AccountBusiness accBusiness;
 	
 	
+	/**
+	 * Gets a Colaborator from database
+	 * @param long id
+	 * @return Response error message or ColaboratorDTO
+	 */
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -60,6 +65,12 @@ public class ColaboratorService {
 		}
 	}
 
+	
+	/**
+	 * Creates a Colaborator
+	 * @param Colaborator myColaborator
+	 * @return Response error message or ColaboratorDTO
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -73,6 +84,12 @@ public class ColaboratorService {
 		}
 	}
 	
+	/**
+	 * Edits a Colaborator
+	 * @param long id
+	 * @param ColaboratorDTO myColaboratorDTOToEdit
+	 * @return Response error message or ColaboratorDTO
+	 */
 	@PUT
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -85,7 +102,11 @@ public class ColaboratorService {
 		}
 	}
 	
-	
+	/**
+	 * Removes Colaborator
+	 * @param idToRemove
+	 * @return Response message
+	 */
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -101,6 +122,10 @@ public class ColaboratorService {
 	}
 	
 
+	/**
+	 * Gets all Colaborators from database
+	 * @return Response error message or List<ColaboratorDTO>
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllValues() {

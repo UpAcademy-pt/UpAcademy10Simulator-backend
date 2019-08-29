@@ -32,7 +32,10 @@ public class FoodSubsidyService {
 	}
 	
 
-	
+	/**
+	 * Gets all FoodSubsidy
+	 * @return Response FoodSubsidy
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFoodSubsidyVariable () {
@@ -40,6 +43,11 @@ public class FoodSubsidyService {
 		return Response.ok().entity(newFoodSubsidyVariable).build();
 	}
 	
+	/**
+	 * Creates FoodSubsidy
+	 * @param FoodSubsidy foodSubsidy
+	 * @return Response message
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createFoodSubsidy (FoodSubsidy foodSubsidy) {
@@ -47,7 +55,11 @@ public class FoodSubsidyService {
 		return Response.ok("Created").build();
 	}
 	
-	
+	/**
+	 * Edits FoodSubsidy
+	 * @param FoodSubsidy foodSubsidy
+	 * @return Response message
+	 */
 	@PUT
 	@Path("newvalue")
 	@Consumes(MediaType.APPLICATION_JSON)
