@@ -8,7 +8,7 @@
 		transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Implementação do JPA -->
-		<jta-data-source>java:/MySqlDS</jta-data-source>
+		<jta-data-source>java:/PostgresDS</jta-data-source>
 
 		<properties>
 			<!-- Propriedades JDBC -->
@@ -21,7 +21,7 @@
 				value="drop-and-create" />
 			<!--Configurações específicas do Hibernate -->
 			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+				value="org.hibernate.dialect.PostgreSQLDialect" />
 			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 			<property name="javax.persistence.sql-load-script-source" value="META-INF/data/import.sql"/>
 			<property name="hibernate.show_sql" value="true" />
