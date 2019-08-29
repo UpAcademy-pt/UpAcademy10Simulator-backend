@@ -111,9 +111,5 @@ public class SimulationsFieldsBusiness {
 		return simFieldsRepository.getSimFieldsCount(name);
 	}
 	
-	public List<SimulationFields> getAllSimValues() {
-		return simFieldsRepository.getAllSimulationFields();
-	}
-	
 	
 }
