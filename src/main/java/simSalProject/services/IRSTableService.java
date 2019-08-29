@@ -32,6 +32,10 @@ public class IRSTableService {
 	@Inject
 	IRSTableBusiness irsBusiness;
 
+	/**
+	 * Gets IRS table form database
+	 * @return Response full IRSTable
+	 */
 	@GET
 	@Path("alltable")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,22 +44,30 @@ public class IRSTableService {
 		return Response.ok().entity(irsBusiness.getAllIRSTable()).build();
 	}
 
+	/**
+	 * Creates IRSTable and updates IRSTable if it exists
+	 * @param Collection <IRSTable> table
+	 * @return Response message
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createIRSTable(Collection <IRSTable> table) {
 		irsBusiness.createIRSTable(table);
-
 		return Response.ok().entity("Table uploaded").build();
 	}
 	
+	/**
+	 * Gets IRSTable depending on Colaborator variables
+	 * @param Colaborator colaborator
+	 * @return Response List<Object[]>
+	 */
 	@POST
 	@Path("filtertable")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response filterIRSTable(Colaborator colaborator) {
 		Collection<Object[]> filteredTable= irsBusiness.filterIRSTable(colaborator);
-		
 		return Response.ok().entity(filteredTable).build();
 	}
 }

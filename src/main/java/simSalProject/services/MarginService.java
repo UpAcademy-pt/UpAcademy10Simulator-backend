@@ -34,7 +34,10 @@ public class MarginService {
 	}
 	
 
-	
+	/**
+	 * Gets all margin values
+	 * @return Response List<Margin>
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getMarginValues () {
@@ -43,13 +46,24 @@ public class MarginService {
 	}
 	
 	
-	
+	/**
+	 * Creates Margin
+	 * @param Margin newValue
+	 * @return Response Margin
+	 */
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createMarginValues(Margin newValue) {
 		return Response.ok(marginBusiness.createMarginValue(newValue)).build();
 	}
 	
+	
+	/**
+	 * Edits Margin
+	 * @param long id
+	 * @param Margin newValue
+	 * @return Response message
+	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)

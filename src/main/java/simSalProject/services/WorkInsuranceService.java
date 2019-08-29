@@ -32,13 +32,21 @@ public class WorkInsuranceService {
 		return "URI " + context.getRequestUri().toString() + " is OK!";
 	}
 	
+	/**
+	 * Gets all WorkInsurance
+	 * @return Response WorkInsurance
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getWorkInsuranceVariable () {
 		return Response.ok().entity(workInsuranceBusiness.getWorkInsuranceVariable()).build();
 	}
 	
-	
+	/**
+	 * Creates WorkInsurance
+	 * @param WorkInsurance newValue
+	 * @return Response message
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -47,6 +55,13 @@ public class WorkInsuranceService {
 		return Response.ok().entity("Work Insurance variable created").build();
 	}
 	
+	
+	/**
+	 * Edits WorkInsurance
+	 * @param long id
+	 * @param WorkInsurance newValue
+	 * @return Response message
+	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)

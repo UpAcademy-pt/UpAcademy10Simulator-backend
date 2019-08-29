@@ -36,6 +36,11 @@ public class TaxService {
 	@Inject
 	TaxBusiness taxBusiness;
 	
+	
+	/**
+	 * Gets all taxes from database
+	 * @return Response List<Tax>
+	 */
 	@GET
 	@Path("all")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -44,7 +49,11 @@ public class TaxService {
 
 	}
 	
-	
+	/**
+	 * Gets Tax from database
+	 * @param String name
+	 * @return Response error message or Tax
+	 */
 	@GET
 	@Path("/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,15 +65,24 @@ public class TaxService {
 
 	}
 
+	
+	/**
+	 * Creates Tax
+	 * @param List<Tax> taxes
+	 * @return Response List<Tax>
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createTax(List<Tax> taxes) {
 			return Response.ok(taxBusiness.createTax(taxes)).build();
-			
 		}		
 	
-	
+	/**
+	 * Edits Tax
+	 * @param List<Tax> taxes
+	 * @return Response message
+	 */
 	@PUT
 	@Path("edit")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +99,11 @@ public class TaxService {
 		return Response.ok("Edited").build();
 	}
 	
-	
+	/**
+	 * Removes Tax
+	 * @param String nameToRemove
+	 * @return Response message
+	 */
 	@DELETE
 	@Path("/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
