@@ -2,6 +2,11 @@ package simSalProject.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -9,6 +14,7 @@ import javax.transaction.Transactional;
 import simSalProject.models.Account;
 import simSalProject.models.Colaborator;
 import simSalProject.models.ColaboratorDTO;
+import simSalProject.models.Simulation;
 import simSalProject.repositories.ColaboratorRepository;
 
 
@@ -73,12 +79,23 @@ public class ColaboratorBusiness {
 		return colaboratorsDTO;
 	}
 	
+	public static <T> Predicate<T> distinctByKey(
+		    Function<? super T, ?> keyExtractor) {
+		   
+		    Map<Object, Boolean> seen = new ConcurrentHashMap<>(); 
+		    return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null; 
+		}
+	
 	public ColaboratorDTO ColaboratorToColaboratorDTO(Colaborator myColaborator) {
 		ColaboratorDTO myColaboratorDTO = colabRepository.ColaboratorToColaboratorDTO(myColaborator);
 		myColaboratorDTO.setName(myColaborator.getName());
 		myColaboratorDTO.setDependents(myColaborator.getDependents());
 		myColaboratorDTO.setStatus(myColaborator.getStatus());
-		myColaboratorDTO.setSimulations(simBusiness.SimulationToSimulationDTO(myColaborator.getSimulations()));
+		List<Simulation> simdb = myColaborator.getSimulations();
+		List<Simulation> sim = simdb.stream() 
+				  .filter(distinctByKey(p -> p.getId())) 
+				  .collect(Collectors.toList());
+		myColaboratorDTO.setSimulations(simBusiness.SimulationToSimulationDTO(sim));
 		return myColaboratorDTO;
 	}
 
