@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "aaab130a-4b26-41a3-aa1b-5b83256bb88a",
+		"name": "Test Simulation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/initDatabase",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/initDatabase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"initDatabase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"admin@admin.com\",\n\t\"password\":\"admin\"\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"joaoltxs@hotmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"João Teixeira\",\n\t \"email\":\"jn.teixeira@campus.fct.unl.pt\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/colaborators/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\":\"Bruno\",\r\n\t\"status\": \"wtv\",\r\n\t\"dependents\":\"1\",\r\n\t\"account\": {\"id\":2,\r\n\t\"email\":\"joaoltxs@hotmail.com\"\r\n\t\t\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/colaborators/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"colaborators",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/simulations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t\t{\n\t\t\t\"name\":\"marginPercentage\",\n\t\t\t\"value\": 20\n\t\t},\n\t\t{\n\t\t\t\"name\":\"netSalary\",\n\t\t\t\"value\":2000\n\t\t},\n\t\t{\n\t\t\t\"name\":\"anualRate\",\n\t\t\t\"value\":80000\n\t\t},\n\t\t{\n\t\t\t\"name\":\"anualTotalCost\",\n\t\t\t\"value\":1298129\n\t\t},\n\t\t{\n\t\t\t\"name\":\"netSalaryWithDuo\",\n\t\t\t\"value\":129812\n\t\t},\n\t\t{\t\n\t\t\t\"name\":\"netSalaryWithoutDuo\",\n\t\t\t\"value\":129813\n\t\t}\n\t\t]"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/simulations/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"simulations",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/simulations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t\t{\n\t\t\t\"name\":\"marginPercentage\",\n\t\t\t\"value\": 20\n\t\t},\n\t\t{\n\t\t\t\"name\":\"netSalary\",\n\t\t\t\"value\":2000\n\t\t},\n\t\t{\n\t\t\t\"name\":\"anualRate\",\n\t\t\t\"value\":3000\n\t\t},\n\t\t{\n\t\t\t\"name\":\"anualTotalCost\",\n\t\t\t\"value\":1298129\n\t\t},\n\t\t{\n\t\t\t\"name\":\"netSalaryWithDuo\",\n\t\t\t\"value\":1298129\n\t\t},\n\t\t{\t\n\t\t\t\"name\":\"netSalaryWithoutDuo\",\n\t\t\t\"value\":1298129\n\t\t}\n\t\t]"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/simulations/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"simulations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/allSimsFromAccount?email=joaoltxs@hotmail.com",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/allSimsFromAccount?email=joaoltxs@hotmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"allSimsFromAccount"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "joaoltxs@hotmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/colaborators/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/colaborators/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"colaborators",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/simulations/allSimsFromColab/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/simulations/allSimsFromColab/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"simulations",
+						"allSimsFromColab",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/simulations/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/simulations/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"simulations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/accWithFilterSimsBetweenDates?startDate=1562906166000&endDate=1566906180000&email=joaoltxs@hotmail.com",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/accWithFilterSimsBetweenDates?startDate=1562906166000&endDate=1566906180000&email=joaoltxs@hotmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"accWithFilterSimsBetweenDates"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "1562906166000"
+						},
+						{
+							"key": "endDate",
+							"value": "1566906180000"
+						},
+						{
+							"key": "email",
+							"value": "joaoltxs@hotmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/simuladorsalarial/api/accounts/allSimsForAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/allSimsForAccounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"allSimsForAccounts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

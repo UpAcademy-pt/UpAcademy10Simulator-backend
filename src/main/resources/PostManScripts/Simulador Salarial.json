@@ -1,0 +1,864 @@
+{
+	"info": {
+		"_postman_id": "0a05b2c8-1a66-4ee1-b678-3f2666769cea",
+		"name": "Simulador Salarial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WorkInsurance",
+			"item": []
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "CreateAccount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"ludopivig@malboxe.com\"\n}\n\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerifyAccount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"polafa@fastmailnow.com\",\n\t\"password\":\"ola\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/accounts/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"polafa@fastmailnow.com\",\n\t\"password\":\"ola\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/accounts/editAccount",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"accounts",
+								"editAccount"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IRS Table",
+			"item": [
+				{
+					"name": "Test IRS Table",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"remuneracao_mensal\":654,\"zero\":0,\"um\":0,\"dois\":0,\"tres\":0,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":683,\"zero\":0.002,\"um\":0,\"dois\":0,\"tres\":0,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":715,\"zero\":0.044,\"um\":0.01,\"dois\":0,\"tres\":0,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":736,\"zero\":0.074,\"um\":0.029,\"dois\":0.003,\"tres\":0,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":811,\"zero\":0.083,\"um\":0.047,\"dois\":0.012,\"tres\":0,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":919,\"zero\":0.105,\"um\":0.07,\"dois\":0.037,\"tres\":0.001,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1001,\"zero\":0.117,\"um\":0.083,\"dois\":0.059,\"tres\":0.016,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1061,\"zero\":0.125,\"um\":0.092,\"dois\":0.068,\"tres\":0.035,\"quatro\":0,\"cinco\":0,\"n_titulares_rendimento\":\"CASADO UNICO_TITULAR\"},{\"remuneracao_mensal\":1139,\"zero\":0.136,\"um\":0.111,\"dois\":0.087,\"tres\":0.053,\"quatro\":0.029,\"cinco\":0.004,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1221,\"zero\":0.146,\"um\":0.122,\"dois\":0.097,\"tres\":0.063,\"quatro\":0.038,\"cinco\":0.014,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1317,\"zero\":0.157,\"um\":0.133,\"dois\":0.109,\"tres\":0.073,\"quatro\":0.048,\"cinco\":0.024,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1419,\"zero\":0.167,\"um\":0.143,\"dois\":0.118,\"tres\":0.084,\"quatro\":0.068,\"cinco\":0.042,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1557,\"zero\":0.178,\"um\":0.153,\"dois\":0.128,\"tres\":0.104,\"quatro\":0.079,\"cinco\":0.052,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1705,\"zero\":0.192,\"um\":0.168,\"dois\":0.153,\"tres\":0.118,\"quatro\":0.093,\"cinco\":0.068,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1864,\"zero\":0.206,\"um\":0.188,\"dois\":0.179,\"tres\":0.15,\"quatro\":0.13,\"cinco\":0.121,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":1971,\"zero\":0.216,\"um\":0.2,\"dois\":0.188,\"tres\":0.16,\"quatro\":0.15,\"cinco\":0.13,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":2083,\"zero\":0.226,\"um\":0.209,\"dois\":0.199,\"tres\":0.169,\"quatro\":0.16,\"cinco\":0.14,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":2211,\"zero\":0.236,\"um\":0.22,\"dois\":0.21,\"tres\":0.181,\"quatro\":0.17,\"cinco\":0.15,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":2359,\"zero\":0.246,\"um\":0.23,\"dois\":0.22,\"tres\":0.191,\"quatro\":0.182,\"cinco\":0.16,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":2527,\"zero\":0.256,\"um\":0.25,\"dois\":0.23,\"tres\":0.211,\"quatro\":0.191,\"cinco\":0.182,\"n_titulares_rendimento\":\"NÃO CASADO\"},{\"remuneracao_mensal\":2758,\"zero\":0.266,\"um\":0.259,\"dois\":0.241,\"tres\":0.221,\"quatro\":0.201,\"cinco\":0.191,\"n_titulares_rendimento\":\"NÃO CASADO\"}]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/irstable/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"irstable",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter IRS Table",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"name\": \"fdsfda\", \n\t\"dependents\": \"5\", \n\t\"status\": \"NÃO CASADO\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/irstable/filtertable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"irstable",
+								"filtertable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HealthCheck IRS Table",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/irstable/healthCheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"irstable",
+								"healthCheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extras",
+			"item": [
+				{
+					"name": "HealthCheck Extras (SimFields)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/simulationfields/healthCheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"simulationfields",
+								"healthCheck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Extras",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/simulationfields/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"simulationfields",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Taxes",
+			"item": [
+				{
+					"name": "Get All Taxes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/taxes/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"taxes",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HealthCheck TAXES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/taxes/healthCheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"taxes",
+								"healthCheck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Taxes",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n    {\n        \"name\": \"autonomousTributation\",\n        \"value\": 10.0\n    },\n    {\n        \"name\": \"workerSocialSecurity\",\n        \"value\": 11.0\n    },\n    {\n        \"name\": \"companySocialSecurity\",\n        \"value\": 23.75\n    }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/taxes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"taxes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Taxes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n    \n        \"name\": \"autonomousTributation\",\n        \"value\": 10.0\n    },\n    {\n    \t\n        \"name\": \"workerSocialSecurity\",\n        \"value\": 11.0\n    },\n    {\n    \t\n        \"name\": \"companySocialSecurity\",\n        \"value\": 23.75\n    }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/taxes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"taxes",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "LoginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"admin@admin.com\",\n\t\"password\":\"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/accounts/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/accounts/initDatabase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"accounts",
+								"initDatabase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Margin",
+			"item": [
+				{
+					"name": "Margin HealthCheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/margin/healthCheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"margin",
+								"healthCheck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Margin New Value",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n\t\"margin_max\":30,\n\t\"margin_min\":20\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/margin/newvalue",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"margin",
+								"newvalue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Margin Values",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/margin/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"margin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Margin Values",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"margin_max\":30,\n\t\"margin_min\":20\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/margin/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"margin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Work Insurance",
+			"item": [
+				{
+					"name": "Work Insurance Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/workinsurance/healthCheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"workinsurance",
+								"healthCheck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Work Insurance Variable",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n\t\"varAccountedForWorkInsurance\":14,\n\t\"workInsuranceVariable\":0.01\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/workinsurance/newvalue",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"workinsurance",
+								"newvalue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Work Insurance Value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/workinsurance/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"workinsurance",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Work Insurance Value",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"varAccountedForWorkInsurance\":14,\n\t\"workInsuranceVariable\":0.01\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/workinsurance/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"workinsurance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Food Subsidy",
+			"item": [
+				{
+					"name": "Food Subsidy Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/foodsubsidy/healthCheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"foodsubsidy",
+								"healthCheck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Food Subsidy Value",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"foodSubsidyMonth\": 160.23,\n    \"averageDaysOfTheMonth\": 21,\n    \"limitValueForFoodSubsidy\": 7.63\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/foodsubsidy/newvalue",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"foodsubsidy",
+								"newvalue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food Subsidy Value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/foodsubsidy/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"foodsubsidy",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Using Date",
+			"item": [
+				{
+					"name": "Get Simulations By Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/simuladorsalarial/api/simulations/allSimsByDate/1565291292000/1565291293000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simuladorsalarial",
+								"api",
+								"simulations",
+								"allSimsByDate",
+								"1565291292000",
+								"1565291293000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/healthCheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"healthCheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Colaborator",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Sr. Ricas\",\n\"dependents\":\"2\",\"status\":\"Não Casado\",\"account\":{\"id\":1,\"name\":null,\"email\":\"admin@admin.com\",\"accountRole\":\"ADMIN\"}}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/colaborators",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"colaborators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulations by date to one account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/simuladorsalarial/api/accounts/accWithFilterSimsBetweenDates?email=feyomisa@fast-coin.com&startDate=1566821025000&endDate=1567080225000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simuladorsalarial",
+						"api",
+						"accounts",
+						"accWithFilterSimsBetweenDates"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "feyomisa@fast-coin.com"
+						},
+						{
+							"key": "startDate",
+							"value": "1566821025000"
+						},
+						{
+							"key": "endDate",
+							"value": "1567080225000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
