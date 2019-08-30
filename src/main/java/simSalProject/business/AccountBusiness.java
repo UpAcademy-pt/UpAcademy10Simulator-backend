@@ -246,9 +246,7 @@ public class AccountBusiness {
 		List<Account> accounts = accRepository.getAccsWithFilterSimsBetweenDates(startDate, endDate);
 		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
 		for (Account account : accounts) {
-			if (account.getAccountRole() == Account.AccountRole.USER) {
 				accountsDTO.add(accountToAccountDTO(account));
-			}
 		}
 		return accountsDTO;
 	}
